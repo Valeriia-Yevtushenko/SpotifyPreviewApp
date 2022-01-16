@@ -7,7 +7,6 @@
 
 import UIKit
 import OAuthSwift
-import Swinject
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

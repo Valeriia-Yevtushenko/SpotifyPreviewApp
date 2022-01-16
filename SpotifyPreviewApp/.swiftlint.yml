@@ -4,7 +4,7 @@ opt_in_rules:
 - empty_count
 - empty_string
 included:
-- MusicApp
+- SpotifyPreviewApp
 excluded:
 - Carthage
 - Pods

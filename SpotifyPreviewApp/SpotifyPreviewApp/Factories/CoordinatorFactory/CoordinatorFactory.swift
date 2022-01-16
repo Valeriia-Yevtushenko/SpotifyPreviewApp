@@ -9,7 +9,10 @@ import Foundation
 
 class CoordinatorFactory: CoordinatorFactoryProtocol {
     func makeAuthorizationCoordinator(router: RouterProtocol, flowFactory: AuthorizationFlowFactory, authorizationService: AuthorizationServiceProtocol) -> AuthorizationCoordinator {
-        let coordinator = AuthorizationCoordinator(router: router, authorizationService: authorizationService, flowFactory: flowFactory, coordinatorFactory: self)
+        let coordinator = AuthorizationCoordinator(router: router,
+                                                   authorizationService: authorizationService,
+                                                   flowFactory: flowFactory,
+                                                   coordinatorFactory: self)
         return coordinator
     }
 }

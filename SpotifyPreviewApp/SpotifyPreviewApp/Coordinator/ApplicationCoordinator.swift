@@ -7,7 +7,6 @@
 
 import Foundation
 import OAuthSwift
-import Swinject
 
 protocol AuthorizationDelegate: AnyObject {
     func strardAuthorizationRequest()
