@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7EDF7E95120A249D948EEB23 /* Pods_SpotifyPreviewApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0715AA1035BF7F63B94F484 /* Pods_SpotifyPreviewApp.framework */; };
 		9729FB2F2793758D00AFD1A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729FB2E2793758D00AFD1A0 /* AppDelegate.swift */; };
-		9729FB332793758D00AFD1A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729FB322793758D00AFD1A0 /* ViewController.swift */; };
-		9729FB362793758D00AFD1A0 /* ViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9729FB342793758D00AFD1A0 /* ViewController.storyboard */; };
+		9729FB332793758D00AFD1A0 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729FB322793758D00AFD1A0 /* AuthorizationViewController.swift */; };
+		9729FB362793758D00AFD1A0 /* AuthorizationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9729FB342793758D00AFD1A0 /* AuthorizationViewController.storyboard */; };
 		9729FB382793758E00AFD1A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9729FB372793758E00AFD1A0 /* Assets.xcassets */; };
 		9729FB3B2793758E00AFD1A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9729FB392793758E00AFD1A0 /* LaunchScreen.storyboard */; };
 		972F27C2279428850000BE72 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27C1279428850000BE72 /* ApplicationCoordinator.swift */; };
@@ -20,13 +21,32 @@
 		972F27CE27942AAF0000BE72 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27CD27942AAF0000BE72 /* Presentable.swift */; };
 		972F27D127942B3F0000BE72 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27CF27942B3F0000BE72 /* UIViewController.swift */; };
 		972F27D227942B3F0000BE72 /* StoryboardInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27D027942B3F0000BE72 /* StoryboardInstantiable.swift */; };
+		972F27DB279430410000BE72 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27DA279430410000BE72 /* AuthorizationService.swift */; };
+		972F27DE2794309E0000BE72 /* ClientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27DD2794309E0000BE72 /* ClientData.swift */; };
+		972F27E0279437B10000BE72 /* AuthorizationPresenterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27DF279437B10000BE72 /* AuthorizationPresenterProtocols.swift */; };
+		972F27E2279437F20000BE72 /* AuthorizationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27E1279437F20000BE72 /* AuthorizationPresenter.swift */; };
+		972F27E4279439A50000BE72 /* AuthorizationInteractorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27E3279439A50000BE72 /* AuthorizationInteractorProtocols.swift */; };
+		972F27E6279439CB0000BE72 /* AuthorizationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27E5279439CB0000BE72 /* AuthorizationInteractor.swift */; };
+		972F27E927943AAC0000BE72 /* KeychainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27E827943AAC0000BE72 /* KeychainServiceProtocol.swift */; };
+		972F27EB27943AB50000BE72 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27EA27943AB50000BE72 /* KeychainService.swift */; };
+		972F27ED27943AC90000BE72 /* AuthorizationServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27EC27943AC90000BE72 /* AuthorizationServiceProtocol.swift */; };
+		972F27F127943D050000BE72 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27F027943D050000BE72 /* Token.swift */; };
+		972F27F5279440FE0000BE72 /* AuthorizationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27F4279440FE0000BE72 /* AuthorizationCoordinator.swift */; };
+		972F27F7279445E60000BE72 /* AuthorizationModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27F6279445E60000BE72 /* AuthorizationModuleAssembly.swift */; };
+		972F27FA27947FC50000BE72 /* ServicesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27F927947FC50000BE72 /* ServicesData.swift */; };
+		972F2802279488110000BE72 /* FlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F2801279488110000BE72 /* FlowFactory.swift */; };
+		972F2804279488490000BE72 /* FlowFactoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F2803279488490000BE72 /* FlowFactoryProtocols.swift */; };
+		972F2807279491910000BE72 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F2806279491910000BE72 /* CoordinatorFactory.swift */; };
+		972F2809279491BF0000BE72 /* CoordinatorFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F2808279491BF0000BE72 /* CoordinatorFactoryProtocol.swift */; };
+		972F280C27949A830000BE72 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F280B27949A830000BE72 /* ServiceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		669F0455D3E6D8269E6D2FF2 /* Pods-SpotifyPreviewApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyPreviewApp.debug.xcconfig"; path = "Target Support Files/Pods-SpotifyPreviewApp/Pods-SpotifyPreviewApp.debug.xcconfig"; sourceTree = "<group>"; };
 		9729FB2B2793758D00AFD1A0 /* SpotifyPreviewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyPreviewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9729FB2E2793758D00AFD1A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9729FB322793758D00AFD1A0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9729FB352793758D00AFD1A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ViewController.storyboard; sourceTree = "<group>"; };
+		9729FB322793758D00AFD1A0 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		9729FB352793758D00AFD1A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AuthorizationViewController.storyboard; sourceTree = "<group>"; };
 		9729FB372793758E00AFD1A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9729FB3A2793758E00AFD1A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9729FB3C2793758E00AFD1A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -38,6 +58,26 @@
 		972F27CD27942AAF0000BE72 /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		972F27CF27942B3F0000BE72 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		972F27D027942B3F0000BE72 /* StoryboardInstantiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardInstantiable.swift; sourceTree = "<group>"; };
+		972F27DA279430410000BE72 /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
+		972F27DD2794309E0000BE72 /* ClientData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientData.swift; sourceTree = "<group>"; };
+		972F27DF279437B10000BE72 /* AuthorizationPresenterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenterProtocols.swift; sourceTree = "<group>"; };
+		972F27E1279437F20000BE72 /* AuthorizationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationPresenter.swift; sourceTree = "<group>"; };
+		972F27E3279439A50000BE72 /* AuthorizationInteractorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInteractorProtocols.swift; sourceTree = "<group>"; };
+		972F27E5279439CB0000BE72 /* AuthorizationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationInteractor.swift; sourceTree = "<group>"; };
+		972F27E827943AAC0000BE72 /* KeychainServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceProtocol.swift; sourceTree = "<group>"; };
+		972F27EA27943AB50000BE72 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		972F27EC27943AC90000BE72 /* AuthorizationServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationServiceProtocol.swift; sourceTree = "<group>"; };
+		972F27F027943D050000BE72 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		972F27F4279440FE0000BE72 /* AuthorizationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationCoordinator.swift; sourceTree = "<group>"; };
+		972F27F6279445E60000BE72 /* AuthorizationModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModuleAssembly.swift; sourceTree = "<group>"; };
+		972F27F927947FC50000BE72 /* ServicesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesData.swift; sourceTree = "<group>"; };
+		972F2801279488110000BE72 /* FlowFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowFactory.swift; sourceTree = "<group>"; };
+		972F2803279488490000BE72 /* FlowFactoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowFactoryProtocols.swift; sourceTree = "<group>"; };
+		972F2806279491910000BE72 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
+		972F2808279491BF0000BE72 /* CoordinatorFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactoryProtocol.swift; sourceTree = "<group>"; };
+		972F280B27949A830000BE72 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		A0715AA1035BF7F63B94F484 /* Pods_SpotifyPreviewApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyPreviewApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8ED3FA0394E64847E6B604A /* Pods-SpotifyPreviewApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyPreviewApp.release.xcconfig"; path = "Target Support Files/Pods-SpotifyPreviewApp/Pods-SpotifyPreviewApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +85,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EDF7E95120A249D948EEB23 /* Pods_SpotifyPreviewApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AE9673A7DD5E1EB176C7174 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				669F0455D3E6D8269E6D2FF2 /* Pods-SpotifyPreviewApp.debug.xcconfig */,
+				A8ED3FA0394E64847E6B604A /* Pods-SpotifyPreviewApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9729FB222793758D00AFD1A0 = {
 			isa = PBXGroup;
 			children = (
 				9729FB2D2793758D00AFD1A0 /* SpotifyPreviewApp */,
 				9729FB2C2793758D00AFD1A0 /* Products */,
+				3AE9673A7DD5E1EB176C7174 /* Pods */,
+				F0CC733086A310961E568A19 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,8 +125,9 @@
 				9729FB42279375A500AFD1A0 /* Delegates */,
 				972F27C0279428550000BE72 /* Coordinator */,
 				9729FB43279375B400AFD1A0 /* Modules */,
-				9729FB322793758D00AFD1A0 /* ViewController.swift */,
-				9729FB342793758D00AFD1A0 /* ViewController.storyboard */,
+				972F27FF2794878B0000BE72 /* Factories */,
+				972F27D8279430260000BE72 /* Services */,
+				972F27DC279430740000BE72 /* Resources */,
 				9729FB442793762500AFD1A0 /* Extension */,
 				9729FB372793758E00AFD1A0 /* Assets.xcassets */,
 				9729FB392793758E00AFD1A0 /* LaunchScreen.storyboard */,
@@ -94,6 +147,7 @@
 		9729FB43279375B400AFD1A0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				972F27D327942E320000BE72 /* Authorization */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -111,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				972F27C1279428850000BE72 /* ApplicationCoordinator.swift */,
+				972F27F2279440BE0000BE72 /* Flows */,
 				972F27C8279429360000BE72 /* Router */,
 				972F27C3279428BF0000BE72 /* BaseCoordinator */,
 				972F27CD27942AAF0000BE72 /* Presentable.swift */,
@@ -136,6 +191,157 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		972F27D327942E320000BE72 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				972F27D727942FE90000BE72 /* Assembly */,
+				972F27D627942F9D0000BE72 /* Interactor */,
+				972F27D527942F940000BE72 /* Presenter */,
+				972F27D427942F860000BE72 /* View */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		972F27D427942F860000BE72 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9729FB322793758D00AFD1A0 /* AuthorizationViewController.swift */,
+				9729FB342793758D00AFD1A0 /* AuthorizationViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		972F27D527942F940000BE72 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				972F27DF279437B10000BE72 /* AuthorizationPresenterProtocols.swift */,
+				972F27E1279437F20000BE72 /* AuthorizationPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		972F27D627942F9D0000BE72 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				972F27E3279439A50000BE72 /* AuthorizationInteractorProtocols.swift */,
+				972F27E5279439CB0000BE72 /* AuthorizationInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		972F27D727942FE90000BE72 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				972F27F6279445E60000BE72 /* AuthorizationModuleAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		972F27D8279430260000BE72 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				972F27E727943A960000BE72 /* KeychainService */,
+				972F27D92794303A0000BE72 /* AuthorizationService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		972F27D92794303A0000BE72 /* AuthorizationService */ = {
+			isa = PBXGroup;
+			children = (
+				972F27DA279430410000BE72 /* AuthorizationService.swift */,
+				972F27EC27943AC90000BE72 /* AuthorizationServiceProtocol.swift */,
+			);
+			path = AuthorizationService;
+			sourceTree = "<group>";
+		};
+		972F27DC279430740000BE72 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				972F27F827947FA90000BE72 /* ConfigData */,
+				972F27EE27943CEB0000BE72 /* DataModel */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		972F27E727943A960000BE72 /* KeychainService */ = {
+			isa = PBXGroup;
+			children = (
+				972F27E827943AAC0000BE72 /* KeychainServiceProtocol.swift */,
+				972F27EA27943AB50000BE72 /* KeychainService.swift */,
+			);
+			path = KeychainService;
+			sourceTree = "<group>";
+		};
+		972F27EE27943CEB0000BE72 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				972F27F027943D050000BE72 /* Token.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		972F27F2279440BE0000BE72 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				972F27F4279440FE0000BE72 /* AuthorizationCoordinator.swift */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		972F27F827947FA90000BE72 /* ConfigData */ = {
+			isa = PBXGroup;
+			children = (
+				972F27DD2794309E0000BE72 /* ClientData.swift */,
+				972F27F927947FC50000BE72 /* ServicesData.swift */,
+			);
+			path = ConfigData;
+			sourceTree = "<group>";
+		};
+		972F27FF2794878B0000BE72 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				972F280A27949A5B0000BE72 /* ServiceManager */,
+				972F280527948F900000BE72 /* CoordinatorFactory */,
+				972F2800279487DB0000BE72 /* FlowFactory */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		972F2800279487DB0000BE72 /* FlowFactory */ = {
+			isa = PBXGroup;
+			children = (
+				972F2801279488110000BE72 /* FlowFactory.swift */,
+				972F2803279488490000BE72 /* FlowFactoryProtocols.swift */,
+			);
+			path = FlowFactory;
+			sourceTree = "<group>";
+		};
+		972F280527948F900000BE72 /* CoordinatorFactory */ = {
+			isa = PBXGroup;
+			children = (
+				972F2806279491910000BE72 /* CoordinatorFactory.swift */,
+				972F2808279491BF0000BE72 /* CoordinatorFactoryProtocol.swift */,
+			);
+			path = CoordinatorFactory;
+			sourceTree = "<group>";
+		};
+		972F280A27949A5B0000BE72 /* ServiceManager */ = {
+			isa = PBXGroup;
+			children = (
+				972F280B27949A830000BE72 /* ServiceManager.swift */,
+			);
+			path = ServiceManager;
+			sourceTree = "<group>";
+		};
+		F0CC733086A310961E568A19 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A0715AA1035BF7F63B94F484 /* Pods_SpotifyPreviewApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,9 +349,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9729FB3F2793758E00AFD1A0 /* Build configuration list for PBXNativeTarget "SpotifyPreviewApp" */;
 			buildPhases = (
+				1447EE588270EA35DBB7F7D6 /* [CP] Check Pods Manifest.lock */,
 				9729FB272793758D00AFD1A0 /* Sources */,
 				9729FB282793758D00AFD1A0 /* Frameworks */,
 				9729FB292793758D00AFD1A0 /* Resources */,
+				11DA61B85E40FE160B6CEC3D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,11 +404,53 @@
 			files = (
 				9729FB3B2793758E00AFD1A0 /* LaunchScreen.storyboard in Resources */,
 				9729FB382793758E00AFD1A0 /* Assets.xcassets in Resources */,
-				9729FB362793758D00AFD1A0 /* ViewController.storyboard in Resources */,
+				9729FB362793758D00AFD1A0 /* AuthorizationViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		11DA61B85E40FE160B6CEC3D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpotifyPreviewApp/Pods-SpotifyPreviewApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpotifyPreviewApp/Pods-SpotifyPreviewApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpotifyPreviewApp/Pods-SpotifyPreviewApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1447EE588270EA35DBB7F7D6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SpotifyPreviewApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9729FB272793758D00AFD1A0 /* Sources */ = {
@@ -208,27 +458,45 @@
 			buildActionMask = 2147483647;
 			files = (
 				972F27D127942B3F0000BE72 /* UIViewController.swift in Sources */,
+				972F27F7279445E60000BE72 /* AuthorizationModuleAssembly.swift in Sources */,
+				972F27DB279430410000BE72 /* AuthorizationService.swift in Sources */,
+				972F27FA27947FC50000BE72 /* ServicesData.swift in Sources */,
 				972F27C6279428E00000BE72 /* BaseCoordinator.swift in Sources */,
-				9729FB332793758D00AFD1A0 /* ViewController.swift in Sources */,
+				972F27DE2794309E0000BE72 /* ClientData.swift in Sources */,
+				972F27ED27943AC90000BE72 /* AuthorizationServiceProtocol.swift in Sources */,
+				972F27E6279439CB0000BE72 /* AuthorizationInteractor.swift in Sources */,
+				972F27EB27943AB50000BE72 /* KeychainService.swift in Sources */,
+				9729FB332793758D00AFD1A0 /* AuthorizationViewController.swift in Sources */,
+				972F2802279488110000BE72 /* FlowFactory.swift in Sources */,
 				972F27CC279429510000BE72 /* RouterProtocol.swift in Sources */,
 				972F27C7279428E00000BE72 /* Coordinator.swift in Sources */,
+				972F27F5279440FE0000BE72 /* AuthorizationCoordinator.swift in Sources */,
+				972F2804279488490000BE72 /* FlowFactoryProtocols.swift in Sources */,
+				972F2807279491910000BE72 /* CoordinatorFactory.swift in Sources */,
+				972F27E927943AAC0000BE72 /* KeychainServiceProtocol.swift in Sources */,
+				972F27F127943D050000BE72 /* Token.swift in Sources */,
+				972F2809279491BF0000BE72 /* CoordinatorFactoryProtocol.swift in Sources */,
+				972F280C27949A830000BE72 /* ServiceManager.swift in Sources */,
 				972F27CB279429510000BE72 /* Router.swift in Sources */,
+				972F27E4279439A50000BE72 /* AuthorizationInteractorProtocols.swift in Sources */,
+				972F27E2279437F20000BE72 /* AuthorizationPresenter.swift in Sources */,
 				9729FB2F2793758D00AFD1A0 /* AppDelegate.swift in Sources */,
 				972F27D227942B3F0000BE72 /* StoryboardInstantiable.swift in Sources */,
 				972F27C2279428850000BE72 /* ApplicationCoordinator.swift in Sources */,
 				972F27CE27942AAF0000BE72 /* Presentable.swift in Sources */,
+				972F27E0279437B10000BE72 /* AuthorizationPresenterProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9729FB342793758D00AFD1A0 /* ViewController.storyboard */ = {
+		9729FB342793758D00AFD1A0 /* AuthorizationViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				9729FB352793758D00AFD1A0 /* Base */,
 			);
-			name = ViewController.storyboard;
+			name = AuthorizationViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		9729FB392793758E00AFD1A0 /* LaunchScreen.storyboard */ = {
@@ -360,6 +628,7 @@
 		};
 		9729FB402793758E00AFD1A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 669F0455D3E6D8269E6D2FF2 /* Pods-SpotifyPreviewApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -387,6 +656,7 @@
 		};
 		9729FB412793758E00AFD1A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8ED3FA0394E64847E6B604A /* Pods-SpotifyPreviewApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
