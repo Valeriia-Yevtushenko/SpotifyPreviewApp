@@ -14,3 +14,13 @@ extension FlowFactory: AuthorizationFlowFactory {
         return AuthorizationModuleAssembly.create(authorizationService: authorizationService)
     }
 }
+
+extension FlowFactory: SearchFlowFactory {
+    func makeSearchModule(serviceManager: ServiceManagerProtocol) -> (Presentable, SearchViewPresenter) {
+        return SearchModuleAssembly().createModule(serviceManager)
+    }
+    
+    func makeCategoriesModule(serviceManager: ServiceManagerProtocol) -> (Presentable, CategoriesViewPresenter) {
+        return CategoriesModuleAssembly().createModule(serviceManager)
+    }
+}

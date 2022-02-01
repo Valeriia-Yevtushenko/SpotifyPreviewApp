@@ -26,7 +26,13 @@ class ApplicationCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        runAuthorizationFlow()
+        serviceManager.authorization().setupAuthorizationDelegate(self)
+        
+        if serviceManager.authorization().isAuthorized {
+            runTabbarFlow()
+        } else {
+            runAuthorizationFlow()
+        }
     }
 }
 
@@ -34,15 +40,39 @@ private extension ApplicationCoordinator {
     func runAuthorizationFlow() {
         let coordinator = coordinatorFactory.makeAuthorizationCoordinator(router: router,
                                                                           flowFactory: flowFactory,
-                                                                          authorizationService: serviceManager.authorization)
+                                                                          authorizationService: serviceManager.authorization())
         coordinator.output = self
         addDependency(coordinator)
+        coordinator.start()
+    }
+    
+    func runTabbarFlow() {
+        
+        let (coordinator, controller) = coordinatorFactory.makeTabbarCoordinator(serviceManager: serviceManager, flowFactory: flowFactory)
+        coordinator.output = self
+        addDependency(coordinator)
+        router.setRootModule(controller, hideBar: true)
         coordinator.start()
     }
 }
 
 extension ApplicationCoordinator: AuthorizationCoordinatorOutput {
     func finishAuthorizationFlow(coordinator: Coordinator) {
+        runTabbarFlow()
         removeDependency(coordinator)
+    }
+}
+
+extension ApplicationCoordinator: TabbarCoordinatorOutput {
+    func finishTabBarFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+        start()
+    }
+}
+
+extension ApplicationCoordinator: AuthorizationDelegate {
+    func strardAuthorizationRequest() {
+        childCoordinators.removeAll()
+        start()
     }
 }

@@ -10,3 +10,8 @@ import Foundation
 protocol AuthorizationFlowFactory {
     func makeAuthorizationModule(authorizationService: AuthorizationServiceProtocol) -> (Presentable, AuthorizationPresenter)
 }
+
+protocol SearchFlowFactory {
+    func makeSearchModule(serviceManager: ServiceManagerProtocol) -> (Presentable, SearchViewPresenter)
+    func makeCategoriesModule(serviceManager: ServiceManagerProtocol) -> (Presentable, CategoriesViewPresenter)
+}

@@ -10,4 +10,8 @@ import Foundation
 protocol CoordinatorFactoryProtocol: AnyObject {
     func makeAuthorizationCoordinator(router: RouterProtocol, flowFactory: AuthorizationFlowFactory, authorizationService: AuthorizationServiceProtocol) ->
     AuthorizationCoordinator
+    
+    func makeSearchCoordinator(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> SearchCoordinator
+    
+    func makeTabbarCoordinator(serviceManager: ServiceManagerProtocol, flowFactory: FlowFactory) -> (configurator: TabBarCoordinator, toPresent: Presentable?)
 }
