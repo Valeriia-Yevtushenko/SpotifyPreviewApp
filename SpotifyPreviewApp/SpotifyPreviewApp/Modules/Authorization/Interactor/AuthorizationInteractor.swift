@@ -20,8 +20,8 @@ final class AuthorizationInteractor: AuthorizationInteractorInputProtocol {
         
         firstly {
             authorizationService.authorization(viewController: viewController)
-        }.done { [weak self] in
-            self?.presenter?.interactorDidAuthorize()
+        }.done {
+            self.presenter?.interactorDidAuthorize()
         }.catch {_ in
             self.presenter?.interactorFailedToAuthorize()
         }

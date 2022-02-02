@@ -11,17 +11,29 @@ import PromiseKit
 
 class AuthorizationService {
     private let oauth: OAuth2Swift
-    private let storageService: KeychainServiceProtocol
+    private let keychainService: KeychainServiceProtocol
     private var renewToken = Promise()
     weak var delegate: AuthorizationDelegate?
     
-    init(oauth: OAuth2Swift, storage: KeychainServiceProtocol) {
+    init(oauth: OAuth2Swift, keychainService: KeychainServiceProtocol) {
         self.oauth = oauth
-        self.storageService = storage
+        self.keychainService = keychainService
     }
 }
 
 extension AuthorizationService: AuthorizationServiceProtocol {
+    func sessionData() -> Token? {
+        return keychainService.get(key: "token")
+    }
+    
+    var isAuthorized: Bool {
+        guard let token: Token = keychainService.get(key: "token") else {
+            return false
+        }
+        
+        return true
+    }
+    
     func setupAuthorizationDelegate(_ delegate: AuthorizationDelegate) {
         self.delegate = delegate
     }
@@ -31,7 +43,7 @@ extension AuthorizationService: AuthorizationServiceProtocol {
         oauth.allowMissingStateCheck = true
 
         return Promise { seal in
-            guard let redirectURL = URL(string: "SpotifyPreviewApp://oauth-callback") else { return }
+            guard let redirectURL = URL(string: Request.callbackUrl.rawValue) else { return }
             oauth.authorize(withCallbackURL: redirectURL, scope: Authorization.scope.rawValue,
                            state: Authorization.state.rawValue, codeChallenge: Authorization.codeChallenge.rawValue,
                                                  codeVerifier: Authorization.codeVerifier.rawValue) { result in
@@ -39,8 +51,8 @@ extension AuthorizationService: AuthorizationServiceProtocol {
                 case .success(let (credential, _, _)):
                     let token = Token(access: credential.oauthToken,
                                               refresh: credential.oauthRefreshToken, date: credential.oauthTokenExpiresAt)
-                    self.storageService.set(token, key: "token")
-                    seal.resolve(.fulfilled(()))
+                    self.keychainService.set(token, key: "token")
+                    seal.fulfill_()
                 case .failure(let error):
                     debugPrint(error.description)
                     seal.reject(error)
@@ -59,7 +71,7 @@ extension AuthorizationService: AuthorizationServiceProtocol {
                 case .success(let (credential, _, _)):
                     let token = Token(access: credential.oauthToken,
                                               refresh: credential.oauthRefreshToken, date: credential.oauthTokenExpiresAt)
-                    self.storageService.set(token, key: "token")
+                    self.keychainService.set(token, key: "token")
                     seal.fulfill_()
                 case .failure(let error):
                     self.delegate?.strardAuthorizationRequest()
