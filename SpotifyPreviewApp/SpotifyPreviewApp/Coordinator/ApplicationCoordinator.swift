@@ -66,6 +66,7 @@ extension ApplicationCoordinator: AuthorizationCoordinatorOutput {
 extension ApplicationCoordinator: TabbarCoordinatorOutput {
     func finishTabBarFlow(coordinator: Coordinator) {
         removeDependency(coordinator)
+        serviceManager.authorization().logOut()
         start()
     }
 }
@@ -73,6 +74,7 @@ extension ApplicationCoordinator: TabbarCoordinatorOutput {
 extension ApplicationCoordinator: AuthorizationDelegate {
     func strardAuthorizationRequest() {
         childCoordinators.removeAll()
+        serviceManager.authorization().logOut()
         start()
     }
 }

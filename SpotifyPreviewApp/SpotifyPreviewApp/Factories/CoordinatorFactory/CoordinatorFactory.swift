@@ -8,6 +8,10 @@
 import Foundation
 
 class CoordinatorFactory: CoordinatorFactoryProtocol {
+    func makeProfileCoordinator(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> ProfileCoordinator {
+        return ProfileCoordinator(factory: factory, router: router, serviceManager: serviceManager, coordinatorFactory: self)
+    }
+    
     func makeTabbarCoordinator(serviceManager: ServiceManagerProtocol, flowFactory: FlowFactory) -> (configurator: TabBarCoordinator, toPresent: Presentable?) {
         let tabBarViewController = TabBarViewController()
         let coordinator = TabBarCoordinator(tabBarViewControllerDelegat: tabBarViewController,

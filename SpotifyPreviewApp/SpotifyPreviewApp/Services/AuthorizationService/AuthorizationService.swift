@@ -22,6 +22,10 @@ class AuthorizationService {
 }
 
 extension AuthorizationService: AuthorizationServiceProtocol {
+    func logOut() {
+        keychainService.remove(key: "token")
+    }
+    
     func sessionData() -> Token? {
         return keychainService.get(key: "token")
     }

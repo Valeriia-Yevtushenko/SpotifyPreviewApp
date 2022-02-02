@@ -12,6 +12,7 @@ protocol AuthorizationServiceProtocol {
     var isAuthorized: Bool { get }
     func setupAuthorizationDelegate(_ delegate: AuthorizationDelegate)
     func authorization(viewController: UIViewController) -> Promise<Void>
+    func logOut()
     func renewAccessToken()
     func sessionData() -> Token?
 }
