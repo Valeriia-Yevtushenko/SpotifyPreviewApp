@@ -33,7 +33,7 @@ extension ProfileViewPresenter: ProfileInteractorOutputProtocol {
     }
     
     func interactorDidFetchUserProfile(_ data: User) {
-        view?.configureProfileInfo(ProfileInfoModel(userImage: data.images?[0].url, username: data.displayName, userEmail: data.email))
+        view?.configureProfileInfo(ProfileInfoModel(userImage: data.images?.first?.url, username: data.displayName, userEmail: data.email))
 
     }
     

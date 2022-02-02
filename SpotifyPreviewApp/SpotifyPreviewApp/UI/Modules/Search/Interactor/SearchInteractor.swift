@@ -12,7 +12,7 @@ final class SearchViewInteractor: SearchInteractorInputProtocol {
     var presenter: SearchInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
     
-    func fetchSearchData(_ text: String) {
+    func fetchSearchText(_ text: String) {
         guard let track = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }

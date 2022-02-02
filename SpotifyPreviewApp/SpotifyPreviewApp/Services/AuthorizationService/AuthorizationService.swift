@@ -10,7 +10,7 @@ import OAuthSwift
 import PromiseKit
 
 class AuthorizationService {
-    private let oauth: OAuth2Swift
+    private var oauth: OAuth2Swift
     private let keychainService: KeychainServiceProtocol
     private var renewToken = Promise()
     weak var delegate: AuthorizationDelegate?
@@ -24,6 +24,9 @@ class AuthorizationService {
 extension AuthorizationService: AuthorizationServiceProtocol {
     func logOut() {
         keychainService.remove(key: "token")
+        oauth = OAuth2Swift(consumerKey: Client.identifier.rawValue, consumerSecret: Client.secret.rawValue,
+                                    authorizeUrl: Request.authURL.rawValue, accessTokenUrl: Request.accessToken.rawValue,
+                                    responseType: Authorization.code.rawValue)
     }
     
     func sessionData() -> Token? {
@@ -31,7 +34,7 @@ extension AuthorizationService: AuthorizationServiceProtocol {
     }
     
     var isAuthorized: Bool {
-        guard let token: Token = keychainService.get(key: "token") else {
+        guard let _: Token = keychainService.get(key: "token") else {
             return false
         }
         

@@ -8,12 +8,12 @@
 import Foundation
 
 protocol CategoriesInteractorInputProtocol: AnyObject {
-    func fetchData()
-    func getData(at index: Int)
+    func fetchCategories()
+    func getCategory(at index: Int)
 }
 
 protocol CategoriesInteractorOutputProtocol: AnyObject {
-    func interactorDidFetchData(_ data: Categories)
-    func interactorFailedToFetchData()
-    func interactorDidGetData(_ category: String)
+    func interactorDidFetchCategories(_ data: Categories)
+    func interactorFailedToFetchCategories()
+    func interactorDidGetCategory(_ category: String)
 }

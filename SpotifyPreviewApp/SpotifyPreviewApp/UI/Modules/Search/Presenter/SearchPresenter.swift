@@ -14,13 +14,14 @@ final class SearchViewPresenter {
 
 extension SearchViewPresenter: SearchViewOutputProtocol {
     func viewDidUpdateBySearchText(_ text: String) {
-        intractor?.fetchSearchData(text)
+        intractor?.fetchSearchText(text)
     }
 }
 
 extension SearchViewPresenter: SearchInteractorOutputProtocol {
     func interactorDidFetchData(_ data: ListOfTrack) {
         guard !data.tracks.items.isEmpty else {
+            view?.setupData([])
             view?.displayLabel(with: "Unfortunately, there is no track with this name...")
             return
         }
@@ -30,7 +31,6 @@ extension SearchViewPresenter: SearchInteractorOutputProtocol {
             return TrackTableViewCellModel(image: $0.album.images[2].url, name: $0.name, artist: artist.joined(separator: ", "))
         }
         
-        view?.displayLabel(with: "")
         view?.setupData(viewModel)
         view?.reloadData()
     }

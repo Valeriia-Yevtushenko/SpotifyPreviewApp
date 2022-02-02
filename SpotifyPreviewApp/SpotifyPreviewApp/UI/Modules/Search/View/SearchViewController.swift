@@ -28,6 +28,7 @@ private extension SearchViewController {
 
 extension SearchViewController: SearchViewInputProtocol {
     func setupData(_ tracks: [TrackTableViewCellModel]) {
+        tableView.backgroundView = nil
         dataSource?.setupViewModel(tracks)
     }
     

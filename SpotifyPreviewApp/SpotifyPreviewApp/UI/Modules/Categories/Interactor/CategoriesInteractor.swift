@@ -13,24 +13,23 @@ final class CategoriesViewInteractor: CategoriesInteractorInputProtocol {
     var presenter: CategoriesInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
     
-    func fetchData() {
+    func fetchCategories() {
         let promise: Promise<Categories> = networkService.fetch(Request.allCategories.rawValue)
-        
         firstly {
             promise
         }.done {data in
             self.categoriesData = data
-            self.presenter?.interactorDidFetchData(data)
+            self.presenter?.interactorDidFetchCategories(data)
         }.catch { _ in
-            self.presenter?.interactorFailedToFetchData()
+            self.presenter?.interactorFailedToFetchCategories()
         }
     }
     
-    func getData(at index: Int) {
+    func getCategory(at index: Int) {
         guard let category = categoriesData?.categories.items[index].identifier else {
             return
         }
         
-        presenter?.interactorDidGetData(category)
+        presenter?.interactorDidGetCategory(category)
     }
 }

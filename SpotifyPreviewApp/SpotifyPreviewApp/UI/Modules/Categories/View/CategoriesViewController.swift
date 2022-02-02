@@ -9,6 +9,7 @@ import UIKit
 
 final class CategoriesViewController: UIViewController {
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
+    
     private var searchController: UISearchController?
     private var refreshControl: UIRefreshControl = UIRefreshControl()
     var output: CategoriesViewOutputProtocol?
@@ -16,6 +17,7 @@ final class CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureRefreshControl()
         configureCollectionView()
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -80,7 +82,6 @@ extension CategoriesViewController: CategoriesViewInputProtocol {
         categoriesCollectionView.reloadData()
     }
 }
-
 
 extension CategoriesViewController: CollectionViewDataSourceDelegate {
     func didSelectItem(at index: Int) {

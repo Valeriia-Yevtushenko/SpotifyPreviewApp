@@ -14,24 +14,24 @@ final class CategoriesViewPresenter {
 
 extension CategoriesViewPresenter: CategoriesViewOutputProtocol {
     func viewDidRefresh() {
-        interactor?.fetchData()
+        interactor?.fetchCategories()
     }
     
     func viewFetchData() {
-        interactor?.fetchData()
+        interactor?.fetchCategories()
     }
     
     func viewSelectedItem(at index: Int) {
-        interactor?.getData(at: index)
+        interactor?.getCategory(at: index)
     }
 }
 
 extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
-    func interactorDidGetData(_ category: String) {
+    func interactorDidGetCategory(_ category: String) {
         
     }
     
-    func interactorDidFetchData(_ data: Categories) {
+    func interactorDidFetchCategories(_ data: Categories) {
         guard !data.categories.items.isEmpty  else {
             view?.displayLabel(with: "Unfortunately, the list of categories is empty...")
             return
@@ -46,7 +46,7 @@ extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
         view?.reloadData()
     }
     
-    func interactorFailedToFetchData() {
+    func interactorFailedToFetchCategories() {
         view?.displayLabel(with: "Oops, something went wrong...")
     }
 }
