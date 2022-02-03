@@ -13,7 +13,7 @@ protocol ProfileInteractorInputProtocol: AnyObject {
 }
 
 protocol ProfileInteractorOutputProtocol: AnyObject {
-    func interactorDidFetchUserProfile(_ data: User)
-    func interactorFailedToFetchData()
+    func interactorDidFetchUserData(_ data: User)
+    func interactorFailedToFetchUserData()
     func interactorDidGetSelectedItem(contentType: Int, _ data: String)
 }

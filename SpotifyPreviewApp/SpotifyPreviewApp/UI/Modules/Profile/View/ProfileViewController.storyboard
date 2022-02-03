@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -39,11 +39,18 @@
                                         </subviews>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ulN-aX-Jg2">
-                                        <rect key="frame" x="64.5" y="27" width="210" height="210"/>
+                                        <rect key="frame" x="64.5" y="29" width="210" height="205.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="210" id="1Ee-lG-NHW"/>
                                             <constraint firstAttribute="width" constant="210" id="Q8u-Da-zEu"/>
                                         </constraints>
+                                        <imageReference key="image" image="person.circle" catalog="system" symbolScale="small" renderingMode="hierarchical-single">
+                                            <hierarchicalColors>
+                                                <color systemColor="labelColor"/>
+                                                <color systemColor="secondaryLabelColor"/>
+                                                <color systemColor="tertiaryLabelColor"/>
+                                            </hierarchicalColors>
+                                        </imageReference>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
@@ -246,7 +253,9 @@
                         <outlet property="followsView" destination="X7y-oj-v4N" id="j3L-0P-5gr"/>
                         <outlet property="playlistView" destination="FHi-dU-vIu" id="Jsq-El-leb"/>
                         <outlet property="userEmailLabel" destination="GWv-hv-QuO" id="NqR-Ti-vZp"/>
+                        <outlet property="userImageHeightLayoutConstraint" destination="1Ee-lG-NHW" id="VBb-6e-IKP"/>
                         <outlet property="userImageView" destination="ulN-aX-Jg2" id="5lJ-bS-EJf"/>
+                        <outlet property="userImageWidthLayoutConstraint" destination="Q8u-Da-zEu" id="g1T-ah-Zvg"/>
                         <outlet property="usernameLabel" destination="vEv-pL-Opq" id="gKd-nW-0AA"/>
                     </connections>
                 </viewController>
@@ -260,6 +269,7 @@
         <image name="folder" catalog="system" width="128" height="97"/>
         <image name="music.note" catalog="system" width="97" height="128"/>
         <image name="person.2.circle" catalog="system" width="128" height="121"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

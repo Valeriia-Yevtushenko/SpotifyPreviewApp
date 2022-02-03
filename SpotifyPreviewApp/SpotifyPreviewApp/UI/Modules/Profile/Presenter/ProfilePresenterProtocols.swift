@@ -8,14 +8,15 @@
 import Foundation
 
 protocol ProfileViewInputProtocol: AnyObject {
-    func displayErrorView()
+    func handleError()
     func configureProfileInfo(_ model: ProfileInfoModel)
 }
 
 protocol ProfileViewOutputProtocol: AnyObject {
     func viewDidLoad()
-    func logOut()
-    func didSelectedItem(at index: Int)
+    func viewDidTapReload()
+    func viewDidTapLogOut()
+    func viewDidSelectedItem(at index: Int)
 }
 
 protocol ProfileModuleOutput {

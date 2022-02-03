@@ -20,6 +20,8 @@ final class ProfileViewController: UIViewController {
     @IBOutlet private weak var followsView: UIView!
     @IBOutlet private weak var playlistView: UIView!
     @IBOutlet private weak var albumsView: UIView!
+    @IBOutlet private weak var userImageHeightLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var userImageWidthLayoutConstraint: NSLayoutConstraint!
     
     var output: ProfileViewOutputProtocol?
     var dataSource: TableViewDataSource?
@@ -34,12 +36,14 @@ final class ProfileViewController: UIViewController {
 
 private extension ProfileViewController {
     @IBAction func logOutButtonDidTap() {
-        output?.logOut()
+        output?.viewDidTapLogOut()
     }
     
     func configure() {
         navigationController?.navigationBar.isHidden = true
-        userImageView.layer.cornerRadius = userImageView.frame.height / 2
+        userImageWidthLayoutConstraint.constant = self.view.frame.width / 2
+        userImageHeightLayoutConstraint.constant = self.view.frame.width / 2
+        userImageView.layer.cornerRadius = userImageWidthLayoutConstraint.constant / 2
         userImageView.clipsToBounds = true
         setupTopBorder(followsView)
         setupBottomBorder(playlistView)
@@ -52,7 +56,7 @@ private extension ProfileViewController {
         let topBorder = CALayer()
         topBorder.frame = CGRect(x: 0.0,
                                  y: 0.0,
-                                 width: view.frame.size.width,
+                                 width: self.view.frame.size.width,
                                  height: thickness)
         topBorder.backgroundColor = UIColor.separator.cgColor
         view.layer.addSublayer(topBorder)
@@ -63,16 +67,30 @@ private extension ProfileViewController {
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 0,
                                     y: view.frame.size.height - thickness,
-                                    width: view.frame.size.width,
+                                    width: self.view.frame.size.width,
                                     height: thickness)
         bottomBorder.backgroundColor = UIColor.separator.cgColor
         view.layer.addSublayer(bottomBorder)
     }
+    
+    func displayErrorAlert() {
+        let alert = UIAlertController(title: "Oops, something went wrong",
+                                      message: "Please, check your internet conection and reload view.",
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let tryAgainButton = UIAlertAction(title: "Reload", style: .default, handler: { _ in
+            self.output?.viewDidTapReload()
+        })
+        alert.addAction(cancelButton)
+        alert.addAction(tryAgainButton)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension ProfileViewController: ProfileViewInputProtocol {
-    func displayErrorView() {
-        
+    func handleError() {
+        usernameLabel.text = nil
+        userEmailLabel.text = nil
     }
     
     func configureProfileInfo(_ model: ProfileInfoModel) {
@@ -80,14 +98,10 @@ extension ProfileViewController: ProfileViewInputProtocol {
         usernameLabel.text = model.username
         userImageView.setImage(withUrl: model.userImage ?? "")
     }
-    
-    func reloadData() {
-       
-    }
 }
 
 extension ProfileViewController: TableViewDataSourceDelegate {
     func didSelectItem(at index: Int) {
-        
+        output?.viewDidSelectedItem(at: index)
     }
 }

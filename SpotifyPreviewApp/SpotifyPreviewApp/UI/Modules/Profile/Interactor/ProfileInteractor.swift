@@ -20,8 +20,10 @@ extension ProfileViewInteractor: ProfileInteractorInputProtocol {
         let promise: Promise<User> = networkService.fetch(Request.user.rawValue)
         
         promise.done {data in
-            self.presenter.interactorDidFetchUserProfile(data)
-        }.catch {_ in}
+            self.presenter.interactorDidFetchUserData(data)
+        }.catch {_ in
+            self.presenter.interactorFailedToFetchUserData()
+        }
     }
     
     func getSelectedItem(at index: Int) {

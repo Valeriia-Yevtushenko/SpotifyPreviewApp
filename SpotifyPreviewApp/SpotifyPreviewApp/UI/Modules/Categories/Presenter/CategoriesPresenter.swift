@@ -33,7 +33,7 @@ extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
     
     func interactorDidFetchCategories(_ data: Categories) {
         guard !data.categories.items.isEmpty  else {
-            view?.displayLabel(with: "Unfortunately, the list of categories is empty...")
+            view?.displayLabel(with: "Unfortunately, the list of categories is empty.")
             return
         }
         
@@ -47,7 +47,7 @@ extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
     }
     
     func interactorFailedToFetchCategories() {
-        view?.displayLabel(with: "Oops, something went wrong...")
+        view?.displayLabel(with: "Oops, something went wrong \n Pull down to relod view.")
     }
 }
 

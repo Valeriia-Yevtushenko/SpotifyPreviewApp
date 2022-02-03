@@ -14,11 +14,15 @@ final class ProfileViewPresenter {
 }
 
 extension ProfileViewPresenter: ProfileViewOutputProtocol {
-    func logOut() {
+    func viewDidTapReload() {
+        interactor?.fetchUserProfileInfo()
+    }
+    
+    func viewDidTapLogOut() {
         coordinator?.runAuthorizationFlow()
     }
     
-    func didSelectedItem(at index: Int) {
+    func viewDidSelectedItem(at index: Int) {
         interactor?.getSelectedItem(at: index)
     }
     
@@ -32,12 +36,12 @@ extension ProfileViewPresenter: ProfileInteractorOutputProtocol {
         
     }
     
-    func interactorDidFetchUserProfile(_ data: User) {
+    func interactorDidFetchUserData(_ data: User) {
         view?.configureProfileInfo(ProfileInfoModel(userImage: data.images?.first?.url, username: data.displayName, userEmail: data.email))
 
     }
     
-    func interactorFailedToFetchData() {
-        view?.displayErrorView()
+    func interactorFailedToFetchUserData() {
+        view?.handleError()
     }
 }
