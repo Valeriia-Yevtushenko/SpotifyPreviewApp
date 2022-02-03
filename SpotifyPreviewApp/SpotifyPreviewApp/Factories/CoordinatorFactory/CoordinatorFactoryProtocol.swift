@@ -14,4 +14,7 @@ protocol CoordinatorFactoryProtocol: AnyObject {
     func makeSearchCoordinator(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> SearchCoordinator
     
     func makeTabbarCoordinator(serviceManager: ServiceManagerProtocol, flowFactory: FlowFactory) -> (configurator: TabBarCoordinator, toPresent: Presentable?)
+    
+    func makeProfileCoordinator(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> ProfileCoordinator
+    
 }

@@ -24,3 +24,9 @@ extension FlowFactory: SearchFlowFactory {
         return CategoriesModuleAssembly().createModule(serviceManager)
     }
 }
+
+extension FlowFactory: ProfileFlowFactory {
+    func makeProfileModule(serviceManager: ServiceManagerProtocol) -> (Presentable, ProfileViewPresenter) {
+        return ProfileModuleAssembly().createModule(serviceManager)
+    }
+}

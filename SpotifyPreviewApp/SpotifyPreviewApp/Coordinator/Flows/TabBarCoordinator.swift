@@ -32,8 +32,9 @@ class TabBarCoordinator: BaseCoordinator {
 
 private extension TabBarCoordinator {
     func setupTabBarController() {
-        let firstController = searchFlow()
-        tabBarViewControllerDelegat?.setupTabBarItems([firstController])
+        let searchController = searchFlow()
+        let profileController = profileFlow()
+        tabBarViewControllerDelegat?.setupTabBarItems([searchController, profileController])
     }
     
     func searchFlow() -> UINavigationController {
@@ -46,10 +47,28 @@ private extension TabBarCoordinator {
         addDependency(searchCoordinator)
         return navigationController
     }
+    
+    func profileFlow() -> UINavigationController {
+        let navigationController = UINavigationController()
+        let profileCoordinator = coordinatorFactory.makeProfileCoordinator(factory: flowFactory,
+                                                                              router: Router(rootController: navigationController),
+                                                                           serviceManager: serviceManager)
+        profileCoordinator.output = self
+        profileCoordinator.start()
+        addDependency(profileCoordinator)
+        return navigationController
+    }
 }
 
 extension TabBarCoordinator: SearchCoordinatorOutput {
     func finishSearchFlow(coordinator: Coordinator) {
         removeDependency(coordinator)
+    }
+}
+
+extension TabBarCoordinator: ProfileCoordinatorOutput {
+    func finishProfileFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+        output?.finishTabBarFlow(coordinator: self)
     }
 }
