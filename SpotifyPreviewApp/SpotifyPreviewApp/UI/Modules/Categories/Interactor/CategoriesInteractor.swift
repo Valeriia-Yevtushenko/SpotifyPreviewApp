@@ -8,17 +8,17 @@
 import Foundation
 import PromiseKit
 
-final class CategoriesViewInteractor: CategoriesInteractorInputProtocol {
-    private var categoriesData: Categories?
+final class CategoriesInteractor: CategoriesInteractorInputProtocol {
+    private var listOfCategories: ListOfCategories?
     var presenter: CategoriesInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
     
     func fetchCategories() {
-        let promise: Promise<Categories> = networkService.fetch(Request.allCategories.rawValue)
+        let promise: Promise<ListOfCategories> = networkService.fetch(Request.allCategories.rawValue)
         firstly {
             promise
         }.done {data in
-            self.categoriesData = data
+            self.listOfCategories = data
             self.presenter?.interactorDidFetchCategories(data)
         }.catch { _ in
             self.presenter?.interactorFailedToFetchCategories()
@@ -26,7 +26,7 @@ final class CategoriesViewInteractor: CategoriesInteractorInputProtocol {
     }
     
     func getCategory(at index: Int) {
-        guard let category = categoriesData?.categories.items[index].identifier else {
+        guard let category = listOfCategories?.categories.items[index].identifier else {
             return
         }
         

@@ -21,7 +21,7 @@ protocol CategoriesViewOutputProtocol: AnyObject {
 }
 
 protocol CategoriesModuleOutput {
-    func runPlaylistsModule(_ data: String)
+    func runPlaylistsFlow(_ data: String)
 }
 
 protocol CategoriesModuleInput {

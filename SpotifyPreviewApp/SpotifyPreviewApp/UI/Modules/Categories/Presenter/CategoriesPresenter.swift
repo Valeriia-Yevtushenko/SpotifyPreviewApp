@@ -9,6 +9,7 @@ import Foundation
 
 final class CategoriesViewPresenter {
     weak var view: CategoriesViewInputProtocol?
+    var coordinator: CategoriesModuleOutput?
     var interactor: CategoriesInteractorInputProtocol?
 }
 
@@ -28,10 +29,10 @@ extension CategoriesViewPresenter: CategoriesViewOutputProtocol {
 
 extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
     func interactorDidGetCategory(_ category: String) {
-        
+        coordinator?.runPlaylistsFlow(category)
     }
     
-    func interactorDidFetchCategories(_ data: Categories) {
+    func interactorDidFetchCategories(_ data: ListOfCategories) {
         guard !data.categories.items.isEmpty  else {
             view?.displayLabel(with: "Unfortunately, the list of categories is empty.")
             return
@@ -47,7 +48,7 @@ extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
     }
     
     func interactorFailedToFetchCategories() {
-        view?.displayLabel(with: "Oops, something went wrong \n Pull down to relod view.")
+        view?.displayLabel(with: "Oops, something went wrong... \n Pull down to relod view")
     }
 }
 

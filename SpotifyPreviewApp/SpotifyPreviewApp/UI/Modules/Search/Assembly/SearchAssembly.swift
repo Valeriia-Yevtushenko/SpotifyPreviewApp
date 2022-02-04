@@ -13,7 +13,7 @@ final class SearchModuleAssembly {
         let dataSource = TrackTableViewDataSource()
         let presenter = SearchViewPresenter()
         searchViewController.dataSource = dataSource
-        let interactor = SearchViewInteractor()
+        let interactor = SearchInteractor()
         interactor.networkService = serviceManager.network()
         interactor.presenter = presenter
         presenter.intractor = interactor

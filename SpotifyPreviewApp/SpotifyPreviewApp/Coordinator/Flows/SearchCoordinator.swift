@@ -34,10 +34,29 @@ private extension SearchCoordinator {
     func runCategoriesModule() {
         let (categoriesModule, presenter) = factory.makeCategoriesModule(serviceManager: serviceManager)
         presenter.runSearchModule(viewController: searchModule().0)
+        presenter.coordinator = self
         router.setRootModule(categoriesModule, hideBar: false)
     }
 
     func searchModule() -> (Presentable, SearchViewPresenter) {
         return factory.makeSearchModule(serviceManager: serviceManager)
+    }
+}
+
+extension SearchCoordinator: CategoriesModuleOutput {
+    func runPlaylistsFlow(_ data: String) {
+        let playlistCoordinator = coordinatorFactory.makePlaylistsCoordinator(type: .category(data),
+                                                                              factory: factory,
+                                                                              router: router,
+                                                                              serviceManager: serviceManager)
+        playlistCoordinator.output = self
+        playlistCoordinator.start()
+        addDependency(playlistCoordinator)
+    }
+}
+
+extension SearchCoordinator: PlaylistsCoordinatorOutput {
+    func finishPlaylistsFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
     }
 }

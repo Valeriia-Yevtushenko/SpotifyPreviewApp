@@ -39,7 +39,23 @@ private extension ProfileCoordinator {
 }
 
 extension ProfileCoordinator: ProfileModuleOutput {
+    func runPlaylistsFlow() {
+        let playlistsCoordinator = coordinatorFactory.makePlaylistsCoordinator(type: .user,
+                                                                              factory: factory,
+                                                                              router: router,
+                                                                              serviceManager: serviceManager)
+        playlistsCoordinator.output = self
+        playlistsCoordinator.start()
+        addDependency(playlistsCoordinator)
+    }
+    
     func runAuthorizationFlow() {
         output?.finishProfileFlow(coordinator: self)
+    }
+}
+
+extension ProfileCoordinator: PlaylistsCoordinatorOutput {
+    func finishPlaylistsFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
     }
 }

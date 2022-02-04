@@ -8,13 +8,12 @@
 import Foundation
 import PromiseKit
 
-final class ProfileViewInteractor {
-    private var identifiers: (Int, [String])?
+final class ProfileInteractor {
     var presenter: ProfileInteractorOutputProtocol!
     var networkService: NetworkServiceProtocol!
 }
 
-extension ProfileViewInteractor: ProfileInteractorInputProtocol {
+extension ProfileInteractor: ProfileInteractorInputProtocol {
 
     func fetchUserProfileInfo() {
         let promise: Promise<User> = networkService.fetch(Request.user.rawValue)
@@ -24,13 +23,5 @@ extension ProfileViewInteractor: ProfileInteractorInputProtocol {
         }.catch {_ in
             self.presenter.interactorFailedToFetchUserData()
         }
-    }
-    
-    func getSelectedItem(at index: Int) {
-        guard let identifier = identifiers else {
-            return
-        }
-
-        presenter?.interactorDidGetSelectedItem(contentType: identifier.0, identifier.1[index])
     }
 }

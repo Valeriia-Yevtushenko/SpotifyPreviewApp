@@ -17,4 +17,5 @@ protocol CoordinatorFactoryProtocol: AnyObject {
     
     func makeProfileCoordinator(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> ProfileCoordinator
     
+    func makePlaylistsCoordinator(type: PlaylistType, factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator
 }

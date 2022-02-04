@@ -105,6 +105,7 @@
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="zcW-3v-GHm" firstAttribute="leading" secondItem="X7y-oj-v4N" secondAttribute="leading" constant="20" id="0wY-kB-qY1"/>
                                             <constraint firstAttribute="trailing" secondItem="G91-0F-e7j" secondAttribute="trailing" constant="20" id="4y5-ey-h0n"/>
@@ -117,6 +118,9 @@
                                             <constraint firstItem="zcW-3v-GHm" firstAttribute="top" secondItem="X7y-oj-v4N" secondAttribute="top" constant="13" id="vWt-4O-g1j"/>
                                             <constraint firstAttribute="bottom" secondItem="zcW-3v-GHm" secondAttribute="bottom" constant="13" id="wRe-eh-wf1"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="RUv-4I-L9L" appends="YES" id="0pg-Kh-bzt"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHi-dU-vIu">
                                         <rect key="frame" x="0.0" y="50" width="375" height="50"/>
@@ -155,6 +159,7 @@
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="2qX-AH-GbA"/>
                                             <constraint firstItem="LSh-sa-aal" firstAttribute="leading" secondItem="ti6-cn-Nqo" secondAttribute="trailing" constant="22" id="68x-PE-68l"/>
@@ -167,6 +172,9 @@
                                             <constraint firstItem="ti6-cn-Nqo" firstAttribute="leading" secondItem="FHi-dU-vIu" secondAttribute="leading" constant="20" id="j05-W2-GYz"/>
                                             <constraint firstItem="858-YK-YLD" firstAttribute="centerY" secondItem="LSh-sa-aal" secondAttribute="centerY" id="z2C-qm-jim"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="TGG-by-Xbv" appends="YES" id="VbU-bW-bkd"/>
+                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTQ-As-l18">
                                         <rect key="frame" x="0.0" y="100" width="375" height="50"/>
@@ -205,6 +213,7 @@
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="Ww9-bR-IW2" secondAttribute="trailing" constant="20" id="1Lk-0x-Geq"/>
                                             <constraint firstItem="Ww9-bR-IW2" firstAttribute="leading" secondItem="SMZ-yF-YVN" secondAttribute="trailing" constant="12" id="2ue-eg-JgD"/>
@@ -217,6 +226,9 @@
                                             <constraint firstItem="SMZ-yF-YVN" firstAttribute="leading" secondItem="coX-9n-LHJ" secondAttribute="trailing" constant="22" id="r8v-Co-ff3"/>
                                             <constraint firstItem="coX-9n-LHJ" firstAttribute="top" secondItem="xTQ-As-l18" secondAttribute="top" constant="13" id="rSI-Hn-a2r"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="tX5-of-NLz" appends="YES" id="Uap-GC-4BG"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -260,6 +272,21 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="RUv-4I-L9L">
+                    <connections>
+                        <action selector="followsSectionDidSelect:" destination="Y6W-OH-hqX" id="fCA-xn-Puc"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="TGG-by-Xbv">
+                    <connections>
+                        <action selector="playlistsSectionDidSelected:" destination="Y6W-OH-hqX" id="FMh-8f-sLp"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="tX5-of-NLz">
+                    <connections>
+                        <action selector="albumsSectionDidSelect:" destination="Y6W-OH-hqX" id="K5S-VW-ION"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="130.43478260869566" y="92.410714285714278"/>
         </scene>

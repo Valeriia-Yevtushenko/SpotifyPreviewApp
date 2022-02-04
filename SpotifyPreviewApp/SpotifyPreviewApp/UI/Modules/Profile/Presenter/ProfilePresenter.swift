@@ -14,6 +14,17 @@ final class ProfileViewPresenter {
 }
 
 extension ProfileViewPresenter: ProfileViewOutputProtocol {
+    func viewDidSelectedSection(_ sectionType: ProfileSectionType) {
+        switch sectionType {
+        case .playlists:
+            coordinator?.runPlaylistsFlow()
+        case .albums:
+            break
+        case .follows:
+            break
+        }
+    }
+    
     func viewDidTapReload() {
         interactor?.fetchUserProfileInfo()
     }
@@ -22,20 +33,12 @@ extension ProfileViewPresenter: ProfileViewOutputProtocol {
         coordinator?.runAuthorizationFlow()
     }
     
-    func viewDidSelectedItem(at index: Int) {
-        interactor?.getSelectedItem(at: index)
-    }
-    
     func viewDidLoad() {
         interactor?.fetchUserProfileInfo()
     }
 }
 
 extension ProfileViewPresenter: ProfileInteractorOutputProtocol {
-    func interactorDidGetSelectedItem(contentType: Int, _ data: String) {
-        
-    }
-    
     func interactorDidFetchUserData(_ data: User) {
         view?.configureProfileInfo(ProfileInfoModel(userImage: data.images?.first?.url, username: data.displayName, userEmail: data.email))
 

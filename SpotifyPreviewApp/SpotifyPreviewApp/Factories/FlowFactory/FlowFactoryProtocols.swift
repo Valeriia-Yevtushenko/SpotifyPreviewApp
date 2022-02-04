@@ -19,3 +19,7 @@ protocol SearchFlowFactory {
 protocol ProfileFlowFactory {
     func makeProfileModule(serviceManager: ServiceManagerProtocol) -> (Presentable, ProfileViewPresenter)
 }
+
+protocol PlaylistsFlowFactory {
+    func makeListOfPlaylistsModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsViewPresenter)
+}

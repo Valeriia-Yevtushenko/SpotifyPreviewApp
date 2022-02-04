@@ -7,37 +7,23 @@
 
 import Foundation
 // MARK: - Categories
-struct Categories: Codable {
-    let categories: CategoriesArray
+struct ListOfCategories: Codable {
+    let categories: Categories
 }
 
 // MARK: - CategoriesArray
-struct CategoriesArray: Codable {
-    let href: String
+struct Categories: Codable {
     let items: [Category]
-    let limit: Int
-    let next: String
-    let offset: Int
-    let previous: JSONNull?
-    let total: Int
 }
 
 // MARK: - Item
 struct Category: Codable {
-    let href: String
-    let icons: [Icon]
+    let icons: [Image]
     let identifier, name: String
     
     enum CodingKeys: String, CodingKey {
-        case href, icons
+        case icons
         case identifier = "id"
         case name
     }
-}
-
-// MARK: - Icon
-struct Icon: Codable {
-    let height: Int?
-    let url: String
-    let width: Int?
 }
