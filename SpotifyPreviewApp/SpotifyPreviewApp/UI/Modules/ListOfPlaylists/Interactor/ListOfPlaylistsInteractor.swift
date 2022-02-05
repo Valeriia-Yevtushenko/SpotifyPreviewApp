@@ -16,15 +16,36 @@ final class ListOfPlaylistsViewInteractor {
 }
 
 extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol {
-    func getData(at index: Int) {
+    func postNewPlaylist(_ playlist: NewPlaylist) {
+        guard let data = try? JSONEncoder().encode(playlist) else {
+            return
+        }
+        
+        let promise: Promise<Playlists> = networkService.post(data: data, url: Request.userPlaylists.rawValue)
+        
+        firstly {
+            promise
+        }.done { data in
+            self.playlists = data
+            self.presenter.interactorDidFetchPlaylists(data)
+        }.catch { _ in
+            self.presenter.interactorFailedToFetchPlaylists()
+        }
+    }
+    
+    func getPlaylistsType() {
+        presenter.interactorDidFetchPlaylistsType(type)
+    }
+    
+    func getPlaylistId(at index: Int) {
         guard let playlistId = playlists?.items?[index].identifier else {
             return
         }
         
-        presenter.interactorDidGetData(playlistId)
+        presenter.interactorDidGetPlaylistId(playlistId)
     }
     
-    func fetchData() {
+    func fetchPlaylists() {
         switch type {
         case .category(let categoryId):
             let promise: Promise<ListOfPlaylists> = networkService.fetch(Request.playlists.createUrl(data: categoryId))
@@ -35,9 +56,9 @@ extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol 
                 return data.playlists
             }.done { data in
                 self.playlists = data
-                self.presenter.interactorDidFetchData(data)
+                self.presenter.interactorDidFetchPlaylists(data)
             }.catch { _ in
-                self.presenter.interactorFailedToFetchData()
+                self.presenter.interactorFailedToFetchPlaylists()
             }
         case .user:
             let promise: Promise<Playlists> = networkService.fetch(Request.userPlaylists.rawValue)
@@ -47,12 +68,12 @@ extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol 
                 return data
             }.done { data in
                 self.playlists = data
-                self.presenter.interactorDidFetchData(data)
+                self.presenter.interactorDidFetchPlaylists(data)
             }.catch { _ in
-                self.presenter.interactorFailedToFetchData()
+                self.presenter.interactorFailedToFetchPlaylists()
             }
         case .none:
-            self.presenter?.interactorFailedToFetchData()
+            self.presenter?.interactorFailedToFetchPlaylists()
         }
     }
 }

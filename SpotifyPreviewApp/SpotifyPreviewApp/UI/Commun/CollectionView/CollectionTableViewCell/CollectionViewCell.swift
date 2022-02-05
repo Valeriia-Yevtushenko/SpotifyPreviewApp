@@ -25,6 +25,9 @@ final class CollectionViewCell: UICollectionViewCell {
         cellImageView.layer.cornerRadius = 10
         
         guard let imageData = data.image else {
+            cellImageView.image = UIImage(systemName: "music.note.list")?.withRenderingMode(.alwaysOriginal)
+            cellImageView.backgroundColor = .placeholderText
+            nameLabel.text = data.name
             return
         }
         

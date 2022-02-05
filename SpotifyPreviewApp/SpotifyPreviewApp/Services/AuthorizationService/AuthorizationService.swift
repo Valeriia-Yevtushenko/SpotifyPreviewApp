@@ -50,7 +50,10 @@ extension AuthorizationService: AuthorizationServiceProtocol {
         oauth.allowMissingStateCheck = true
 
         return Promise { seal in
-            guard let redirectURL = URL(string: Request.callbackUrl.rawValue) else { return }
+            guard let redirectURL = URL(string: Request.callbackUrl.rawValue) else {
+                return
+            }
+            
             oauth.authorize(withCallbackURL: redirectURL, scope: Authorization.scope.rawValue,
                            state: Authorization.state.rawValue, codeChallenge: Authorization.codeChallenge.rawValue,
                                                  codeVerifier: Authorization.codeVerifier.rawValue) { result in

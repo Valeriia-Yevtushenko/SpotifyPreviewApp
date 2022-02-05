@@ -46,6 +46,29 @@ extension NetworkService: NetworkServiceProtocol {
             }
         }
     }
+    
+    func post<T: Codable>(data: Data, url: String) -> Promise<T> {
+        if client.credential.isTokenExpired() {
+           authorizationService.renewAccessToken()
+        }
+       
+        return Promise {seal in
+            client.post(url, body: data) { result in
+                switch result {
+                case .success(let response):
+                    guard let data = try? JSONDecoder().decode(T.self, from: response.data) else {
+                        seal.reject(NetworkError.parse)
+                        return
+                    }
+
+                    seal.resolve(.fulfilled(data))
+                case .failure(let error):
+                    debugPrint(error.description)
+                    seal.reject(error)
+                }
+            }
+        }
+    }
 }
 
 private extension NetworkService {

@@ -14,35 +14,52 @@ class ListOfPlaylistsViewPresenter {
 }
 
 extension ListOfPlaylistsViewPresenter: ListOfPlaylistsViewOutputProtocol {
+    func viewDidTapCreatePlaylist(_ playlist: NewPlaylist) {
+        interactor?.postNewPlaylist(playlist)
+    }
+    
     func viewSelectedItem(at index: Int) {
         
     }
     
     func viewDidLoad() {
-        interactor?.fetchData()
+        interactor?.getPlaylistsType()
+        interactor?.fetchPlaylists()
     }
 }
 
 extension ListOfPlaylistsViewPresenter: ListOfPlaylistsInteractorOutputProtocol {
-    func interactorDidGetData(_ data: String) {
+    func interactorDidPostNewPlaylist() {
+        
+    }
+    
+    func interactorDidFetchPlaylistsType(_ type: PlaylistType) {
+        view?.setupPlaylistsType(type)
+    }
+    
+    func interactorDidGetPlaylistId(_ data: String) {
         coordinator?.runPlaylistModule(data: data)
     }
     
-    func interactorDidFetchData(_ data: Playlists) {
+    func interactorDidFetchPlaylists(_ data: Playlists) {
         guard let playlists = data.items, !playlists.isEmpty else {
             view?.displayLabel(with: "Unfortunately, this category is empty...")
             return
         }
         
         let viewModel: [CollectionViewCellModel]  = playlists.map({
-            return CollectionViewCellModel(image: $0.images?[0].url, name: $0.name)
+            guard $0.images?.first?.url == nil else {
+                return CollectionViewCellModel(image: $0.images?.first?.url)
+            }
+            
+            return CollectionViewCellModel(name: $0.name)
         })
         
         view?.setupData(viewModel)
         view?.reloadData()
     }
     
-    func interactorFailedToFetchData() {
+    func interactorFailedToFetchPlaylists() {
         view?.displayLabel(with: "Oops, something went wrong... \n Pull down to relod view")
     }
 }

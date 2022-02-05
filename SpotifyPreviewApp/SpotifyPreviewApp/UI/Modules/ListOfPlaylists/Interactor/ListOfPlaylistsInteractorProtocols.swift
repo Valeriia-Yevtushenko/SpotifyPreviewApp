@@ -8,12 +8,16 @@
 import Foundation
 
 protocol ListOfPlaylistsInteractorInputProtocol: AnyObject {
-    func fetchData()
-    func getData(at index: Int)
+    func fetchPlaylists()
+    func postNewPlaylist(_ playlist: NewPlaylist)
+    func getPlaylistsType()
+    func getPlaylistId(at index: Int)
 }
 
 protocol ListOfPlaylistsInteractorOutputProtocol: AnyObject {
-    func interactorDidFetchData(_ data: Playlists)
-    func interactorFailedToFetchData()
-    func interactorDidGetData(_ data: String)
+    func interactorDidFetchPlaylists(_ data: Playlists)
+    func interactorDidPostNewPlaylist()
+    func interactorDidFetchPlaylistsType(_ type: PlaylistType)
+    func interactorFailedToFetchPlaylists()
+    func interactorDidGetPlaylistId(_ data: String)
 }

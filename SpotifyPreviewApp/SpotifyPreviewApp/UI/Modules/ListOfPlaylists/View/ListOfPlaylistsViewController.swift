@@ -39,6 +39,16 @@ private extension ListOfPlaylistsViewController {
 }
 
 extension ListOfPlaylistsViewController: ListOfPlaylistsViewInputProtocol {
+    func setupPlaylistsType(_ type: PlaylistType) {
+        switch type {
+        case .user:
+            navigationItem.title = "Your playlists"
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonDidTap))
+        case .category(let name):
+            navigationItem.title = name.uppercased()
+        }
+    }
+    
     func setupData(_ model: [CollectionViewCellModel]) {
         dataSource?.setupViewModel(model)
     }
@@ -60,5 +70,31 @@ extension ListOfPlaylistsViewController: ListOfPlaylistsViewInputProtocol {
 extension ListOfPlaylistsViewController: CollectionViewDataSourceDelegate {
     func didSelectItem(at index: Int) {
         output?.viewSelectedItem(at: index)
+    }
+}
+
+@objc private extension ListOfPlaylistsViewController {
+    func addButtonDidTap() {
+        let alert = UIAlertController(title: "Create new playlist",
+                                      message: "Please, enter playlist name and description.",
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let createButton = UIAlertAction(title: "Create", style: .destructive, handler: { [weak alert] (_) in
+            self.output?
+                .viewDidTapCreatePlaylist(NewPlaylist(name: alert?.textFields?[0].text ?? "",
+                                                      description: alert?.textFields?[1].text ?? "", publicType: false))
+        })
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Name"
+        }
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Description"
+        }
+        
+        alert.addAction(cancelButton)
+        alert.addAction(createButton)
+        present(alert, animated: true, completion: nil)
     }
 }
