@@ -8,7 +8,7 @@
 import Foundation
 import PromiseKit
 
-final class SearchViewInteractor: SearchInteractorInputProtocol {
+final class SearchInteractor: SearchInteractorInputProtocol {
     var presenter: SearchInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
     

@@ -74,6 +74,7 @@ extension CategoriesViewController: CategoriesViewInputProtocol {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         label.text = text
         label.textColor = .lightGray
+        label.numberOfLines = 0
         label.textAlignment = .center
         categoriesCollectionView.backgroundView = label
     }

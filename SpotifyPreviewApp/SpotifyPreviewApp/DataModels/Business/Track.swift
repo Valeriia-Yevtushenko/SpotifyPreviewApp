@@ -12,7 +12,6 @@ struct PlaylistTracks: Codable {
     let limit: Int
     let next: String
     let offset: Int
-    let previous: JSONNull?
     let total: Int
 }
 
@@ -24,7 +23,7 @@ struct Song: Codable {
     let discNumber, durationMS: Int
     let explicit: Bool
     let externalIDS: TrackExternalIDS
-    let externalUrls: SongExternalUrls
+    let externalUrls: ExternalUrls
     let href: String
     let identifier: String
     let isLocal: Bool
@@ -57,7 +56,7 @@ struct SongAlbum: Codable {
     let albumType: String
     let artists: [SongArtist]
     let availableMarkets: [String]
-    let externalUrls: SongExternalUrls
+    let externalUrls: ExternalUrls
     let href: String
     let identifier: String
     let images: [SongImage]
@@ -82,7 +81,7 @@ struct SongAlbum: Codable {
 
 // MARK: - Artist
 struct SongArtist: Codable {
-    let externalUrls: SongExternalUrls
+    let externalUrls: ExternalUrls
     let href: String
     let identifier, name, type, uri: String
 
@@ -95,7 +94,7 @@ struct SongArtist: Codable {
 }
 
 // MARK: - ExternalUrls
-struct SongExternalUrls: Codable {
+struct ExternalUrls: Codable {
     let spotify: String
 }
 

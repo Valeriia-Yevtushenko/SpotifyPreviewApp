@@ -30,3 +30,9 @@ extension FlowFactory: ProfileFlowFactory {
         return ProfileModuleAssembly().createModule(serviceManager)
     }
 }
+
+extension FlowFactory: PlaylistsFlowFactory {
+    func makeListOfPlaylistsModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsViewPresenter) {
+        return ListOfPlaylistsModuleAssembly().createModule(with: type, serviceManager: serviceManager)
+    }
+}

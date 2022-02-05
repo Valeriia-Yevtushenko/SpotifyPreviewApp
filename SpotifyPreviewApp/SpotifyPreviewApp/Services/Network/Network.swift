@@ -8,6 +8,10 @@
 import OAuthSwift
 import PromiseKit
 
+enum NetworkError: Error {
+    case parse
+}
+
 class NetworkService {
     private let authorizationService: AuthorizationServiceProtocol
     private let client: OAuthSwiftClient
@@ -30,6 +34,30 @@ extension NetworkService: NetworkServiceProtocol {
                 switch result {
                 case .success(let response):
                     guard let data = try? JSONDecoder().decode(T.self, from: response.data) else {
+                        seal.reject(NetworkError.parse)
+                        return
+                    }
+
+                    seal.resolve(.fulfilled(data))
+                case .failure(let error):
+                    debugPrint(error.description)
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    func post<T: Codable>(data: Data, url: String) -> Promise<T> {
+        if client.credential.isTokenExpired() {
+           authorizationService.renewAccessToken()
+        }
+       
+        return Promise {seal in
+            client.post(url, body: data) { result in
+                switch result {
+                case .success(let response):
+                    guard let data = try? JSONDecoder().decode(T.self, from: response.data) else {
+                        seal.reject(NetworkError.parse)
                         return
                     }
 

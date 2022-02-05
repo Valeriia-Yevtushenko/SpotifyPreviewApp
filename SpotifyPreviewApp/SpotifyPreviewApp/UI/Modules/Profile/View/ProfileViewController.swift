@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum ProfileSectionType {
+    case playlists
+    case albums
+    case follows
+}
+
 struct ProfileInfoModel {
     var userImage: String?
     var username: String?
@@ -24,27 +30,53 @@ final class ProfileViewController: UIViewController {
     @IBOutlet private weak var userImageWidthLayoutConstraint: NSLayoutConstraint!
     
     var output: ProfileViewOutputProtocol?
-    var dataSource: TableViewDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         output?.viewDidLoad()
-        configure()
+        configureUserImageView()
+        configureSections()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
     }
 }
 
 private extension ProfileViewController {
+    @IBAction func followsSectionDidSelect(_ sender: UITapGestureRecognizer) {
+        
+    }
+    
+    @IBAction func playlistsSectionDidSelected(_ sender: UITapGestureRecognizer) {
+        output?.viewDidSelectedSection(.playlists)
+    }
+    
+    @IBAction func albumsSectionDidSelect(_ sender: UITapGestureRecognizer) {
+        
+    }
+    
     @IBAction func logOutButtonDidTap() {
         output?.viewDidTapLogOut()
     }
     
-    func configure() {
-        navigationController?.navigationBar.isHidden = true
+    func configureUserImageView() {
         userImageWidthLayoutConstraint.constant = self.view.frame.width / 2
         userImageHeightLayoutConstraint.constant = self.view.frame.width / 2
         userImageView.layer.cornerRadius = userImageWidthLayoutConstraint.constant / 2
         userImageView.clipsToBounds = true
+    }
+    
+    func configureSections() {
         setupTopBorder(followsView)
         setupBottomBorder(playlistView)
         setupBottomBorder(followsView)
@@ -97,11 +129,5 @@ extension ProfileViewController: ProfileViewInputProtocol {
         userEmailLabel.text = model.userEmail
         usernameLabel.text = model.username
         userImageView.setImage(withUrl: model.userImage ?? "")
-    }
-}
-
-extension ProfileViewController: TableViewDataSourceDelegate {
-    func didSelectItem(at index: Int) {
-        output?.viewDidSelectedItem(at: index)
     }
 }

@@ -9,35 +9,42 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search View Controller-->
+        <!--List Of Playlists View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" id="Y6W-OH-hqX" customClass="SearchViewController" customModule="SpotifyPreviewApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ListOfPlaylistsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ListOfPlaylistsViewController" customModule="SpotifyPreviewApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="center" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BNX-pv-iPC">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="81O-Xv-35C">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                            </tableView>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="kD7-M3-YLp">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="BNX-pv-iPC" secondAttribute="bottom" id="1YE-be-E1t"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="BNX-pv-iPC" secondAttribute="trailing" id="P0W-nc-Xm7"/>
-                            <constraint firstItem="BNX-pv-iPC" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="m1f-CE-1EV"/>
-                            <constraint firstItem="BNX-pv-iPC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="ohY-mo-e1b"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="81O-Xv-35C" secondAttribute="bottom" id="Biz-wq-jdB"/>
+                            <constraint firstItem="81O-Xv-35C" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="PST-Tx-YqP"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="81O-Xv-35C" secondAttribute="trailing" id="cEz-QH-u3B"/>
+                            <constraint firstItem="81O-Xv-35C" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="qMp-Gx-5Kl"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="BNX-pv-iPC" id="Bvv-pn-9kE"/>
+                        <outlet property="playlistCollectionView" destination="81O-Xv-35C" id="GR3-Hi-A3W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="75"/>
+            <point key="canvasLocation" x="129" y="78"/>
         </scene>
     </scenes>
     <resources>

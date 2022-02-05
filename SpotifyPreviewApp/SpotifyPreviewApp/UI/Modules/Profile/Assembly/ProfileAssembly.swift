@@ -12,10 +12,7 @@ final class ProfileModuleAssembly {
         let profileViewController = ProfileViewController.instantiate(from: ProfileViewController.identifier)
         let presenter = ProfileViewPresenter()
         presenter.view = profileViewController
-        let dataSource = TableViewDataSource()
-        dataSource.delegate = profileViewController
-        profileViewController.dataSource = dataSource
-        let interactor = ProfileViewInteractor()
+        let interactor = ProfileInteractor()
         interactor.presenter = presenter
         interactor.networkService = serviceManager.network()
         presenter.interactor = interactor

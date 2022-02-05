@@ -13,7 +13,7 @@ protocol CategoriesInteractorInputProtocol: AnyObject {
 }
 
 protocol CategoriesInteractorOutputProtocol: AnyObject {
-    func interactorDidFetchCategories(_ data: Categories)
+    func interactorDidFetchCategories(_ data: ListOfCategories)
     func interactorFailedToFetchCategories()
     func interactorDidGetCategory(_ category: String)
 }

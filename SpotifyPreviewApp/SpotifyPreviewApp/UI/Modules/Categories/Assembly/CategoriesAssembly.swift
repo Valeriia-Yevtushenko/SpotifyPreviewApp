@@ -14,7 +14,7 @@ final class CategoriesModuleAssembly {
         let dataSource = CollectionViewDataSource()
         dataSource.delegate = categoriesViewController
         categoriesViewController.dataSource = dataSource
-        let interactor = CategoriesViewInteractor()
+        let interactor = CategoriesInteractor()
         interactor.networkService = serviceManager.network()
         interactor.presenter = presenter
         presenter.interactor = interactor
