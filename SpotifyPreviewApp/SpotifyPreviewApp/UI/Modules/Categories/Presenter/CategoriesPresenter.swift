@@ -48,7 +48,7 @@ extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
     }
     
     func interactorFailedToFetchCategories() {
-        view?.displayLabel(with: "Oops, something went wrong... \n Pull down to relod view")
+        view?.displayLabel(with: "Oops, something went wrong... \n Pull down to reload view")
     }
 }
 

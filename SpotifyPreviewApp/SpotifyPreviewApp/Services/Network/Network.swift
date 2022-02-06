@@ -38,7 +38,7 @@ extension NetworkService: NetworkServiceProtocol {
                         return
                     }
 
-                    seal.resolve(.fulfilled(data))
+                    seal.fulfill(data)
                 case .failure(let error):
                     debugPrint(error.description)
                     seal.reject(error)
@@ -61,7 +61,25 @@ extension NetworkService: NetworkServiceProtocol {
                         return
                     }
 
-                    seal.resolve(.fulfilled(data))
+                    seal.fulfill(data)
+                case .failure(let error):
+                    debugPrint(error.description)
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    func delete(url: String) -> Promise<Void> {
+        if client.credential.isTokenExpired() {
+           authorizationService.renewAccessToken()
+        }
+       
+        return Promise {seal in
+            client.delete(url) { result in
+                switch result {
+                case .success(_):
+                    seal.fulfill_()
                 case .failure(let error):
                     debugPrint(error.description)
                     seal.reject(error)

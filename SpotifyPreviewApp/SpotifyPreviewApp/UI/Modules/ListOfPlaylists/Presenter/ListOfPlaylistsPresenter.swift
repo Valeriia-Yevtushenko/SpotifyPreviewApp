@@ -14,12 +14,16 @@ class ListOfPlaylistsViewPresenter {
 }
 
 extension ListOfPlaylistsViewPresenter: ListOfPlaylistsViewOutputProtocol {
+    func viewWillAppear() {
+        interactor?.fetchPlaylists()
+    }
+    
     func viewDidTapCreatePlaylist(_ playlist: NewPlaylist) {
         interactor?.postNewPlaylist(playlist)
     }
     
     func viewSelectedItem(at index: Int) {
-        
+        interactor?.getPlaylistId(at: index)
     }
     
     func viewDidLoad() {
@@ -29,37 +33,43 @@ extension ListOfPlaylistsViewPresenter: ListOfPlaylistsViewOutputProtocol {
 }
 
 extension ListOfPlaylistsViewPresenter: ListOfPlaylistsInteractorOutputProtocol {
+    func interactorFailedToPostPlaylist(_ error: String) {
+        view?.displayErrorAlert(with: error)
+    }
+    
     func interactorDidPostNewPlaylist() {
-        
+        interactor?.fetchPlaylists()
     }
     
     func interactorDidFetchPlaylistsType(_ type: PlaylistType) {
         view?.setupPlaylistsType(type)
     }
     
-    func interactorDidGetPlaylistId(_ data: String) {
-        coordinator?.runPlaylistModule(data: data)
+    func interactorDidGetPlaylistId(_ identifier: String, type: PlaylistType) {
+        coordinator?.runPlaylistModule(with: identifier, type: type)
     }
     
     func interactorDidFetchPlaylists(_ data: Playlists) {
-        guard let playlists = data.items, !playlists.isEmpty else {
-            view?.displayLabel(with: "Unfortunately, this category is empty...")
-            return
-        }
+        let viewModel: [CollectionViewCellModel]
         
-        let viewModel: [CollectionViewCellModel]  = playlists.map({
-            guard $0.images?.first?.url == nil else {
-                return CollectionViewCellModel(image: $0.images?.first?.url)
-            }
-            
-            return CollectionViewCellModel(name: $0.name)
-        })
+        if let playlists = data.items, !playlists.isEmpty {
+            viewModel = playlists.map({
+                guard $0.images?.first?.url == nil else {
+                    return CollectionViewCellModel(image: $0.images?.first?.url)
+                }
+                
+                return CollectionViewCellModel(name: $0.name)
+            })
+        } else {
+            viewModel = []
+            view?.displayLabel(with: "Unfortunately, this category is empty...")
+        }
         
         view?.setupData(viewModel)
         view?.reloadData()
     }
     
     func interactorFailedToFetchPlaylists() {
-        view?.displayLabel(with: "Oops, something went wrong... \n Pull down to relod view")
+        view?.displayLabel(with: "Oops, something went wrong... \n Pull down to reload view")
     }
 }

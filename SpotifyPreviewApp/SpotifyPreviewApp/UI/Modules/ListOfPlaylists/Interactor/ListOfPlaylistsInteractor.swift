@@ -27,9 +27,9 @@ extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol 
             promise
         }.done { data in
             self.playlists = data
-            self.presenter.interactorDidFetchPlaylists(data)
-        }.catch { _ in
-            self.presenter.interactorFailedToFetchPlaylists()
+            self.presenter.interactorDidPostNewPlaylist()
+        }.catch { error in
+            self.presenter.interactorFailedToPostPlaylist(error.localizedDescription)
         }
     }
     
@@ -42,7 +42,7 @@ extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol 
             return
         }
         
-        presenter.interactorDidGetPlaylistId(playlistId)
+        presenter.interactorDidGetPlaylistId(playlistId, type: type)
     }
     
     func fetchPlaylists() {

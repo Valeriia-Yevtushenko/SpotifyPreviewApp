@@ -22,4 +22,6 @@ protocol ProfileFlowFactory {
 
 protocol PlaylistsFlowFactory {
     func makeListOfPlaylistsModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsViewPresenter)
+    
+    func makePlaylistModule(with playlistId: String, type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, PlaylistViewPresenter)
 }
