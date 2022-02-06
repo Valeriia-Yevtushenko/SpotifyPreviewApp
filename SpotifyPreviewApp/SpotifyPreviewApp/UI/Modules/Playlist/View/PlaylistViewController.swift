@@ -9,6 +9,7 @@ import UIKit
 
 class PlaylistViewController: UIViewController {
     @IBOutlet private weak var playlistTableView: UITableView!
+    private let toastView = ToastView()
     var output: PlaylistViewOutputProtocol?
     var dataSource: TrackTableViewDataSource?
     var headerView: UIImageView!
@@ -52,6 +53,26 @@ private extension PlaylistViewController {
 }
 
 extension PlaylistViewController: PlaylistViewInputProtocol {
+    func showConfirmationToastView() {
+        toastView.text = "Successfully added"
+        toastView.layer.setValue("0.01", forKeyPath: "transform.scale")
+        toastView.alpha = 0
+        view.addSubview(toastView)
+        
+        UIView.animate(withDuration: 1.5,
+                       delay: 0,
+                       usingSpringWithDamping: 0.75,
+                       initialSpringVelocity: 0,
+                       options: [.beginFromCurrentState],
+                       animations: {
+            self.toastView.alpha = 1
+            self.toastView.layer.setValue(1, forKeyPath: "transform.scale")
+            }) { _ in
+                self.toastView.removeFromSuperview()
+            }
+
+    }
+    
     func setupPlaylistInfo(image url: String?, name: String?, type: PlaylistType) {
         navigationItem.title = name
         
@@ -120,11 +141,31 @@ extension PlaylistViewController: TrackTableViewDataSourceDelegate {
 
 @objc private extension PlaylistViewController {
     func addButtonDidTap() {
-    
+        let alert = UIAlertController(title: "Add playlist",
+                                      message: "Are you sure you want to add this playlist to y favorites?",
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteButton = UIAlertAction(title: "Add", style: .destructive, handler: { _ in
+            self.output?.viewDidTapAddPlaylist()
+        })
+        
+        alert.addAction(cancelButton)
+        alert.addAction(deleteButton)
+        present(alert, animated: true, completion: nil)
     }
     
     func trashButtonDidTap() {
-        output?.viewDidTapDeletePlaylist()
+        let alert = UIAlertController(title: "Delete playlist",
+                                      message: "Are you sure you want to delete the playlist? After that you won't be able to restore it.",
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteButton = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.output?.viewDidTapDeletePlaylist()
+        })
+        
+        alert.addAction(cancelButton)
+        alert.addAction(deleteButton)
+        present(alert, animated: true, completion: nil)
     }
     
     func editButtonDidTap() {

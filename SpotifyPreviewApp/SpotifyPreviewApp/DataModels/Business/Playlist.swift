@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Playlist
 struct Playlist: Codable {
     let playlistDescription: String?
-    let id: String?
+    let identifier: String?
     let images: [Image]?
     let name: String?
     let owner: Owner?
@@ -19,7 +19,8 @@ struct Playlist: Codable {
 
     enum CodingKeys: String, CodingKey {
         case playlistDescription = "description"
-        case id, images, name, owner
+        case identifier = "id"
+        case images, name, owner
         case tracks, type, uri
     }
 }

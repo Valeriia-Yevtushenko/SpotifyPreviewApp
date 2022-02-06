@@ -9,6 +9,7 @@ import Foundation
 import PromiseKit
 
 final class PlaylistViewInteractor {
+    private var playlist: Playlist?
     var presenter: PlaylistInteractorOutputProtocol?
     var playlistId: String!
     var playlistType: PlaylistType!
@@ -16,6 +17,18 @@ final class PlaylistViewInteractor {
 }
 
 extension PlaylistViewInteractor: PlaylistInteractorInputProtocol {
+    func addPlaylist() {
+        guard let playlistId = playlistId, let jsonData = try? JSONSerialization.data(withJSONObject: ["public": false]) else {
+            return
+        }
+        
+        networkService.put(data: jsonData, url: Request.addPlaylist.createUrl(data: playlistId)).done { _ in
+            self.presenter?.interactorDidAddPlaylist()
+        }.catch { error in
+            self.presenter?.interactorFailedToAddPlaylist(error.localizedDescription)
+        }
+    }
+    
     func deletePlaylist() {
         guard let playlistId = playlistId else {
             return
@@ -31,6 +44,7 @@ extension PlaylistViewInteractor: PlaylistInteractorInputProtocol {
     func fetchPlaylist() {
         let promise: Promise<Playlist> = networkService.fetch(Request.playlist.createUrl(data: playlistId))
         promise.done { data in
+            self.playlist = data
             self.presenter?.interactorDidFetchPlaylist(data, type: self.playlistType)
         }.catch {_ in
             self.presenter?.interactorFailedToFetchPlaylist()

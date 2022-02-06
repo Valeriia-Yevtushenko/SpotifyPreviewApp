@@ -14,11 +14,13 @@ protocol PlaylistViewInputProtocol: AnyObject {
     func updateHeaderView()
     func displayLabel(with text: String)
     func displayErrorAlert(with text: String)
+    func showConfirmationToastView()
 }
 
 protocol PlaylistViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func viewDidTapDeletePlaylist()
+    func viewDidTapAddPlaylist()
     func viewDidUpdate()
     func viewWillDisappear()
 }

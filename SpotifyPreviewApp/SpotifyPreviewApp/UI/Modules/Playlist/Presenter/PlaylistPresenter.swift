@@ -14,6 +14,10 @@ final class PlaylistViewPresenter {
 }
 
 extension PlaylistViewPresenter: PlaylistViewOutputProtocol {
+    func viewDidTapAddPlaylist() {
+        interactor?.addPlaylist()
+    }
+    
     func viewDidTapDeletePlaylist() {
         interactor?.deletePlaylist()
     }
@@ -32,6 +36,14 @@ extension PlaylistViewPresenter: PlaylistViewOutputProtocol {
 }
 
 extension PlaylistViewPresenter: PlaylistInteractorOutputProtocol {
+    func interactorDidAddPlaylist() {
+        view?.showConfirmationToastView()
+    }
+    
+    func interactorFailedToAddPlaylist(_ error: String) {
+        view?.displayErrorAlert(with: error)
+    }
+    
     func interactorDidDeletePlaylist() {
         coordinator?.backToPlaylists()
     }

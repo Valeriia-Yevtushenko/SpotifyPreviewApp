@@ -16,6 +16,7 @@ enum Request: String {
     case callbackUrl = "SpotifyPreviewApp://oauth-callback"
     case playlist = "https://api.spotify.com/v1/playlists/"
     case deletePlaylist
+    case addPlaylist
     case playlistImage
     case user = "https://api.spotify.com/v1/me"
     case userPlaylists = "https://api.spotify.com/v1/me/playlists"
@@ -41,6 +42,8 @@ enum Request: String {
         case .artistAlbums:
             return "https://api.spotify.com/v1/artists/" + data + "/albums?market=UA"
         case .deletePlaylist:
+            return "https://api.spotify.com/v1/playlists/\(data)/followers"
+        case .addPlaylist:
             return "https://api.spotify.com/v1/playlists/\(data)/followers"
         default:
             return ""
