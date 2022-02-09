@@ -99,7 +99,7 @@ extension ListOfPlaylistsViewController: CollectionViewDataSourceDelegate {
         let createButton = UIAlertAction(title: "Create", style: .destructive, handler: { [weak alert] (_) in
             self.output?
                 .viewDidTapCreatePlaylist(NewPlaylist(name: alert?.textFields?[0].text ?? "",
-                                                      description: alert?.textFields?[1].text ?? "", publicType: false))
+                                                      description: alert?.textFields?[1].text ?? "", isPublic: false))
         })
         
         alert.addTextField { textField in

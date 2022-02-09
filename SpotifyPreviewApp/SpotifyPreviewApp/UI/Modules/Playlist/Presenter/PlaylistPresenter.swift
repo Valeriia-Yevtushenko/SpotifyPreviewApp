@@ -14,6 +14,10 @@ final class PlaylistViewPresenter {
 }
 
 extension PlaylistViewPresenter: PlaylistViewOutputProtocol {
+    func viewDidEditPlaylist() {
+        interactor?.getPlaylist()
+    }
+    
     func viewDidTapAddPlaylist() {
         interactor?.addPlaylist()
     }
@@ -22,12 +26,8 @@ extension PlaylistViewPresenter: PlaylistViewOutputProtocol {
         interactor?.deletePlaylist()
     }
     
-    func viewDidUpdate() {
+    func viewDidUpdatePlaylist() {
         view?.updateHeaderView()
-    }
-    
-    func viewWillDisappear() {
-        coordinator?.finishedFlow()
     }
     
     func viewDidLoad() {
@@ -36,6 +36,14 @@ extension PlaylistViewPresenter: PlaylistViewOutputProtocol {
 }
 
 extension PlaylistViewPresenter: PlaylistInteractorOutputProtocol {
+    func interactorDidGetPlaylist(_ playlist: Playlist) {
+        coordinator?.runEditPlaylistModule(with: playlist)
+    }
+    
+    func interactorFailedToGetPlaylist() {
+        view?.displayErrorAlert(with: "Playlist editing isn't available at the moment.")
+    }
+    
     func interactorDidAddPlaylist() {
         view?.showConfirmationToastView()
     }
@@ -53,21 +61,19 @@ extension PlaylistViewPresenter: PlaylistInteractorOutputProtocol {
     }
     
     func interactorDidFetchPlaylist(_ playlist: Playlist, type: PlaylistType) {
-        let viewModel: [TrackTableViewCellModel]
+        let tracksViewModel: [TrackTableViewCellModel]
         
         if let tracks = playlist.tracks.items, !tracks.isEmpty {
-            viewModel = tracks.compactMap {
+            tracksViewModel = tracks.compactMap {
                 let artists = $0.track?.artists?.compactMap { return $0.name }
                 return TrackTableViewCellModel(image: ($0.track?.album?.images?[2].url),
                                                name: $0.track?.name, artist: artists?.joined(separator: ", "))
             }
         } else {
-            viewModel = []
+            tracksViewModel = []
             view?.displayLabel(with: "Unfortunately, this playlist is empty...")
         }
- 
-        view?.setupPlaylistInfo(image: playlist.images?.first?.url, name: playlist.name, type: type)
-        view?.setupPlaylistTracks(viewModel)
+        view?.setupPlaylist(model: PlaylistViewControllerModel(name: playlist.name, type: type, imageUrl: playlist.images?.first?.url), tracks: tracksViewModel)
         view?.reloadData()
     }
     

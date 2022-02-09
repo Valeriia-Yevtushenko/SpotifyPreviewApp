@@ -10,10 +10,10 @@ import Foundation
 struct NewPlaylist: Codable {
     var name: String
     var description: String
-    var publicType: Bool
+    var isPublic: Bool
     
     enum CodingKeys: String, CodingKey {
         case name, description
-        case publicType = "public"
+        case isPublic = "public"
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import PromiseKit
 
-final class PlaylistViewInteractor {
+final class PlaylistInteractor {
     private var playlist: Playlist?
     var presenter: PlaylistInteractorOutputProtocol?
     var playlistId: String!
@@ -16,13 +16,22 @@ final class PlaylistViewInteractor {
     var networkService: NetworkServiceProtocol!
 }
 
-extension PlaylistViewInteractor: PlaylistInteractorInputProtocol {
+extension PlaylistInteractor: PlaylistInteractorInputProtocol {
+    func getPlaylist() {
+        guard let playlist = playlist else {
+            presenter?.interactorFailedToGetPlaylist()
+            return
+        }
+        
+        presenter?.interactorDidGetPlaylist(playlist)
+    }
+    
     func addPlaylist() {
         guard let playlistId = playlistId, let jsonData = try? JSONSerialization.data(withJSONObject: ["public": false]) else {
             return
         }
         
-        networkService.put(data: jsonData, url: Request.addPlaylist.createUrl(data: playlistId)).done { _ in
+        networkService.put(data: jsonData, header: nil, url: Request.addPlaylist.createUrl(data: playlistId)).done { _ in
             self.presenter?.interactorDidAddPlaylist()
         }.catch { error in
             self.presenter?.interactorFailedToAddPlaylist(error.localizedDescription)

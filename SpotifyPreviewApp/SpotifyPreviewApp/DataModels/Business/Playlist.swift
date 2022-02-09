@@ -9,19 +9,21 @@ import Foundation
 
 // MARK: - Playlist
 struct Playlist: Codable {
-    let playlistDescription: String?
-    let identifier: String?
+    let description: String?
+    let identifier: String
     let images: [Image]?
     let name: String?
     let owner: Owner?
     let tracks: TracksOfPlaylist
     let type, uri: String?
+    let isPublic: Bool
 
     enum CodingKeys: String, CodingKey {
-        case playlistDescription = "description"
+        case description
         case identifier = "id"
         case images, name, owner
         case tracks, type, uri
+        case isPublic = "public"
     }
 }
 

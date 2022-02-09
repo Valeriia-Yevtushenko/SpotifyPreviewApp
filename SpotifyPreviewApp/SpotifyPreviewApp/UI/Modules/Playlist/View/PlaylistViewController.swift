@@ -7,6 +7,12 @@
 
 import UIKit
 
+struct PlaylistViewControllerModel {
+    var name: String?
+    var type: PlaylistType
+    var imageUrl: String?
+}
+
 class PlaylistViewController: UIViewController {
     @IBOutlet private weak var playlistTableView: UITableView!
     private let toastView = ToastView()
@@ -26,7 +32,6 @@ class PlaylistViewController: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.largeTitleDisplayMode = .never
-        output?.viewWillDisappear()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +58,29 @@ private extension PlaylistViewController {
 }
 
 extension PlaylistViewController: PlaylistViewInputProtocol {
+    func setupPlaylist(model: PlaylistViewControllerModel, tracks: [TrackTableViewCellModel]) {
+        navigationItem.title = model.name
+        playlistTableView.backgroundView = tracks.isEmpty ? playlistTableView.backgroundView: nil
+        dataSource?.setupViewModel(tracks)
+        
+        if let url = model.imageUrl {
+            headerView.setImage(withUrl: url)
+            playlistTableView.addSubview(headerView)
+        }
+        
+        switch model.type {
+        case .user:
+            navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .trash,
+                                                                  target: self,
+                                                                  action: #selector(trashButtonDidTap)),
+                                                  UIBarButtonItem(barButtonSystemItem: .compose,
+                                                                  target: self,
+                                                                  action: #selector(editButtonDidTap))]
+        case .category(_):
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonDidTap))
+        }
+    }
+    
     func showConfirmationToastView() {
         toastView.text = "Successfully added"
         toastView.layer.setValue("0.01", forKeyPath: "transform.scale")
@@ -71,32 +99,6 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
                 self.toastView.removeFromSuperview()
             }
 
-    }
-    
-    func setupPlaylistInfo(image url: String?, name: String?, type: PlaylistType) {
-        navigationItem.title = name
-        
-        if let url = url {
-            headerView.setImage(withUrl: url)
-            playlistTableView.addSubview(headerView)
-        }
-        
-        switch type {
-        case .user:
-            navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .trash,
-                                                                  target: self,
-                                                                  action: #selector(trashButtonDidTap)),
-                                                  UIBarButtonItem(barButtonSystemItem: .compose,
-                                                                  target: self,
-                                                                  action: #selector(editButtonDidTap))]
-        case .category(_):
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonDidTap))
-        }
-    }
-    
-    func setupPlaylistTracks(_ tracks: [TrackTableViewCellModel]) {
-        playlistTableView.backgroundView = tracks.isEmpty ? playlistTableView.backgroundView: nil
-        dataSource?.setupViewModel(tracks)
     }
     
     func reloadData() {
@@ -135,7 +137,7 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
 
 extension PlaylistViewController: TrackTableViewDataSourceDelegate {
     func scrollViewDidScroll() {
-        output?.viewDidUpdate()
+        output?.viewDidUpdatePlaylist()
     }
 }
 
@@ -169,6 +171,6 @@ extension PlaylistViewController: TrackTableViewDataSourceDelegate {
     }
     
     func editButtonDidTap() {
-       
+        output?.viewDidEditPlaylist()
     }
 }

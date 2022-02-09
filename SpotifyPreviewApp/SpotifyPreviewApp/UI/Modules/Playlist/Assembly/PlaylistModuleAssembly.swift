@@ -11,7 +11,7 @@ final class PlaylistModuleAssembly {
     func createModule(with playlistId: String, type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (UIViewController, PlaylistViewPresenter) {
         let playlistViewController = PlaylistViewController.instantiate(from: PlaylistViewController.identifier)
         let presenter = PlaylistViewPresenter()
-        let interactor = PlaylistViewInteractor()
+        let interactor = PlaylistInteractor()
         interactor.networkService = serviceManager.network()
         interactor.playlistId = playlistId
         interactor.presenter = presenter

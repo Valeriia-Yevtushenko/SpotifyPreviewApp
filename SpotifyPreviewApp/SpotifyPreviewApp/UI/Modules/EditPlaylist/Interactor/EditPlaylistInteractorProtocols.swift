@@ -8,16 +8,12 @@
 import Foundation
 
 protocol EditPlaylistInteractorInputProtocol: AnyObject {
-    func fetchPlaylist()
-    func addPlaylist()
-    func deletePlaylist()
+    func getPlaylist()
+    func updatePlaylist(with info: NewPlaylist?, image: Data?)
 }
 
 protocol EditPlaylistInteractorOutputProtocol: AnyObject {
-    func interactorDidFetchPlaylist(_ playlist: Playlist, type: PlaylistType)
-    func interactorDidDeletePlaylist()
-    func interactorDidAddPlaylist()
-    func interactorFailedToFetchPlaylist()
-    func interactorFailedToDeletePlaylist(_ error: String)
-    func interactorFailedToAddPlaylist(_ error: String)
+    func interactorDidGetPlaylist(_ playlist: Playlist)
+    func interactorDidUpdatePlaylist()
+    func interactorFailedToUpdatePlaylist(_ error: String)
 }

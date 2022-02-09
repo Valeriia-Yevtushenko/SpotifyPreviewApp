@@ -8,14 +8,14 @@
 import Foundation
 import PromiseKit
 
-final class ListOfPlaylistsViewInteractor {
+final class ListOfPlaylistsInteractor {
     private var playlists: Playlists?
     var presenter: ListOfPlaylistsInteractorOutputProtocol!
     var type: PlaylistType!
     var networkService: NetworkServiceProtocol!
 }
 
-extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol {
+extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
     func postNewPlaylist(_ playlist: NewPlaylist) {
         guard let data = try? JSONEncoder().encode(playlist) else {
             return

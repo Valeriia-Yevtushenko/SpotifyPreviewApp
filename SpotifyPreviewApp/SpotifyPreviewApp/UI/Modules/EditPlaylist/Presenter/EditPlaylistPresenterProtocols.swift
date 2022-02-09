@@ -8,12 +8,14 @@
 import Foundation
 
 protocol EditPlaylistViewInputProtocol: AnyObject {
-    
+    func setupPlaylistInfo(_ model: EditPlaylistViewControllerModel)
+    func displayErrorAlert(with text: String)
 }
 
 protocol EditPlaylistViewOutputProtocol: AnyObject {
     func viewDidLoad()
-    func viewDidTapSavePlaylistInfo()
+    func viewDidTapCancel()
+    func viewDidTapSavePlaylist(with info: NewPlaylist?, image: Data?)
 }
 
 protocol EditPlaylistModuleOutput {

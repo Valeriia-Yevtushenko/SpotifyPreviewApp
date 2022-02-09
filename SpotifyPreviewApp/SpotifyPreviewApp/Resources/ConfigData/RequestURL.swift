@@ -17,6 +17,7 @@ enum Request: String {
     case playlist = "https://api.spotify.com/v1/playlists/"
     case deletePlaylist
     case addPlaylist
+    case updatePlaylist
     case playlistImage
     case user = "https://api.spotify.com/v1/me"
     case userPlaylists = "https://api.spotify.com/v1/me/playlists"
@@ -45,6 +46,8 @@ enum Request: String {
             return "https://api.spotify.com/v1/playlists/\(data)/followers"
         case .addPlaylist:
             return "https://api.spotify.com/v1/playlists/\(data)/followers"
+        case .updatePlaylist:
+            return "https://api.spotify.com/v1/playlists/\(data)"
         default:
             return ""
         }

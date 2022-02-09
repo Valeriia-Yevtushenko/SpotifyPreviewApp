@@ -8,8 +8,7 @@
 import Foundation
 
 protocol PlaylistViewInputProtocol: AnyObject {
-    func setupPlaylistTracks(_ tracks: [TrackTableViewCellModel])
-    func setupPlaylistInfo(image url: String?, name: String?, type: PlaylistType)
+    func setupPlaylist(model: PlaylistViewControllerModel, tracks: [TrackTableViewCellModel])
     func reloadData()
     func updateHeaderView()
     func displayLabel(with text: String)
@@ -21,11 +20,11 @@ protocol PlaylistViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func viewDidTapDeletePlaylist()
     func viewDidTapAddPlaylist()
-    func viewDidUpdate()
-    func viewWillDisappear()
+    func viewDidUpdatePlaylist()
+    func viewDidEditPlaylist()
 }
 
 protocol PlaylistModuleOutput {
     func backToPlaylists()
-    func finishedFlow()
+    func runEditPlaylistModule(with playlist: Playlist)
 }
