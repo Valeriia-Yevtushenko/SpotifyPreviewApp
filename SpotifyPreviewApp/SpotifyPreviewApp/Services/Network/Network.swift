@@ -76,7 +76,7 @@ extension NetworkService: NetworkServiceProtocol {
         }
        
         return Promise {seal in
-            client.put(url, body: data) { result in
+            client.put(url, headers: ["Content-Type": "image/jpeg"], body: data) { result in
                 switch result {
                 case .success(_):
                     seal.fulfill_()

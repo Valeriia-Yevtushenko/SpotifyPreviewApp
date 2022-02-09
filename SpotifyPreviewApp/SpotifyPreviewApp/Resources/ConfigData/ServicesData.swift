@@ -14,7 +14,7 @@ enum Service: String {
 }
 
 enum Authorization: String {
-    case scope = "user-follow-read+user-read-private+playlist-read-private+user-read-email+playlist-modify-public+playlist-modify-private"
+    case scope = "user-follow-read+user-read-private+playlist-read-private+user-read-email+playlist-modify-public+playlist-modify-private+ugc-image-upload"
     // swiftlint:disable all
     case codeVerifier = "ToCFHo51D5P-hNOOcJif6iGygUVvEa7VIGsYAnPQ.kjYO7PDCQlQNqb.HtP7KovxciXzyr4Nt62thWx4bl10pX1_-R.uDg8B0FTzy22WlO1gT4cIlnJ1q5V4i1h1~.We"
     // swiftlint:enable all
