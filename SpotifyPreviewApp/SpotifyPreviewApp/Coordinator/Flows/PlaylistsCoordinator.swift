@@ -41,7 +41,28 @@ private extension PlaylistsCoordinator {
 }
 
 extension PlaylistsCoordinator: ListOfPlaylistsModuleOutput {
-    func runPlaylistModule(data: String) {
-        
+    func runPlaylistModule(with playlistId: String, type: PlaylistType) {
+        let (playlistModule, presenter) = factory.makePlaylistModule(with: playlistId, type: type, serviceManager: serviceManager)
+        presenter.coordinator = self
+        router.push(playlistModule)
+    }
+}
+
+extension PlaylistsCoordinator: PlaylistModuleOutput {
+    func runEditPlaylistModule(with playlist: Playlist) {
+        let (playlistModule, presenter) = factory.makeEditPlaylistModule(with: playlist, serviceManager: serviceManager)
+        presenter.coordinator = self
+        playlistModule.toPresent()?.modalPresentationStyle = .fullScreen
+        router.present(playlistModule)
+    }
+    
+    func backToPlaylists() {
+        router.popModule()
+    }
+}
+
+extension PlaylistsCoordinator: EditPlaylistModuleOutput {
+    func backToPlaylist() {
+        router.dismissModule()
     }
 }

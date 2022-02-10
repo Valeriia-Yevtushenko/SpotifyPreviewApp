@@ -14,7 +14,7 @@ final class ListOfPlaylistsModuleAssembly {
         let dataSource = CollectionViewDataSource()
         dataSource.delegate = playlistsViewController
         playlistsViewController.dataSource = dataSource
-        let interactor = ListOfPlaylistsViewInteractor()
+        let interactor = ListOfPlaylistsInteractor()
         interactor.networkService = serviceManager.network()
         interactor.type = type
         interactor.presenter = presenter

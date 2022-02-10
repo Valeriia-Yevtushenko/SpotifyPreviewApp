@@ -7,6 +7,26 @@
 
 import Foundation
 
+// MARK: - Playlist
+struct Playlist: Codable {
+    let description: String?
+    let identifier: String
+    let images: [Image]?
+    let name: String?
+    let owner: Owner?
+    let tracks: TracksOfPlaylist?
+    let type, uri: String?
+    let isPublic: Bool?
+
+    enum CodingKeys: String, CodingKey {
+        case description
+        case identifier = "id"
+        case images, name, owner
+        case tracks, type, uri
+        case isPublic = "public"
+    }
+}
+
 // MARK: - TracksOfPlaylist
 struct TracksOfPlaylist: Codable {
     let items: [ItemOfPlaylist]?
@@ -14,34 +34,27 @@ struct TracksOfPlaylist: Codable {
 
 // MARK: - Item
 struct ItemOfPlaylist: Codable {
-    let addedBy: AddedBy?
     let track: Track?
-
-    enum CodingKeys: String, CodingKey {
-        case addedBy = "added_by"
-        case track
-    }
-}
-
-// MARK: - AddedBy
-struct AddedBy: Codable {
-    let identifier, name: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case identifier = "id"
-        case name
-    }
 }
 
 // MARK: - Track
 struct Track: Codable {
     let album: TrackAlbum?
-    let artists: [AddedBy]?
-    let href: String?
+    let artists: [Artist]?
     let identifier, name: String?
     
     enum CodingKeys: String, CodingKey {
-        case album, href, artists
+        case album, artists
+        case identifier = "id"
+        case name
+    }
+}
+
+// MARK: - AddedBy
+struct Artist: Codable {
+    let identifier, name: String?
+    
+    enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case name
     }
@@ -50,13 +63,6 @@ struct Track: Codable {
 // MARK: - Album
 struct TrackAlbum: Codable {
     let href: String?
-    let images: [AlbumImage]?
+    let images: [Image]?
     let name: String?
-}
-
-// MARK: - Image
-struct AlbumImage: Codable {
-    let height: Int?
-    let url: String?
-    let width: Int?
 }

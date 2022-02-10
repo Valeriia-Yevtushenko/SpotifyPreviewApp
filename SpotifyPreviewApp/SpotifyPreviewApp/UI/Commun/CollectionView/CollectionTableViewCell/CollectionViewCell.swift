@@ -17,6 +17,8 @@ final class CollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var nameLabel: UILabel!
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         cellImageView.image = nil
         nameLabel.text = nil
     }

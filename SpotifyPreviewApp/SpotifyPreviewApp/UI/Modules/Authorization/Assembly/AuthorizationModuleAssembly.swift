@@ -8,7 +8,7 @@
 import UIKit
 
 class AuthorizationModuleAssembly {
-    static func create(authorizationService: AuthorizationServiceProtocol) -> (UIViewController, AuthorizationPresenter) {
+    func create(authorizationService: AuthorizationServiceProtocol) -> (UIViewController, AuthorizationPresenter) {
         let viewController = AuthorizationViewController.instantiate(from: AuthorizationViewController.identifier)
         let presenter = AuthorizationPresenter()
         presenter.view = viewController

@@ -11,7 +11,7 @@ class FlowFactory {}
 
 extension FlowFactory: AuthorizationFlowFactory {
     func makeAuthorizationModule(authorizationService: AuthorizationServiceProtocol) -> (Presentable, AuthorizationPresenter) {
-        return AuthorizationModuleAssembly.create(authorizationService: authorizationService)
+        return AuthorizationModuleAssembly().create(authorizationService: authorizationService)
     }
 }
 
@@ -32,6 +32,14 @@ extension FlowFactory: ProfileFlowFactory {
 }
 
 extension FlowFactory: PlaylistsFlowFactory {
+    func makeEditPlaylistModule(with playlist: Playlist, serviceManager: ServiceManagerProtocol) -> (Presentable, EditPlaylistViewPresenter) {
+        return EditPlaylistModuleAssembly().createModule(with: playlist, serviceManager: serviceManager)
+    }
+    
+    func makePlaylistModule(with playlistId: String, type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, PlaylistViewPresenter) {
+        return PlaylistModuleAssembly().createModule(with: playlistId, type: type, serviceManager: serviceManager)
+    }
+    
     func makeListOfPlaylistsModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsViewPresenter) {
         return ListOfPlaylistsModuleAssembly().createModule(with: type, serviceManager: serviceManager)
     }

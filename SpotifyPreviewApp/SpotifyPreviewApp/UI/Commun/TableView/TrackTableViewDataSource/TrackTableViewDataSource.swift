@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol TrackTableViewDataSourceDelegate: AnyObject {
+    func scrollViewDidScroll()
+}
+
 final class TrackTableViewDataSource: NSObject {
     private var tracks: [TrackTableViewCellModel] = []
+    weak var delegate: TrackTableViewDataSourceDelegate?
 }
 
 extension TrackTableViewDataSource {
@@ -16,7 +21,11 @@ extension TrackTableViewDataSource {
         self.tracks = tracks
     }
 }
-extension TrackTableViewDataSource: UITableViewDelegate {}
+extension TrackTableViewDataSource: UITableViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.scrollViewDidScroll()
+    }
+}
 
 extension TrackTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

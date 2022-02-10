@@ -19,8 +19,15 @@ final class ListOfPlaylistsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         output?.viewDidLoad()
         configureCollectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        output?.viewWillAppear()
     }
 }
 
@@ -51,6 +58,7 @@ extension ListOfPlaylistsViewController: ListOfPlaylistsViewInputProtocol {
     
     func setupData(_ model: [CollectionViewCellModel]) {
         dataSource?.setupViewModel(model)
+        playlistCollectionView.backgroundView = model.isEmpty ? playlistCollectionView.backgroundView: nil
     }
     
     func reloadData() {
@@ -64,6 +72,15 @@ extension ListOfPlaylistsViewController: ListOfPlaylistsViewInputProtocol {
         label.textColor = .lightGray
         label.textAlignment = NSTextAlignment.center
         playlistCollectionView.backgroundView = label
+    }
+    
+    func displayErrorAlert(with text: String) {
+        let alert = UIAlertController(title: "Failed",
+                                      message: text,
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelButton)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -82,7 +99,7 @@ extension ListOfPlaylistsViewController: CollectionViewDataSourceDelegate {
         let createButton = UIAlertAction(title: "Create", style: .destructive, handler: { [weak alert] (_) in
             self.output?
                 .viewDidTapCreatePlaylist(NewPlaylist(name: alert?.textFields?[0].text ?? "",
-                                                      description: alert?.textFields?[1].text ?? "", publicType: false))
+                                                      description: alert?.textFields?[1].text ?? "", isPublic: false))
         })
         
         alert.addTextField { textField in

@@ -8,14 +8,14 @@
 import Foundation
 import PromiseKit
 
-final class ListOfPlaylistsViewInteractor {
+final class ListOfPlaylistsInteractor {
     private var playlists: Playlists?
     var presenter: ListOfPlaylistsInteractorOutputProtocol!
     var type: PlaylistType!
     var networkService: NetworkServiceProtocol!
 }
 
-extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol {
+extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
     func postNewPlaylist(_ playlist: NewPlaylist) {
         guard let data = try? JSONEncoder().encode(playlist) else {
             return
@@ -27,9 +27,9 @@ extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol 
             promise
         }.done { data in
             self.playlists = data
-            self.presenter.interactorDidFetchPlaylists(data)
-        }.catch { _ in
-            self.presenter.interactorFailedToFetchPlaylists()
+            self.presenter.interactorDidPostNewPlaylist()
+        }.catch { error in
+            self.presenter.interactorFailedToPostPlaylist(error.localizedDescription)
         }
     }
     
@@ -42,7 +42,7 @@ extension ListOfPlaylistsViewInteractor: ListOfPlaylistsInteractorInputProtocol 
             return
         }
         
-        presenter.interactorDidGetPlaylistId(playlistId)
+        presenter.interactorDidGetPlaylistId(playlistId, type: type)
     }
     
     func fetchPlaylists() {

@@ -15,6 +15,9 @@ enum Request: String {
     case search = "https://api.spotify.com/v1/search?"
     case callbackUrl = "SpotifyPreviewApp://oauth-callback"
     case playlist = "https://api.spotify.com/v1/playlists/"
+    case deletePlaylist
+    case addPlaylist
+    case updatePlaylist
     case playlistImage
     case user = "https://api.spotify.com/v1/me"
     case userPlaylists = "https://api.spotify.com/v1/me/playlists"
@@ -26,7 +29,7 @@ enum Request: String {
     func createUrl(data: String) -> String {
         switch self {
         case .playlist:
-        return self.rawValue + data + "/tracks?limit=50"
+        return self.rawValue + data
         case .playlists:
             return self.rawValue + data + "/playlists?limit=50"
         case .search:
@@ -39,6 +42,12 @@ enum Request: String {
             return "https://api.spotify.com/v1/artists/" + data + "/top-tracks?market=ua"
         case .artistAlbums:
             return "https://api.spotify.com/v1/artists/" + data + "/albums?market=UA"
+        case .deletePlaylist:
+            return "https://api.spotify.com/v1/playlists/\(data)/followers"
+        case .addPlaylist:
+            return "https://api.spotify.com/v1/playlists/\(data)/followers"
+        case .updatePlaylist:
+            return "https://api.spotify.com/v1/playlists/\(data)"
         default:
             return ""
         }
