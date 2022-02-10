@@ -63,7 +63,7 @@ extension PlaylistViewPresenter: PlaylistInteractorOutputProtocol {
     func interactorDidFetchPlaylist(_ playlist: Playlist, type: PlaylistType) {
         let tracksViewModel: [TrackTableViewCellModel]
         
-        if let tracks = playlist.tracks.items, !tracks.isEmpty {
+        if let tracks = playlist.tracks?.items, !tracks.isEmpty {
             tracksViewModel = tracks.compactMap {
                 let artists = $0.track?.artists?.compactMap { return $0.name }
                 return TrackTableViewCellModel(image: ($0.track?.album?.images?[2].url),
@@ -73,7 +73,9 @@ extension PlaylistViewPresenter: PlaylistInteractorOutputProtocol {
             tracksViewModel = []
             view?.displayLabel(with: "Unfortunately, this playlist is empty...")
         }
-        view?.setupPlaylist(model: PlaylistViewControllerModel(name: playlist.name, type: type, imageUrl: playlist.images?.first?.url), tracks: tracksViewModel)
+        view?.setupPlaylist(model: PlaylistViewControllerModel(name: playlist.name,
+                                                               type: type,
+                                                               imageUrl: playlist.images?.first?.url), tracks: tracksViewModel)
         view?.reloadData()
     }
     

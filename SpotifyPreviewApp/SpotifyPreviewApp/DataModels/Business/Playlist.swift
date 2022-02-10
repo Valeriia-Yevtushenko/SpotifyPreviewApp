@@ -14,9 +14,9 @@ struct Playlist: Codable {
     let images: [Image]?
     let name: String?
     let owner: Owner?
-    let tracks: TracksOfPlaylist
+    let tracks: TracksOfPlaylist?
     let type, uri: String?
-    let isPublic: Bool
+    let isPublic: Bool?
 
     enum CodingKeys: String, CodingKey {
         case description

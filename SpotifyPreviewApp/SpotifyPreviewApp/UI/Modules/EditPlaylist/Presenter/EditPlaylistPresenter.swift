@@ -40,6 +40,6 @@ extension EditPlaylistViewPresenter: EditPlaylistInteractorOutputProtocol {
         view?.setupPlaylistInfo(EditPlaylistViewControllerModel(name: playlist.name ?? "",
                                                                 description: playlist.description ?? "",
                                                                 imageUrl: playlist.images?.first?.url,
-                                                                isPublic: playlist.isPublic))
+                                                                isPublic: playlist.isPublic ?? true))
     }
 }

@@ -20,5 +20,4 @@ protocol EditPlaylistViewOutputProtocol: AnyObject {
 
 protocol EditPlaylistModuleOutput {
     func backToPlaylist()
-    func finishedFlow()
 }

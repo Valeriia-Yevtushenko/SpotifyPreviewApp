@@ -24,10 +24,27 @@ class EditPlaylistViewController: UIViewController {
     @IBOutlet private weak var saveButton: UIButton!
     private var newImageData: Data?
     private var model: EditPlaylistViewControllerModel!
+    
     private var isModified: Bool = false {
         didSet {
             saveButton.isEnabled = isModified
         }
+    }
+    
+    private var isImageSizeAvaible: Bool {
+        guard let imageDataCount = newImageData?.count else {
+            return true
+        }
+        
+        let byteCountFormatter = ByteCountFormatter()
+        byteCountFormatter.allowedUnits = [.useKB]
+        
+        guard let mbCount = Double(byteCountFormatter.string(fromByteCount: Int64(imageDataCount)).replacingOccurrences(of: " KB", with: "")),
+           mbCount < 256 else {
+            return false
+        }
+        
+        return true
     }
     
     var output: EditPlaylistViewOutputProtocol?
@@ -42,6 +59,11 @@ class EditPlaylistViewController: UIViewController {
 
 private extension EditPlaylistViewController {
     @IBAction func saveButtonDidTap() {
+        guard isImageSizeAvaible else {
+            displayErrorAlert(with: "Image size is too big, please choose another one.")
+            return
+        }
+        
         output?.viewDidTapSavePlaylist(with: NewPlaylist(name: model.name,
                                                          description: model.description,
                                                          isPublic: visibleStatusSwitch.isOn),

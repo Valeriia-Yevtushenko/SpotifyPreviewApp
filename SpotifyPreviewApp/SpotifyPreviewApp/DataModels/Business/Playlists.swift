@@ -14,26 +14,7 @@ struct ListOfPlaylists: Codable {
 
 // MARK: - Playlists
 struct Playlists: Codable {
-    let items: [PlaylistItem]?
-}
-
-// MARK: - Item
-struct PlaylistItem: Codable {
-    let collaborative: Bool?
-    let itemDescription: String?
-    let identifier: String?
-    let images: [Image]?
-    let name: String?
-    let owner: Owner?
-    let type, uri: String?
-
-    enum CodingKeys: String, CodingKey {
-        case collaborative
-        case itemDescription = "description"
-        case identifier = "id"
-        case images, name, owner
-        case type, uri
-    }
+    let items: [Playlist]?
 }
 
 // MARK: - Image
