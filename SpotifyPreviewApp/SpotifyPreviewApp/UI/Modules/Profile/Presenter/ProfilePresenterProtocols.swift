@@ -20,6 +20,7 @@ protocol ProfileViewOutputProtocol: AnyObject {
 }
 
 protocol ProfileModuleOutput {
+    func runPListOfArtistsModule()
     func runPlaylistsFlow()
     func runAuthorizationFlow()
 }

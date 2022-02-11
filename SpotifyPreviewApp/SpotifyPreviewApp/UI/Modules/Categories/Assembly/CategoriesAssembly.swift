@@ -8,9 +8,9 @@
 import UIKit
 
 final class CategoriesModuleAssembly {
-    func createModule(_ serviceManager: ServiceManagerProtocol) -> (UIViewController, CategoriesViewPresenter) {
+    func createModule(_ serviceManager: ServiceManagerProtocol) -> (UIViewController, CategoriesPresenter) {
         let categoriesViewController = CategoriesViewController.instantiate(from: CategoriesViewController.identifier)
-        let presenter = CategoriesViewPresenter()
+        let presenter = CategoriesPresenter()
         let dataSource = CollectionViewDataSource()
         dataSource.delegate = categoriesViewController
         categoriesViewController.dataSource = dataSource

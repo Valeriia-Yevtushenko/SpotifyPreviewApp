@@ -10,7 +10,7 @@ import PromiseKit
 
 final class ListOfPlaylistsInteractor {
     private var playlists: Playlists?
-    var presenter: ListOfPlaylistsInteractorOutputProtocol!
+    weak var presenter: ListOfPlaylistsInteractorOutputProtocol?
     var type: PlaylistType!
     var networkService: NetworkServiceProtocol!
 }
@@ -27,14 +27,14 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
             promise
         }.done { data in
             self.playlists = data
-            self.presenter.interactorDidPostNewPlaylist()
+            self.presenter?.interactorDidPostNewPlaylist()
         }.catch { error in
-            self.presenter.interactorFailedToPostPlaylist(error.localizedDescription)
+            self.presenter?.interactorFailedToPostPlaylist(error.localizedDescription)
         }
     }
     
     func getPlaylistsType() {
-        presenter.interactorDidFetchPlaylistsType(type)
+        presenter?.interactorDidFetchPlaylistsType(type)
     }
     
     func getPlaylistId(at index: Int) {
@@ -42,7 +42,7 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
             return
         }
         
-        presenter.interactorDidGetPlaylistId(playlistId, type: type)
+        presenter?.interactorDidGetPlaylistId(playlistId, type: type)
     }
     
     func fetchPlaylists() {
@@ -56,9 +56,9 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
                 return data.playlists
             }.done { data in
                 self.playlists = data
-                self.presenter.interactorDidFetchPlaylists(data)
+                self.presenter?.interactorDidFetchPlaylists(data)
             }.catch { _ in
-                self.presenter.interactorFailedToFetchPlaylists()
+                self.presenter?.interactorFailedToFetchPlaylists()
             }
         case .user:
             let promise: Promise<Playlists> = networkService.fetch(Request.userPlaylists.rawValue)
@@ -68,9 +68,9 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
                 return data
             }.done { data in
                 self.playlists = data
-                self.presenter.interactorDidFetchPlaylists(data)
+                self.presenter?.interactorDidFetchPlaylists(data)
             }.catch { _ in
-                self.presenter.interactorFailedToFetchPlaylists()
+                self.presenter?.interactorFailedToFetchPlaylists()
             }
         case .none:
             self.presenter?.interactorFailedToFetchPlaylists()

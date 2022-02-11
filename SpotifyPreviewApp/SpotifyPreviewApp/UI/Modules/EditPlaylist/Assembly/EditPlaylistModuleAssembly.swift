@@ -8,9 +8,9 @@
 import UIKit
 
 class EditPlaylistModuleAssembly {
-    func createModule(with playlist: Playlist, serviceManager: ServiceManagerProtocol) -> (UIViewController, EditPlaylistViewPresenter) {
+    func createModule(with playlist: Playlist, serviceManager: ServiceManagerProtocol) -> (UIViewController, EditPlaylistPresenter) {
         let playlistViewController = EditPlaylistViewController.instantiate(from: EditPlaylistViewController.identifier)
-        let presenter = EditPlaylistViewPresenter()
+        let presenter = EditPlaylistPresenter()
         let interactor = EditPlaylistInteractor()
         interactor.networkService = serviceManager.network()
         interactor.presenter = presenter

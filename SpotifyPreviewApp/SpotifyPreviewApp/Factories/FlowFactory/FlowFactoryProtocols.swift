@@ -12,18 +12,19 @@ protocol AuthorizationFlowFactory {
 }
 
 protocol SearchFlowFactory {
-    func makeSearchModule(serviceManager: ServiceManagerProtocol) -> (Presentable, SearchViewPresenter)
-    func makeCategoriesModule(serviceManager: ServiceManagerProtocol) -> (Presentable, CategoriesViewPresenter)
+    func makeSearchModule(serviceManager: ServiceManagerProtocol) -> (Presentable, SearchPresenter)
+    func makeCategoriesModule(serviceManager: ServiceManagerProtocol) -> (Presentable, CategoriesPresenter)
 }
 
 protocol ProfileFlowFactory {
-    func makeProfileModule(serviceManager: ServiceManagerProtocol) -> (Presentable, ProfileViewPresenter)
+    func makeProfileModule(serviceManager: ServiceManagerProtocol) -> (Presentable, ProfilePresenter)
+    func makeListOfArtistsModule(serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfArtistsPresenter)
 }
 
 protocol PlaylistsFlowFactory {
-    func makeListOfPlaylistsModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsViewPresenter)
+    func makeListOfPlaylistsModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsPresenter)
     
-    func makePlaylistModule(with playlistId: String, type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, PlaylistViewPresenter)
+    func makePlaylistModule(with playlistId: String, type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, PlaylistPresenter)
     
-    func makeEditPlaylistModule(with playlist: Playlist, serviceManager: ServiceManagerProtocol) -> (Presentable, EditPlaylistViewPresenter)
+    func makeEditPlaylistModule(with playlist: Playlist, serviceManager: ServiceManagerProtocol) -> (Presentable, EditPlaylistPresenter)
 }

@@ -7,13 +7,13 @@
 
 import Foundation
 
-final class PlaylistViewPresenter {
+final class PlaylistPresenter {
     weak var view: PlaylistViewInputProtocol?
     var coordinator: PlaylistModuleOutput?
     var interactor: PlaylistInteractorInputProtocol?
 }
 
-extension PlaylistViewPresenter: PlaylistViewOutputProtocol {
+extension PlaylistPresenter: PlaylistViewOutputProtocol {
     func viewDidEditPlaylist() {
         interactor?.getPlaylist()
     }
@@ -35,7 +35,7 @@ extension PlaylistViewPresenter: PlaylistViewOutputProtocol {
     }
 }
 
-extension PlaylistViewPresenter: PlaylistInteractorOutputProtocol {
+extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
     func interactorDidGetPlaylist(_ playlist: Playlist) {
         coordinator?.runEditPlaylistModule(with: playlist)
     }

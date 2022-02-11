@@ -16,20 +16,3 @@ struct ListOfPlaylists: Codable {
 struct Playlists: Codable {
     let items: [Playlist]?
 }
-
-// MARK: - Image
-struct Image: Codable {
-    let url: String?
-}
-
-// MARK: - Owner
-struct Owner: Codable {
-    let displayName: String?
-    let identifier, type, uri: String?
-
-    enum CodingKeys: String, CodingKey {
-        case displayName = "display_name"
-        case identifier = "id"
-        case type, uri
-    }
-}

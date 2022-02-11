@@ -39,6 +39,12 @@ private extension ProfileCoordinator {
 }
 
 extension ProfileCoordinator: ProfileModuleOutput {
+    func runPListOfArtistsModule() {
+        let (listOfArtistsModule, presenter) = factory.makeListOfArtistsModule(serviceManager: serviceManager)
+        presenter.coordinator = self
+        router.push(listOfArtistsModule)
+    }
+    
     func runPlaylistsFlow() {
         let playlistsCoordinator = coordinatorFactory.makePlaylistsCoordinator(type: .user,
                                                                               factory: factory,
@@ -57,5 +63,11 @@ extension ProfileCoordinator: ProfileModuleOutput {
 extension ProfileCoordinator: PlaylistsCoordinatorOutput {
     func finishPlaylistsFlow(coordinator: Coordinator) {
         removeDependency(coordinator)
+    }
+}
+
+extension ProfileCoordinator: ListOfArtistsModuleOutput {
+    func runArtistFlow(with identifier: String) {
+        
     }
 }

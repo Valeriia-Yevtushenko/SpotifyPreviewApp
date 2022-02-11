@@ -8,10 +8,10 @@
 import UIKit
 
 final class SearchModuleAssembly {    
-    func createModule(_ serviceManager: ServiceManagerProtocol) -> (UIViewController, SearchViewPresenter) {
+    func createModule(_ serviceManager: ServiceManagerProtocol) -> (UIViewController, SearchPresenter) {
         let searchViewController = SearchViewController.instantiate(from: SearchViewController.identifier)
         let dataSource = TrackTableViewDataSource()
-        let presenter = SearchViewPresenter()
+        let presenter = SearchPresenter()
         searchViewController.dataSource = dataSource
         let interactor = SearchInteractor()
         interactor.networkService = serviceManager.network()

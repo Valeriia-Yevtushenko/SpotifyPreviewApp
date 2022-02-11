@@ -38,7 +38,7 @@ private extension SearchCoordinator {
         router.setRootModule(categoriesModule, hideBar: false)
     }
 
-    func searchModule() -> (Presentable, SearchViewPresenter) {
+    func searchModule() -> (Presentable, SearchPresenter) {
         return factory.makeSearchModule(serviceManager: serviceManager)
     }
 }

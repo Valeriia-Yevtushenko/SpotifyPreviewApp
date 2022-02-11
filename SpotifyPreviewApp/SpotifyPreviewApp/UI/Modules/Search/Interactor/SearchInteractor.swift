@@ -9,7 +9,7 @@ import Foundation
 import PromiseKit
 
 final class SearchInteractor: SearchInteractorInputProtocol {
-    var presenter: SearchInteractorOutputProtocol?
+    weak var presenter: SearchInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
     
     func fetchSearchText(_ text: String) {
@@ -17,7 +17,7 @@ final class SearchInteractor: SearchInteractorInputProtocol {
             return
         }
         
-        let promise: Promise<ListOfTrack> = networkService.fetch(Request.search.createUrl(data: track))
+        let promise: Promise<ListOfSearchedTracks> = networkService.fetch(Request.search.createUrl(data: track))
         
         firstly {
             promise

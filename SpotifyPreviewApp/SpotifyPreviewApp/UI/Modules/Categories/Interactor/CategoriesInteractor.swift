@@ -10,7 +10,7 @@ import PromiseKit
 
 final class CategoriesInteractor: CategoriesInteractorInputProtocol {
     private var listOfCategories: ListOfCategories?
-    var presenter: CategoriesInteractorOutputProtocol?
+    weak var presenter: CategoriesInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
     
     func fetchCategories() {

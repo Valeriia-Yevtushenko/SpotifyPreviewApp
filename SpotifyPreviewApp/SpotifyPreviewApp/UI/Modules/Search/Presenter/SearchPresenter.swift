@@ -7,19 +7,19 @@
 
 import UIKit
 
-final class SearchViewPresenter {
+final class SearchPresenter {
     weak var view: SearchViewInputProtocol?
     var intractor: SearchInteractorInputProtocol?
 }
 
-extension SearchViewPresenter: SearchViewOutputProtocol {
+extension SearchPresenter: SearchViewOutputProtocol {
     func viewDidUpdateBySearchText(_ text: String) {
         intractor?.fetchSearchText(text)
     }
 }
 
-extension SearchViewPresenter: SearchInteractorOutputProtocol {
-    func interactorDidFetchData(_ data: ListOfTrack) {
+extension SearchPresenter: SearchInteractorOutputProtocol {
+    func interactorDidFetchData(_ data: ListOfSearchedTracks) {
         guard !data.tracks.items.isEmpty else {
             view?.setupData([])
             view?.displayLabel(with: "Unfortunately, there is no track with this name...")
@@ -27,8 +27,8 @@ extension SearchViewPresenter: SearchInteractorOutputProtocol {
         }
         
         let viewModel: [TrackTableViewCellModel] = data.tracks.items.map {
-            let artist = $0.artists.map { return $0.name }
-            return TrackTableViewCellModel(image: $0.album.images[2].url, name: $0.name, artist: artist.joined(separator: ", "))
+            let artists = $0.artists?.compactMap { $0.name }
+            return TrackTableViewCellModel(image: $0.album?.images?[2].url, name: $0.name, artist: artists?.joined(separator: ", "))
         }
         
         view?.setupData(viewModel)

@@ -10,7 +10,7 @@ import PromiseKit
 
 final class PlaylistInteractor {
     private var playlist: Playlist?
-    var presenter: PlaylistInteractorOutputProtocol?
+    weak var presenter: PlaylistInteractorOutputProtocol?
     var playlistId: String!
     var playlistType: PlaylistType!
     var networkService: NetworkServiceProtocol!

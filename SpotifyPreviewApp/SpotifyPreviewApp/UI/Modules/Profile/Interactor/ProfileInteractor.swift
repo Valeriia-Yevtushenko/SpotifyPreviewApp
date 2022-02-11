@@ -9,7 +9,7 @@ import Foundation
 import PromiseKit
 
 final class ProfileInteractor {
-    var presenter: ProfileInteractorOutputProtocol!
+    weak var presenter: ProfileInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
 }
 
@@ -19,9 +19,9 @@ extension ProfileInteractor: ProfileInteractorInputProtocol {
         let promise: Promise<User> = networkService.fetch(Request.user.rawValue)
         
         promise.done {data in
-            self.presenter.interactorDidFetchUserData(data)
+            self.presenter?.interactorDidFetchUserData(data)
         }.catch {_ in
-            self.presenter.interactorFailedToFetchUserData()
+            self.presenter?.interactorFailedToFetchUserData()
         }
     }
 }

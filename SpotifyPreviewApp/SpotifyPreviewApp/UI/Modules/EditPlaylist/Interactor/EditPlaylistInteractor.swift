@@ -9,8 +9,8 @@ import Foundation
 import PromiseKit
 
 class EditPlaylistInteractor {
+    weak var presenter: EditPlaylistInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
-    var presenter: EditPlaylistInteractorOutputProtocol?
     var playlist: Playlist!
 }
 

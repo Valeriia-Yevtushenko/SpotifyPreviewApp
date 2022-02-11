@@ -1,5 +1,5 @@
 //
-//  Track.swift
+//  Artist.swift
 //  SpotifyPreviewApp
 //
 //  Created by Valeriia Yevtushenko on 11.02.2022.
@@ -7,16 +7,13 @@
 
 import Foundation
 
-// MARK: - Track
-struct Track: Codable {
-    let album: Album?
-    let artists: [Artist]?
-    let identifier, name: String?
+// MARK: - Artist
+struct Artist: Codable {
     let externalUrls: ExternalUrls
+    let identifier, name: String?
     
     enum CodingKeys: String, CodingKey {
         case externalUrls = "external_urls"
-        case album, artists
         case identifier = "id"
         case name
     }

@@ -11,7 +11,7 @@ protocol SearchInteractorInputProtocol: AnyObject {
     func fetchSearchText(_ text: String)
 }
 
-protocol SearchInteractorOutputProtocol {
-    func interactorDidFetchData(_ data: ListOfTrack)
+protocol SearchInteractorOutputProtocol: AnyObject {
+    func interactorDidFetchData(_ data: ListOfSearchedTracks)
     func interactorFailedToFetchData()
 }

@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: - Playlist
 struct Playlist: Codable {
+    let externalUrls: ExternalUrls
     let description: String?
     let identifier: String
     let images: [Image]?
@@ -19,6 +20,7 @@ struct Playlist: Codable {
     let isPublic: Bool?
 
     enum CodingKeys: String, CodingKey {
+        case externalUrls = "external_urls"
         case description
         case identifier = "id"
         case images, name, owner
@@ -35,34 +37,4 @@ struct TracksOfPlaylist: Codable {
 // MARK: - Item
 struct ItemOfPlaylist: Codable {
     let track: Track?
-}
-
-// MARK: - Track
-struct Track: Codable {
-    let album: TrackAlbum?
-    let artists: [Artist]?
-    let identifier, name: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case album, artists
-        case identifier = "id"
-        case name
-    }
-}
-
-// MARK: - AddedBy
-struct Artist: Codable {
-    let identifier, name: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case identifier = "id"
-        case name
-    }
-}
-
-// MARK: - Album
-struct TrackAlbum: Codable {
-    let href: String?
-    let images: [Image]?
-    let name: String?
 }

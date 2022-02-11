@@ -8,9 +8,9 @@
 import UIKit
 
 final class PlaylistModuleAssembly {
-    func createModule(with playlistId: String, type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (UIViewController, PlaylistViewPresenter) {
+    func createModule(with playlistId: String, type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (UIViewController, PlaylistPresenter) {
         let playlistViewController = PlaylistViewController.instantiate(from: PlaylistViewController.identifier)
-        let presenter = PlaylistViewPresenter()
+        let presenter = PlaylistPresenter()
         let interactor = PlaylistInteractor()
         interactor.networkService = serviceManager.network()
         interactor.playlistId = playlistId

@@ -7,13 +7,13 @@
 
 import Foundation
 
-final class CategoriesViewPresenter {
+final class CategoriesPresenter {
     weak var view: CategoriesViewInputProtocol?
     var coordinator: CategoriesModuleOutput?
     var interactor: CategoriesInteractorInputProtocol?
 }
 
-extension CategoriesViewPresenter: CategoriesViewOutputProtocol {
+extension CategoriesPresenter: CategoriesViewOutputProtocol {
     func viewDidRefresh() {
         interactor?.fetchCategories()
     }
@@ -27,7 +27,7 @@ extension CategoriesViewPresenter: CategoriesViewOutputProtocol {
     }
 }
 
-extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
+extension CategoriesPresenter: CategoriesInteractorOutputProtocol {
     func interactorDidGetCategory(_ category: String) {
         coordinator?.runPlaylistsFlow(category)
     }
@@ -52,7 +52,7 @@ extension CategoriesViewPresenter: CategoriesInteractorOutputProtocol {
     }
 }
 
-extension CategoriesViewPresenter: CategoriesModuleInput {
+extension CategoriesPresenter: CategoriesModuleInput {
     func runSearchModule(viewController: Presentable) {
         view?.configureSearchController(searchResultsController: viewController)
     }

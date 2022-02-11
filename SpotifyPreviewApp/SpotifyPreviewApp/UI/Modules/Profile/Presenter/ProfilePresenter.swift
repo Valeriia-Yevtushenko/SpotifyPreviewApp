@@ -7,13 +7,13 @@
 
 import Foundation
 
-final class ProfileViewPresenter {
+final class ProfilePresenter {
     weak var view: ProfileViewInputProtocol?
     var coordinator: ProfileModuleOutput?
     var interactor: ProfileInteractorInputProtocol?
 }
 
-extension ProfileViewPresenter: ProfileViewOutputProtocol {
+extension ProfilePresenter: ProfileViewOutputProtocol {
     func viewDidSelectedSection(_ sectionType: ProfileSectionType) {
         switch sectionType {
         case .playlists:
@@ -38,7 +38,7 @@ extension ProfileViewPresenter: ProfileViewOutputProtocol {
     }
 }
 
-extension ProfileViewPresenter: ProfileInteractorOutputProtocol {
+extension ProfilePresenter: ProfileInteractorOutputProtocol {
     func interactorDidFetchUserData(_ data: User) {
         view?.configureProfileInfo(ProfileInfoModel(userImage: data.images?.first?.url, username: data.displayName, userEmail: data.email))
 

@@ -8,9 +8,9 @@
 import UIKit
 
 final class ListOfPlaylistsModuleAssembly {
-    func createModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (UIViewController, ListOfPlaylistsViewPresenter) {
+    func createModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (UIViewController, ListOfPlaylistsPresenter) {
         let playlistsViewController = ListOfPlaylistsViewController.instantiate(from: ListOfPlaylistsViewController.identifier)
-        let presenter = ListOfPlaylistsViewPresenter()
+        let presenter = ListOfPlaylistsPresenter()
         let dataSource = CollectionViewDataSource()
         dataSource.delegate = playlistsViewController
         playlistsViewController.dataSource = dataSource

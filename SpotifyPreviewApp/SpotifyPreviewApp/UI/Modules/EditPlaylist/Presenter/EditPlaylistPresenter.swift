@@ -7,13 +7,13 @@
 
 import Foundation
 
-class EditPlaylistViewPresenter {
+class EditPlaylistPresenter {
     weak var view: EditPlaylistViewInputProtocol?
     var coordinator: EditPlaylistModuleOutput?
     var interactor: EditPlaylistInteractorInputProtocol?
 }
 
-extension EditPlaylistViewPresenter: EditPlaylistViewOutputProtocol {
+extension EditPlaylistPresenter: EditPlaylistViewOutputProtocol {
     func viewDidTapCancel() {
         coordinator?.backToPlaylist()
     }
@@ -27,7 +27,7 @@ extension EditPlaylistViewPresenter: EditPlaylistViewOutputProtocol {
     }
 }
 
-extension EditPlaylistViewPresenter: EditPlaylistInteractorOutputProtocol {
+extension EditPlaylistPresenter: EditPlaylistInteractorOutputProtocol {
     func interactorDidUpdatePlaylist() {
         coordinator?.backToPlaylist()
     }

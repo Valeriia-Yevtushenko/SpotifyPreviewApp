@@ -7,13 +7,13 @@
 
 import Foundation
 
-class ListOfPlaylistsViewPresenter {
+class ListOfPlaylistsPresenter {
     weak var view: ListOfPlaylistsViewInputProtocol?
     var coordinator: ListOfPlaylistsModuleOutput?
     var interactor: ListOfPlaylistsInteractorInputProtocol?
 }
 
-extension ListOfPlaylistsViewPresenter: ListOfPlaylistsViewOutputProtocol {
+extension ListOfPlaylistsPresenter: ListOfPlaylistsViewOutputProtocol {
     func viewWillAppear() {
         interactor?.fetchPlaylists()
     }
@@ -32,7 +32,7 @@ extension ListOfPlaylistsViewPresenter: ListOfPlaylistsViewOutputProtocol {
     }
 }
 
-extension ListOfPlaylistsViewPresenter: ListOfPlaylistsInteractorOutputProtocol {
+extension ListOfPlaylistsPresenter: ListOfPlaylistsInteractorOutputProtocol {
     func interactorFailedToPostPlaylist(_ error: String) {
         view?.displayErrorAlert(with: error)
     }
