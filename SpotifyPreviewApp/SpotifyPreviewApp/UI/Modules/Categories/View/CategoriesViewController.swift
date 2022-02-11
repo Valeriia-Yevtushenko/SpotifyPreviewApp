@@ -47,7 +47,7 @@ private extension CategoriesViewController {
         refreshControl.addTarget(self, action: #selector(refreshCollectionView(sender:)), for: .valueChanged)
     }
     
-    @objc private func refreshCollectionView(sender: UIRefreshControl) {
+    @objc func refreshCollectionView(sender: UIRefreshControl) {
         output?.viewDidRefresh()
         sender.endRefreshing()
     }

@@ -8,8 +8,7 @@
 import Foundation
 
 protocol ListOfPlaylistsViewInputProtocol: AnyObject {
-    func setupData(_ model: [CollectionViewCellModel])
-    func setupPlaylistsType(_ type: PlaylistType)
+    func setupData(_ model: [CollectionViewCellModel], type: PlaylistType)
     func reloadData()
     func displayLabel(with text: String)
     func displayErrorAlert(with text: String)
@@ -17,6 +16,7 @@ protocol ListOfPlaylistsViewInputProtocol: AnyObject {
 
 protocol ListOfPlaylistsViewOutputProtocol: AnyObject {
     func viewDidLoad()
+    func viewDidRefresh()
     func viewWillAppear()
     func viewDidTapCreatePlaylist(_ playlist: NewPlaylist)
     func viewSelectedItem(at index: Int)

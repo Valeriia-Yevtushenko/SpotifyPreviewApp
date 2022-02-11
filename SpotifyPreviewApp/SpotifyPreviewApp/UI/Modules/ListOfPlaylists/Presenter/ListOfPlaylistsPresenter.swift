@@ -14,6 +14,10 @@ class ListOfPlaylistsPresenter {
 }
 
 extension ListOfPlaylistsPresenter: ListOfPlaylistsViewOutputProtocol {
+    func viewDidRefresh() {
+        interactor?.fetchPlaylists()
+    }
+    
     func viewWillAppear() {
         interactor?.fetchPlaylists()
     }
@@ -27,29 +31,12 @@ extension ListOfPlaylistsPresenter: ListOfPlaylistsViewOutputProtocol {
     }
     
     func viewDidLoad() {
-        interactor?.getPlaylistsType()
         interactor?.fetchPlaylists()
     }
 }
 
 extension ListOfPlaylistsPresenter: ListOfPlaylistsInteractorOutputProtocol {
-    func interactorFailedToPostPlaylist(_ error: String) {
-        view?.displayErrorAlert(with: error)
-    }
-    
-    func interactorDidPostNewPlaylist() {
-        interactor?.fetchPlaylists()
-    }
-    
-    func interactorDidFetchPlaylistsType(_ type: PlaylistType) {
-        view?.setupPlaylistsType(type)
-    }
-    
-    func interactorDidGetPlaylistId(_ identifier: String, type: PlaylistType) {
-        coordinator?.runPlaylistModule(with: identifier, type: type)
-    }
-    
-    func interactorDidFetchPlaylists(_ data: Playlists) {
+    func interactorDidFetchPlaylists(_ data: Playlists, type: PlaylistType) {
         let viewModel: [CollectionViewCellModel]
         
         if let playlists = data.items, !playlists.isEmpty {
@@ -65,8 +52,20 @@ extension ListOfPlaylistsPresenter: ListOfPlaylistsInteractorOutputProtocol {
             view?.displayLabel(with: "Unfortunately, this category is empty...")
         }
         
-        view?.setupData(viewModel)
+        view?.setupData(viewModel, type: type)
         view?.reloadData()
+    }
+    
+    func interactorFailedToPostPlaylist(_ error: String) {
+        view?.displayErrorAlert(with: error)
+    }
+    
+    func interactorDidPostNewPlaylist() {
+        interactor?.fetchPlaylists()
+    }
+    
+    func interactorDidGetPlaylistId(_ identifier: String, type: PlaylistType) {
+        coordinator?.runPlaylistModule(with: identifier, type: type)
     }
     
     func interactorFailedToFetchPlaylists() {

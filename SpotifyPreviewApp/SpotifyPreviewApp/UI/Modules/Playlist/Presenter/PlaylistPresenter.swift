@@ -14,6 +14,14 @@ final class PlaylistPresenter {
 }
 
 extension PlaylistPresenter: PlaylistViewOutputProtocol {
+    func viewWillAppear() {
+        interactor?.fetchPlaylist()
+    }
+    
+    func viewDidRefresh() {
+        interactor?.fetchPlaylist()
+    }
+    
     func viewDidEditPlaylist() {
         interactor?.getPlaylist()
     }

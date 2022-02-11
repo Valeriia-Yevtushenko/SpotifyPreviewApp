@@ -16,6 +16,9 @@ class ListOfArtistsModuleAssembly {
         interactor.presenter = presenter
         presenter.interactor = interactor
         presenter.view = listOfArtistsViewController
+        let dataSource = TableViewDataSource()
+        dataSource.delegate = listOfArtistsViewController
+        listOfArtistsViewController.dataSource = dataSource
         listOfArtistsViewController.output = presenter
         return (listOfArtistsViewController, presenter)
     }

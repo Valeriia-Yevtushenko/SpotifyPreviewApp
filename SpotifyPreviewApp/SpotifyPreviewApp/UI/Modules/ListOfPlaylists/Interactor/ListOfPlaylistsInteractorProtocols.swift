@@ -10,14 +10,12 @@ import Foundation
 protocol ListOfPlaylistsInteractorInputProtocol: AnyObject {
     func fetchPlaylists()
     func postNewPlaylist(_ playlist: NewPlaylist)
-    func getPlaylistsType()
     func getPlaylistId(at index: Int)
 }
 
 protocol ListOfPlaylistsInteractorOutputProtocol: AnyObject {
-    func interactorDidFetchPlaylists(_ data: Playlists)
+    func interactorDidFetchPlaylists(_ data: Playlists, type: PlaylistType)
     func interactorDidPostNewPlaylist()
-    func interactorDidFetchPlaylistsType(_ type: PlaylistType)
     func interactorFailedToFetchPlaylists()
     func interactorFailedToPostPlaylist(_ error: String)
     func interactorDidGetPlaylistId(_ identifier: String, type: PlaylistType)

@@ -13,7 +13,7 @@ protocol ListOfArtistsInteractorInputProtocol: AnyObject {
 }
 
 protocol ListOfArtistsInteractorOutputProtocol: AnyObject {
-    func interactorDidFetchArtists(_ data: Playlists)
+    func interactorDidFetchArtists(_ data: ListOfArtists)
     func interactorFailedToFetchArtists()
     func interactorDidGetPlaylistId(_ identifier: String)
 }

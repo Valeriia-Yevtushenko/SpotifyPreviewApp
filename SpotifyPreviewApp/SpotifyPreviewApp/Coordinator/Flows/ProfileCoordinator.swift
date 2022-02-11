@@ -39,7 +39,7 @@ private extension ProfileCoordinator {
 }
 
 extension ProfileCoordinator: ProfileModuleOutput {
-    func runPListOfArtistsModule() {
+    func runListOfArtistsModule() {
         let (listOfArtistsModule, presenter) = factory.makeListOfArtistsModule(serviceManager: serviceManager)
         presenter.coordinator = self
         router.push(listOfArtistsModule)

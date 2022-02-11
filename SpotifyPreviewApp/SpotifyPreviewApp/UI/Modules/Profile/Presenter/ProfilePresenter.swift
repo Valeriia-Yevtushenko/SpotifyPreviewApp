@@ -21,7 +21,7 @@ extension ProfilePresenter: ProfileViewOutputProtocol {
         case .albums:
             break
         case .follows:
-            break
+            coordinator?.runListOfArtistsModule()
         }
     }
     

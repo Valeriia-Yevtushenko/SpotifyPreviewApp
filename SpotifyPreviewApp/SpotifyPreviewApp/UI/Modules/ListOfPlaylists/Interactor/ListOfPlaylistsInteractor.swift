@@ -33,10 +33,6 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
         }
     }
     
-    func getPlaylistsType() {
-        presenter?.interactorDidFetchPlaylistsType(type)
-    }
-    
     func getPlaylistId(at index: Int) {
         guard let playlistId = playlists?.items?[index].identifier else {
             return
@@ -56,7 +52,7 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
                 return data.playlists
             }.done { data in
                 self.playlists = data
-                self.presenter?.interactorDidFetchPlaylists(data)
+                self.presenter?.interactorDidFetchPlaylists(data, type: self.type)
             }.catch { _ in
                 self.presenter?.interactorFailedToFetchPlaylists()
             }
@@ -68,7 +64,7 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
                 return data
             }.done { data in
                 self.playlists = data
-                self.presenter?.interactorDidFetchPlaylists(data)
+                self.presenter?.interactorDidFetchPlaylists(data, type: self.type)
             }.catch { _ in
                 self.presenter?.interactorFailedToFetchPlaylists()
             }

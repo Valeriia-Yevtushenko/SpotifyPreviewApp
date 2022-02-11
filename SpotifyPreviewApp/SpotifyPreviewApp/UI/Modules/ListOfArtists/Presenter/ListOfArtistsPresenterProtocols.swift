@@ -15,6 +15,8 @@ protocol ListOfArtistsViewInputProtocol: AnyObject {
 
 protocol ListOfArtistsViewOutputProtocol: AnyObject {
     func viewDidLoad()
+    func viewWillAppear()
+    func viewDidRefresh()
     func viewSelectedItem(at index: Int)
 }
 

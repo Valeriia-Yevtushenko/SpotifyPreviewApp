@@ -15,6 +15,7 @@ struct PlaylistViewControllerModel {
 
 class PlaylistViewController: UIViewController {
     @IBOutlet private weak var playlistTableView: UITableView!
+    private var refreshControl: UIRefreshControl = UIRefreshControl()
     private let toastView = ToastView()
     var output: PlaylistViewOutputProtocol?
     var dataSource: TrackTableViewDataSource?
@@ -25,6 +26,7 @@ class PlaylistViewController: UIViewController {
         
         output?.viewDidLoad()
         configureTableView()
+        configureRefreshControl()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,7 +38,8 @@ class PlaylistViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        output?.viewDidLoad()
+        
+        output?.viewWillAppear()
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .always
     }
@@ -48,12 +51,17 @@ private extension PlaylistViewController {
         playlistTableView.delegate = dataSource
         playlistTableView.register(UINib(nibName: TrackTableViewCell.reuseIdentifier, bundle: nil),
                            forCellReuseIdentifier: TrackTableViewCell.reuseIdentifier )
+        playlistTableView.refreshControl = refreshControl
         headerView = UIImageView()
         headerView.contentMode = .scaleAspectFill
         headerView.clipsToBounds = true
         playlistTableView.contentInset = UIEdgeInsets(top: 400, left: 0, bottom: 0, right: 0)
         playlistTableView.contentOffset = CGPoint(x: 0, y: -400)
         updateHeaderView()
+    }
+    
+    func configureRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(refreshCollectionView(sender:)), for: .valueChanged)
     }
 }
 
@@ -172,5 +180,10 @@ extension PlaylistViewController: TrackTableViewDataSourceDelegate {
     
     func editButtonDidTap() {
         output?.viewDidEditPlaylist()
+    }
+    
+    func refreshCollectionView(sender: UIRefreshControl) {
+        output?.viewDidRefresh()
+        sender.endRefreshing()
     }
 }

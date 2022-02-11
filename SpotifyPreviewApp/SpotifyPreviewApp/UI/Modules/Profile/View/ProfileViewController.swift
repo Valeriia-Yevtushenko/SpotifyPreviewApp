@@ -54,7 +54,7 @@ final class ProfileViewController: UIViewController {
 
 private extension ProfileViewController {
     @IBAction func followsSectionDidSelect(_ sender: UITapGestureRecognizer) {
-        
+        output?.viewDidSelectedSection(.follows)
     }
     
     @IBAction func playlistsSectionDidSelected(_ sender: UITapGestureRecognizer) {

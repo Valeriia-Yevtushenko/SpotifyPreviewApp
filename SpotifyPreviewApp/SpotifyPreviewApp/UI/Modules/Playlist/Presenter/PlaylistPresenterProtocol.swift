@@ -18,6 +18,8 @@ protocol PlaylistViewInputProtocol: AnyObject {
 
 protocol PlaylistViewOutputProtocol: AnyObject {
     func viewDidLoad()
+    func viewWillAppear()
+    func viewDidRefresh()
     func viewDidTapDeletePlaylist()
     func viewDidTapAddPlaylist()
     func viewDidUpdatePlaylist()
