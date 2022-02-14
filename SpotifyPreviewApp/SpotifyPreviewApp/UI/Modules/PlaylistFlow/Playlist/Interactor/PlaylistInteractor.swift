@@ -17,6 +17,14 @@ final class PlaylistInteractor {
 }
 
 extension PlaylistInteractor: PlaylistInteractorInputProtocol {
+    func getTrackArtistId(at index: Int) {
+        guard let artistId = playlist?.tracks?.items?[index].track?.artists?.first?.identifier else {
+            return
+        }
+        
+        presenter?.interactorDidGetPlaylist(artistId)
+    }
+    
     func getPlaylist() {
         guard let playlist = playlist else {
             presenter?.interactorFailedToGetPlaylist()

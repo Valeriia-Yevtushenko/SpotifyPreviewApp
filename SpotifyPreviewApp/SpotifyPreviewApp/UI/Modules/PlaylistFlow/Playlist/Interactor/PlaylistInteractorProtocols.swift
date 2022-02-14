@@ -11,12 +11,14 @@ protocol PlaylistInteractorInputProtocol: AnyObject {
     func fetchPlaylist()
     func addPlaylist()
     func deletePlaylist()
+    func getTrackArtistId(at index: Int)
     func getPlaylist()
 }
 
 protocol PlaylistInteractorOutputProtocol: AnyObject {
     func interactorDidFetchPlaylist(_ playlist: Playlist, type: PlaylistType)
     func interactorDidGetPlaylist(_ playlist: Playlist)
+    func interactorDidGetPlaylist(_ identifier: String)
     func interactorDidDeletePlaylist()
     func interactorDidAddPlaylist()
     func interactorFailedToFetchPlaylist()

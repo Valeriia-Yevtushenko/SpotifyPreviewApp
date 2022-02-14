@@ -107,7 +107,7 @@
 		9766CC1027ADD16200426D8F /* NewPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9766CC0F27ADD16200426D8F /* NewPlaylist.swift */; };
 		97A418A427AFC7F00012CD3D /* PlaylistModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A4189827AFC7F00012CD3D /* PlaylistModuleAssembly.swift */; };
 		97A418A527AFC7F00012CD3D /* PlaylistPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A4189A27AFC7F00012CD3D /* PlaylistPresenter.swift */; };
-		97A418A627AFC7F00012CD3D /* PlaylistPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A4189B27AFC7F00012CD3D /* PlaylistPresenterProtocol.swift */; };
+		97A418A627AFC7F00012CD3D /* PlaylistPresenterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A4189B27AFC7F00012CD3D /* PlaylistPresenterProtocols.swift */; };
 		97A418A727AFC7F00012CD3D /* PlaylistViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97A4189D27AFC7F00012CD3D /* PlaylistViewController.storyboard */; };
 		97A418A927AFC7F00012CD3D /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A418A027AFC7F00012CD3D /* PlaylistViewController.swift */; };
 		97A418AA27AFC7F00012CD3D /* PlaylistInteractorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A418A227AFC7F00012CD3D /* PlaylistInteractorProtocols.swift */; };
@@ -239,7 +239,7 @@
 		9766CC0F27ADD16200426D8F /* NewPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaylist.swift; sourceTree = "<group>"; };
 		97A4189827AFC7F00012CD3D /* PlaylistModuleAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistModuleAssembly.swift; sourceTree = "<group>"; };
 		97A4189A27AFC7F00012CD3D /* PlaylistPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistPresenter.swift; sourceTree = "<group>"; };
-		97A4189B27AFC7F00012CD3D /* PlaylistPresenterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistPresenterProtocol.swift; sourceTree = "<group>"; };
+		97A4189B27AFC7F00012CD3D /* PlaylistPresenterProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistPresenterProtocols.swift; sourceTree = "<group>"; };
 		97A4189D27AFC7F00012CD3D /* PlaylistViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PlaylistViewController.storyboard; sourceTree = "<group>"; };
 		97A418A027AFC7F00012CD3D /* PlaylistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		97A418A227AFC7F00012CD3D /* PlaylistInteractorProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistInteractorProtocols.swift; sourceTree = "<group>"; };
@@ -968,7 +968,7 @@
 			isa = PBXGroup;
 			children = (
 				97A4189A27AFC7F00012CD3D /* PlaylistPresenter.swift */,
-				97A4189B27AFC7F00012CD3D /* PlaylistPresenterProtocol.swift */,
+				97A4189B27AFC7F00012CD3D /* PlaylistPresenterProtocols.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -1251,7 +1251,7 @@
 				6B1060E727A9281F00EB98A7 /* SearchPresenterProtocols.swift in Sources */,
 				6B9ABFF227AAD47F00F9F9F3 /* ProfileInteractor.swift in Sources */,
 				6B1060C927A927C900EB98A7 /* CategoriesAssembly.swift in Sources */,
-				97A418A627AFC7F00012CD3D /* PlaylistPresenterProtocol.swift in Sources */,
+				97A418A627AFC7F00012CD3D /* PlaylistPresenterProtocols.swift in Sources */,
 				6B06FDE227AD259B000E66CE /* ListOfPlaylistsInteractorProtocols.swift in Sources */,
 				6B9ABFEB27AAD47F00F9F9F3 /* ProfilePresenterProtocols.swift in Sources */,
 				972F27DB279430410000BE72 /* AuthorizationService.swift in Sources */,

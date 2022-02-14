@@ -8,6 +8,7 @@
 import UIKit
 
 protocol TrackTableViewDataSourceDelegate: AnyObject {
+    func trackArtistDidTap(at index: Int)
     func scrollViewDidScroll()
 }
 
@@ -34,6 +35,11 @@ extension TrackTableViewDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TrackTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        
+        cell.artistDidTap = {
+            self.delegate?.trackArtistDidTap(at: indexPath.row)
+        }
+        
         cell.configure(tracks[indexPath.row])
         return cell
     }

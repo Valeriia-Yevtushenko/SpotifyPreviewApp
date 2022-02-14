@@ -143,6 +143,10 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
 }
 
 extension PlaylistViewController: TrackTableViewDataSourceDelegate {
+    func trackArtistDidTap(at index: Int) {
+        output?.viewDidTapOnTrackArtist(at: index)
+    }
+    
     func scrollViewDidScroll() {
         updateHeaderView()
     }

@@ -14,6 +14,10 @@ final class PlaylistPresenter {
 }
 
 extension PlaylistPresenter: PlaylistViewOutputProtocol {
+    func viewDidTapOnTrackArtist(at index: Int) {
+        interactor?.getTrackArtistId(at: index)
+    }
+    
     func viewWillAppear() {
         interactor?.fetchPlaylist()
     }
@@ -40,6 +44,10 @@ extension PlaylistPresenter: PlaylistViewOutputProtocol {
 }
 
 extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
+    func interactorDidGetPlaylist(_ identifier: String) {
+        coordinator?.runArtistFlow(with: identifier)
+    }
+    
     func interactorDidGetPlaylist(_ playlist: Playlist) {
         coordinator?.runEditPlaylistModule(with: playlist)
     }

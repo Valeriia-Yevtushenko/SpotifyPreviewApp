@@ -19,6 +19,7 @@ protocol PlaylistViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func viewWillAppear()
     func viewDidRefresh()
+    func viewDidTapOnTrackArtist(at index: Int)
     func viewDidTapDeletePlaylist()
     func viewDidTapAddPlaylist()
     func viewDidEditPlaylist()
