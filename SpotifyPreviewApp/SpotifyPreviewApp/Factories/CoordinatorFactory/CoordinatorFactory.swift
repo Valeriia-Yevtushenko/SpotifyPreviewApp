@@ -8,8 +8,8 @@
 import Foundation
 
 class CoordinatorFactory: CoordinatorFactoryProtocol {
-    func makeArtistCoordinator(artistId: String, factory: ArtistFlow, router: Router, serviceManager: ServiceManagerProtocol) -> ArtistCoordinator {
-        return ArtistCoordinator(artistId: artistId, factory: factory, router: router, serviceManager: serviceManager, coordinatorFactory: self)
+    func makeArtistCoordinator(artistId: String, status: ArtistStatus, factory: ArtistFlow, router: Router, serviceManager: ServiceManagerProtocol) -> ArtistCoordinator {
+        return ArtistCoordinator(artistId: artistId, status: status, factory: factory, router: router, serviceManager: serviceManager, coordinatorFactory: self)
     }
     
     func makePlaylistsCoordinator(type: PlaylistType, factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator {

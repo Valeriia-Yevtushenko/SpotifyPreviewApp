@@ -14,6 +14,12 @@ struct ArtistInfoViewModel {
     var albums: [TableViewCellModel]
 }
 
+enum ArtistStatus {
+    case followed
+    case unfollowed
+    case unknown
+}
+
 final class ArtistViewController: UIViewController {
     @IBOutlet private weak var artistTableView: UITableView!
     var output: ArtistViewOutputProtocol?
@@ -71,6 +77,23 @@ private extension ArtistViewController {
 }
 
 extension ArtistViewController: ArtistViewInputProtocol {
+    func setupArtistStatus(_ status: ArtistStatus) {
+        switch status {
+        case .followed:
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.minus"),
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(unfollowButtonDidTap))
+        case .unfollowed:
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(followButtonDidTap))
+        case .unknown:
+            break
+        }
+    }
+    
     func setupArtistInfo(_ data: ArtistInfoViewModel) {
         dataSource?.setupData(tracks: data.tracks, albums: data.albums)
         navigationItem.title = data.name
@@ -102,5 +125,34 @@ extension ArtistViewController: ArtistViewInputProtocol {
 extension ArtistViewController: ArtistTableViewDataSourceDelegate {
     func scrollViewDidScroll() {
         updateHeaderView()
+    }
+}
+
+@objc private extension ArtistViewController {
+    func unfollowButtonDidTap() {
+        let alert = UIAlertController(title: "Unfollow artist",
+                                      message: "Are you sure you want to unfollow this artists?",
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let unfollowButton = UIAlertAction(title: "Unfollow", style: .destructive, handler: { _ in
+           
+        })
+        
+        alert.addAction(cancelButton)
+        alert.addAction(unfollowButton)
+        present(alert, animated: true, completion: nil)
+    }
+    func followButtonDidTap() {
+        let alert = UIAlertController(title: "Follow on artist",
+                                      message: "Are you sure you want to follow this artists?",
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let followButton = UIAlertAction(title: "Follow", style: .destructive, handler: { _ in
+           
+        })
+        
+        alert.addAction(cancelButton)
+        alert.addAction(followButton)
+        present(alert, animated: true, completion: nil)
     }
 }

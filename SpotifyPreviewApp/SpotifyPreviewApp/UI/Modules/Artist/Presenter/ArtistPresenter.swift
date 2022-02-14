@@ -24,6 +24,10 @@ extension ArtistPresenter: ArtistViewOutputProtocol {
 }
 
 extension ArtistPresenter: ArtistInteractorOutputProtocol {
+    func interactorDidGetArtistStatus(_ status: ArtistStatus) {
+        view?.setupArtistStatus(status)
+    }
+    
     func interactorDidFetchArtistInfo(_ artistInfo: (Artist?, [Track], [Album])) {
         let tracks: [TrackTableViewCellModel] = artistInfo.1.map {
             let artist = $0.artists?.compactMap { return $0.name }

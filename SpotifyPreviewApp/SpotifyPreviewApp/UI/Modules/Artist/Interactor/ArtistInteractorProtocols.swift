@@ -13,5 +13,6 @@ protocol ArtistInteractorInputProtocol: AnyObject {
 
 protocol ArtistInteractorOutputProtocol: AnyObject {
     func interactorDidFetchArtistInfo(_ artistInfo: (Artist?, [Track], [Album]))
+    func interactorDidGetArtistStatus(_ status: ArtistStatus)
     func interactorFailedToFetchArtistInfo()
 }

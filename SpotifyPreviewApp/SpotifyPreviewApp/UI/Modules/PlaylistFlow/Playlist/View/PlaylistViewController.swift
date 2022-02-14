@@ -155,7 +155,7 @@ extension PlaylistViewController: TrackTableViewDataSourceDelegate {
 @objc private extension PlaylistViewController {
     func addButtonDidTap() {
         let alert = UIAlertController(title: "Add playlist",
-                                      message: "Are you sure you want to add this playlist to y favorites?",
+                                      message: "Are you sure you want to add this playlist to favorites?",
                                       preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteButton = UIAlertAction(title: "Add", style: .destructive, handler: { _ in

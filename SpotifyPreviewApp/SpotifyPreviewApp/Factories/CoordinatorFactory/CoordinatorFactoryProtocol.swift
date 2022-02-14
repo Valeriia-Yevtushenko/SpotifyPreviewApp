@@ -19,5 +19,5 @@ protocol CoordinatorFactoryProtocol: AnyObject {
     
     func makePlaylistsCoordinator(type: PlaylistType, factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator
     
-    func makeArtistCoordinator(artistId: String, factory: ArtistFlow, router: Router, serviceManager: ServiceManagerProtocol) -> ArtistCoordinator
+    func makeArtistCoordinator(artistId: String, status: ArtistStatus, factory: ArtistFlow, router: Router, serviceManager: ServiceManagerProtocol) -> ArtistCoordinator
 }

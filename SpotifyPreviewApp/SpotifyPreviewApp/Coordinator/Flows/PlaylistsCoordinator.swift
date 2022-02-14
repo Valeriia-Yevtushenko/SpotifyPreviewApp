@@ -51,9 +51,10 @@ extension PlaylistsCoordinator: ListOfPlaylistsModuleOutput {
 extension PlaylistsCoordinator: PlaylistModuleOutput {
     func runArtistFlow(with identifier: String) {
         let artistCoordinator = coordinatorFactory.makeArtistCoordinator(artistId: identifier,
-                                                                          factory: factory,
-                                                                          router: router,
-                                                                          serviceManager: serviceManager)
+                                                                         status: .unknown,
+                                                                         factory: factory,
+                                                                         router: router,
+                                                                         serviceManager: serviceManager)
         artistCoordinator.output = self
         artistCoordinator.start()
         addDependency(artistCoordinator)

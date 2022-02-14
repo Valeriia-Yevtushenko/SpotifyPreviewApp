@@ -9,6 +9,7 @@ import Foundation
 
 protocol ArtistViewInputProtocol: AnyObject {
     func setupArtistInfo(_ data: ArtistInfoViewModel)
+    func setupArtistStatus(_ status: ArtistStatus)
     func reloadData()
     func displayLabel(with text: String)
 }

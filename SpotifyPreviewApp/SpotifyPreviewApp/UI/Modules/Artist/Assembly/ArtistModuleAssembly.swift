@@ -8,7 +8,7 @@
 import UIKit
 
 final class ArtistModuleAssembly {
-    func createModule(with artistId: String, serviceManager: ServiceManagerProtocol) -> (UIViewController, ArtistPresenter) {
+    func createModule(with artistId: String, status: ArtistStatus, serviceManager: ServiceManagerProtocol) -> (UIViewController, ArtistPresenter) {
         let artistViewController = ArtistViewController.instantiate(from: ArtistViewController.identifier)
         let presenter = ArtistPresenter()
         let dataSource = ArtistTableViewDataSource()

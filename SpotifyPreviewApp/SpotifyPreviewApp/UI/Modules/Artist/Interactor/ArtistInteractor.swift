@@ -13,6 +13,7 @@ final class ArtistInteractor {
     weak var presenter: ArtistInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
     var identifier: String!
+    var status: ArtistStatus!
 }
 
 extension ArtistInteractor: ArtistInteractorInputProtocol {
@@ -36,6 +37,23 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
             self.presenter?.interactorDidFetchArtistInfo(self.artistInfo)
         }.catch { _ in
             self.presenter?.interactorFailedToFetchArtistInfo()
+        }
+        
+        guard status != ArtistStatus.followed else {
+            presenter?.interactorDidGetArtistStatus(.followed)
+            return
+        }
+        
+        let isUserFollows: Promise<[Bool]> = networkService.fetch(Request.isUserFollowsArtist.createUrl(data: self.identifier))
+        
+        isUserFollows.done { result in
+            if result.first == true {
+                self.presenter?.interactorDidGetArtistStatus(.followed)
+            } else {
+                self.presenter?.interactorDidGetArtistStatus(.unfollowed)
+            }
+        }.catch { _ in
+            self.presenter?.interactorDidGetArtistStatus(.unknown)
         }
     }
 }

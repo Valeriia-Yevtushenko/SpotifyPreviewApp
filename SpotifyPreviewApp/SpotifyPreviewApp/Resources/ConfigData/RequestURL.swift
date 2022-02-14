@@ -25,29 +25,32 @@ enum Request: String {
     case artist = "https://api.spotify.com/v1/artists/"
     case artistTopTrack
     case artistAlbums
-    
+    case isUserFollowsArtist = "https://api.spotify.com/v1/me/following/contains?type=artist&ids="
+
     func createUrl(data: String) -> String {
         switch self {
         case .playlist:
-        return self.rawValue + data
+        return rawValue + data
         case .playlists:
-            return self.rawValue + data + "/playlists?limit=50"
+            return rawValue + data + "/playlists?limit=50"
         case .search:
-            return self.rawValue + "q=\(data)&type=track&limit=50"
+            return rawValue + "q=\(data)&type=track&limit=50"
         case .playlistImage:
             return "https://api.spotify.com/v1/playlists/" + data + "/images"
         case .artist:
-            return self.rawValue + data
+            return rawValue + data
         case .artistTopTrack:
-            return "https://api.spotify.com/v1/artists/" + data + "/top-tracks?market=ua"
+            return "https://api.spotify.com/v1/artists/" + data + "/top-tracks?market=us"
         case .artistAlbums:
-            return "https://api.spotify.com/v1/artists/" + data + "/albums?market=UA&limit=5"
+            return "https://api.spotify.com/v1/artists/" + data + "/albums?limit=5"
         case .deletePlaylist:
             return "https://api.spotify.com/v1/playlists/\(data)/followers"
         case .addPlaylist:
             return "https://api.spotify.com/v1/playlists/\(data)/followers"
         case .updatePlaylist:
             return "https://api.spotify.com/v1/playlists/\(data)"
+        case .isUserFollowsArtist:
+            return rawValue + data
         default:
             return ""
         }

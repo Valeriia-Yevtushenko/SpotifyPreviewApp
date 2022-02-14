@@ -50,7 +50,7 @@ extension FlowFactory: PlaylistsFlowFactory {
 }
 
 extension FlowFactory: ArtistFlow {
-    func makeArtistModule(with artistId: String, serviceManager: ServiceManagerProtocol) -> (Presentable, ArtistPresenter) {
-        return ArtistModuleAssembly().createModule(with: artistId, serviceManager: serviceManager)
+    func makeArtistModule(with artistId: String, status: ArtistStatus, serviceManager: ServiceManagerProtocol) -> (Presentable, ArtistPresenter) {
+        return ArtistModuleAssembly().createModule(with: artistId, status: status, serviceManager: serviceManager)
     }
 }

@@ -18,11 +18,13 @@ struct Track: Codable {
     let artists: [Artist]?
     let identifier, name: String?
     let externalUrls: ExternalUrls
+    let previewUrl: String?
     
     enum CodingKeys: String, CodingKey {
         case externalUrls = "external_urls"
         case album, artists
         case identifier = "id"
         case name
+        case previewUrl = "preview_url"
     }
 }

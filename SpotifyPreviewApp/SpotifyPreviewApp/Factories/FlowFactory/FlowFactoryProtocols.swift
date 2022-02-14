@@ -30,5 +30,5 @@ protocol PlaylistsFlowFactory: AnyObject {
 }
 
 protocol ArtistFlow: AnyObject {
-    func makeArtistModule(with artistId: String, serviceManager: ServiceManagerProtocol) -> (Presentable, ArtistPresenter)
+    func makeArtistModule(with artistId: String, status: ArtistStatus, serviceManager: ServiceManagerProtocol) -> (Presentable, ArtistPresenter)
 }
