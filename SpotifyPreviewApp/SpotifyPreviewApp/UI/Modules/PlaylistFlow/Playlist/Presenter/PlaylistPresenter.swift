@@ -34,10 +34,6 @@ extension PlaylistPresenter: PlaylistViewOutputProtocol {
         interactor?.deletePlaylist()
     }
     
-    func viewDidUpdatePlaylist() {
-        view?.updateHeaderView()
-    }
-    
     func viewDidLoad() {
         interactor?.fetchPlaylist()
     }

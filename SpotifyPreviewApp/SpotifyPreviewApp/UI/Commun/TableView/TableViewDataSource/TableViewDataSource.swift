@@ -39,6 +39,7 @@ extension TableViewDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.accessoryType = .disclosureIndicator
         cell.configure(viewModel[indexPath.row])
         return cell
     }

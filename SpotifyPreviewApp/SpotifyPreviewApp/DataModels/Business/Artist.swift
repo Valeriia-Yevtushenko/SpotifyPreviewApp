@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Artist
 struct Artist: Codable {
-    let externalUrls: ExternalUrls
+    let externalUrls: ExternalUrls?
     let images: [Image]?
     let identifier, name: String?
     

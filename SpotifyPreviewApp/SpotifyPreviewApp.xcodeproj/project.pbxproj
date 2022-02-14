@@ -63,6 +63,15 @@
 		6B9ABFFD27AADCEF00F9F9F3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9ABFFC27AADCEF00F9F9F3 /* User.swift */; };
 		6B9AC00027AAE30400F9F9F3 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B9ABFFF27AAE30400F9F9F3 /* ProfileViewController.storyboard */; };
 		6B9AC00227AAEDAD00F9F9F3 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9AC00127AAEDAD00F9F9F3 /* ProfileCoordinator.swift */; };
+		6BBCB90E27BA54F700FC2A34 /* ArtistModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCB8FA27BA54F700FC2A34 /* ArtistModuleAssembly.swift */; };
+		6BBCB90F27BA54F700FC2A34 /* ArtistPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCB8FC27BA54F700FC2A34 /* ArtistPresenter.swift */; };
+		6BBCB91027BA54F700FC2A34 /* ArtistPresenterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCB8FD27BA54F700FC2A34 /* ArtistPresenterProtocols.swift */; };
+		6BBCB91327BA54F700FC2A34 /* ArtistTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCB90227BA54F700FC2A34 /* ArtistTableViewDataSource.swift */; };
+		6BBCB91427BA54F700FC2A34 /* ArtistViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BBCB90327BA54F700FC2A34 /* ArtistViewController.storyboard */; };
+		6BBCB91927BA54F700FC2A34 /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCB90A27BA54F700FC2A34 /* ArtistViewController.swift */; };
+		6BBCB91A27BA54F700FC2A34 /* ArtistInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCB90C27BA54F700FC2A34 /* ArtistInteractor.swift */; };
+		6BBCB91B27BA54F700FC2A34 /* ArtistInteractorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCB90D27BA54F700FC2A34 /* ArtistInteractorProtocols.swift */; };
+		6BBCB92027BA75D100FC2A34 /* ArtistCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBCB91F27BA75D100FC2A34 /* ArtistCoordinator.swift */; };
 		7EDF7E95120A249D948EEB23 /* Pods_SpotifyPreviewApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0715AA1035BF7F63B94F484 /* Pods_SpotifyPreviewApp.framework */; };
 		9729FB2F2793758D00AFD1A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729FB2E2793758D00AFD1A0 /* AppDelegate.swift */; };
 		9729FB332793758D00AFD1A0 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729FB322793758D00AFD1A0 /* AuthorizationViewController.swift */; };
@@ -185,6 +194,15 @@
 		6B9ABFFC27AADCEF00F9F9F3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6B9ABFFF27AAE30400F9F9F3 /* ProfileViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		6B9AC00127AAEDAD00F9F9F3 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		6BBCB8FA27BA54F700FC2A34 /* ArtistModuleAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistModuleAssembly.swift; sourceTree = "<group>"; };
+		6BBCB8FC27BA54F700FC2A34 /* ArtistPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistPresenter.swift; sourceTree = "<group>"; };
+		6BBCB8FD27BA54F700FC2A34 /* ArtistPresenterProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistPresenterProtocols.swift; sourceTree = "<group>"; };
+		6BBCB90227BA54F700FC2A34 /* ArtistTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTableViewDataSource.swift; sourceTree = "<group>"; };
+		6BBCB90327BA54F700FC2A34 /* ArtistViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ArtistViewController.storyboard; sourceTree = "<group>"; };
+		6BBCB90A27BA54F700FC2A34 /* ArtistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
+		6BBCB90C27BA54F700FC2A34 /* ArtistInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistInteractor.swift; sourceTree = "<group>"; };
+		6BBCB90D27BA54F700FC2A34 /* ArtistInteractorProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistInteractorProtocols.swift; sourceTree = "<group>"; };
+		6BBCB91F27BA75D100FC2A34 /* ArtistCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCoordinator.swift; sourceTree = "<group>"; };
 		9729FB2B2793758D00AFD1A0 /* SpotifyPreviewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyPreviewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9729FB2E2793758D00AFD1A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9729FB322793758D00AFD1A0 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -603,6 +621,89 @@
 			path = TrackTableViewDataSource;
 			sourceTree = "<group>";
 		};
+		6BBCB8F827BA54F700FC2A34 /* Artist */ = {
+			isa = PBXGroup;
+			children = (
+				6BBCB8F927BA54F700FC2A34 /* Assembly */,
+				6BBCB90B27BA54F700FC2A34 /* Interactor */,
+				6BBCB8FB27BA54F700FC2A34 /* Presenter */,
+				6BBCB8FE27BA54F700FC2A34 /* View */,
+			);
+			path = Artist;
+			sourceTree = "<group>";
+		};
+		6BBCB8F927BA54F700FC2A34 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6BBCB8FA27BA54F700FC2A34 /* ArtistModuleAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6BBCB8FB27BA54F700FC2A34 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6BBCB8FC27BA54F700FC2A34 /* ArtistPresenter.swift */,
+				6BBCB8FD27BA54F700FC2A34 /* ArtistPresenterProtocols.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6BBCB8FE27BA54F700FC2A34 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6BBCB8FF27BA54F700FC2A34 /* DataSource */,
+				6BBCB90327BA54F700FC2A34 /* ArtistViewController.storyboard */,
+				6BBCB90A27BA54F700FC2A34 /* ArtistViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6BBCB8FF27BA54F700FC2A34 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				6BBCB90227BA54F700FC2A34 /* ArtistTableViewDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		6BBCB90B27BA54F700FC2A34 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6BBCB90C27BA54F700FC2A34 /* ArtistInteractor.swift */,
+				6BBCB90D27BA54F700FC2A34 /* ArtistInteractorProtocols.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6BBCB91C27BA550600FC2A34 /* PlaylistFlow */ = {
+			isa = PBXGroup;
+			children = (
+				6B06FDCC27AD259B000E66CE /* ListOfPlaylists */,
+				97A4189627AFC7F00012CD3D /* Playlist */,
+				97A418AF27B054EF0012CD3D /* EditPlaylist */,
+			);
+			path = PlaylistFlow;
+			sourceTree = "<group>";
+		};
+		6BBCB91D27BA556500FC2A34 /* SearchFlow */ = {
+			isa = PBXGroup;
+			children = (
+				6B1060B527A927C900EB98A7 /* Categories */,
+				6B1060D527A9281F00EB98A7 /* Search */,
+			);
+			path = SearchFlow;
+			sourceTree = "<group>";
+		};
+		6BBCB91E27BA55EC00FC2A34 /* ProfileFlow */ = {
+			isa = PBXGroup;
+			children = (
+				97DA15CE27B67E7800DE2D7D /* ListOfArtists */,
+				6B9ABFD527AAD47F00F9F9F3 /* Profile */,
+			);
+			path = ProfileFlow;
+			sourceTree = "<group>";
+		};
 		9729FB222793758D00AFD1A0 = {
 			isa = PBXGroup;
 			children = (
@@ -650,13 +751,10 @@
 		9729FB43279375B400AFD1A0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				97DA15CE27B67E7800DE2D7D /* ListOfArtists */,
-				97A418AF27B054EF0012CD3D /* EditPlaylist */,
-				97A4189627AFC7F00012CD3D /* Playlist */,
-				6B06FDCC27AD259B000E66CE /* ListOfPlaylists */,
-				6B9ABFD527AAD47F00F9F9F3 /* Profile */,
-				6B1060D527A9281F00EB98A7 /* Search */,
-				6B1060B527A927C900EB98A7 /* Categories */,
+				6BBCB8F827BA54F700FC2A34 /* Artist */,
+				6BBCB91C27BA550600FC2A34 /* PlaylistFlow */,
+				6BBCB91D27BA556500FC2A34 /* SearchFlow */,
+				6BBCB91E27BA55EC00FC2A34 /* ProfileFlow */,
 				972F27D327942E320000BE72 /* Authorization */,
 			);
 			path = Modules;
@@ -797,6 +895,7 @@
 				6B1060B327A9259C00EB98A7 /* SearchCoordinator.swift */,
 				6B9AC00127AAEDAD00F9F9F3 /* ProfileCoordinator.swift */,
 				6B811C1A27AD2CC50000EB93 /* PlaylistsCoordinator.swift */,
+				6BBCB91F27BA75D100FC2A34 /* ArtistCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1063,6 +1162,7 @@
 				97DA15D627B6807300DE2D7D /* ListOfArtistsViewController.storyboard in Resources */,
 				6B9ABFCC27AAD03800F9F9F3 /* TableViewCell.xib in Resources */,
 				6B06FDE127AD259B000E66CE /* ListOfPlaylistsViewController.storyboard in Resources */,
+				6BBCB91427BA54F700FC2A34 /* ArtistViewController.storyboard in Resources */,
 				6B1060CE27A927C900EB98A7 /* CollectionViewCell.xib in Resources */,
 				9729FB362793758D00AFD1A0 /* AuthorizationViewController.storyboard in Resources */,
 				6B1060EB27A9281F00EB98A7 /* SearchViewController.storyboard in Resources */,
@@ -1161,11 +1261,15 @@
 				972F27C6279428E00000BE72 /* BaseCoordinator.swift in Sources */,
 				972F27DE2794309E0000BE72 /* RequestURL.swift in Sources */,
 				97A418C127B05B480012CD3D /* EditPlaylistModuleAssembly.swift in Sources */,
+				6BBCB91A27BA54F700FC2A34 /* ArtistInteractor.swift in Sources */,
 				6B9ABFF727AADB6900F9F9F3 /* TrackTableViewDataSource.swift in Sources */,
 				6B06FDDC27AD259B000E66CE /* ListOfPlaylistsAssembly.swift in Sources */,
+				6BBCB92027BA75D100FC2A34 /* ArtistCoordinator.swift in Sources */,
 				972F27ED27943AC90000BE72 /* AuthorizationServiceProtocol.swift in Sources */,
 				972F27E6279439CB0000BE72 /* AuthorizationInteractor.swift in Sources */,
+				6BBCB91B27BA54F700FC2A34 /* ArtistInteractorProtocols.swift in Sources */,
 				972F27EB27943AB50000BE72 /* KeychainService.swift in Sources */,
+				6BBCB91027BA54F700FC2A34 /* ArtistPresenterProtocols.swift in Sources */,
 				97DA15EB27B6BCCF00DE2D7D /* Owner.swift in Sources */,
 				6B1060CB27A927C900EB98A7 /* CategoriesPresenterProtocols.swift in Sources */,
 				97DA15EF27B6C00D00DE2D7D /* ListOfArtists.swift in Sources */,
@@ -1178,6 +1282,7 @@
 				97A418AE27B028FD0012CD3D /* ToastView.swift in Sources */,
 				6B1060B127A922A800EB98A7 /* TabBarCoordinator.swift in Sources */,
 				6B1060B427A9259C00EB98A7 /* SearchCoordinator.swift in Sources */,
+				6BBCB90F27BA54F700FC2A34 /* ArtistPresenter.swift in Sources */,
 				97DA15E527B6BC0000DE2D7D /* Album.swift in Sources */,
 				97DA15ED27B6BCE700DE2D7D /* Image.swift in Sources */,
 				6B1060F427A929D200EB98A7 /* NetworkServiceProtocol.swift in Sources */,
@@ -1204,6 +1309,7 @@
 				6B10610627A939D500EB98A7 /* CollectionViewExtention.swift in Sources */,
 				6B811C1B27AD2CC50000EB93 /* PlaylistsCoordinator.swift in Sources */,
 				972F27CB279429510000BE72 /* Router.swift in Sources */,
+				6BBCB90E27BA54F700FC2A34 /* ArtistModuleAssembly.swift in Sources */,
 				6B1060F227A929BA00EB98A7 /* Network.swift in Sources */,
 				972F27E4279439A50000BE72 /* AuthorizationInteractorProtocols.swift in Sources */,
 				6B1060F927A938B200EB98A7 /* ListOfSearchedTracks.swift in Sources */,
@@ -1218,6 +1324,7 @@
 				6B1060CD27A927C900EB98A7 /* CollectionViewCell.swift in Sources */,
 				6B1060CA27A927C900EB98A7 /* CategoriesPresenter.swift in Sources */,
 				97DA15E327B6B9B000DE2D7D /* Artist.swift in Sources */,
+				6BBCB91927BA54F700FC2A34 /* ArtistViewController.swift in Sources */,
 				6B10610727A939D500EB98A7 /* ImageViewExtention.swift in Sources */,
 				9729FB2F2793758D00AFD1A0 /* AppDelegate.swift in Sources */,
 				6B1060FC27A938E200EB98A7 /* Playlist.swift in Sources */,
@@ -1239,6 +1346,7 @@
 				97A418A427AFC7F00012CD3D /* PlaylistModuleAssembly.swift in Sources */,
 				97DA15DD27B6A1E700DE2D7D /* ListOfArtistsIneractor.swift in Sources */,
 				6B9ABFFD27AADCEF00F9F9F3 /* User.swift in Sources */,
+				6BBCB91327BA54F700FC2A34 /* ArtistTableViewDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

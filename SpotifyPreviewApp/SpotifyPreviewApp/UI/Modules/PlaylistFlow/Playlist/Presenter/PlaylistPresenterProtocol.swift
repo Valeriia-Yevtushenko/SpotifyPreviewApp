@@ -10,7 +10,6 @@ import Foundation
 protocol PlaylistViewInputProtocol: AnyObject {
     func setupPlaylist(model: PlaylistViewControllerModel, tracks: [TrackTableViewCellModel])
     func reloadData()
-    func updateHeaderView()
     func displayLabel(with text: String)
     func displayErrorAlert(with text: String)
     func showConfirmationToastView()
@@ -22,11 +21,11 @@ protocol PlaylistViewOutputProtocol: AnyObject {
     func viewDidRefresh()
     func viewDidTapDeletePlaylist()
     func viewDidTapAddPlaylist()
-    func viewDidUpdatePlaylist()
     func viewDidEditPlaylist()
 }
 
 protocol PlaylistModuleOutput {
     func backToPlaylists()
+    func runArtistFlow(with identifier: String)
     func runEditPlaylistModule(with playlist: Playlist)
 }

@@ -68,6 +68,18 @@ extension ProfileCoordinator: PlaylistsCoordinatorOutput {
 
 extension ProfileCoordinator: ListOfArtistsModuleOutput {
     func runArtistFlow(with identifier: String) {
-        
+        let artistCoordinator = coordinatorFactory.makeArtistCoordinator(artistId: identifier,
+                                                                          factory: factory,
+                                                                          router: router,
+                                                                          serviceManager: serviceManager)
+        artistCoordinator.output = self
+        artistCoordinator.start()
+        addDependency(artistCoordinator)
+    }
+}
+
+extension ProfileCoordinator: ArtistCoordinatorOutput {
+    func finishArtistFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
     }
 }

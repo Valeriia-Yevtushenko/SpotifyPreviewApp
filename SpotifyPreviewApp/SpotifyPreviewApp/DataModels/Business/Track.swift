@@ -7,6 +7,11 @@
 
 import Foundation
 
+// MARK: - Tracks
+struct Tracks: Codable {
+    let tracks: [Track]
+}
+
 // MARK: - Track
 struct Track: Codable {
     let album: Album?

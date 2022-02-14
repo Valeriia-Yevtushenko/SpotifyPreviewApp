@@ -63,6 +63,17 @@ private extension PlaylistViewController {
     func configureRefreshControl() {
         refreshControl.addTarget(self, action: #selector(refreshCollectionView(sender:)), for: .valueChanged)
     }
+    
+    func updateHeaderView() {
+        var headerRect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 400)
+        
+        if playlistTableView.contentOffset.y < UIScreen.main.bounds.width {
+            headerRect.origin.y = playlistTableView.contentOffset.y
+            headerRect.size.height = -playlistTableView.contentOffset.y
+        }
+        
+        headerView.frame = headerRect
+    }
 }
 
 extension PlaylistViewController: PlaylistViewInputProtocol {
@@ -113,18 +124,6 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
         playlistTableView.reloadData()
     }
     
-    func updateHeaderView() {
-        var headerRect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 400)
-        
-        if playlistTableView.contentOffset.y < UIScreen.main.bounds.width {
-            headerRect.origin.y = playlistTableView.contentOffset.y
-            headerRect.size.height = -playlistTableView.contentOffset.y
-        }
-        
-        headerView.frame = headerRect
-
-    }
-    
     func displayLabel(with text: String) {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         label.text = text
@@ -145,7 +144,7 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
 
 extension PlaylistViewController: TrackTableViewDataSourceDelegate {
     func scrollViewDidScroll() {
-        output?.viewDidUpdatePlaylist()
+        updateHeaderView()
     }
 }
 

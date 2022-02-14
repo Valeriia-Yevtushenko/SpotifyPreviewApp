@@ -41,7 +41,7 @@ enum Request: String {
         case .artistTopTrack:
             return "https://api.spotify.com/v1/artists/" + data + "/top-tracks?market=ua"
         case .artistAlbums:
-            return "https://api.spotify.com/v1/artists/" + data + "/albums?market=UA"
+            return "https://api.spotify.com/v1/artists/" + data + "/albums?market=UA&limit=5"
         case .deletePlaylist:
             return "https://api.spotify.com/v1/playlists/\(data)/followers"
         case .addPlaylist:

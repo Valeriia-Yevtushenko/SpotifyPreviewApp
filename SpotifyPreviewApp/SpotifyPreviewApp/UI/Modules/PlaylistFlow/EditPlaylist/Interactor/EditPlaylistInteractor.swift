@@ -30,9 +30,9 @@ extension EditPlaylistInteractor: EditPlaylistInteractorInputProtocol {
                 self.networkService.put(data: image,
                                         header: ["Content-Type": "image/jpeg"],
                                         url: Request.playlistImage.createUrl(data: identifier))
-            }.done({ _ in
+            }.done { _ in
                 self.presenter?.interactorDidUpdatePlaylist()
-            }).catch { error in
+            }.catch { error in
                 self.presenter?.interactorFailedToUpdatePlaylist(error.localizedDescription)
             }
         } else if let info = info, let data = try? JSONEncoder().encode(info) {

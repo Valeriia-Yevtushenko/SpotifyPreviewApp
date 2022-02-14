@@ -48,3 +48,9 @@ extension FlowFactory: PlaylistsFlowFactory {
         return ListOfPlaylistsModuleAssembly().createModule(with: type, serviceManager: serviceManager)
     }
 }
+
+extension FlowFactory: ArtistFlow {
+    func makeArtistModule(with artistId: String, serviceManager: ServiceManagerProtocol) -> (Presentable, ArtistPresenter) {
+        return ArtistModuleAssembly().createModule(with: artistId, serviceManager: serviceManager)
+    }
+}

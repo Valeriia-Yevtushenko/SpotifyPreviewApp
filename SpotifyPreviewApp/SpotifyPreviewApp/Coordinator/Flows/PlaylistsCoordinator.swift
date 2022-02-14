@@ -49,6 +49,10 @@ extension PlaylistsCoordinator: ListOfPlaylistsModuleOutput {
 }
 
 extension PlaylistsCoordinator: PlaylistModuleOutput {
+    func runArtistFlow(with identifier: String) {
+        
+    }
+    
     func runEditPlaylistModule(with playlist: Playlist) {
         let (playlistModule, presenter) = factory.makeEditPlaylistModule(with: playlist, serviceManager: serviceManager)
         presenter.coordinator = self

@@ -5,7 +5,7 @@ struct ListOfSearchedTracks: Codable {
     let tracks: SearchedTracks
 }
 
-// MARK: - Tracks
+// MARK: - SearchedTracks
 struct SearchedTracks: Codable {
     let items: [Track]
 }
