@@ -10,9 +10,10 @@ import PromiseKit
 
 final class ListOfPlaylistsInteractor {
     private var playlists: Playlists?
-    weak var presenter: ListOfPlaylistsInteractorOutputProtocol?
-    var type: PlaylistType!
+    weak var presenter: ListOfPlaylistsInteractorOutputProtocol?    
     var networkService: NetworkServiceProtocol!
+    var urlBuilder: URLBuilderProtocol!
+    var type: PlaylistType!
 }
 
 extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
@@ -21,11 +22,12 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
             return
         }
         
-        let promise: Promise<Playlists> = networkService.post(data: data, url: Request.userPlaylists.rawValue)
+        let promise: Promise<Playlists> = networkService.post(data: data,
+                                                              url: urlBuilder
+                                                                .with(path: .userPlaylist)
+                                                                .build())
         
-        firstly {
-            promise
-        }.done { data in
+        promise.done { data in
             self.playlists = data
             self.presenter?.interactorDidPostNewPlaylist()
         }.catch { error in
@@ -44,11 +46,12 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
     func fetchPlaylists() {
         switch type {
         case .category(let categoryId):
-            let promise: Promise<ListOfPlaylists> = networkService.fetch(Request.playlists.createUrl(data: categoryId))
+            let promise: Promise<ListOfPlaylists> = networkService.fetch(urlBuilder
+                                                                            .with(path: .category)
+                                                                            .with(data: categoryId)
+                                                                            .build())
             
-            firstly {
-                promise
-            }.compactMap { data in
+            promise.compactMap { data in
                 return data.playlists
             }.done { data in
                 self.playlists = data
@@ -57,10 +60,10 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
                 self.presenter?.interactorFailedToFetchPlaylists()
             }
         case .user:
-            let promise: Promise<Playlists> = networkService.fetch(Request.userPlaylists.rawValue)
-            firstly {
-                promise
-            }.compactMap { data in
+            let promise: Promise<Playlists> = networkService.fetch(urlBuilder
+                                                                    .with(path: .userPlaylist)
+                                                                    .build())
+            promise.compactMap { data in
                 return data
             }.done { data in
                 self.playlists = data

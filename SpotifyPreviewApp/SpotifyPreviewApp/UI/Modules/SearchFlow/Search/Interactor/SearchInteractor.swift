@@ -9,19 +9,23 @@ import Foundation
 import PromiseKit
 
 final class SearchInteractor: SearchInteractorInputProtocol {
-    weak var presenter: SearchInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
+    var urlBuilder: URLBuilderProtocol!
+    weak var presenter: SearchInteractorOutputProtocol?
     
     func fetchSearchText(_ text: String) {
         guard let track = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
         
-        let promise: Promise<ListOfSearchedTracks> = networkService.fetch(Request.search.createUrl(data: track))
+        let promise: Promise<ListOfSearchedTracks> = networkService.fetch(urlBuilder
+                                                                            .with(path: .search)
+                                                                            .with(queryItems: ["q": track,
+                                                                                               "type": "track",
+                                                                                               "limit": "50"])
+                                                                            .build())
         
-        firstly {
-            promise
-        }.done { data in
+        promise.done { data in
             self.presenter?.interactorDidFetchData(data)
         }.catch { _ in
             self.presenter?.interactorFailedToFetchData()

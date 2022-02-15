@@ -15,6 +15,7 @@ final class ProfileModuleAssembly {
         let interactor = ProfileInteractor()
         interactor.presenter = presenter
         interactor.networkService = serviceManager.network()
+        interactor.urlBuilder = serviceManager.urlBuilder()
         presenter.interactor = interactor
         profileViewController.output = presenter
         return (profileViewController, presenter)

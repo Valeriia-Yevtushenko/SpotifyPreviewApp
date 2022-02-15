@@ -10,10 +10,11 @@ import PromiseKit
 
 final class PlaylistInteractor {
     private var playlist: Playlist?
-    weak var presenter: PlaylistInteractorOutputProtocol?
     var playlistId: String!
     var playlistType: PlaylistType!
     var networkService: NetworkServiceProtocol!
+    var urlBuilder: URLBuilderProtocol!
+    weak var presenter: PlaylistInteractorOutputProtocol?
 }
 
 extension PlaylistInteractor: PlaylistInteractorInputProtocol {
@@ -40,11 +41,15 @@ extension PlaylistInteractor: PlaylistInteractorInputProtocol {
         }
         
         networkService.put(data: jsonData,
-                           url: Request.addPlaylist.createUrl(data: playlistId)).done { _ in
-            self.presenter?.interactorDidAddPlaylist()
-        }.catch { error in
-            self.presenter?.interactorFailedToAddPlaylist(error.localizedDescription)
-        }
+                           url: urlBuilder
+                            .with(path: .playlistFollowers)
+                            .with(data: playlistId)
+                            .build())
+            .done { _ in
+                self.presenter?.interactorDidAddPlaylist()
+            }.catch { error in
+                self.presenter?.interactorFailedToAddPlaylist(error.localizedDescription)
+            }
     }
     
     func deletePlaylist() {
@@ -52,15 +57,22 @@ extension PlaylistInteractor: PlaylistInteractorInputProtocol {
             return
         }
         
-        networkService.delete(url: Request.deletePlaylist.createUrl(data: playlistId)).done { _ in
-            self.presenter?.interactorDidDeletePlaylist()
-        }.catch { error in
-            self.presenter?.interactorFailedToDeletePlaylist(error.localizedDescription)
-        }
+        networkService.delete(url: urlBuilder
+                                .with(path: .playlistFollowers)
+                                .with(data: playlistId)
+                                .build())
+            .done { _ in
+                self.presenter?.interactorDidDeletePlaylist()
+            }.catch { error in
+                self.presenter?.interactorFailedToDeletePlaylist(error.localizedDescription)
+            }
     }
     
     func fetchPlaylist() {
-        let promise: Promise<Playlist> = networkService.fetch(Request.playlist.createUrl(data: playlistId))
+        let promise: Promise<Playlist> = networkService.fetch(urlBuilder
+                                                                .with(path: .playlist)
+                                                                .with(data: playlistId)
+                                                                .build())
         promise.done { data in
             self.playlist = data
             self.presenter?.interactorDidFetchPlaylist(data, type: self.playlistType)

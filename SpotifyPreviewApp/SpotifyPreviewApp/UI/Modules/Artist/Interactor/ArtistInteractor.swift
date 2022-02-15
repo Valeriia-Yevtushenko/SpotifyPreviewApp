@@ -10,10 +10,11 @@ import PromiseKit
 
 final class ArtistInteractor {
     private var artistInfo: (Artist?, [Track], [Album]) = (nil, [], [])
-    weak var presenter: ArtistInteractorOutputProtocol?
-    var networkService: NetworkServiceProtocol!
     var identifier: String!
     var status: ArtistStatus!
+    var networkService: NetworkServiceProtocol!
+    var urlBuilder: URLBuilderProtocol!
+    weak var presenter: ArtistInteractorOutputProtocol?
 }
 
 extension ArtistInteractor: ArtistInteractorInputProtocol {
@@ -24,7 +25,11 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
         }
         
         networkService.put(data: jsonData,
-                           url: Request.followOnArtist.createUrl(data: artistId))
+                           url: urlBuilder
+                            .with(path: .following)
+                            .with(queryItems: ["type": "artist",
+                                               "ids": artistId])
+                            .build())
             .done {_ in
                 self.presenter?.interactorDidFollowOnArtist()
             }.catch { error in
@@ -37,7 +42,11 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
             return
         }
         
-        networkService.delete(url: Request.followOnArtist.createUrl(data: artistId))
+        networkService.delete(url: urlBuilder
+                                .with(path: .following)
+                                .with(queryItems: ["type": "artist",
+                                                   "ids": artistId])
+                                .build())
             .done { _ in
                 self.presenter?.interactorUnfollowArtist()
             }.catch { error in
@@ -46,18 +55,30 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
     }
 
     func fetchArtistInfo() {
-        let promise: Promise<Artist> = networkService.fetch(Request.artist.createUrl(data: identifier))
+        let promise: Promise<Artist> = networkService.fetch(urlBuilder
+                                                                .with(path: .artist)
+                                                                .with(data: self.identifier)
+                                                                .with(data: identifier)
+                                                                .build())
         
         firstly {
             promise
         }.then { artist -> Promise<Tracks> in
             self.artistInfo.0 = artist
-            return self.networkService.fetch(Request.artistTopTrack.createUrl(data: self.identifier))
+            return self.networkService.fetch(self.urlBuilder
+                                                .with(path: .artistTopTrack)
+                                                .with(data: self.identifier)
+                                                .with(queryItems: ["market": "us"])
+                                                .build())
         }.compactMap { tracks in
             return tracks.tracks
         }.then { tracks -> Promise<Albums> in
             self.artistInfo.1 = tracks
-            return self.networkService.fetch(Request.artistAlbums.createUrl(data: self.identifier))
+            return self.networkService.fetch(self.urlBuilder
+                                                .with(path: .artistAlbums)
+                                                .with(data: self.identifier)
+                                                .with(queryItems: ["limit": "5"])
+                                                .build())
         }.compactMap { albums in
             return albums.items
         }.done { albums in
@@ -72,7 +93,11 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
             return
         }
         
-        let isUserFollows: Promise<[Bool]> = networkService.fetch(Request.isUserFollowsArtist.createUrl(data: self.identifier))
+        let isUserFollows: Promise<[Bool]> = networkService.fetch(urlBuilder
+                                                                    .with(path: .isFolowing)
+                                                                    .with(queryItems: ["type": "artist",
+                                                                                       "ids": identifier])
+                                                                    .build())
         
         isUserFollows.done { result in
             if result.first == true {

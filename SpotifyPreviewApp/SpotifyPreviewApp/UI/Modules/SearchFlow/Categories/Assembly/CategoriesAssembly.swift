@@ -16,6 +16,7 @@ final class CategoriesModuleAssembly {
         categoriesViewController.dataSource = dataSource
         let interactor = CategoriesInteractor()
         interactor.networkService = serviceManager.network()
+        interactor.urlBuilder = serviceManager.urlBuilder()
         interactor.presenter = presenter
         presenter.interactor = interactor
         presenter.view = categoriesViewController

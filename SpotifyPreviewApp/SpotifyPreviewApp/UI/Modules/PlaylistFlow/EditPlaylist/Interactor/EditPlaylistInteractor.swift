@@ -11,6 +11,7 @@ import PromiseKit
 class EditPlaylistInteractor {
     weak var presenter: EditPlaylistInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
+    var urlBuilder: URLBuilderProtocol!
     var playlist: Playlist!
 }
 
@@ -21,14 +22,23 @@ extension EditPlaylistInteractor: EditPlaylistInteractorInputProtocol {
             return
         }
         
+        let updateInfoUrl = urlBuilder
+            .with(path: .playlist)
+            .with(data: identifier)
+            .build()
+        let updateImageUrl = urlBuilder
+            .with(path: .playlistImage)
+            .with(data: identifier)
+            .build()
+        
         if let info = info, let data = try? JSONEncoder().encode(info), let image = image {
             firstly {
                 self.networkService.put(data: data,
-                                        url: Request.updatePlaylist.createUrl(data: identifier))
+                                        url: updateInfoUrl)
             }.then { _ in
                 self.networkService.put(data: image,
                                         header: ["Content-Type": "image/jpeg"],
-                                        url: Request.playlistImage.createUrl(data: identifier))
+                                        url: updateImageUrl)
             }.done { _ in
                 self.presenter?.interactorDidUpdatePlaylist()
             }.catch { error in
@@ -36,7 +46,7 @@ extension EditPlaylistInteractor: EditPlaylistInteractorInputProtocol {
             }
         } else if let info = info, let data = try? JSONEncoder().encode(info) {
             self.networkService.put(data: data,
-                                    url: Request.updatePlaylist.createUrl(data: identifier))
+                                    url: updateInfoUrl)
                 .done({ _ in
                     self.presenter?.interactorDidUpdatePlaylist()
                 }).catch { error in
@@ -45,7 +55,7 @@ extension EditPlaylistInteractor: EditPlaylistInteractorInputProtocol {
         } else if let image = image {
             self.networkService.put(data: image,
                                     header: ["Content-Type": "image/jpeg"],
-                                    url: Request.playlistImage.createUrl(data: identifier))
+                                    url: updateImageUrl)
                 .done({ _ in
                     self.presenter?.interactorDidUpdatePlaylist()
                 }).catch { error in
