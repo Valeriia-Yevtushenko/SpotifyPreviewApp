@@ -70,13 +70,31 @@ extension NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func put(data: Data, header: [String: String]?, url: String) -> Promise<Void> {
+    func put(data: Data, header: [String: String], url: String) -> Promise<Void> {
         if client.credential.isTokenExpired() {
            authorizationService.renewAccessToken()
         }
        
         return Promise {seal in
             client.put(url, headers: header, body: data) { result in
+                switch result {
+                case .success(_):
+                    seal.fulfill_()
+                case .failure(let error):
+                    debugPrint(error.description)
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    func put(data: Data, url: String) -> Promise<Void> {
+        if client.credential.isTokenExpired() {
+           authorizationService.renewAccessToken()
+        }
+       
+        return Promise {seal in
+            client.put(url, body: data) { result in
                 switch result {
                 case .success(_):
                     seal.fulfill_()
