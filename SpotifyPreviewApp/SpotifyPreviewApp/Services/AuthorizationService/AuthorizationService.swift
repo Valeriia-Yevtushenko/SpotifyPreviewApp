@@ -24,9 +24,12 @@ class AuthorizationService {
 extension AuthorizationService: AuthorizationServiceProtocol {
     func logOut() {
         keychainService.remove(key: "token")
-        oauth = OAuth2Swift(consumerKey: Client.identifier.rawValue, consumerSecret: Client.secret.rawValue,
-                                    authorizeUrl: Request.authURL.rawValue, accessTokenUrl: Request.accessToken.rawValue,
-                                    responseType: Authorization.code.rawValue)
+        
+        oauth = OAuth2Swift(consumerKey: Client.identifier.rawValue,
+                            consumerSecret: Client.secret.rawValue,
+                            authorizeUrl: Authorization.url.rawValue,
+                            accessTokenUrl: Authorization.accessToken.rawValue,
+                            responseType: Authorization.code.rawValue)
     }
     
     func sessionData() -> Token? {
@@ -50,7 +53,7 @@ extension AuthorizationService: AuthorizationServiceProtocol {
         oauth.allowMissingStateCheck = true
 
         return Promise { seal in
-            guard let redirectURL = URL(string: Request.callbackUrl.rawValue) else {
+            guard let redirectURL = URL(string: Authorization.callbackUrl.rawValue) else {
                 return
             }
             

@@ -14,6 +14,7 @@ class ListOfArtistsModuleAssembly {
         let interactor = ListOfArtistsIneractor()
         interactor.networkService = serviceManager.network()
         interactor.presenter = presenter
+        interactor.urlBuilder = serviceManager.urlBuilder()
         presenter.interactor = interactor
         presenter.view = listOfArtistsViewController
         let dataSource = TableViewDataSource()

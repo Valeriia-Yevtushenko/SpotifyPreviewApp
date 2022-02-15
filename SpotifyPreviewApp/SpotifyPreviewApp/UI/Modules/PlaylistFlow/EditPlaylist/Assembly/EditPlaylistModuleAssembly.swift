@@ -13,6 +13,7 @@ class EditPlaylistModuleAssembly {
         let presenter = EditPlaylistPresenter()
         let interactor = EditPlaylistInteractor()
         interactor.networkService = serviceManager.network()
+        interactor.urlBuilder = serviceManager.urlBuilder()
         interactor.presenter = presenter
         interactor.playlist = playlist
         presenter.interactor = interactor

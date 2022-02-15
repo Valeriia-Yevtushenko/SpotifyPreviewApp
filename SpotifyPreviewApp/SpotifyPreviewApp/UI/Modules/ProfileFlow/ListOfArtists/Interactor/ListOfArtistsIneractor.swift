@@ -12,11 +12,17 @@ class ListOfArtistsIneractor {
     private var artists: [Artist]?
     weak var presenter: ListOfArtistsInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
+    var urlBuilder: URLBuilderProtocol!
 }
 
 extension ListOfArtistsIneractor: ListOfArtistsInteractorInputProtocol {
     func fetchArtists() {
-        let promise: Promise<ListOfArtists> = networkService.fetch(Request.userFollows.rawValue)
+        let url = urlBuilder
+                .with(path: .following)
+                .with(queryItems: ["type": "artist"])
+                .build()
+        
+        let promise: Promise<ListOfArtists> = networkService.fetch(url)
         
         promise.done { listOfArtists in
             self.artists = listOfArtists.artists.items

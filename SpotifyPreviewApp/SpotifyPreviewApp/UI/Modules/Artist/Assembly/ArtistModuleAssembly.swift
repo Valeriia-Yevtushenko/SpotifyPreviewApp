@@ -18,6 +18,7 @@ final class ArtistModuleAssembly {
         interactor.presenter = presenter
         interactor.identifier = artistId
         interactor.networkService = serviceManager.network()
+        interactor.urlBuilder = serviceManager.urlBuilder()
         presenter.interactor = interactor
         presenter.view = artistViewController
         artistViewController.output = presenter

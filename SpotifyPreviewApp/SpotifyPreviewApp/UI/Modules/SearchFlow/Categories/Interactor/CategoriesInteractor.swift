@@ -10,11 +10,15 @@ import PromiseKit
 
 final class CategoriesInteractor: CategoriesInteractorInputProtocol {
     private var listOfCategories: ListOfCategories?
-    weak var presenter: CategoriesInteractorOutputProtocol?
     var networkService: NetworkServiceProtocol!
+    var urlBuilder: URLBuilderProtocol!
+    weak var presenter: CategoriesInteractorOutputProtocol?
     
     func fetchCategories() {
-        let promise: Promise<ListOfCategories> = networkService.fetch(Request.allCategories.rawValue)
+        let promise: Promise<ListOfCategories> = networkService.fetch(urlBuilder
+                                                                        .with(path: .categories)
+                                                                        .with(queryItems: ["limit": "50"])
+                                                                        .build())
         
         firstly {
             promise
