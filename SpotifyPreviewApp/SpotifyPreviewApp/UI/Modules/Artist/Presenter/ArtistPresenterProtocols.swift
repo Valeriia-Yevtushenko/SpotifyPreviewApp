@@ -12,11 +12,15 @@ protocol ArtistViewInputProtocol: AnyObject {
     func setupArtistStatus(_ status: ArtistStatus)
     func reloadData()
     func displayLabel(with text: String)
+    func showConfirmationToastView()
+    func displayErrorAlert(with text: String)
 }
 
 protocol ArtistViewOutputProtocol: AnyObject {
     func viewDidLoad()
-    func viewWillDisappear()
+    func viewDidTapFollow()
+    func viewDidTapUnfollow()
+    func viewDidRefresh()
 }
 
 protocol ArtistModuleOutput: AnyObject {

@@ -39,7 +39,8 @@ extension PlaylistInteractor: PlaylistInteractorInputProtocol {
             return
         }
         
-        networkService.put(data: jsonData, header: nil, url: Request.addPlaylist.createUrl(data: playlistId)).done { _ in
+        networkService.put(data: jsonData,
+                           url: Request.addPlaylist.createUrl(data: playlistId)).done { _ in
             self.presenter?.interactorDidAddPlaylist()
         }.catch { error in
             self.presenter?.interactorFailedToAddPlaylist(error.localizedDescription)

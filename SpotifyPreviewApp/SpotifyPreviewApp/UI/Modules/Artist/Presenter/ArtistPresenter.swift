@@ -13,9 +13,17 @@ final class ArtistPresenter {
     var interactor: ArtistInteractorInputProtocol?
 }
 
-extension ArtistPresenter: ArtistViewOutputProtocol {    
-    func viewWillDisappear() {
-       
+extension ArtistPresenter: ArtistViewOutputProtocol {
+    func viewDidTapUnfollow() {
+        interactor?.unfollowArtist()
+    }
+    
+    func viewDidTapFollow() {
+        interactor?.followOnArtist()
+    }
+    
+    func viewDidRefresh() {
+        interactor?.fetchArtistInfo()
     }
     
     func viewDidLoad() {
@@ -24,6 +32,24 @@ extension ArtistPresenter: ArtistViewOutputProtocol {
 }
 
 extension ArtistPresenter: ArtistInteractorOutputProtocol {
+    func interactorUnfollowArtist() {
+        view?.showConfirmationToastView()
+        view?.setupArtistStatus(.unfollowed)
+    }
+    
+    func interactorFailedToUnfollowArtist(_ error: String) {
+        view?.displayErrorAlert(with: error)
+    }
+    
+    func interactorDidFollowOnArtist() {
+        view?.showConfirmationToastView()
+        view?.setupArtistStatus(.followed)
+    }
+    
+    func interactorFailedToFollowOnArtist(_ error: String) {
+        view?.displayErrorAlert(with: error)
+    }
+    
     func interactorDidGetArtistStatus(_ status: ArtistStatus) {
         view?.setupArtistStatus(status)
     }

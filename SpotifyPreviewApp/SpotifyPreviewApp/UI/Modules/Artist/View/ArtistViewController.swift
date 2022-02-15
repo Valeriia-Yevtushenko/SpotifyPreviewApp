@@ -22,6 +22,8 @@ enum ArtistStatus {
 
 final class ArtistViewController: UIViewController {
     @IBOutlet private weak var artistTableView: UITableView!
+    private var refreshControl: UIRefreshControl = UIRefreshControl()
+    private let toastView = ToastView()
     var output: ArtistViewOutputProtocol?
     var dataSource: ArtistTableViewDataSource?
     var headerView: UIImageView!
@@ -31,6 +33,7 @@ final class ArtistViewController: UIViewController {
         
         output?.viewDidLoad()
         configureTableView()
+        configureRefreshControl()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,8 +63,13 @@ private extension ArtistViewController {
         artistTableView.addSubview(headerView)
         headerView.contentMode = .scaleAspectFill
         headerView.clipsToBounds = true
+        artistTableView.refreshControl = refreshControl
         artistTableView.contentInset = UIEdgeInsets(top: 400, left: 0, bottom: 0, right: 0)
         artistTableView.contentOffset = CGPoint(x: 0, y: -400)
+    }
+    
+    func configureRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(refreshCollectionView(sender:)), for: .valueChanged)
     }
     
     func updateHeaderView() {
@@ -120,6 +128,34 @@ extension ArtistViewController: ArtistViewInputProtocol {
         label.textAlignment = NSTextAlignment.center
         artistTableView.backgroundView = label
     }
+    
+    func showConfirmationToastView() {
+        toastView.text = "Success"
+        toastView.layer.setValue("0.01", forKeyPath: "transform.scale")
+        toastView.alpha = 0
+        view.addSubview(toastView)
+        
+        UIView.animate(withDuration: 1,
+                       delay: 0,
+                       usingSpringWithDamping: 0.75,
+                       initialSpringVelocity: 0,
+                       options: [.beginFromCurrentState],
+                       animations: {
+            self.toastView.alpha = 1
+            self.toastView.layer.setValue(1, forKeyPath: "transform.scale")
+            }) { _ in
+                self.toastView.removeFromSuperview()
+            }
+    }
+    
+    func displayErrorAlert(with text: String) {
+        let alert = UIAlertController(title: "Failed",
+                                      message: text,
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelButton)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension ArtistViewController: ArtistTableViewDataSourceDelegate {
@@ -135,24 +171,30 @@ extension ArtistViewController: ArtistTableViewDataSourceDelegate {
                                       preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let unfollowButton = UIAlertAction(title: "Unfollow", style: .destructive, handler: { _ in
-           
+            self.output?.viewDidTapUnfollow()
         })
         
         alert.addAction(cancelButton)
         alert.addAction(unfollowButton)
         present(alert, animated: true, completion: nil)
     }
+    
     func followButtonDidTap() {
         let alert = UIAlertController(title: "Follow on artist",
                                       message: "Are you sure you want to follow this artists?",
                                       preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let followButton = UIAlertAction(title: "Follow", style: .destructive, handler: { _ in
-           
+            self.output?.viewDidTapFollow()
         })
         
         alert.addAction(cancelButton)
         alert.addAction(followButton)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func refreshCollectionView(sender: UIRefreshControl) {
+        output?.viewDidRefresh()
+        sender.endRefreshing()
     }
 }

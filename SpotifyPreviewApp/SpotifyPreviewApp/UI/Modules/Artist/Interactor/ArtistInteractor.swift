@@ -17,6 +17,34 @@ final class ArtistInteractor {
 }
 
 extension ArtistInteractor: ArtistInteractorInputProtocol {
+    func followOnArtist() {
+        guard let artistId = artistInfo.0?.identifier,
+              let jsonData = try? JSONSerialization.data(withJSONObject: ["ids": [artistId]]) else {
+            return
+        }
+        
+        networkService.put(data: jsonData,
+                           url: Request.followOnArtist.createUrl(data: artistId))
+            .done {_ in
+                self.presenter?.interactorDidFollowOnArtist()
+            }.catch { error in
+                self.presenter?.interactorFailedToFollowOnArtist(error.localizedDescription)
+            }
+    }
+    
+    func unfollowArtist() {
+        guard let artistId = artistInfo.0?.identifier else {
+            return
+        }
+        
+        networkService.delete(url: Request.followOnArtist.createUrl(data: artistId))
+            .done { _ in
+                self.presenter?.interactorUnfollowArtist()
+            }.catch { error in
+                self.presenter?.interactorFailedToUnfollowArtist(error.localizedDescription)
+            }
+    }
+
     func fetchArtistInfo() {
         let promise: Promise<Artist> = networkService.fetch(Request.artist.createUrl(data: identifier))
         

@@ -24,7 +24,6 @@ extension EditPlaylistInteractor: EditPlaylistInteractorInputProtocol {
         if let info = info, let data = try? JSONEncoder().encode(info), let image = image {
             firstly {
                 self.networkService.put(data: data,
-                                        header: nil,
                                         url: Request.updatePlaylist.createUrl(data: identifier))
             }.then { _ in
                 self.networkService.put(data: image,
@@ -37,7 +36,6 @@ extension EditPlaylistInteractor: EditPlaylistInteractorInputProtocol {
             }
         } else if let info = info, let data = try? JSONEncoder().encode(info) {
             self.networkService.put(data: data,
-                                    header: nil,
                                     url: Request.updatePlaylist.createUrl(data: identifier))
                 .done({ _ in
                     self.presenter?.interactorDidUpdatePlaylist()

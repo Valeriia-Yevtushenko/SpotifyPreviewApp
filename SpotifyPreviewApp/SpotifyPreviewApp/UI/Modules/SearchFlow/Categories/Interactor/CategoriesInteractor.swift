@@ -15,6 +15,7 @@ final class CategoriesInteractor: CategoriesInteractorInputProtocol {
     
     func fetchCategories() {
         let promise: Promise<ListOfCategories> = networkService.fetch(Request.allCategories.rawValue)
+        
         firstly {
             promise
         }.done {data in

@@ -7,6 +7,10 @@
 
 import Foundation
 
+final class URLBuilder {
+    private var baseUrl = "https://api.spotify.com/v1/"
+}
+
 enum Request: String {
     case allCategories = "https://api.spotify.com/v1/browse/categories?limit=50"
     case authURL = "https://accounts.spotify.com/authorize"
@@ -21,11 +25,12 @@ enum Request: String {
     case playlistImage
     case user = "https://api.spotify.com/v1/me"
     case userPlaylists = "https://api.spotify.com/v1/me/playlists"
-    case userFollows = "https://api.spotify.com/v1/me/following?type=artist&after=0I2XqVXqHScXjHhk6AYYRe"
+    case userFollows = "https://api.spotify.com/v1/me/following?type=artist"
     case artist = "https://api.spotify.com/v1/artists/"
     case artistTopTrack
     case artistAlbums
     case isUserFollowsArtist = "https://api.spotify.com/v1/me/following/contains?type=artist&ids="
+    case followOnArtist
 
     func createUrl(data: String) -> String {
         switch self {
@@ -51,6 +56,8 @@ enum Request: String {
             return "https://api.spotify.com/v1/playlists/\(data)"
         case .isUserFollowsArtist:
             return rawValue + data
+        case .followOnArtist:
+            return "https://api.spotify.com/v1/me/following?type=artist&ids=" + data
         default:
             return ""
         }

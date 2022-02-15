@@ -117,7 +117,6 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
             }) { _ in
                 self.toastView.removeFromSuperview()
             }
-
     }
     
     func reloadData() {
