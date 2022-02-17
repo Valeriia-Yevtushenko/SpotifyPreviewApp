@@ -14,6 +14,10 @@ final class ArtistPresenter {
 }
 
 extension ArtistPresenter: ArtistViewOutputProtocol {
+    func viewDidTapOnAlbum(at index: Int) {
+        interactor?.getAlbumId(at: index)
+    }
+    
     func viewDidTapUnfollow() {
         interactor?.unfollowArtist()
     }
@@ -32,6 +36,10 @@ extension ArtistPresenter: ArtistViewOutputProtocol {
 }
 
 extension ArtistPresenter: ArtistInteractorOutputProtocol {
+    func interactorDidGetAlbumId(_ identifier: String) {
+        coordinator?.runAlbumFlow(with: identifier)
+    }
+    
     func interactorUnfollowArtist() {
         view?.showConfirmationToastView()
         view?.setupArtistStatus(.unfollowed)

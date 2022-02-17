@@ -23,14 +23,13 @@ final class TableViewCell: UITableViewCell {
     }
     
     func configure(_ model: TableViewCellModel) {
-        cellImageView.layer.cornerRadius = 10
+        cellImageView.layer.cornerRadius = .pi
+        nameLabel.text = model.name
         
         guard let image = model.image else {
             return
         }
         
         cellImageView.setImage(withUrl: image)
-        nameLabel.text = model.name
     }
-    
 }

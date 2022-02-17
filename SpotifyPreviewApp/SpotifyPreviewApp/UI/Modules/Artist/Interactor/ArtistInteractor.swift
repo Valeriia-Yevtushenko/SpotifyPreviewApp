@@ -18,6 +18,10 @@ final class ArtistInteractor {
 }
 
 extension ArtistInteractor: ArtistInteractorInputProtocol {
+    func getAlbumId(at index: Int) {
+        presenter?.interactorDidGetAlbumId(artistInfo.2[index].identifier ?? "")
+    }
+    
     func followOnArtist() {
         guard let artistId = artistInfo.0?.identifier,
               let jsonData = try? JSONSerialization.data(withJSONObject: ["ids": [artistId]]) else {
@@ -57,7 +61,6 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
     func fetchArtistInfo() {
         let promise: Promise<Artist> = networkService.fetch(urlBuilder
                                                                 .with(path: .artist)
-                                                                .with(data: self.identifier)
                                                                 .with(data: identifier)
                                                                 .build())
         

@@ -54,3 +54,9 @@ extension FlowFactory: ArtistFlow {
         return ArtistModuleAssembly().createModule(with: artistId, status: status, serviceManager: serviceManager)
     }
 }
+
+extension FlowFactory: AlbumFlow {
+    func makeAlbumModule(with albumId: String, serviceManager: ServiceManagerProtocol) -> (Presentable, AlbumPresenter) {
+        return AlbumModuleAssembly().createModule(with: albumId, serviceManager: serviceManager)
+    }
+}

@@ -24,4 +24,6 @@ enum Path: String {
     case artist = "artists/%@"
     case artistTopTrack = "artists/%@/top-tracks"
     case artistAlbums = "artists/%@/albums"
+    
+    case album = "albums/%@"
 }

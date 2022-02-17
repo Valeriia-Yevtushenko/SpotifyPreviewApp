@@ -159,6 +159,14 @@ extension ArtistViewController: ArtistViewInputProtocol {
 }
 
 extension ArtistViewController: ArtistTableViewDataSourceDelegate {
+    func didSelectAlbum(at index: Int) {
+        output?.viewDidTapOnAlbum(at: index)
+    }
+    
+    func didSelectTrack(at index: Int) {
+        
+    }
+    
     func scrollViewDidScroll() {
         updateHeaderView()
     }
