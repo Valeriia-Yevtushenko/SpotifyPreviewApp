@@ -11,6 +11,7 @@ protocol ArtistInteractorInputProtocol: AnyObject {
     func fetchArtistInfo()
     func followOnArtist()
     func unfollowArtist()
+    func getAlbumId(at index: Int)
 }
 
 protocol ArtistInteractorOutputProtocol: AnyObject {
@@ -18,6 +19,7 @@ protocol ArtistInteractorOutputProtocol: AnyObject {
     func interactorDidGetArtistStatus(_ status: ArtistStatus)
     func interactorDidFollowOnArtist()
     func interactorUnfollowArtist()
+    func interactorDidGetAlbumId(_ identifier: String)
     func interactorFailedToFetchArtistInfo()
     func interactorFailedToFollowOnArtist(_ error: String)
     func interactorFailedToUnfollowArtist(_ error: String)

@@ -85,6 +85,7 @@ extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
             tracksViewModel = []
             view?.displayLabel(with: "Unfortunately, this playlist is empty...")
         }
+        
         view?.setupPlaylist(model: PlaylistViewControllerModel(name: playlist.name,
                                                                type: type,
                                                                imageUrl: playlist.images?.first?.url), tracks: tracksViewModel)

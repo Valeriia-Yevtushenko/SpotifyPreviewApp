@@ -32,3 +32,7 @@ protocol PlaylistsFlowFactory: AnyObject {
 protocol ArtistFlow: AnyObject {
     func makeArtistModule(with artistId: String, status: ArtistStatus, serviceManager: ServiceManagerProtocol) -> (Presentable, ArtistPresenter)
 }
+
+protocol AlbumFlow: AnyObject {
+    func makeAlbumModule(with albumId: String, serviceManager: ServiceManagerProtocol) -> (Presentable, AlbumPresenter)
+}

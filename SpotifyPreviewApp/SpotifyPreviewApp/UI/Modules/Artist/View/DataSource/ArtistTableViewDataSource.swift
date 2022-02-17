@@ -8,6 +8,8 @@
 import UIKit
 
 protocol ArtistTableViewDataSourceDelegate: AnyObject {
+    func didSelectAlbum(at index: Int)
+    func didSelectTrack(at index: Int)
     func scrollViewDidScroll()
 }
 
@@ -96,6 +98,14 @@ extension ArtistTableViewDataSource: UITableViewDataSource {
             let cell: TrackTableViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.configure(tracks[indexPath.row])
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            delegate?.didSelectTrack(at: indexPath.row)
+        } else {
+            delegate?.didSelectAlbum(at: indexPath.row)
         }
     }
 }

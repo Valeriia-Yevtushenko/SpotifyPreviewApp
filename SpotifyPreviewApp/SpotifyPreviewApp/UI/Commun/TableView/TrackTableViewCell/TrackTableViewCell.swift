@@ -30,11 +30,10 @@ final class TrackTableViewCell: UITableViewCell {
     }
     
     func configure(_ model: TrackTableViewCellModel) {
-        guard let image = model.image else {
-            return
+        if let image = model.image {
+            cellImageView.setImage(withUrl: image)
         }
         
-        cellImageView.setImage(withUrl: image)
         nameLabel.text = model.name
         artistLabel.text = model.artist
         tapGesture.addTarget(self, action: #selector(artistLabelDidTap(_:)))

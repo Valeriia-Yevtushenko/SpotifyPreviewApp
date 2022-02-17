@@ -20,9 +20,10 @@ protocol ArtistViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func viewDidTapFollow()
     func viewDidTapUnfollow()
+    func viewDidTapOnAlbum(at index: Int)
     func viewDidRefresh()
 }
 
 protocol ArtistModuleOutput: AnyObject {
-    
+    func runAlbumFlow(with identifier: String)
 }

@@ -18,10 +18,15 @@ struct Album: Codable {
     let images: [Image]?
     let name: String?
     let externalUrls: ExternalUrls
+    let tracks: AlbumTracks?
     
     enum CodingKeys: String, CodingKey {
         case externalUrls = "external_urls"
         case identifier = "id"
-        case images, name
+        case images, name, tracks
     }
+}
+
+struct AlbumTracks: Codable {
+    let items: [Track]
 }

@@ -51,6 +51,17 @@
 		6B16637527BBF44C00577712 /* URLBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B16637427BBF44C00577712 /* URLBuilderProtocol.swift */; };
 		6B3934BF27A8388D00B9C742 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3934BE27A8388D00B9C742 /* TabBarController.swift */; };
 		6B3934C427A83B8A00B9C742 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3934C327A83B8A00B9C742 /* TabBarItem.swift */; };
+		6B3D61C927BE68BC00AE58B8 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61C727BE68BC00AE58B8 /* AlbumTableViewCell.swift */; };
+		6B3D61CA27BE68BC00AE58B8 /* AlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D61C827BE68BC00AE58B8 /* AlbumTableViewCell.xib */; };
+		6B3D61CC27BE6CC100AE58B8 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61CB27BE6CC100AE58B8 /* AlbumViewController.swift */; };
+		6B3D61CE27BE6CDA00AE58B8 /* AlbumViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D61CD27BE6CDA00AE58B8 /* AlbumViewController.storyboard */; };
+		6B3D61D127BE7C8200AE58B8 /* AlbumTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61D027BE7C8200AE58B8 /* AlbumTableViewDataSource.swift */; };
+		6B3D61D327BE7EEF00AE58B8 /* AlbumPresenterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61D227BE7EEF00AE58B8 /* AlbumPresenterProtocols.swift */; };
+		6B3D61D527BE85F100AE58B8 /* AlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61D427BE85F100AE58B8 /* AlbumPresenter.swift */; };
+		6B3D61D727BE865200AE58B8 /* AlbumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61D627BE865200AE58B8 /* AlbumInteractor.swift */; };
+		6B3D61D927BE865D00AE58B8 /* AlbumInteractorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61D827BE865D00AE58B8 /* AlbumInteractorProtocols.swift */; };
+		6B3D61DB27BE91A100AE58B8 /* AlbumCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61DA27BE91A100AE58B8 /* AlbumCoordinator.swift */; };
+		6B3D61DD27BE92FD00AE58B8 /* AlbumModulAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61DC27BE92FD00AE58B8 /* AlbumModulAssembly.swift */; };
 		6B811C1B27AD2CC50000EB93 /* PlaylistsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B811C1A27AD2CC50000EB93 /* PlaylistsCoordinator.swift */; };
 		6B9ABFCB27AAD03800F9F9F3 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9ABFBD27AAD03800F9F9F3 /* TableViewCell.swift */; };
 		6B9ABFCC27AAD03800F9F9F3 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B9ABFBE27AAD03800F9F9F3 /* TableViewCell.xib */; };
@@ -184,6 +195,17 @@
 		6B16637427BBF44C00577712 /* URLBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilderProtocol.swift; sourceTree = "<group>"; };
 		6B3934BE27A8388D00B9C742 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		6B3934C327A83B8A00B9C742 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		6B3D61C727BE68BC00AE58B8 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
+		6B3D61C827BE68BC00AE58B8 /* AlbumTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumTableViewCell.xib; sourceTree = "<group>"; };
+		6B3D61CB27BE6CC100AE58B8 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		6B3D61CD27BE6CDA00AE58B8 /* AlbumViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlbumViewController.storyboard; sourceTree = "<group>"; };
+		6B3D61D027BE7C8200AE58B8 /* AlbumTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewDataSource.swift; sourceTree = "<group>"; };
+		6B3D61D227BE7EEF00AE58B8 /* AlbumPresenterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPresenterProtocols.swift; sourceTree = "<group>"; };
+		6B3D61D427BE85F100AE58B8 /* AlbumPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPresenter.swift; sourceTree = "<group>"; };
+		6B3D61D627BE865200AE58B8 /* AlbumInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInteractor.swift; sourceTree = "<group>"; };
+		6B3D61D827BE865D00AE58B8 /* AlbumInteractorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumInteractorProtocols.swift; sourceTree = "<group>"; };
+		6B3D61DA27BE91A100AE58B8 /* AlbumCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCoordinator.swift; sourceTree = "<group>"; };
+		6B3D61DC27BE92FD00AE58B8 /* AlbumModulAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumModulAssembly.swift; sourceTree = "<group>"; };
 		6B811C1A27AD2CC50000EB93 /* PlaylistsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistsCoordinator.swift; sourceTree = "<group>"; };
 		6B9ABFBD27AAD03800F9F9F3 /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		6B9ABFBE27AAD03800F9F9F3 /* TableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
@@ -523,6 +545,71 @@
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
+		6B3D61BE27BE530600AE58B8 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				6B3D61C327BE5CDC00AE58B8 /* Assembly */,
+				6B3D61C127BE5CCF00AE58B8 /* Interactor */,
+				6B3D61C027BE5CC300AE58B8 /* Presenter */,
+				6B3D61BF27BE5CB900AE58B8 /* View */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
+		6B3D61BF27BE5CB900AE58B8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6B3D61CF27BE7C2E00AE58B8 /* DataSource */,
+				6B3D61C627BE688F00AE58B8 /* AlbumTableViewCell */,
+				6B3D61CB27BE6CC100AE58B8 /* AlbumViewController.swift */,
+				6B3D61CD27BE6CDA00AE58B8 /* AlbumViewController.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6B3D61C027BE5CC300AE58B8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6B3D61D227BE7EEF00AE58B8 /* AlbumPresenterProtocols.swift */,
+				6B3D61D427BE85F100AE58B8 /* AlbumPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6B3D61C127BE5CCF00AE58B8 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				6B3D61D627BE865200AE58B8 /* AlbumInteractor.swift */,
+				6B3D61D827BE865D00AE58B8 /* AlbumInteractorProtocols.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		6B3D61C327BE5CDC00AE58B8 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				6B3D61DC27BE92FD00AE58B8 /* AlbumModulAssembly.swift */,
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		6B3D61C627BE688F00AE58B8 /* AlbumTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6B3D61C727BE68BC00AE58B8 /* AlbumTableViewCell.swift */,
+				6B3D61C827BE68BC00AE58B8 /* AlbumTableViewCell.xib */,
+			);
+			path = AlbumTableViewCell;
+			sourceTree = "<group>";
+		};
+		6B3D61CF27BE7C2E00AE58B8 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				6B3D61D027BE7C8200AE58B8 /* AlbumTableViewDataSource.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
 		6B9ABFBC27AAD03800F9F9F3 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -764,6 +851,7 @@
 		9729FB43279375B400AFD1A0 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6B3D61BE27BE530600AE58B8 /* Album */,
 				6BBCB8F827BA54F700FC2A34 /* Artist */,
 				6BBCB91C27BA550600FC2A34 /* PlaylistFlow */,
 				6BBCB91D27BA556500FC2A34 /* SearchFlow */,
@@ -910,6 +998,7 @@
 				6B9AC00127AAEDAD00F9F9F3 /* ProfileCoordinator.swift */,
 				6B811C1A27AD2CC50000EB93 /* PlaylistsCoordinator.swift */,
 				6BBCB91F27BA75D100FC2A34 /* ArtistCoordinator.swift */,
+				6B3D61DA27BE91A100AE58B8 /* AlbumCoordinator.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1171,9 +1260,11 @@
 				6B9AC00027AAE30400F9F9F3 /* ProfileViewController.storyboard in Resources */,
 				97A418B527B0554B0012CD3D /* EditPlaylistViewController.storyboard in Resources */,
 				9729FB382793758E00AFD1A0 /* Assets.xcassets in Resources */,
+				6B3D61CE27BE6CDA00AE58B8 /* AlbumViewController.storyboard in Resources */,
 				97A418A727AFC7F00012CD3D /* PlaylistViewController.storyboard in Resources */,
 				6B1060D027A927C900EB98A7 /* CategoriesViewController.storyboard in Resources */,
 				97DA15D627B6807300DE2D7D /* ListOfArtistsViewController.storyboard in Resources */,
+				6B3D61CA27BE68BC00AE58B8 /* AlbumTableViewCell.xib in Resources */,
 				6B9ABFCC27AAD03800F9F9F3 /* TableViewCell.xib in Resources */,
 				6B06FDE127AD259B000E66CE /* ListOfPlaylistsViewController.storyboard in Resources */,
 				6BBCB91427BA54F700FC2A34 /* ArtistViewController.storyboard in Resources */,
@@ -1269,13 +1360,16 @@
 				6B06FDE227AD259B000E66CE /* ListOfPlaylistsInteractorProtocols.swift in Sources */,
 				6B9ABFEB27AAD47F00F9F9F3 /* ProfilePresenterProtocols.swift in Sources */,
 				972F27DB279430410000BE72 /* AuthorizationService.swift in Sources */,
+				6B3D61DB27BE91A100AE58B8 /* AlbumCoordinator.swift in Sources */,
 				6B1060EA27A9281F00EB98A7 /* SearchViewController.swift in Sources */,
 				97A418AA27AFC7F00012CD3D /* PlaylistInteractorProtocols.swift in Sources */,
 				972F27FA27947FC50000BE72 /* AuthorizationData.swift in Sources */,
 				972F27C6279428E00000BE72 /* BaseCoordinator.swift in Sources */,
 				972F27DE2794309E0000BE72 /* URLPath.swift in Sources */,
+				6B3D61C927BE68BC00AE58B8 /* AlbumTableViewCell.swift in Sources */,
 				97A418C127B05B480012CD3D /* EditPlaylistModuleAssembly.swift in Sources */,
 				6BBCB91A27BA54F700FC2A34 /* ArtistInteractor.swift in Sources */,
+				6B3D61CC27BE6CC100AE58B8 /* AlbumViewController.swift in Sources */,
 				6B9ABFF727AADB6900F9F9F3 /* TrackTableViewDataSource.swift in Sources */,
 				6B06FDDC27AD259B000E66CE /* ListOfPlaylistsAssembly.swift in Sources */,
 				6BBCB92027BA75D100FC2A34 /* ArtistCoordinator.swift in Sources */,
@@ -1283,11 +1377,13 @@
 				972F27E6279439CB0000BE72 /* AuthorizationInteractor.swift in Sources */,
 				6BBCB91B27BA54F700FC2A34 /* ArtistInteractorProtocols.swift in Sources */,
 				972F27EB27943AB50000BE72 /* KeychainService.swift in Sources */,
+				6B3D61D727BE865200AE58B8 /* AlbumInteractor.swift in Sources */,
 				6BBCB91027BA54F700FC2A34 /* ArtistPresenterProtocols.swift in Sources */,
 				97DA15EB27B6BCCF00DE2D7D /* Owner.swift in Sources */,
 				6B1060CB27A927C900EB98A7 /* CategoriesPresenterProtocols.swift in Sources */,
 				97DA15EF27B6C00D00DE2D7D /* ListOfArtists.swift in Sources */,
 				97A418A927AFC7F00012CD3D /* PlaylistViewController.swift in Sources */,
+				6B3D61D527BE85F100AE58B8 /* AlbumPresenter.swift in Sources */,
 				6B1060CC27A927C900EB98A7 /* CategoriesCollectionViewDataSource.swift in Sources */,
 				9729FB332793758D00AFD1A0 /* AuthorizationViewController.swift in Sources */,
 				6B1060D227A927C900EB98A7 /* CategoriesInteractor.swift in Sources */,
@@ -1309,6 +1405,7 @@
 				972F27F5279440FE0000BE72 /* AuthorizationCoordinator.swift in Sources */,
 				972F2804279488490000BE72 /* FlowFactoryProtocols.swift in Sources */,
 				6B16637527BBF44C00577712 /* URLBuilderProtocol.swift in Sources */,
+				6B3D61D327BE7EEF00AE58B8 /* AlbumPresenterProtocols.swift in Sources */,
 				97DA15E727B6BC6900DE2D7D /* Track.swift in Sources */,
 				97DA15E927B6BC8B00DE2D7D /* ExternalUrls.swift in Sources */,
 				6B10610527A939D500EB98A7 /* CellExtention.swift in Sources */,
@@ -1338,6 +1435,7 @@
 				6B3934BF27A8388D00B9C742 /* TabBarController.swift in Sources */,
 				6B1060CD27A927C900EB98A7 /* CollectionViewCell.swift in Sources */,
 				6B1060CA27A927C900EB98A7 /* CategoriesPresenter.swift in Sources */,
+				6B3D61DD27BE92FD00AE58B8 /* AlbumModulAssembly.swift in Sources */,
 				97DA15E327B6B9B000DE2D7D /* Artist.swift in Sources */,
 				6BBCB91927BA54F700FC2A34 /* ArtistViewController.swift in Sources */,
 				6B10610727A939D500EB98A7 /* ImageViewExtention.swift in Sources */,
@@ -1348,6 +1446,7 @@
 				97DA15D927B680CB00DE2D7D /* ListOfArtistsPresenter.swift in Sources */,
 				972F27D227942B3F0000BE72 /* StoryboardInstantiable.swift in Sources */,
 				972F27C2279428850000BE72 /* ApplicationCoordinator.swift in Sources */,
+				6B3D61D127BE7C8200AE58B8 /* AlbumTableViewDataSource.swift in Sources */,
 				6B10610A27A93A0900EB98A7 /* TableViewHeaderFooterViewExtention.swift in Sources */,
 				972F27CE27942AAF0000BE72 /* Presentable.swift in Sources */,
 				6B06FDDE27AD259B000E66CE /* ListOfPlaylistsPresenter.swift in Sources */,
@@ -1357,6 +1456,7 @@
 				6B9ABFE927AAD47F00F9F9F3 /* ProfileAssembly.swift in Sources */,
 				972F27E0279437B10000BE72 /* AuthorizationPresenterProtocols.swift in Sources */,
 				97A418B927B05AF60012CD3D /* EditPlaylistPresenter.swift in Sources */,
+				6B3D61D927BE865D00AE58B8 /* AlbumInteractorProtocols.swift in Sources */,
 				97A418BB27B05B0E0012CD3D /* EditPlaylistPresenterProtocols.swift in Sources */,
 				6B1060FE27A9391400EB98A7 /* Playlists.swift in Sources */,
 				97A418A427AFC7F00012CD3D /* PlaylistModuleAssembly.swift in Sources */,
