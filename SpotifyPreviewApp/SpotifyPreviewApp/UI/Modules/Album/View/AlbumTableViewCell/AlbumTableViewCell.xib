@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1GR-kl-sPD">
-                        <rect key="frame" x="127" y="15" width="160" height="198"/>
+                        <rect key="frame" x="127" y="15" width="160" height="200.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S2Y-Gn-27G">
                                 <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
@@ -28,18 +29,18 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TmH-P1-rlf">
-                                <rect key="frame" x="31" y="180" width="98" height="18"/>
+                                <rect key="frame" x="31" y="180" width="98" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="74" translatesAutoresizingMaskIntoConstraints="NO" id="JRw-VS-kbx">
-                        <rect key="frame" x="60" y="243" width="294" height="31"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="JRw-VS-kbx">
+                        <rect key="frame" x="40" y="240.5" width="334" height="33.5"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5q-dX-njV">
-                                <rect key="frame" x="0.0" y="0.0" width="110" height="31"/>
+                                <rect key="frame" x="0.0" y="0.0" width="147" height="33.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Play"/>
                                 <connections>
@@ -47,7 +48,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sxl-gr-X79">
-                                <rect key="frame" x="184" y="0.0" width="110" height="31"/>
+                                <rect key="frame" x="187" y="0.0" width="147" height="33.5"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Shuffle"/>
                                 <connections>
@@ -57,12 +58,13 @@
                         </subviews>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="JRw-VS-kbx" secondAttribute="bottom" constant="20" id="3BW-1Y-pT0"/>
-                    <constraint firstItem="JRw-VS-kbx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="KJH-cD-JaH"/>
+                    <constraint firstItem="JRw-VS-kbx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="KJH-cD-JaH"/>
                     <constraint firstItem="1GR-kl-sPD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="LEi-ps-RPQ"/>
                     <constraint firstItem="1GR-kl-sPD" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cd2-Fl-ajK"/>
-                    <constraint firstItem="JRw-VS-kbx" firstAttribute="top" secondItem="1GR-kl-sPD" secondAttribute="bottom" constant="30" id="kX5-uK-ezK"/>
+                    <constraint firstItem="JRw-VS-kbx" firstAttribute="top" secondItem="1GR-kl-sPD" secondAttribute="bottom" constant="25" id="kX5-uK-ezK"/>
                     <constraint firstItem="JRw-VS-kbx" firstAttribute="centerX" secondItem="1GR-kl-sPD" secondAttribute="centerX" id="pQ2-hm-bUK"/>
                 </constraints>
             </tableViewCellContentView>
@@ -74,4 +76,9 @@
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

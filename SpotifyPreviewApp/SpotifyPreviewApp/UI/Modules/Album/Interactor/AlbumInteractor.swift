@@ -20,7 +20,7 @@ extension AlbumInteractor: AlbumInteractorInputProtocol {
     func fetchAlbum() {
         let promise: Promise<Album> = networkService.fetch(urlBuilder
                                                                 .with(path: .album)
-                                                                .with(data: identifier)
+                                                                .with(pathParameter: identifier)
                                                                 .build())
         
         promise.done { album in

@@ -43,7 +43,7 @@ extension PlaylistInteractor: PlaylistInteractorInputProtocol {
         networkService.put(data: jsonData,
                            url: urlBuilder
                             .with(path: .playlistFollowers)
-                            .with(data: playlistId)
+                            .with(pathParameter: playlistId)
                             .build())
             .done { _ in
                 self.presenter?.interactorDidAddPlaylist()
@@ -59,7 +59,7 @@ extension PlaylistInteractor: PlaylistInteractorInputProtocol {
         
         networkService.delete(url: urlBuilder
                                 .with(path: .playlistFollowers)
-                                .with(data: playlistId)
+                                .with(pathParameter: playlistId)
                                 .build())
             .done { _ in
                 self.presenter?.interactorDidDeletePlaylist()
@@ -71,7 +71,7 @@ extension PlaylistInteractor: PlaylistInteractorInputProtocol {
     func fetchPlaylist() {
         let promise: Promise<Playlist> = networkService.fetch(urlBuilder
                                                                 .with(path: .playlist)
-                                                                .with(data: playlistId)
+                                                                .with(pathParameter: playlistId)
                                                                 .build())
         promise.done { data in
             self.playlist = data

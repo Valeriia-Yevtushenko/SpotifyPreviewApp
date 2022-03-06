@@ -23,7 +23,8 @@ extension CollectionViewDataSource {
 }
 extension CollectionViewDataSource: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width / 2.8, height: UIScreen.main.bounds.size.width / 2.8)
+        let size = UIScreen.main.bounds.size.width / 2.8
+        return CGSize(width: size, height: size)
     }
 }
 

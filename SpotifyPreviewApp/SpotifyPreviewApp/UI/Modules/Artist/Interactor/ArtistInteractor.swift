@@ -61,7 +61,7 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
     func fetchArtistInfo() {
         let promise: Promise<Artist> = networkService.fetch(urlBuilder
                                                                 .with(path: .artist)
-                                                                .with(data: identifier)
+                                                                .with(pathParameter: identifier)
                                                                 .build())
         
         firstly {
@@ -70,7 +70,7 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
             self.artistInfo.0 = artist
             return self.networkService.fetch(self.urlBuilder
                                                 .with(path: .artistTopTrack)
-                                                .with(data: self.identifier)
+                                                .with(pathParameter: self.identifier)
                                                 .with(queryItems: ["market": "us"])
                                                 .build())
         }.compactMap { tracks in
@@ -79,7 +79,7 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
             self.artistInfo.1 = tracks
             return self.networkService.fetch(self.urlBuilder
                                                 .with(path: .artistAlbums)
-                                                .with(data: self.identifier)
+                                                .with(pathParameter: self.identifier)
                                                 .with(queryItems: ["limit": "5"])
                                                 .build())
         }.compactMap { albums in
