@@ -8,8 +8,21 @@
 import UIKit
 
 final class PlayerModuleAssembly {
-    func createModule(with albumId: String, serviceManager: ServiceManagerProtocol) -> UIViewController {
+    func createModule(with tracks: [Track], for index: Int, serviceManager: ServiceManagerProtocol) -> (UIViewController, PlayerPresenter) {
         let playerViewController = PlayerViewController.instantiate(from: PlayerViewController.identifier)
-        return playerViewController
+        let presenter = PlayerPresenter()
+        presenter.view = playerViewController
+        let interactor = PlayerInteractor()
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        interactor.tracks = tracks
+        interactor.index = index
+        let playerService = serviceManager.player()
+        interactor.playerService = playerService
+        playerService.setupDelegate(interactor)
+        interactor.networkService = serviceManager.network()
+        interactor.urlBuilder = serviceManager.urlBuilder()
+        playerViewController.output = presenter
+        return (playerViewController, presenter)
     }
 }

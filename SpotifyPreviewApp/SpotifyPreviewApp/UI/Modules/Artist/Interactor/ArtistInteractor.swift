@@ -18,8 +18,12 @@ final class ArtistInteractor {
 }
 
 extension ArtistInteractor: ArtistInteractorInputProtocol {
+    func getPlaylist(for index: Int) {
+        presenter?.interactorDidGetPlaylist(tracks: artistInfo.1, for: index)
+    }
+    
     func getAlbumId(at index: Int) {
-        presenter?.interactorDidGetAlbumId(artistInfo.2[index].identifier ?? "")
+        presenter?.interactorDidGetAlbumId(artistInfo.2[index].identifier)
     }
     
     func followOnArtist() {

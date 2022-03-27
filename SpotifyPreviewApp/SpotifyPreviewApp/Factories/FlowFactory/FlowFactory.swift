@@ -60,3 +60,9 @@ extension FlowFactory: AlbumFlow {
         return AlbumModuleAssembly().createModule(with: albumId, serviceManager: serviceManager)
     }
 }
+
+extension FlowFactory: PlayerFlow {
+    func makePlayerModule(with tracks: [Track], for index: Int, serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter) {
+        return PlayerModuleAssembly().createModule(with: tracks, for: index, serviceManager: serviceManager)
+    }
+}

@@ -13,13 +13,13 @@ protocol AlbumCoordinatorOutput: AnyObject {
 
 class AlbumCoordinator: BaseCoordinator {
     private let albumId: String
-    private let factory: AlbumFlow
+    private let factory: AlbumFlow & PlayerFlow
     private let router: Router
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     weak var output: AlbumCoordinatorOutput?
     
-    init(albumId: String, factory: AlbumFlow, router: Router, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(albumId: String, factory: AlbumFlow & PlayerFlow, router: Router, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
         self.albumId = albumId
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
@@ -37,12 +37,12 @@ private extension AlbumCoordinator {
         let (artistModule, presenter) = factory.makeAlbumModule(with: albumId,
                                                                 serviceManager: serviceManager)
         presenter.coordinator = self
-        router.push(artistModule)
+        router.present(artistModule)
     }
 }
 
 extension AlbumCoordinator: AlbumModuleOutput {
     func finishFlow() {
-        output?.finishArtistFlow(coordinator:self)
+        output?.finishArtistFlow(coordinator: self)
     }
 }

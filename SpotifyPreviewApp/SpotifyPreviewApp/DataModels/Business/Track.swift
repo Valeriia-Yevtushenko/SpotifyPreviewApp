@@ -14,9 +14,10 @@ struct Tracks: Codable {
 
 // MARK: - Track
 struct Track: Codable {
+    let identifier: String
     let album: Album?
     let artists: [Artist]?
-    let identifier, name: String?
+    let name: String?
     let externalUrls: ExternalUrls
     let previewUrl: String?
     

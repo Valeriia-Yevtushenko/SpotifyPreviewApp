@@ -22,17 +22,30 @@ protocol ProfileFlowFactory: AnyObject {
 }
 
 protocol PlaylistsFlowFactory: AnyObject {
-    func makeListOfPlaylistsModule(with type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsPresenter)
+    func makeListOfPlaylistsModule(with type: PlaylistType,
+                                   serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsPresenter)
     
-    func makePlaylistModule(with playlistId: String, type: PlaylistType, serviceManager: ServiceManagerProtocol) -> (Presentable, PlaylistPresenter)
+    func makePlaylistModule(with playlistId: String,
+                            type: PlaylistType,
+                            serviceManager: ServiceManagerProtocol) -> (Presentable, PlaylistPresenter)
     
-    func makeEditPlaylistModule(with playlist: Playlist, serviceManager: ServiceManagerProtocol) -> (Presentable, EditPlaylistPresenter)
+    func makeEditPlaylistModule(with playlist: Playlist,
+                                serviceManager: ServiceManagerProtocol) -> (Presentable, EditPlaylistPresenter)
 }
 
 protocol ArtistFlow: AnyObject {
-    func makeArtistModule(with artistId: String, status: ArtistStatus, serviceManager: ServiceManagerProtocol) -> (Presentable, ArtistPresenter)
+    func makeArtistModule(with artistId: String,
+                          status: ArtistStatus,
+                          serviceManager: ServiceManagerProtocol) -> (Presentable, ArtistPresenter)
 }
 
 protocol AlbumFlow: AnyObject {
-    func makeAlbumModule(with albumId: String, serviceManager: ServiceManagerProtocol) -> (Presentable, AlbumPresenter)
+    func makeAlbumModule(with albumId: String,
+                         serviceManager: ServiceManagerProtocol) -> (Presentable, AlbumPresenter)
+}
+
+protocol PlayerFlow: AnyObject {
+    func makePlayerModule(with tracks: [Track],
+                          for index: Int,
+                          serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter)
 }
