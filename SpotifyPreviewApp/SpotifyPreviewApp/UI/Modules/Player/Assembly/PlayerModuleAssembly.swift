@@ -22,6 +22,7 @@ final class PlayerModuleAssembly {
         playerService.setupDelegate(interactor)
         interactor.networkService = serviceManager.network()
         interactor.urlBuilder = serviceManager.urlBuilder()
+        playerViewController.dataSource = TrackTableViewDataSource()
         playerViewController.output = presenter
         return (playerViewController, presenter)
     }

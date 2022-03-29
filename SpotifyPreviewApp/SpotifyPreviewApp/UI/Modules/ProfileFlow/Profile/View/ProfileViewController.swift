@@ -25,7 +25,6 @@ final class ProfileViewController: UIViewController {
     @IBOutlet private weak var userImageView: UIImageView!
     @IBOutlet private weak var followsView: UIView!
     @IBOutlet private weak var playlistView: UIView!
-    @IBOutlet private weak var albumsView: UIView!
     @IBOutlet private weak var userImageHeightLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var userImageWidthLayoutConstraint: NSLayoutConstraint!
     
@@ -61,10 +60,6 @@ private extension ProfileViewController {
         output?.viewDidSelectedSection(.playlists)
     }
     
-    @IBAction func albumsSectionDidSelect(_ sender: UITapGestureRecognizer) {
-        
-    }
-    
     @IBAction func logOutButtonDidTap() {
         output?.viewDidTapLogOut()
     }
@@ -80,7 +75,6 @@ private extension ProfileViewController {
         setupTopBorder(followsView)
         setupBottomBorder(playlistView)
         setupBottomBorder(followsView)
-        setupBottomBorder(albumsView)
     }
     
     func setupTopBorder(_ view: UIView) {

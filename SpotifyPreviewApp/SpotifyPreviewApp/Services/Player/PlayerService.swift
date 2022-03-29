@@ -53,7 +53,11 @@ class PlayerService: NSObject {
 }
 
 extension PlayerService: PlayerServiceProtocol {
-    func refreshPlayerTime() -> Double {
+    var currentListOfPlayerItems: [PlayerItem] {
+        return playerItems
+    }
+    
+    var currentTime: Double {
         return player?.currentTime ?? 0
     }
     

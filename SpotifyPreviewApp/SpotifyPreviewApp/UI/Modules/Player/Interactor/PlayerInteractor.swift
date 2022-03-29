@@ -17,9 +17,12 @@ class PlayerInteractor {
 }
 
 extension PlayerInteractor: PlayerInteractorInputProtocol {
+    func getListOfTracks() {
+        presenter?.interactorDidGetListOfTracks(playerService.currentListOfPlayerItems)
+    }
+    
     func refreshPlayerTime() {
-        let time = playerService.refreshPlayerTime()
-        presenter?.interactorDidRefreshPlayerTime(time)
+        presenter?.interactorDidRefreshPlayerTime(playerService.currentTime)
     }
     
     func play() {

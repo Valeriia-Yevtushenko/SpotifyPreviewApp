@@ -14,6 +14,10 @@ class PlayerPresenter {
 }
 
 extension PlayerPresenter: PlayerViewOutputProtocol {
+    func viewDidTapShowListOfTracks() {
+        interactor?.getListOfTracks()
+    }
+    
     func viewNeedToRefreshPlayerTime() {
         interactor?.refreshPlayerTime()
     }
@@ -48,6 +52,14 @@ extension PlayerPresenter: PlayerViewOutputProtocol {
 }
 
 extension PlayerPresenter: PlayerInteractorOutputProtocol {
+    func interactorDidGetListOfTracks(_ tracks: [PlayerItem]) {
+        let tracks: [TrackTableViewCellModel] = tracks.map {
+            return TrackTableViewCellModel(image: $0.image, name: $0.title, artist: $0.artists)
+        }
+        
+        view?.setupListOfTracks(tracks)
+    }
+    
     func interactorDidRefreshPlayerTime(_ time: Double) {
         view?.refreshPlayerTime(time)
     }

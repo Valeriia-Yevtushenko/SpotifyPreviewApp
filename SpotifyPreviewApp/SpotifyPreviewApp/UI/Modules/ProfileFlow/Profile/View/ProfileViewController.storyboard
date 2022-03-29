@@ -66,7 +66,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gda-k4-fLn">
-                                <rect key="frame" x="0.0" y="355" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="355" width="375" height="100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7y-oj-v4N">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -176,60 +176,6 @@
                                             <outletCollection property="gestureRecognizers" destination="TGG-by-Xbv" appends="YES" id="VbU-bW-bkd"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTQ-As-l18">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="50"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="coX-9n-LHJ">
-                                                <rect key="frame" x="20" y="14" width="24" height="21.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="24" id="nMm-yt-uc6"/>
-                                                </constraints>
-                                                <imageReference key="image" image="folder" catalog="system" renderingMode="hierarchical-single">
-                                                    <hierarchicalColors>
-                                                        <color systemColor="labelColor"/>
-                                                        <color systemColor="secondaryLabelColor"/>
-                                                        <color systemColor="tertiaryLabelColor"/>
-                                                    </hierarchicalColors>
-                                                </imageReference>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Albums" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMZ-yF-YVN">
-                                                <rect key="frame" x="66" y="13" width="255" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ww9-bR-IW2">
-                                                <rect key="frame" x="333" y="15.5" width="22" height="19"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="22" id="Mek-2X-dCe"/>
-                                                </constraints>
-                                                <imageReference key="image" image="chevron.right.circle.fill" catalog="system" renderingMode="hierarchical-single">
-                                                    <hierarchicalColors>
-                                                        <color systemColor="labelColor"/>
-                                                        <color systemColor="secondaryLabelColor"/>
-                                                        <color systemColor="tertiaryLabelColor"/>
-                                                    </hierarchicalColors>
-                                                </imageReference>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="Ww9-bR-IW2" secondAttribute="trailing" constant="20" id="1Lk-0x-Geq"/>
-                                            <constraint firstItem="Ww9-bR-IW2" firstAttribute="leading" secondItem="SMZ-yF-YVN" secondAttribute="trailing" constant="12" id="2ue-eg-JgD"/>
-                                            <constraint firstAttribute="bottom" secondItem="coX-9n-LHJ" secondAttribute="bottom" constant="13" id="9ij-Yi-kcJ"/>
-                                            <constraint firstItem="Ww9-bR-IW2" firstAttribute="centerY" secondItem="SMZ-yF-YVN" secondAttribute="centerY" id="QD6-p2-zhd"/>
-                                            <constraint firstItem="coX-9n-LHJ" firstAttribute="leading" secondItem="xTQ-As-l18" secondAttribute="leading" constant="20" id="Xno-hD-vJ4"/>
-                                            <constraint firstItem="SMZ-yF-YVN" firstAttribute="top" secondItem="xTQ-As-l18" secondAttribute="top" constant="13" id="eGV-x0-nLS"/>
-                                            <constraint firstAttribute="bottom" secondItem="SMZ-yF-YVN" secondAttribute="bottom" constant="13" id="gl5-G3-XuH"/>
-                                            <constraint firstAttribute="height" constant="50" id="r2r-j0-o3u"/>
-                                            <constraint firstItem="SMZ-yF-YVN" firstAttribute="leading" secondItem="coX-9n-LHJ" secondAttribute="trailing" constant="22" id="r8v-Co-ff3"/>
-                                            <constraint firstItem="coX-9n-LHJ" firstAttribute="top" secondItem="xTQ-As-l18" secondAttribute="top" constant="13" id="rSI-Hn-a2r"/>
-                                        </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="tX5-of-NLz" appends="YES" id="Uap-GC-4BG"/>
-                                        </connections>
-                                    </view>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzs-YH-5fE">
@@ -261,7 +207,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="albumsView" destination="xTQ-As-l18" id="AqG-cM-2bG"/>
                         <outlet property="followsView" destination="X7y-oj-v4N" id="j3L-0P-5gr"/>
                         <outlet property="playlistView" destination="FHi-dU-vIu" id="Jsq-El-leb"/>
                         <outlet property="userEmailLabel" destination="GWv-hv-QuO" id="NqR-Ti-vZp"/>
@@ -282,18 +227,13 @@
                         <action selector="playlistsSectionDidSelected:" destination="Y6W-OH-hqX" id="FMh-8f-sLp"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="tX5-of-NLz">
-                    <connections>
-                        <action selector="albumsSectionDidSelect:" destination="Y6W-OH-hqX" id="K5S-VW-ION"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="tX5-of-NLz"/>
             </objects>
             <point key="canvasLocation" x="130.43478260869566" y="92.410714285714278"/>
         </scene>
     </scenes>
     <resources>
         <image name="chevron.right.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="folder" catalog="system" width="128" height="97"/>
         <image name="music.note" catalog="system" width="97" height="128"/>
         <image name="person.2.circle" catalog="system" width="128" height="121"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>

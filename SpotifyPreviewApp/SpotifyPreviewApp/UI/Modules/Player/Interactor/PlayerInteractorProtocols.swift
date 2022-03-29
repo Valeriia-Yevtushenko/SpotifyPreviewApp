@@ -16,9 +16,11 @@ protocol PlayerInteractorInputProtocol: AnyObject {
     func shuffle()
     func togglePlayPause()
     func refreshPlayerTime()
+    func getListOfTracks()
 }
 
 protocol PlayerInteractorOutputProtocol: AnyObject {
     func interactorDidPlay(with track: PlayerItem)
+    func interactorDidGetListOfTracks(_ tracks: [PlayerItem])
     func interactorDidRefreshPlayerTime(_ time: Double)
 }
