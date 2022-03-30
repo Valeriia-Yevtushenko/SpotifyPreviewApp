@@ -8,10 +8,21 @@
 import Foundation
 import PromiseKit
 
-final class SearchInteractor: SearchInteractorInputProtocol {
+final class SearchInteractor {
+    private var listOfSearchedTracks: ListOfSearchedTracks?
     var networkService: NetworkServiceProtocol!
     var urlBuilder: URLBuilderProtocol!
     weak var presenter: SearchInteractorOutputProtocol?
+}
+
+extension SearchInteractor: SearchInteractorInputProtocol {
+    func getTrack(at index: Int) {
+        guard let track = listOfSearchedTracks?.tracks.items[index] else {
+            return
+        }
+        
+        presenter?.interactorDidGetTrack(tracks: track)
+    }
     
     func fetchSearchText(_ text: String) {
         guard let track = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
@@ -26,6 +37,7 @@ final class SearchInteractor: SearchInteractorInputProtocol {
                                                                             .build())
         
         promise.done { data in
+            self.listOfSearchedTracks = data
             self.presenter?.interactorDidFetchData(data)
         }.catch { _ in
             self.presenter?.interactorFailedToFetchData()

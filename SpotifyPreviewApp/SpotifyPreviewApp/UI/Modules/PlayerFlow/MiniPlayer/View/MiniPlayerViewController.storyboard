@@ -33,11 +33,19 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k1a-No-arp">
-                                <rect key="frame" x="20" y="9" width="64" height="64"/>
+                                <rect key="frame" x="20" y="9.5" width="64" height="63"/>
+                                <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="64" id="Xb1-QE-Fr2"/>
                                     <constraint firstAttribute="height" constant="64" id="vSX-14-1pN"/>
                                 </constraints>
+                                <imageReference key="image" image="music.note" catalog="system" renderingMode="hierarchical-single">
+                                    <hierarchicalColors>
+                                        <color systemColor="labelColor"/>
+                                        <color systemColor="secondaryLabelColor"/>
+                                        <color systemColor="tertiaryLabelColor"/>
+                                    </hierarchicalColors>
+                                </imageReference>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="6sR-By-ekw">
                                 <rect key="frame" x="94" y="14.5" width="163.5" height="53"/>
@@ -67,7 +75,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="26" scale="small"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="togglePlayPauseButtonDidTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="9wU-2Y-OMR"/>
+                                            <action selector="togglePlayPauseButtonDidTap" destination="Y6W-OH-hqX" eventType="touchUpInside" id="VwQ-GY-4xj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCa-IC-dvF">
@@ -111,6 +119,7 @@
                         <outlet property="artistsLabel" destination="s6S-H2-NQM" id="wF8-4q-q9J"/>
                         <outlet property="imageView" destination="k1a-No-arp" id="P6t-kZ-W2a"/>
                         <outlet property="songNameLabel" destination="JdT-lz-JKN" id="UcX-K1-vCu"/>
+                        <outlet property="togglePlayPauseButton" destination="7pv-pF-t2a" id="A41-cT-a98"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -120,12 +129,25 @@
     </scenes>
     <resources>
         <image name="forward.fill" catalog="system" width="128" height="79"/>
+        <image name="music.note" catalog="system" width="97" height="128"/>
         <image name="pause.fill" catalog="system" width="116" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.16" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

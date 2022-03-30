@@ -51,8 +51,7 @@
 		6B16637527BBF44C00577712 /* URLBuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B16637427BBF44C00577712 /* URLBuilderProtocol.swift */; };
 		6B3934BF27A8388D00B9C742 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3934BE27A8388D00B9C742 /* TabBarController.swift */; };
 		6B3934C427A83B8A00B9C742 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3934C327A83B8A00B9C742 /* TabBarItem.swift */; };
-		6B3D61C927BE68BC00AE58B8 /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61C727BE68BC00AE58B8 /* AlbumTableViewCell.swift */; };
-		6B3D61CA27BE68BC00AE58B8 /* AlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D61C827BE68BC00AE58B8 /* AlbumTableViewCell.xib */; };
+		6B3D61C927BE68BC00AE58B8 /* AlbumTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61C727BE68BC00AE58B8 /* AlbumTableViewHeaderFooterView.swift */; };
 		6B3D61CC27BE6CC100AE58B8 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61CB27BE6CC100AE58B8 /* AlbumViewController.swift */; };
 		6B3D61CE27BE6CDA00AE58B8 /* AlbumViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B3D61CD27BE6CDA00AE58B8 /* AlbumViewController.storyboard */; };
 		6B3D61D127BE7C8200AE58B8 /* AlbumTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B3D61D027BE7C8200AE58B8 /* AlbumTableViewDataSource.swift */; };
@@ -93,6 +92,10 @@
 		9729FB3B2793758E00AFD1A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9729FB392793758E00AFD1A0 /* LaunchScreen.storyboard */; };
 		972CFDB627F43B22008752D0 /* ContainerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 972CFDB527F43B22008752D0 /* ContainerViewController.storyboard */; };
 		972CFDB827F43D31008752D0 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972CFDB727F43D31008752D0 /* ContainerViewController.swift */; };
+		972CFDBC27F46865008752D0 /* PlaylistTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972CFDBB27F46865008752D0 /* PlaylistTableViewHeaderFooterView.swift */; };
+		972CFDBE27F46893008752D0 /* PlaylistTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972CFDBD27F46893008752D0 /* PlaylistTableViewHeaderFooterView.xib */; };
+		972CFDC127F46CDD008752D0 /* PlaylistTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972CFDC027F46CDD008752D0 /* PlaylistTableViewDataSource.swift */; };
+		972CFDC327F49BAB008752D0 /* AlbumTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972CFDC227F49BAB008752D0 /* AlbumTableViewHeaderFooterView.xib */; };
 		972F27C2279428850000BE72 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27C1279428850000BE72 /* ApplicationCoordinator.swift */; };
 		972F27C6279428E00000BE72 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27C4279428E00000BE72 /* BaseCoordinator.swift */; };
 		972F27C7279428E00000BE72 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27C5279428E00000BE72 /* Coordinator.swift */; };
@@ -216,8 +219,7 @@
 		6B16637427BBF44C00577712 /* URLBuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilderProtocol.swift; sourceTree = "<group>"; };
 		6B3934BE27A8388D00B9C742 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		6B3934C327A83B8A00B9C742 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
-		6B3D61C727BE68BC00AE58B8 /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
-		6B3D61C827BE68BC00AE58B8 /* AlbumTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumTableViewCell.xib; sourceTree = "<group>"; };
+		6B3D61C727BE68BC00AE58B8 /* AlbumTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		6B3D61CB27BE6CC100AE58B8 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		6B3D61CD27BE6CDA00AE58B8 /* AlbumViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlbumViewController.storyboard; sourceTree = "<group>"; };
 		6B3D61D027BE7C8200AE58B8 /* AlbumTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewDataSource.swift; sourceTree = "<group>"; };
@@ -259,6 +261,10 @@
 		9729FB3C2793758E00AFD1A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		972CFDB527F43B22008752D0 /* ContainerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContainerViewController.storyboard; sourceTree = "<group>"; };
 		972CFDB727F43D31008752D0 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		972CFDBB27F46865008752D0 /* PlaylistTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
+		972CFDBD27F46893008752D0 /* PlaylistTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
+		972CFDC027F46CDD008752D0 /* PlaylistTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewDataSource.swift; sourceTree = "<group>"; };
+		972CFDC227F49BAB008752D0 /* AlbumTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
 		972F27C1279428850000BE72 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		972F27C4279428E00000BE72 /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		972F27C5279428E00000BE72 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -490,8 +496,8 @@
 		6B1060D827A9281F00EB98A7 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				6B1060D927A9281F00EB98A7 /* SearchPresenterProtocols.swift */,
 				6B1060DA27A9281F00EB98A7 /* SearchPresenter.swift */,
+				6B1060D927A9281F00EB98A7 /* SearchPresenterProtocols.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -517,8 +523,8 @@
 		6B1060E327A9281F00EB98A7 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				6B1060E427A9281F00EB98A7 /* SearchInteractorProtocol.swift */,
 				6B1060E527A9281F00EB98A7 /* SearchInteractor.swift */,
+				6B1060E427A9281F00EB98A7 /* SearchInteractorProtocol.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -602,10 +608,10 @@
 		6B3D61BF27BE5CB900AE58B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6B3D61CF27BE7C2E00AE58B8 /* DataSource */,
-				6B3D61C627BE688F00AE58B8 /* AlbumTableViewCell */,
 				6B3D61CB27BE6CC100AE58B8 /* AlbumViewController.swift */,
 				6B3D61CD27BE6CDA00AE58B8 /* AlbumViewController.storyboard */,
+				6B3D61CF27BE7C2E00AE58B8 /* DataSource */,
+				6B3D61C627BE688F00AE58B8 /* AlbumTableViewHeaderFooterView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -613,8 +619,8 @@
 		6B3D61C027BE5CC300AE58B8 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				6B3D61D227BE7EEF00AE58B8 /* AlbumPresenterProtocols.swift */,
 				6B3D61D427BE85F100AE58B8 /* AlbumPresenter.swift */,
+				6B3D61D227BE7EEF00AE58B8 /* AlbumPresenterProtocols.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -636,13 +642,13 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
-		6B3D61C627BE688F00AE58B8 /* AlbumTableViewCell */ = {
+		6B3D61C627BE688F00AE58B8 /* AlbumTableViewHeaderFooterView */ = {
 			isa = PBXGroup;
 			children = (
-				6B3D61C727BE68BC00AE58B8 /* AlbumTableViewCell.swift */,
-				6B3D61C827BE68BC00AE58B8 /* AlbumTableViewCell.xib */,
+				6B3D61C727BE68BC00AE58B8 /* AlbumTableViewHeaderFooterView.swift */,
+				972CFDC227F49BAB008752D0 /* AlbumTableViewHeaderFooterView.xib */,
 			);
-			path = AlbumTableViewCell;
+			path = AlbumTableViewHeaderFooterView;
 			sourceTree = "<group>";
 		};
 		6B3D61CF27BE7C2E00AE58B8 /* DataSource */ = {
@@ -928,6 +934,23 @@
 				972CFDB527F43B22008752D0 /* ContainerViewController.storyboard */,
 			);
 			path = ContainerViewController;
+			sourceTree = "<group>";
+		};
+		972CFDBA27F4682A008752D0 /* PlaylistTableViewHeaderFooter */ = {
+			isa = PBXGroup;
+			children = (
+				972CFDBB27F46865008752D0 /* PlaylistTableViewHeaderFooterView.swift */,
+				972CFDBD27F46893008752D0 /* PlaylistTableViewHeaderFooterView.xib */,
+			);
+			path = PlaylistTableViewHeaderFooter;
+			sourceTree = "<group>";
+		};
+		972CFDBF27F46CC4008752D0 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				972CFDC027F46CDD008752D0 /* PlaylistTableViewDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		972F27C0279428550000BE72 /* Coordinator */ = {
@@ -1239,6 +1262,8 @@
 			children = (
 				97A418A027AFC7F00012CD3D /* PlaylistViewController.swift */,
 				97A4189D27AFC7F00012CD3D /* PlaylistViewController.storyboard */,
+				972CFDBF27F46CC4008752D0 /* DataSource */,
+				972CFDBA27F4682A008752D0 /* PlaylistTableViewHeaderFooter */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1424,6 +1449,7 @@
 			files = (
 				9729FB3B2793758E00AFD1A0 /* LaunchScreen.storyboard in Resources */,
 				6B1060EC27A9281F00EB98A7 /* TrackTableViewCell.xib in Resources */,
+				972CFDBE27F46893008752D0 /* PlaylistTableViewHeaderFooterView.xib in Resources */,
 				6B9AC00027AAE30400F9F9F3 /* ProfileViewController.storyboard in Resources */,
 				97A418B527B0554B0012CD3D /* EditPlaylistViewController.storyboard in Resources */,
 				9729FB382793758E00AFD1A0 /* Assets.xcassets in Resources */,
@@ -1432,7 +1458,6 @@
 				6B1060D027A927C900EB98A7 /* CategoriesViewController.storyboard in Resources */,
 				9792A46227D4FE1100EDDA96 /* PlayerViewController.storyboard in Resources */,
 				97DA15D627B6807300DE2D7D /* ListOfArtistsViewController.storyboard in Resources */,
-				6B3D61CA27BE68BC00AE58B8 /* AlbumTableViewCell.xib in Resources */,
 				6B9ABFCC27AAD03800F9F9F3 /* TableViewCell.xib in Resources */,
 				6B06FDE127AD259B000E66CE /* ListOfPlaylistsViewController.storyboard in Resources */,
 				97878FA427F2EAF700E97377 /* MiniPlayerViewController.storyboard in Resources */,
@@ -1441,6 +1466,7 @@
 				6B1060CE27A927C900EB98A7 /* CollectionViewCell.xib in Resources */,
 				9729FB362793758D00AFD1A0 /* AuthorizationViewController.storyboard in Resources */,
 				6B1060EB27A9281F00EB98A7 /* SearchViewController.storyboard in Resources */,
+				972CFDC327F49BAB008752D0 /* AlbumTableViewHeaderFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1542,7 +1568,7 @@
 				972F27C6279428E00000BE72 /* BaseCoordinator.swift in Sources */,
 				9792A46C27D4FEF900EDDA96 /* PlayerModuleAssembly.swift in Sources */,
 				972F27DE2794309E0000BE72 /* URLPath.swift in Sources */,
-				6B3D61C927BE68BC00AE58B8 /* AlbumTableViewCell.swift in Sources */,
+				6B3D61C927BE68BC00AE58B8 /* AlbumTableViewHeaderFooterView.swift in Sources */,
 				97A418C127B05B480012CD3D /* EditPlaylistModuleAssembly.swift in Sources */,
 				6BBCB91A27BA54F700FC2A34 /* ArtistInteractor.swift in Sources */,
 				6B3D61CC27BE6CC100AE58B8 /* AlbumViewController.swift in Sources */,
@@ -1622,6 +1648,7 @@
 				6B1060CA27A927C900EB98A7 /* CategoriesPresenter.swift in Sources */,
 				97878F9627F0CA8B00E97377 /* PlayerServiceProtocol.swift in Sources */,
 				6B3D61DD27BE92FD00AE58B8 /* AlbumModulAssembly.swift in Sources */,
+				972CFDC127F46CDD008752D0 /* PlaylistTableViewDataSource.swift in Sources */,
 				97DA15E327B6B9B000DE2D7D /* Artist.swift in Sources */,
 				6BBCB91927BA54F700FC2A34 /* ArtistViewController.swift in Sources */,
 				6B10610727A939D500EB98A7 /* ImageViewExtention.swift in Sources */,
@@ -1642,6 +1669,7 @@
 				6B9ABFE927AAD47F00F9F9F3 /* ProfileAssembly.swift in Sources */,
 				972F27E0279437B10000BE72 /* AuthorizationPresenterProtocols.swift in Sources */,
 				97878FA627F2FED100E97377 /* MiniPlayerPresenter.swift in Sources */,
+				972CFDBC27F46865008752D0 /* PlaylistTableViewHeaderFooterView.swift in Sources */,
 				9792A46627D4FE9100EDDA96 /* PlayerPresenterProtocols.swift in Sources */,
 				97A418B927B05AF60012CD3D /* EditPlaylistPresenter.swift in Sources */,
 				6B3D61D927BE865D00AE58B8 /* AlbumInteractorProtocols.swift in Sources */,
@@ -1805,6 +1833,7 @@
 				INFOPLIST_FILE = SpotifyPreviewApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
@@ -1834,6 +1863,7 @@
 				INFOPLIST_FILE = SpotifyPreviewApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;

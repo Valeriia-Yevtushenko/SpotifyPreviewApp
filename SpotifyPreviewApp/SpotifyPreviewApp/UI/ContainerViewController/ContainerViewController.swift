@@ -16,19 +16,36 @@ class ContainerViewController: UIViewController {
     @IBOutlet private weak var mainContainerView: UIView!
     @IBOutlet private weak var miniContainerView: UIView!
     
-    var mainViewController: UIViewController!
-    var miniViewController: UIViewController!
+    var mainViewController: UIViewController! {
+        didSet {
+            setupMainContainer()
+        }
+    }
+    
+    var miniViewController: UIViewController! {
+        didSet {
+            setupMiniContainer()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         UINavigationBar.appearance().barTintColor = .secondarySystemBackground
-        setupMainContainer()
-        setupMiniContainer()
+        
+        if mainViewController != nil, miniViewController != nil {
+            setupMainContainer()
+            setupMiniContainer()
+        }
     }
 }
 
 private extension ContainerViewController {
     func setupMainContainer() {
+        guard isViewLoaded, mainViewController != nil else {
+            return
+        }
+        
         mainViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(mainViewController)
         mainContainerView.addSubview(mainViewController.view)
@@ -43,6 +60,10 @@ private extension ContainerViewController {
     }
     
     func setupMiniContainer() {
+        guard isViewLoaded, miniViewController != nil else {
+            return
+        }
+        
         miniContainerView.isHidden = true
         miniViewController.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(miniViewController)

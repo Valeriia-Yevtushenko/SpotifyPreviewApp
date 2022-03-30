@@ -10,10 +10,13 @@ import Foundation
 protocol MiniPlayerInteractorInputProtocol: AnyObject {
     func getCurrentPlayingTrack()
     func next()
+    func refresh()
     func togglePlayPause()
 }
 
 protocol MiniPlayerInteractorOutputProtocol: AnyObject {
-    func interactorDidGetCurrentPlayingTrack(with track: PlayerItem)
+    func interactorDidPlayLastTrack()
+    func interactorDidGetCurrentPlayingTrack(_ track: PlayerItem)
+    func interactorDidRefresh(track: PlayerItem, isPlaying: Bool)
     func interactorFailedToGetCurrentPlayingTrack()
 }

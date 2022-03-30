@@ -10,6 +10,7 @@ import PromiseKit
 
 protocol PlayerServiceDelegate: AnyObject {
     func audioPlayerDidFinishPlaying()
+    func audioPlayerPlayesLastItem()
 }
 
 enum PlayerError: Error {
@@ -40,8 +41,10 @@ class PlayerService: NSObject {
             guard !playerItems.isEmpty, let url = URL(string: playerItems[currentIndex].url ?? ""),
                   let data = try? Data(contentsOf: url) else {
                       seal.reject(PlayerError.url)
+                      player?.stop()
                 return
             }
+            
             var item = playerItems[currentIndex]
             player = try? AVAudioPlayer(data: data)
             player?.delegate = self
@@ -53,6 +56,10 @@ class PlayerService: NSObject {
 }
 
 extension PlayerService: PlayerServiceProtocol {
+    var isPlaying: Bool {
+        return player?.isPlaying ?? false
+    }
+    
     var currentPlaiyngItem: PlayerItem? {
         guard !playerItems.isEmpty else {
             return nil
@@ -73,6 +80,11 @@ extension PlayerService: PlayerServiceProtocol {
         self.delegate = delegate
     }
     
+    func play(at index: Int) -> Promise<PlayerItem> {
+        currentIndex = index
+        return play()
+    }
+    
     func play(with items: [PlayerItem], at index: Int) -> Promise<PlayerItem> {
         playerItems = items
         currentIndex = index
@@ -86,7 +98,7 @@ extension PlayerService: PlayerServiceProtocol {
     }
     
     func next() -> Promise<PlayerItem> {
-        if currentIndex < playerItems.count {
+        if currentIndex < (playerItems.count - 1) {
             currentIndex += 1
         }
         
@@ -126,6 +138,10 @@ extension PlayerService: PlayerServiceProtocol {
 
 extension PlayerService: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        delegate?.audioPlayerDidFinishPlaying()
+        if currentIndex == (playerItems.count - 1) {
+            delegate?.audioPlayerPlayesLastItem()
+        } else {
+            delegate?.audioPlayerDidFinishPlaying()
+        }
     }
 }

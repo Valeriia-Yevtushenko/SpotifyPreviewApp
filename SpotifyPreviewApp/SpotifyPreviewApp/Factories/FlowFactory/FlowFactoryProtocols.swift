@@ -48,5 +48,6 @@ protocol PlayerFlow: AnyObject {
     func makePlayerModule(with tracks: [Track],
                           for index: Int,
                           serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter)
+    func makePlayerModule(serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter)
     func makeMiniPlayerModule(serviceManager: ServiceManagerProtocol) -> (Presentable, MiniPlayerPresenter)
 }

@@ -9,39 +9,38 @@ import UIKit
 
 protocol AlbumTableViewDataSourceDelegate: AnyObject {
     func didSelectItem(at index: Int)
+    func playDidTap()
+    func shuffleDidTap()
 }
 
 final class AlbumTableViewDataSource: NSObject {
-    private var sections: [Section] = []
+    private var viewModels: [TrackTableViewCellModel] = []
+    private var headerModel: AlbumTableViewHeaderFooterViewModel?
     weak var delegate: AlbumTableViewDataSourceDelegate?
 }
 
-private extension AlbumTableViewDataSource {
-    enum Section {
-        case track([TrackTableViewCellModel])
-        case albumInfo(AlbumTableViewCellModel)
-        
-        var count: Int {
-            switch self {
-            case .track(let cells):
-                return cells.count
-            case .albumInfo(_):
-                return 1
-            }
-        }
-    }
-}
-
 extension AlbumTableViewDataSource {
-    func setupData(tracks: [TrackTableViewCellModel], album: AlbumTableViewCellModel) {
-        sections.append(.albumInfo(album))
-        sections.append(.track(tracks))
+    func setupData(tracks: [TrackTableViewCellModel], album: AlbumTableViewHeaderFooterViewModel) {
+        viewModels = tracks
+        headerModel = album
     }
 }
 
 extension AlbumTableViewDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 300
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header: AlbumTableViewHeaderFooterView = tableView.dequeueReusableHeaderFooterView()
+        header.configure(headerModel)
+        header.shuffle = delegate?.shuffleDidTap
+        header.play = delegate?.playDidTap
+        return header
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -51,23 +50,12 @@ extension AlbumTableViewDataSource: UITableViewDelegate {
 
 extension AlbumTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].count
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return viewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch sections[indexPath.section] {
-        case .albumInfo(let album):
-            let cell: AlbumTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(album)
-            return cell
-        case .track(let tracks):
-            let cell: TrackTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.configure(tracks[indexPath.row])
-            return cell
-        }
+        let cell: TrackTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.configure(viewModels[indexPath.row])
+        return cell
     }
 }

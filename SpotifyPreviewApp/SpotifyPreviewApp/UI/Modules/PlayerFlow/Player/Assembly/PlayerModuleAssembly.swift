@@ -24,4 +24,20 @@ final class PlayerModuleAssembly {
         playerViewController.output = presenter
         return (playerViewController, presenter)
     }
+    
+    func createModule(serviceManager: ServiceManagerProtocol) -> (UIViewController, PlayerPresenter) {
+        let playerViewController = PlayerViewController.instantiate(from: PlayerViewController.identifier)
+        let presenter = PlayerPresenter()
+        presenter.view = playerViewController
+        let interactor = PlayerInteractor()
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        let playerService = serviceManager.player()
+        interactor.playerService = playerService
+        interactor.isOpeningFromMiniPlayer = true
+        playerService.setupDelegate(interactor)
+        playerViewController.dataSource = TrackTableViewDataSource()
+        playerViewController.output = presenter
+        return (playerViewController, presenter)
+    }
 }

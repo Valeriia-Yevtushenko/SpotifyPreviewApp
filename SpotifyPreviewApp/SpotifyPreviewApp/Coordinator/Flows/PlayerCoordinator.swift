@@ -40,15 +40,33 @@ class PlayerCoordinator: BaseCoordinator {
 private extension PlayerCoordinator {
     func runMiniPlayerModule() {
         let (playerModule, presenter) = factory.makeMiniPlayerModule(serviceManager: serviceManager)
-        router.setRootModule(playerModule, hideBar: true)
+        presenter.coordinator = self
         miniPlayerDelegate = presenter
+        router.setRootModule(playerModule, hideBar: true)
     }
 }
 
 extension PlayerCoordinator: PlayerModuleOutput {
-    func dismissPlayer() {
+    func dismissPlayer(with success: Bool) {
+        if success {
+            showMiniPlayer()
+        } else {
+            containerViewControllerDelegate?.isMiniContainerViewHidden = true
+        }
+        
         router.dismissModule()
-        showMiniPlayer()
+    }
+}
+
+extension PlayerCoordinator: MiniPlayerModuleOutput {
+    func hideMiniPlayer() {
+        containerViewControllerDelegate?.isMiniContainerViewHidden = false
+    }
+    
+    func openPlayer() {
+        let (playerModule, presenter) = factory.makePlayerModule(serviceManager: serviceManager)
+        presenter.coordinator = self
+        router.present(playerModule)
     }
 }
 
@@ -57,6 +75,7 @@ extension PlayerCoordinator: PlayerCoordinatorDelegate {
         let (playerModule, presenter) = factory.makePlayerModule(with: tracks,
                                                                  for: index,
                                                                  serviceManager: serviceManager)
+        
         presenter.coordinator = self
         router.present(playerModule)
     }

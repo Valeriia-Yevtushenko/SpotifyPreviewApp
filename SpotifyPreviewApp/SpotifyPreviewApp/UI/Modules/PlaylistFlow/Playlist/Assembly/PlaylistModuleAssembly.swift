@@ -17,7 +17,7 @@ final class PlaylistModuleAssembly {
         interactor.playlistId = playlistId
         interactor.presenter = presenter
         interactor.playlistType = type
-        let dataSource = TrackTableViewDataSource()
+        let dataSource = PlaylistTableViewDataSource()
         dataSource.delegate = playlistViewController
         presenter.interactor = interactor
         playlistViewController.dataSource = dataSource

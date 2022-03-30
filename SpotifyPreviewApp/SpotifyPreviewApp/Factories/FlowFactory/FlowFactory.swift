@@ -62,6 +62,10 @@ extension FlowFactory: AlbumFlow {
 }
 
 extension FlowFactory: PlayerFlow {
+    func makePlayerModule(serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter) {
+        return PlayerModuleAssembly().createModule(serviceManager: serviceManager)
+    }
+    
     func makeMiniPlayerModule(serviceManager: ServiceManagerProtocol) -> (Presentable, MiniPlayerPresenter) {
         return MiniPlayerModuleAssembly().createModule(serviceManager: serviceManager)
     }

@@ -14,8 +14,12 @@ class PlayerPresenter {
 }
 
 extension PlayerPresenter: PlayerViewOutputProtocol {
-    func viewDidTapDismiss() {
-        coordinator?.dismissPlayer()
+    func viewDidChangePlayerItem(_ index: Int) {
+        interactor?.play(at: index)
+    }
+    
+    func viewDidTapDismiss(with success: Bool) {
+        coordinator?.dismissPlayer(with: success)
     }
     
     func viewDidTapShowListOfTracks() {
@@ -56,6 +60,18 @@ extension PlayerPresenter: PlayerViewOutputProtocol {
 }
 
 extension PlayerPresenter: PlayerInteractorOutputProtocol {
+    func interactorDidGetCurrentPlayingTrack(_ track: PlayerItem, isPlaying: Bool) {
+        view?.setupPlayer(with: track, isPlaying: isPlaying)
+    }
+    
+    func interactorDidPlayLastTrack() {
+        view?.stopPlayer()
+    }
+    
+    func interactorFailedToPlay() {
+        view?.displayErrorAlert()
+    }
+    
     func interactorDidGetListOfTracks(_ tracks: [PlayerItem]) {
         let tracks: [TrackTableViewCellModel] = tracks.map {
             return TrackTableViewCellModel(image: $0.image, name: $0.title, artist: $0.artists)

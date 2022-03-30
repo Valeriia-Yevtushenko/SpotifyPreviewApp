@@ -14,6 +14,10 @@ class MiniPlayerPresenter {
 }
 
 extension MiniPlayerPresenter: MiniPlayerViewOutputProtocol {
+    func viewDidTapOpenPlayer() {
+        coordinator?.openPlayer()
+    }
+    
     func viewDidLoad() {
         interactor?.getCurrentPlayingTrack()
     }
@@ -28,18 +32,25 @@ extension MiniPlayerPresenter: MiniPlayerViewOutputProtocol {
 }
 
 extension MiniPlayerPresenter: MiniPlayerInteractorOutputProtocol {
-    func interactorDidGetCurrentPlayingTrack(with track: PlayerItem) {
+    func interactorDidPlayLastTrack() {
+        view?.stopPlayer()
+    }
+    
+    func interactorDidRefresh(track: PlayerItem, isPlaying: Bool) {
+        view?.updatePlayer(with: track, isPlaying: isPlaying)
+    }
+    
+    func interactorDidGetCurrentPlayingTrack(_ track: PlayerItem) {
         view?.setupPlayer(with: track)
     }
     
     func interactorFailedToGetCurrentPlayingTrack() {
-        
+        view?.displayErrorAlert()
     }
-    
 }
 
 extension MiniPlayerPresenter: MiniPlayerModuleInput {
     func refreshMiniPlayer() {
-        interactor?.getCurrentPlayingTrack()
+        interactor?.refresh()
     }
 }

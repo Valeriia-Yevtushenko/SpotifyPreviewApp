@@ -17,7 +17,7 @@ final class SearchModuleAssembly {
         interactor.networkService = serviceManager.network()
         interactor.urlBuilder = serviceManager.urlBuilder()
         interactor.presenter = presenter
-        presenter.intractor = interactor
+        presenter.interactor = interactor
         presenter.view = searchViewController
         searchViewController.output = presenter
         return (searchViewController, presenter)
