@@ -125,7 +125,7 @@
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="26" scale="large"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="togglePlayPauseButtonDidTap:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ofw-gO-0V0"/>
+                                                            <action selector="togglePlayPauseButtonDidTap" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Lob-jn-VMO"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRX-p4-WTe">
@@ -225,6 +225,7 @@
                         <outlet property="infoStackView" destination="UnY-5W-yKk" id="soe-vc-Pm0"/>
                         <outlet property="playerProgressSlider" destination="FvN-SY-Fe3" id="qfg-n0-hZD"/>
                         <outlet property="songNameLabel" destination="6AG-OS-dBh" id="IDv-Si-ygH"/>
+                        <outlet property="togglePlayPauseButton" destination="XUJ-bL-4QS" id="l5k-fr-VHp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

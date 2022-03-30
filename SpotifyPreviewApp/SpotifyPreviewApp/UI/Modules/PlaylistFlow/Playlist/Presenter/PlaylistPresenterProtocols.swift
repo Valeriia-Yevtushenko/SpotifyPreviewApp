@@ -19,14 +19,16 @@ protocol PlaylistViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func viewWillAppear()
     func viewDidRefresh()
-    func viewDidTapOnTrackArtist(at index: Int)
+    func viewDidSelectItem(at index: Int)
     func viewDidTapDeletePlaylist()
     func viewDidTapAddPlaylist()
     func viewDidEditPlaylist()
+    func viewDidTapPlay()
+    func viewDidTapShuffle()
 }
 
 protocol PlaylistModuleOutput {
     func backToPlaylists()
-    func runArtistFlow(with identifier: String)
+    func runPlayerFlow(with tracks: [Track], for index: Int)
     func runEditPlaylistModule(with playlist: Playlist)
 }

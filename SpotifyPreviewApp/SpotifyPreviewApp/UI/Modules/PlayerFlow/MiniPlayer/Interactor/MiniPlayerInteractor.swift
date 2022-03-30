@@ -13,7 +13,7 @@ class MiniPlayerInteractor {
 }
 
 extension MiniPlayerInteractor: MiniPlayerInteractorInputProtocol {
-    func getCurrentPlayingTrack() {
+    func refresh() {
         playerService.setupDelegate(self)
         
         guard let item = playerService.currentPlaiyngItem else {
@@ -21,13 +21,22 @@ extension MiniPlayerInteractor: MiniPlayerInteractorInputProtocol {
             return
         }
         
-        presenter?.interactorDidGetCurrentPlayingTrack(with: item)
+        presenter?.interactorDidRefresh(track: item, isPlaying: playerService.isPlaying)
+    }
+    
+    func getCurrentPlayingTrack() {
+        guard let item = playerService.currentPlaiyngItem else {
+            presenter?.interactorFailedToGetCurrentPlayingTrack()
+            return
+        }
+        
+        presenter?.interactorDidGetCurrentPlayingTrack(item)
     }
     
     func next() {
         playerService.next()
             .done { item in
-                self.presenter?.interactorDidGetCurrentPlayingTrack(with: item)
+                self.presenter?.interactorDidGetCurrentPlayingTrack(item)
             }.catch { _ in
                 
             }
@@ -39,10 +48,14 @@ extension MiniPlayerInteractor: MiniPlayerInteractorInputProtocol {
 }
 
 extension MiniPlayerInteractor: PlayerServiceDelegate {
+    func audioPlayerPlayesLastItem() {
+        presenter?.interactorDidPlayLastTrack()
+    }
+    
     func audioPlayerDidFinishPlaying() {
         playerService.next()
             .done { item in
-                self.presenter?.interactorDidGetCurrentPlayingTrack(with: item)
+                self.presenter?.interactorDidGetCurrentPlayingTrack(item)
             }.catch { _ in
                 
             }

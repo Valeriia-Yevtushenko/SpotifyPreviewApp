@@ -9,8 +9,11 @@ import Foundation
 
 protocol PlayerViewInputProtocol: AnyObject {
     func setupPlayer(with item: PlayerItem)
+    func setupPlayer(with item: PlayerItem, isPlaying: Bool)
     func setupListOfTracks(_ tracks: [TrackTableViewCellModel])
     func refreshPlayerTime(_ time: Double)
+    func displayErrorAlert()
+    func stopPlayer()
 }
 
 protocol PlayerViewOutputProtocol: AnyObject {
@@ -23,6 +26,7 @@ protocol PlayerViewOutputProtocol: AnyObject {
     func viewDidChangePlayerTime(_ time: Double)
     func viewNeedToRefreshPlayerTime()
     func viewDidTapShowListOfTracks()
+    func viewDidChangePlayerItem(_ index: Int)
     func viewDidTapDismiss()
 }
 

@@ -43,6 +43,10 @@ private extension AlbumCoordinator {
 }
 
 extension AlbumCoordinator: AlbumModuleOutput {
+    func runPlayerFlow(with tracks: [Track], for index: Int) {
+        playerDelegate?.showPlayer(with: tracks, for: index)
+    }
+    
     func finishFlow() {
         output?.finishArtistFlow(coordinator: self)
     }

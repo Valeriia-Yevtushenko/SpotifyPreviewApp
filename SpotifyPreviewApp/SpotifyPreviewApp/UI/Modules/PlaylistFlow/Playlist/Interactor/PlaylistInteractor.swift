@@ -18,12 +18,29 @@ final class PlaylistInteractor {
 }
 
 extension PlaylistInteractor: PlaylistInteractorInputProtocol {
-    func getTrackArtistId(at index: Int) {
-        guard let artistId = playlist?.tracks?.items?[index].track?.artists?.first?.identifier else {
-            return
-        }
+    func getTracks() {
+        let tracks: [Track] = playlist?.tracks?.items?.compactMap({
+            return $0.track
+        }) ?? []
         
-        presenter?.interactorDidGetPlaylist(artistId)
+        presenter?.interactorDidGetPlaylist(tracks: tracks, for: 0)
+    }
+    
+    func getShuffledTracks() {
+        var tracks: [Track] = playlist?.tracks?.items?.compactMap({
+            return $0.track
+        }) ?? []
+        
+        tracks.shuffle()
+        presenter?.interactorDidGetPlaylist(tracks: tracks, for: 0)
+    }
+    
+    func getPlaylist(for index: Int) {
+        let tracks: [Track] = playlist?.tracks?.items?.compactMap({
+            return $0.track
+        }) ?? []
+        
+        presenter?.interactorDidGetPlaylist(tracks: tracks, for: index)
     }
     
     func getPlaylist() {

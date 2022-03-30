@@ -9,6 +9,7 @@ import Foundation
 
 protocol PlayerInteractorInputProtocol: AnyObject {
     func play()
+    func play(at index: Int)
     func play(at: Double)
     func next()
     func previous()
@@ -20,7 +21,10 @@ protocol PlayerInteractorInputProtocol: AnyObject {
 }
 
 protocol PlayerInteractorOutputProtocol: AnyObject {
+    func interactorDidPlayLastTrack()
     func interactorDidPlay(with track: PlayerItem)
+    func interactorDidGetCurrentPlayingTrack(_ track: PlayerItem, isPlaying: Bool)
+    func interactorFailedToPlay()
     func interactorDidGetListOfTracks(_ tracks: [PlayerItem])
     func interactorDidRefreshPlayerTime(_ time: Double)
 }

@@ -13,7 +13,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="TableViewCell" id="KGk-i7-Jjw" customClass="TableViewCell" customModule="SpotifyPreviewApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="378" height="82"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="378" height="82"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -32,10 +32,10 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="OEE-Gg-sJk" secondAttribute="bottom" constant="13" id="Fet-uC-Mmv"/>
                     <constraint firstItem="mmb-XE-pTF" firstAttribute="leading" secondItem="OEE-Gg-sJk" secondAttribute="trailing" constant="18" id="Jo0-Eq-vOt"/>
                     <constraint firstAttribute="trailingMargin" secondItem="mmb-XE-pTF" secondAttribute="trailing" constant="7.5" id="Ue3-vb-lL6"/>
                     <constraint firstItem="OEE-Gg-sJk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="bar-bt-A4G"/>
+                    <constraint firstAttribute="bottom" secondItem="mmb-XE-pTF" secondAttribute="bottom" constant="30" id="p87-vR-koU"/>
                     <constraint firstItem="OEE-Gg-sJk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="sOP-qR-2fI"/>
                     <constraint firstItem="mmb-XE-pTF" firstAttribute="centerY" secondItem="OEE-Gg-sJk" secondAttribute="centerY" id="tWR-4U-X2a"/>
                 </constraints>

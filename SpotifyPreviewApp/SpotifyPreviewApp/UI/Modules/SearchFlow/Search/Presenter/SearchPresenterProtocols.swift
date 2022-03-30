@@ -14,7 +14,10 @@ protocol SearchViewInputProtocol: AnyObject {
 }
 
 protocol SearchViewOutputProtocol: AnyObject {
+    func viewDidSelectItem(at index: Int)
     func viewDidUpdateBySearchText(_ text: String)
 }
 
-protocol DataSourceDelegate: AnyObject {}
+protocol SearchModuleOutput {
+    func runPlayerFlow(with tracks: [Track], for index: Int)
+}

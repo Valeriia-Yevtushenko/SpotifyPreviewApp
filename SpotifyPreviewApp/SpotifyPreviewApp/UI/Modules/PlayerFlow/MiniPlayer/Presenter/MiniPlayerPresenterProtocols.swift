@@ -9,16 +9,19 @@ import Foundation
 
 protocol MiniPlayerViewInputProtocol: AnyObject {
     func setupPlayer(with item: PlayerItem)
+    func updatePlayer(with item: PlayerItem, isPlaying: Bool)
+    func stopPlayer()
 }
 
 protocol MiniPlayerViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func viewDidTapNext()
     func viewDidTapTogglePlayPause()
+    func viewDidTapOpenPlayer() 
 }
 
 protocol MiniPlayerModuleOutput: AnyObject {
-    
+    func openPlayer()
 }
 
 protocol MiniPlayerModuleInput: AnyObject {

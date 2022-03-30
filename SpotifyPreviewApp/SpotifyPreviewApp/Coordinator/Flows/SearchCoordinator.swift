@@ -34,7 +34,9 @@ class SearchCoordinator: BaseCoordinator {
 private extension SearchCoordinator {
     func runCategoriesModule() {
         let (categoriesModule, presenter) = factory.makeCategoriesModule(serviceManager: serviceManager)
-        presenter.runSearchModule(viewController: searchModule().0)
+        let (searchModule, searchPresenter) = searchModule()
+        searchPresenter.coordinator = self
+        presenter.runSearchModule(viewController: searchModule)
         presenter.coordinator = self
         router.setRootModule(categoriesModule, hideBar: false)
         
@@ -55,6 +57,12 @@ extension SearchCoordinator: CategoriesModuleOutput {
         playlistCoordinator.playerDelegate = playerDelegate
         playlistCoordinator.start()
         addDependency(playlistCoordinator)
+    }
+}
+
+extension SearchCoordinator: SearchModuleOutput {
+    func runPlayerFlow(with tracks: [Track], for index: Int) {
+        playerDelegate?.showPlayer(with: tracks, for: index)
     }
 }
 

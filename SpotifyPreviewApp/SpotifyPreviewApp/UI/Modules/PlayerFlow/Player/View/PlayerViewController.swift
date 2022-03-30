@@ -16,6 +16,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet private weak var artistsLabel: UILabel!
     @IBOutlet private weak var currentTimeLabel: UILabel!
     @IBOutlet private weak var durationLabel: UILabel!
+    @IBOutlet private weak var togglePlayPauseButton: UIButton!
     @IBOutlet private weak var infoStackView: UIStackView!
     @IBOutlet private weak var containerStackView: UIStackView!
     @IBOutlet private weak var playerProgressSlider: UISlider!
@@ -48,11 +49,11 @@ private extension PlayerViewController {
         output?.viewDidTapNext()
     }
     
-    @IBAction func togglePlayPauseButtonDidTap(_ sender: UIButton) {
+    @IBAction func togglePlayPauseButtonDidTap() {
         if isPlaying {
-            sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            togglePlayPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         } else {
-            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            togglePlayPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
         
         isPlaying = !isPlaying
@@ -93,6 +94,7 @@ private extension PlayerViewController {
     func setupUI() {
         accessoryView.layer.cornerRadius = .pi
     
+        dataSource?.delegate = self
         tableView.backgroundColor = .secondarySystemBackground
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
@@ -136,6 +138,31 @@ private extension PlayerViewController {
 }
 
 extension PlayerViewController: PlayerViewInputProtocol {
+    func setupPlayer(with item: PlayerItem, isPlaying: Bool) {
+        if isPlaying {
+            togglePlayPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            togglePlayPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
+        
+        self.isPlaying = isPlaying
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateSliderValue(_:)), userInfo: nil, repeats: true)
+        timer?.fire()
+        songNameLabel.text = item.title
+        artistsLabel.text = item.artists
+        playerProgressSlider.maximumValue = 0
+        playerProgressSlider.maximumValue = Float(item.duration ?? 0)
+        durationLabel.text = item.duration?.asString(style: .abbreviated)
+        
+        if let imageUrl = item.image {
+            imageView.setImage(withUrl: imageUrl)
+        }
+    }
+    
+    func stopPlayer() {
+        togglePlayPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+    
     func setupListOfTracks(_ tracks: [TrackTableViewCellModel]) {
         dataSource?.setupViewModel(tracks)
         tableView.reloadData()
@@ -158,5 +185,23 @@ extension PlayerViewController: PlayerViewInputProtocol {
         if let imageUrl = item.image {
             imageView.setImage(withUrl: imageUrl)
         }
+    }
+    
+    func displayErrorAlert() {
+        let alert = UIAlertController(title: "Error",
+                                      message: "We can't play this track. It is only for premium version.",
+                                      preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
+            self.output?.viewDidTapDismiss()
+        })
+        
+        alert.addAction(okButton)
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+extension PlayerViewController: TrackTableViewDataSourceDelegate {
+    func didSelectItem(at index: Int) {
+        output?.viewDidChangePlayerItem(index)
     }
 }

@@ -50,16 +50,8 @@ extension PlaylistsCoordinator: ListOfPlaylistsModuleOutput {
 }
 
 extension PlaylistsCoordinator: PlaylistModuleOutput {
-    func runArtistFlow(with identifier: String) {
-        let artistCoordinator = coordinatorFactory.makeArtistCoordinator(artistId: identifier,
-                                                                         status: .unknown,
-                                                                         factory: factory,
-                                                                         router: router,
-                                                                         serviceManager: serviceManager)
-        artistCoordinator.output = self
-        artistCoordinator.playerDelegate = playerDelegate
-        artistCoordinator.start()
-        addDependency(artistCoordinator)
+    func runPlayerFlow(with tracks: [Track], for index: Int) {
+        playerDelegate?.showPlayer(with: tracks, for: index)
     }
     
     func runEditPlaylistModule(with playlist: Playlist) {
@@ -77,11 +69,5 @@ extension PlaylistsCoordinator: PlaylistModuleOutput {
 extension PlaylistsCoordinator: EditPlaylistModuleOutput {
     func backToPlaylist() {
         router.dismissModule()
-    }
-}
-
-extension PlaylistsCoordinator: ArtistCoordinatorOutput {
-    func finishArtistFlow(coordinator: Coordinator) {
-        removeDependency(coordinator)
     }
 }

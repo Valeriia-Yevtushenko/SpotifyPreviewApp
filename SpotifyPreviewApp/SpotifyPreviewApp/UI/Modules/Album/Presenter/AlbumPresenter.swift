@@ -14,6 +14,14 @@ class AlbumPresenter {
 }
 
 extension AlbumPresenter: AlbumViewOutputProtocol {
+    func viewDidTapPlay() {
+        interactor?.getPlaylist()
+    }
+    
+    func viewDidTapShuffle() {
+        interactor?.getShuffledPlaylist()
+    }
+    
     func viewWillDisappear() {
         coordinator?.finishFlow()
     }
@@ -27,11 +35,15 @@ extension AlbumPresenter: AlbumViewOutputProtocol {
     }
     
     func viewSelectedItem(at index: Int) {
-    
+        interactor?.getPlaylist(for: index)
     }
 }
 
 extension AlbumPresenter: AlbumInteractorOutputProtocol {
+    func interactorDidGetPlaylist(tracks: [Track], for index: Int) {
+        coordinator?.runPlayerFlow(with: tracks, for: index)
+    }
+    
     func interactorDidFetchAlbum(_ data: Album) {
         let tracksViewModel: [TrackTableViewCellModel]
         
@@ -46,7 +58,7 @@ extension AlbumPresenter: AlbumInteractorOutputProtocol {
             view?.displayLabel(with: "Unfortunately, this playlist is empty...")
         }
     
-        view?.setupData(AlbumTableViewCellModel(imageUrl: data.images?.first?.url,
+        view?.setupData(AlbumTableViewHeaderFooterViewModel(imageUrl: data.images?.first?.url,
                                                 name: data.name),
                         tracks: tracksViewModel)
         

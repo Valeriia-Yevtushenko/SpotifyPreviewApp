@@ -19,6 +19,7 @@ final class SearchViewController: UIViewController {
 }
 private extension SearchViewController {
     func configureTableView() {
+        dataSource?.delegate = self
         tableView.dataSource = dataSource
         tableView.delegate = dataSource
         tableView.register(UINib(nibName: TrackTableViewCell.reuseIdentifier, bundle: nil),
@@ -54,5 +55,11 @@ extension SearchViewController: UISearchResultsUpdating {
         if !text.isEmpty {
             output?.viewDidUpdateBySearchText(text)
         }
+    }
+}
+
+extension SearchViewController: TrackTableViewDataSourceDelegate {
+    func didSelectItem(at index: Int) {
+        output?.viewDidSelectItem(at: index)
     }
 }

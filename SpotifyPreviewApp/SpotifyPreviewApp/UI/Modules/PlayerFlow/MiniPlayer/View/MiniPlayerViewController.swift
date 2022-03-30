@@ -10,25 +10,24 @@ import UIKit
 class MiniPlayerViewController: UIViewController {
     @IBOutlet private weak var songNameLabel: UILabel!
     @IBOutlet private weak var artistsLabel: UILabel!
+    @IBOutlet private weak var togglePlayPauseButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
+    private let tapGestureRecognizer = UITapGestureRecognizer()
     private var isPlaying = true
     var output: MiniPlayerViewOutputProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setupGesture()
         output?.viewDidLoad()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-       
-    }
     
-    @IBAction func togglePlayPauseButtonDidTap(_ sender: UIButton) {
+    @IBAction func togglePlayPauseButtonDidTap() {
         if isPlaying {
-            sender.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            togglePlayPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         } else {
-            sender.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            togglePlayPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         }
         
         isPlaying = !isPlaying
@@ -41,6 +40,28 @@ class MiniPlayerViewController: UIViewController {
 }
 
 extension MiniPlayerViewController: MiniPlayerViewInputProtocol {
+    func stopPlayer() {
+        togglePlayPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+    }
+    
+    func updatePlayer(with item: PlayerItem, isPlaying: Bool) {
+        
+        songNameLabel.text = item.title
+        artistsLabel.text = item.artists
+        
+        if let imageUrl = item.image {
+            imageView.setImage(withUrl: imageUrl)
+        }
+        
+        if isPlaying {
+            togglePlayPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            togglePlayPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
+        
+        self.isPlaying = isPlaying
+    }
+    
     func setupPlayer(with item: PlayerItem) {
         songNameLabel.text = item.title
         artistsLabel.text = item.artists
@@ -48,5 +69,18 @@ extension MiniPlayerViewController: MiniPlayerViewInputProtocol {
         if let imageUrl = item.image {
             imageView.setImage(withUrl: imageUrl)
         }
+    }
+}
+
+private extension MiniPlayerViewController {
+    func setupGesture() {
+        view.addGestureRecognizer(tapGestureRecognizer)
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTapGestureRecognizer(_:)))
+    }
+}
+
+@objc private extension MiniPlayerViewController {
+    func handleTapGestureRecognizer(_ sender: UITapGestureRecognizer) {
+        output?.viewDidTapOpenPlayer()
     }
 }

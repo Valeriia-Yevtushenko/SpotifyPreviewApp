@@ -17,6 +17,31 @@ class AlbumInteractor {
 }
 
 extension AlbumInteractor: AlbumInteractorInputProtocol {
+    func getPlaylist() {
+        let tracks: [Track] = album?.tracks?.items.compactMap {
+            return $0
+        } ?? []
+        
+        presenter?.interactorDidGetPlaylist(tracks: tracks, for: 0)
+    }
+    
+    func getShuffledPlaylist() {
+        var tracks: [Track] = album?.tracks?.items.compactMap {
+            return $0
+        } ?? []
+        
+        tracks.shuffle()
+        presenter?.interactorDidGetPlaylist(tracks: tracks, for: 0)
+    }
+    
+    func getPlaylist(for index: Int) {
+        let tracks: [Track] = album?.tracks?.items.compactMap {
+            return $0
+        } ?? []
+        
+        presenter?.interactorDidGetPlaylist(tracks: tracks, for: index)
+    }
+    
     func fetchAlbum() {
         let promise: Promise<Album> = networkService.fetch(urlBuilder
                                                                 .with(path: .album)
@@ -24,6 +49,7 @@ extension AlbumInteractor: AlbumInteractorInputProtocol {
                                                                 .build())
         
         promise.done { album in
+            self.album = album
             self.presenter?.interactorDidFetchAlbum(album)
         }.catch { _ in
             self.presenter?.interactorFailedToFetchAlbum()

@@ -7,38 +7,33 @@
 
 import UIKit
 
-struct AlbumTableViewCellModel {
+struct AlbumTableViewHeaderFooterViewModel {
     var imageUrl: String?
     var name: String?
 }
 
-class AlbumTableViewCell: UITableViewCell {
+class AlbumTableViewHeaderFooterView: UITableViewHeaderFooterView {
     @IBOutlet private weak var albumImageView: UIImageView!
     @IBOutlet private weak var nameLabel: UILabel!
+    var play: (() -> Void)!
+    var shuffle: (() -> Void)!
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        self.albumImageView.image = nil
-        self.nameLabel.text = nil
-    }
-
-    func configure(_ model: AlbumTableViewCellModel) {
+    func configure(_ model: AlbumTableViewHeaderFooterViewModel?) {
         albumImageView.layer.cornerRadius = .pi
-        nameLabel.text = model.name
+        nameLabel.text = model?.name
         
-        if let image = model.imageUrl {
+        if let image = model?.imageUrl {
             albumImageView.setImage(withUrl: image)
         }
     }
 }
 
-private extension AlbumTableViewCell {
+private extension AlbumTableViewHeaderFooterView {
     @IBAction func shuffleButtonDidTap() {
-        
+        shuffle()
     }
     
     @IBAction func playButtonDidTap() {
-        
+        play()
     }
 }

@@ -40,8 +40,9 @@ class PlayerCoordinator: BaseCoordinator {
 private extension PlayerCoordinator {
     func runMiniPlayerModule() {
         let (playerModule, presenter) = factory.makeMiniPlayerModule(serviceManager: serviceManager)
-        router.setRootModule(playerModule, hideBar: true)
+        presenter.coordinator = self
         miniPlayerDelegate = presenter
+        router.setRootModule(playerModule, hideBar: true)
     }
 }
 
@@ -52,11 +53,20 @@ extension PlayerCoordinator: PlayerModuleOutput {
     }
 }
 
+extension PlayerCoordinator: MiniPlayerModuleOutput {
+    func openPlayer() {
+        let (playerModule, presenter) = factory.makePlayerModule(serviceManager: serviceManager)
+        presenter.coordinator = self
+        router.present(playerModule)
+    }
+}
+
 extension PlayerCoordinator: PlayerCoordinatorDelegate {
     func showPlayer(with tracks: [Track], for index: Int) {
         let (playerModule, presenter) = factory.makePlayerModule(with: tracks,
                                                                  for: index,
                                                                  serviceManager: serviceManager)
+        
         presenter.coordinator = self
         router.present(playerModule)
     }

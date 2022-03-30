@@ -32,11 +32,12 @@ private extension AlbumViewController {
     func configureTableView() {
         albumTableView.dataSource = dataSource
         albumTableView.delegate = dataSource
-        albumTableView.register(UINib(nibName: AlbumTableViewCell.reuseIdentifier, bundle: nil),
-                                forCellReuseIdentifier: AlbumTableViewCell.reuseIdentifier)
+        albumTableView.register(UINib(nibName: AlbumTableViewHeaderFooterView.reuseIdentifier,
+                                      bundle: nil), forHeaderFooterViewReuseIdentifier: AlbumTableViewHeaderFooterView.reuseIdentifier)
         albumTableView.register(UINib(nibName: TrackTableViewCell.reuseIdentifier, bundle: nil),
                                 forCellReuseIdentifier: TrackTableViewCell.reuseIdentifier)
         albumTableView.refreshControl = refreshControl
+        dataSource?.delegate = self
     }
     
     func configureRefreshControl() {
@@ -52,14 +53,21 @@ private extension AlbumViewController {
 }
 
 extension AlbumViewController: AlbumTableViewDataSourceDelegate {
+    func playDidTap() {
+        output?.viewDidTapPlay()
+    }
+    
+    func shuffleDidTap() {
+        output?.viewDidTapShuffle()
+    }
+    
     func didSelectItem(at index: Int) {
-        present(PlayerViewController.instantiate(from: PlayerViewController.identifier), animated: true, completion: nil)
         output?.viewSelectedItem(at: index)
     }
 }
 
 extension AlbumViewController: AlbumViewInputProtocol {
-    func setupData(_ info: AlbumTableViewCellModel, tracks: [TrackTableViewCellModel]) {
+    func setupData(_ info: AlbumTableViewHeaderFooterViewModel, tracks: [TrackTableViewCellModel]) {
         dataSource?.setupData(tracks: tracks, album: info)
     }
     

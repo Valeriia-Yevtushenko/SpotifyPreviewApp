@@ -18,7 +18,7 @@ class PlaylistViewController: UIViewController {
     private var refreshControl: UIRefreshControl = UIRefreshControl()
     private let toastView = ToastView()
     var output: PlaylistViewOutputProtocol?
-    var dataSource: TrackTableViewDataSource?
+    var dataSource: PlaylistTableViewDataSource?
     var headerView: UIImageView!
     
     override func viewDidLoad() {
@@ -49,6 +49,9 @@ private extension PlaylistViewController {
     func configureTableView() {
         playlistTableView.dataSource = dataSource
         playlistTableView.delegate = dataSource
+        playlistTableView.register(UINib(nibName: PlaylistTableViewHeaderFooterView.reuseIdentifier,
+                                         bundle: nil),
+                                   forHeaderFooterViewReuseIdentifier: PlaylistTableViewHeaderFooterView.reuseIdentifier)
         playlistTableView.register(UINib(nibName: TrackTableViewCell.reuseIdentifier, bundle: nil),
                            forCellReuseIdentifier: TrackTableViewCell.reuseIdentifier )
         playlistTableView.refreshControl = refreshControl
@@ -141,9 +144,17 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
     }
 }
 
-extension PlaylistViewController: TrackTableViewDataSourceDelegate {
-    func trackArtistDidTap(at index: Int) {
-        output?.viewDidTapOnTrackArtist(at: index)
+extension PlaylistViewController: PlaylistTableViewDataSourceDelegate {
+    func playDidTap() {
+        output?.viewDidTapPlay()
+    }
+    
+    func shuffleDidTap() {
+        output?.viewDidTapShuffle()
+    }
+    
+    func didSelectItem(at index: Int) {
+        output?.viewDidSelectItem(at: index)
     }
     
     func scrollViewDidScroll() {

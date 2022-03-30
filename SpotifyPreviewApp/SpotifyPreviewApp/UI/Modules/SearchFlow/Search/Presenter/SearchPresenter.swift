@@ -9,16 +9,25 @@ import UIKit
 
 final class SearchPresenter {
     weak var view: SearchViewInputProtocol?
-    var intractor: SearchInteractorInputProtocol?
+    var interactor: SearchInteractorInputProtocol?
+    var coordinator: SearchModuleOutput?
 }
 
 extension SearchPresenter: SearchViewOutputProtocol {
+    func viewDidSelectItem(at index: Int) {
+        interactor?.getTrack(at: index)
+    }
+    
     func viewDidUpdateBySearchText(_ text: String) {
-        intractor?.fetchSearchText(text)
+        interactor?.fetchSearchText(text)
     }
 }
 
 extension SearchPresenter: SearchInteractorOutputProtocol {
+    func interactorDidGetTrack(tracks: Track) {
+        coordinator?.runPlayerFlow(with: [tracks], for: 0)
+    }
+    
     func interactorDidFetchData(_ data: ListOfSearchedTracks) {
         guard !data.tracks.items.isEmpty else {
             view?.setupData([])
