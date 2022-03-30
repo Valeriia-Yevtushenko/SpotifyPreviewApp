@@ -37,7 +37,7 @@ class PlayerService: NSObject {
 
     private func play() -> Promise<PlayerItem> {
         return Promise { seal in
-            guard let url = URL(string: playerItems[currentIndex].url ?? ""),
+            guard !playerItems.isEmpty, let url = URL(string: playerItems[currentIndex].url ?? ""),
                   let data = try? Data(contentsOf: url) else {
                       seal.reject(PlayerError.url)
                 return
@@ -53,6 +53,14 @@ class PlayerService: NSObject {
 }
 
 extension PlayerService: PlayerServiceProtocol {
+    var currentPlaiyngItem: PlayerItem? {
+        guard !playerItems.isEmpty else {
+            return nil
+        }
+        
+        return playerItems[currentIndex]
+    }
+    
     var currentListOfPlayerItems: [PlayerItem] {
         return playerItems
     }

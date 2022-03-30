@@ -14,35 +14,33 @@ protocol CoordinatorFactoryProtocol: AnyObject {
     AuthorizationCoordinator
     
     func makeSearchCoordinator(factory: FlowFactory,
-                               router: Router,
+                               router: RouterProtocol,
                                serviceManager: ServiceManagerProtocol) -> SearchCoordinator
     
     func makeTabbarCoordinator(serviceManager: ServiceManagerProtocol,
                                flowFactory: FlowFactory) -> (TabBarCoordinator, Presentable?)
     
     func makeProfileCoordinator(factory: FlowFactory,
-                                router: Router,
+                                router: RouterProtocol,
                                 serviceManager: ServiceManagerProtocol) -> ProfileCoordinator
     
     func makePlaylistsCoordinator(type: PlaylistType,
                                   factory: FlowFactory,
-                                  router: Router,
+                                  router: RouterProtocol,
                                   serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator
     
     func makeArtistCoordinator(artistId: String,
                                status: ArtistStatus,
                                factory: FlowFactory,
-                               router: Router,
+                               router: RouterProtocol,
                                serviceManager: ServiceManagerProtocol) -> ArtistCoordinator
     
     func makeAlbumCoordinator(albumId: String,
                               factory: AlbumFlow & PlayerFlow,
-                              router: Router,
+                              router: RouterProtocol,
                               serviceManager: ServiceManagerProtocol) -> AlbumCoordinator
     
-    func makePlayerCoordinator(with tracks: [Track],
-                               for index: Int,
-                               factory: PlayerFlow,
-                               router: Router,
+    func makePlayerCoordinator(factory: PlayerFlow,
+                               router: RouterProtocol,
                                serviceManager: ServiceManagerProtocol) -> PlayerCoordinator
 }

@@ -7,22 +7,25 @@
 
 import Foundation
 
+protocol PlayerCoordinatorDelegate: AnyObject {
+    func showPlayer(with tracks: [Track], for index: Int)
+    func showMiniPlayer()
+}
+
 protocol PlayerCoordinatorOutput: AnyObject {
     func finishPlayerFlow(coordinator: Coordinator)
 }
 
 class PlayerCoordinator: BaseCoordinator {
-    private let tracks: [Track]
-    private let index: Int
     private let factory: PlayerFlow
-    private let router: Router
+    private let router: RouterProtocol
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
+    private weak var miniPlayerDelegate: MiniPlayerModuleInput?
+    weak var containerViewControllerDelegate: ContainerViewControllerDelegate?
     weak var output: PlayerCoordinatorOutput?
     
-    init(tracks: [Track], index: Int, factory: PlayerFlow, router: Router, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
-        self.index = index
-        self.tracks = tracks
+    init(factory: PlayerFlow, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
         self.router = router
@@ -30,22 +33,36 @@ class PlayerCoordinator: BaseCoordinator {
     }
     
     override func start() {
-        runPlayerModule()
+        runMiniPlayerModule()
     }
 }
 
 private extension PlayerCoordinator {
-    func runPlayerModule() {
-        let (artistModule, presenter) = factory.makePlayerModule(with: tracks,
-                                                                 for: index,
-                                                                 serviceManager: serviceManager)
-        presenter.coordinator = self
-        router.present(artistModule)
+    func runMiniPlayerModule() {
+        let (playerModule, presenter) = factory.makeMiniPlayerModule(serviceManager: serviceManager)
+        router.setRootModule(playerModule, hideBar: true)
+        miniPlayerDelegate = presenter
     }
 }
 
 extension PlayerCoordinator: PlayerModuleOutput {
-    func finishFlow() {
-        output?.finishPlayerFlow(coordinator: self)
+    func dismissPlayer() {
+        router.dismissModule()
+        showMiniPlayer()
+    }
+}
+
+extension PlayerCoordinator: PlayerCoordinatorDelegate {
+    func showPlayer(with tracks: [Track], for index: Int) {
+        let (playerModule, presenter) = factory.makePlayerModule(with: tracks,
+                                                                 for: index,
+                                                                 serviceManager: serviceManager)
+        presenter.coordinator = self
+        router.present(playerModule)
+    }
+    
+    func showMiniPlayer() {
+        containerViewControllerDelegate?.isMiniContainerViewHidden = false
+        miniPlayerDelegate?.refreshMiniPlayer()
     }
 }

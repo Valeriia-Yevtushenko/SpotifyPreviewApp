@@ -8,14 +8,10 @@
 import Foundation
 
 class CoordinatorFactory: CoordinatorFactoryProtocol {
-    func makePlayerCoordinator(with tracks: [Track],
-                               for index: Int,
-                               factory: PlayerFlow,
-                               router: Router,
+    func makePlayerCoordinator(factory: PlayerFlow,
+                               router: RouterProtocol,
                                serviceManager: ServiceManagerProtocol) -> PlayerCoordinator {
-        return PlayerCoordinator(tracks: tracks,
-                                 index: index,
-                                 factory: factory,
+        return PlayerCoordinator(factory: factory,
                                  router: router,
                                  serviceManager: serviceManager,
                                  coordinatorFactory: self)
@@ -23,7 +19,8 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
     
     func makeAlbumCoordinator(albumId: String,
                               factory: AlbumFlow & PlayerFlow,
-                              router: Router, serviceManager: ServiceManagerProtocol) -> AlbumCoordinator {
+                              router: RouterProtocol,
+                              serviceManager: ServiceManagerProtocol) -> AlbumCoordinator {
         return AlbumCoordinator(albumId: albumId,
                                 factory: factory,
                                 router: router,
@@ -34,7 +31,7 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
     func makeArtistCoordinator(artistId: String,
                                status: ArtistStatus,
                                factory: FlowFactory,
-                               router: Router,
+                               router: RouterProtocol,
                                serviceManager: ServiceManagerProtocol) -> ArtistCoordinator {
         return ArtistCoordinator(artistId: artistId,
                                  status: status,
@@ -46,7 +43,7 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
     
     func makePlaylistsCoordinator(type: PlaylistType,
                                   factory: FlowFactory,
-                                  router: Router,
+                                  router: RouterProtocol,
                                   serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator {
         return PlaylistsCoordinator(factory: factory,
                                     router: router,
@@ -56,7 +53,7 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
     }
     
     func makeProfileCoordinator(factory: FlowFactory,
-                                router: Router,
+                                router: RouterProtocol,
                                 serviceManager: ServiceManagerProtocol) -> ProfileCoordinator {
         return ProfileCoordinator(factory: factory,
                                   router: router,
@@ -66,16 +63,16 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
     
     func makeTabbarCoordinator(serviceManager: ServiceManagerProtocol,
                                flowFactory: FlowFactory) -> (TabBarCoordinator, Presentable?) {
-        let tabBarViewController = TabBarViewController()
-        let coordinator = TabBarCoordinator(tabBarViewControllerDelegat: tabBarViewController,
+        let containerViewControllerDelegate = ContainerViewController.instantiate(from: ContainerViewController.identifier)
+        let coordinator = TabBarCoordinator(containerViewControllerDelegate: containerViewControllerDelegate,
                                             coordinatorFactory: self,
                                             serviceManager: serviceManager,
                                             flowFactory: flowFactory)
-        return(coordinator, tabBarViewController)
+        return(coordinator, containerViewControllerDelegate)
     }
     
     func makeSearchCoordinator(factory: FlowFactory,
-                               router: Router,
+                               router: RouterProtocol,
                                serviceManager: ServiceManagerProtocol) -> SearchCoordinator {
         return SearchCoordinator(factory: factory,
                                  router: router, serviceManager: serviceManager,

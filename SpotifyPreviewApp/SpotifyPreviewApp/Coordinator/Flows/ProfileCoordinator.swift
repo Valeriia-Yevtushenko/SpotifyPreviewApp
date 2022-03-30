@@ -13,12 +13,13 @@ protocol ProfileCoordinatorOutput: AnyObject {
 
 class ProfileCoordinator: BaseCoordinator {
     private let factory: FlowFactory
-    private let router: Router
+    private let router: RouterProtocol
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
+    weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: ProfileCoordinatorOutput?
     
-    init(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
         self.router = router
@@ -51,6 +52,7 @@ extension ProfileCoordinator: ProfileModuleOutput {
                                                                               router: router,
                                                                               serviceManager: serviceManager)
         playlistsCoordinator.output = self
+        playlistsCoordinator.playerDelegate = playerDelegate
         playlistsCoordinator.start()
         addDependency(playlistsCoordinator)
     }
@@ -74,6 +76,7 @@ extension ProfileCoordinator: ListOfArtistsModuleOutput {
                                                                          router: router,
                                                                          serviceManager: serviceManager)
         artistCoordinator.output = self
+        artistCoordinator.playerDelegate = playerDelegate
         artistCoordinator.start()
         addDependency(artistCoordinator)
     }

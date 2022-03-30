@@ -10,9 +10,7 @@ import Foundation
 class PlayerInteractor {
     var tracks: [Track]!
     var index: Int!
-    var networkService: NetworkServiceProtocol!
     var playerService: PlayerServiceProtocol!
-    var urlBuilder: URLBuilderProtocol!
     weak var presenter: PlayerInteractorOutputProtocol?
 }
 

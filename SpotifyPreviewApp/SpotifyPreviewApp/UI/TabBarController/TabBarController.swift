@@ -7,18 +7,14 @@
 
 import UIKit
 
-protocol TabBarViewControllerDelegate: AnyObject {
-    func setupTabBarItems(_ viewControllers: [UIViewController])
-    func setupTabBarItems(_ viewControllers: [UIViewController], with index: Int)
-}
-
 final class TabBarViewController: UITabBarController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UITabBar.appearance().barTintColor = .secondarySystemBackground
     }
-}
-
-extension TabBarViewController: TabBarViewControllerDelegate {
+    
     func setupTabBarItems(_ viewControllers: [UIViewController]) {
         self.viewControllers = viewControllers
         viewControllers[0].tabBarItem = UITabBarItem(title: TabBarItem.search.rawValue,

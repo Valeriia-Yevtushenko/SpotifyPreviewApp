@@ -13,13 +13,14 @@ protocol PlaylistsCoordinatorOutput: AnyObject {
 
 class PlaylistsCoordinator: BaseCoordinator {
     private let factory: FlowFactory
-    private let router: Router
+    private let router: RouterProtocol
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private let type: PlaylistType
+    weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: PlaylistsCoordinatorOutput?
     
-    init(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol, type: PlaylistType) {
+    init(factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol, type: PlaylistType) {
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
         self.router = router
@@ -56,6 +57,7 @@ extension PlaylistsCoordinator: PlaylistModuleOutput {
                                                                          router: router,
                                                                          serviceManager: serviceManager)
         artistCoordinator.output = self
+        artistCoordinator.playerDelegate = playerDelegate
         artistCoordinator.start()
         addDependency(artistCoordinator)
     }

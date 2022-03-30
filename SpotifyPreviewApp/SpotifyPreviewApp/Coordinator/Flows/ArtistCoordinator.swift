@@ -15,12 +15,13 @@ class ArtistCoordinator: BaseCoordinator {
     private let artistId: String
     private let status: ArtistStatus
     private let factory: FlowFactory
-    private let router: Router
+    private let router: RouterProtocol
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
+    weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: ArtistCoordinatorOutput?
     
-    init(artistId: String, status: ArtistStatus, factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(artistId: String, status: ArtistStatus, factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
         self.artistId = artistId
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
@@ -44,14 +45,7 @@ private extension ArtistCoordinator {
 
 extension ArtistCoordinator: ArtistModuleOutput {
     func runPlayerFlow(with tracks: [Track], for index: Int) {
-        let playerCoordinator = coordinatorFactory.makePlayerCoordinator(with: tracks,
-                                                                         for: index,
-                                                                         factory: factory,
-                                                                         router: router,
-                                                                         serviceManager: serviceManager)
-        playerCoordinator.output = self
-        playerCoordinator.start()
-        addDependency(playerCoordinator)
+        playerDelegate?.showPlayer(with: tracks, for: index)
     }
 
     func runAlbumFlow(with identifier: String) {
@@ -60,6 +54,7 @@ extension ArtistCoordinator: ArtistModuleOutput {
                                                                        router: router,
                                                                        serviceManager: serviceManager)
         albumCoordinator.output = self
+        albumCoordinator.playerDelegate = playerDelegate
         albumCoordinator.start()
         addDependency(albumCoordinator)
     }

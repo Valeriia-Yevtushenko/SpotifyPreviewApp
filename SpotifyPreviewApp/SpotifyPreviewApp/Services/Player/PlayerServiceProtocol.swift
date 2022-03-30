@@ -10,6 +10,7 @@ import PromiseKit
 
 protocol PlayerServiceProtocol: AnyObject {
     var currentListOfPlayerItems: [PlayerItem] { get }
+    var currentPlaiyngItem: PlayerItem? { get }
     var currentTime: Double { get }
     func setupDelegate(_ delegate: PlayerServiceDelegate)
     func play(with items: [PlayerItem], at index: Int) -> Promise<PlayerItem>

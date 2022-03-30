@@ -20,8 +20,6 @@ final class PlayerModuleAssembly {
         let playerService = serviceManager.player()
         interactor.playerService = playerService
         playerService.setupDelegate(interactor)
-        interactor.networkService = serviceManager.network()
-        interactor.urlBuilder = serviceManager.urlBuilder()
         playerViewController.dataSource = TrackTableViewDataSource()
         playerViewController.output = presenter
         return (playerViewController, presenter)

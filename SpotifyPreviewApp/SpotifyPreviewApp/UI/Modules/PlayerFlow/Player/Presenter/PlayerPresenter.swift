@@ -14,6 +14,10 @@ class PlayerPresenter {
 }
 
 extension PlayerPresenter: PlayerViewOutputProtocol {
+    func viewDidTapDismiss() {
+        coordinator?.dismissPlayer()
+    }
+    
     func viewDidTapShowListOfTracks() {
         interactor?.getListOfTracks()
     }

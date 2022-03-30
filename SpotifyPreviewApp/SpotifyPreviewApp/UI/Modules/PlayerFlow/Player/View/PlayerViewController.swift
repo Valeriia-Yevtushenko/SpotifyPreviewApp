@@ -8,6 +8,7 @@
 import UIKit
 
 class PlayerViewController: UIViewController {
+    @IBOutlet private weak var accessoryView: UIView!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var imageWidhtLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var imageHeightLayoutConstraint: NSLayoutConstraint!
@@ -35,6 +36,10 @@ class PlayerViewController: UIViewController {
 }
 
 private extension PlayerViewController {
+    @IBAction func handlePanGestureRecognizer(_ sender: UIPanGestureRecognizer) {
+        output?.viewDidTapDismiss()
+    }
+    
     @IBAction func playerProgressSliderDidChange(_ sender: UISlider) {
         output?.viewDidChangePlayerTime(Double(sender.value))
     }
@@ -86,6 +91,8 @@ private extension PlayerViewController {
 
 private extension PlayerViewController {
     func setupUI() {
+        accessoryView.layer.cornerRadius = .pi
+    
         tableView.backgroundColor = .secondarySystemBackground
         tableView.delegate = dataSource
         tableView.dataSource = dataSource
