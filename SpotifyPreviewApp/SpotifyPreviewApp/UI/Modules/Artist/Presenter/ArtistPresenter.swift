@@ -14,6 +14,10 @@ final class ArtistPresenter {
 }
 
 extension ArtistPresenter: ArtistViewOutputProtocol {
+    func viewDidTapOnTrack(at index: Int) {
+        interactor?.getPlaylist(for: index)
+    }
+    
     func viewDidTapOnAlbum(at index: Int) {
         interactor?.getAlbumId(at: index)
     }
@@ -36,6 +40,10 @@ extension ArtistPresenter: ArtistViewOutputProtocol {
 }
 
 extension ArtistPresenter: ArtistInteractorOutputProtocol {
+    func interactorDidGetPlaylist(tracks: [Track], for index: Int) {
+        coordinator?.runPlayerFlow(with: tracks, for: index)
+    }
+    
     func interactorDidGetAlbumId(_ identifier: String) {
         coordinator?.runAlbumFlow(with: identifier)
     }
@@ -65,7 +73,7 @@ extension ArtistPresenter: ArtistInteractorOutputProtocol {
     func interactorDidFetchArtistInfo(_ artistInfo: (Artist?, [Track], [Album])) {
         let tracks: [TrackTableViewCellModel] = artistInfo.1.map {
             let artist = $0.artists?.compactMap { return $0.name }
-            return TrackTableViewCellModel(image: $0.album?.images?[2].url, name: $0.name, artist: artist?.joined(separator: ", "))
+            return TrackTableViewCellModel(image: $0.album?.images?[0].url, name: $0.name, artist: artist?.joined(separator: ", "))
         }
         
         let albums: [TableViewCellModel] = artistInfo.2.map {

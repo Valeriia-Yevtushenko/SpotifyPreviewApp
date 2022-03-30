@@ -8,7 +8,19 @@
 import Foundation
 
 class CoordinatorFactory: CoordinatorFactoryProtocol {
-    func makeAlbumCoordinator(albumId: String, factory: AlbumFlow, router: Router, serviceManager: ServiceManagerProtocol) -> AlbumCoordinator {
+    func makePlayerCoordinator(factory: PlayerFlow,
+                               router: RouterProtocol,
+                               serviceManager: ServiceManagerProtocol) -> PlayerCoordinator {
+        return PlayerCoordinator(factory: factory,
+                                 router: router,
+                                 serviceManager: serviceManager,
+                                 coordinatorFactory: self)
+    }
+    
+    func makeAlbumCoordinator(albumId: String,
+                              factory: AlbumFlow & PlayerFlow,
+                              router: RouterProtocol,
+                              serviceManager: ServiceManagerProtocol) -> AlbumCoordinator {
         return AlbumCoordinator(albumId: albumId,
                                 factory: factory,
                                 router: router,
@@ -16,7 +28,11 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
                                 coordinatorFactory: self)
     }
     
-    func makeArtistCoordinator(artistId: String, status: ArtistStatus, factory: ArtistFlow&AlbumFlow, router: Router, serviceManager: ServiceManagerProtocol) -> ArtistCoordinator {
+    func makeArtistCoordinator(artistId: String,
+                               status: ArtistStatus,
+                               factory: FlowFactory,
+                               router: RouterProtocol,
+                               serviceManager: ServiceManagerProtocol) -> ArtistCoordinator {
         return ArtistCoordinator(artistId: artistId,
                                  status: status,
                                  factory: factory,
@@ -25,7 +41,10 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
                                  coordinatorFactory: self)
     }
     
-    func makePlaylistsCoordinator(type: PlaylistType, factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator {
+    func makePlaylistsCoordinator(type: PlaylistType,
+                                  factory: FlowFactory,
+                                  router: RouterProtocol,
+                                  serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator {
         return PlaylistsCoordinator(factory: factory,
                                     router: router,
                                     serviceManager: serviceManager,
@@ -33,29 +52,36 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
                                     type: type)
     }
     
-    func makeProfileCoordinator(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> ProfileCoordinator {
+    func makeProfileCoordinator(factory: FlowFactory,
+                                router: RouterProtocol,
+                                serviceManager: ServiceManagerProtocol) -> ProfileCoordinator {
         return ProfileCoordinator(factory: factory,
                                   router: router,
                                   serviceManager: serviceManager,
                                   coordinatorFactory: self)
     }
     
-    func makeTabbarCoordinator(serviceManager: ServiceManagerProtocol, flowFactory: FlowFactory) -> (configurator: TabBarCoordinator, toPresent: Presentable?) {
-        let tabBarViewController = TabBarViewController()
-        let coordinator = TabBarCoordinator(tabBarViewControllerDelegat: tabBarViewController,
+    func makeTabbarCoordinator(serviceManager: ServiceManagerProtocol,
+                               flowFactory: FlowFactory) -> (TabBarCoordinator, Presentable?) {
+        let containerViewControllerDelegate = ContainerViewController.instantiate(from: ContainerViewController.identifier)
+        let coordinator = TabBarCoordinator(containerViewControllerDelegate: containerViewControllerDelegate,
                                             coordinatorFactory: self,
                                             serviceManager: serviceManager,
                                             flowFactory: flowFactory)
-        return(coordinator, tabBarViewController)
+        return(coordinator, containerViewControllerDelegate)
     }
     
-    func makeSearchCoordinator(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol) -> SearchCoordinator {
+    func makeSearchCoordinator(factory: FlowFactory,
+                               router: RouterProtocol,
+                               serviceManager: ServiceManagerProtocol) -> SearchCoordinator {
         return SearchCoordinator(factory: factory,
                                  router: router, serviceManager: serviceManager,
                                  coordinatorFactory: self)
     }
     
-    func makeAuthorizationCoordinator(router: RouterProtocol, flowFactory: AuthorizationFlowFactory, authorizationService: AuthorizationServiceProtocol) -> AuthorizationCoordinator {
+    func makeAuthorizationCoordinator(router: RouterProtocol,
+                                      flowFactory: AuthorizationFlowFactory,
+                                      authorizationService: AuthorizationServiceProtocol) -> AuthorizationCoordinator {
         let coordinator = AuthorizationCoordinator(router: router,
                                                    authorizationService: authorizationService,
                                                    flowFactory: flowFactory,

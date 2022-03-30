@@ -164,7 +164,7 @@ extension ArtistViewController: ArtistTableViewDataSourceDelegate {
     }
     
     func didSelectTrack(at index: Int) {
-        
+        output?.viewDidTapOnTrack(at: index)
     }
     
     func scrollViewDidScroll() {

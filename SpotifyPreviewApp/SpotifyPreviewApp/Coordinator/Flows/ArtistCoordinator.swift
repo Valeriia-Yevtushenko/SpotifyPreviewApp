@@ -14,13 +14,14 @@ protocol ArtistCoordinatorOutput: AnyObject {
 class ArtistCoordinator: BaseCoordinator {
     private let artistId: String
     private let status: ArtistStatus
-    private let factory: ArtistFlow&AlbumFlow
-    private let router: Router
+    private let factory: FlowFactory
+    private let router: RouterProtocol
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
+    weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: ArtistCoordinatorOutput?
     
-    init(artistId: String, status: ArtistStatus, factory: ArtistFlow&AlbumFlow, router: Router, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(artistId: String, status: ArtistStatus, factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
         self.artistId = artistId
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
@@ -43,12 +44,17 @@ private extension ArtistCoordinator {
 }
 
 extension ArtistCoordinator: ArtistModuleOutput {
+    func runPlayerFlow(with tracks: [Track], for index: Int) {
+        playerDelegate?.showPlayer(with: tracks, for: index)
+    }
+
     func runAlbumFlow(with identifier: String) {
         let albumCoordinator = coordinatorFactory.makeAlbumCoordinator(albumId: identifier,
-                                                                         factory: factory,
-                                                                         router: router,
-                                                                         serviceManager: serviceManager)
+                                                                       factory: factory,
+                                                                       router: router,
+                                                                       serviceManager: serviceManager)
         albumCoordinator.output = self
+        albumCoordinator.playerDelegate = playerDelegate
         albumCoordinator.start()
         addDependency(albumCoordinator)
     }
@@ -60,6 +66,11 @@ extension ArtistCoordinator: ArtistModuleOutput {
 
 extension ArtistCoordinator: AlbumCoordinatorOutput {
     func finishArtistFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+    }
+}
+extension ArtistCoordinator: PlayerCoordinatorOutput {
+    func finishPlayerFlow(coordinator: Coordinator) {
         removeDependency(coordinator)
     }
 }

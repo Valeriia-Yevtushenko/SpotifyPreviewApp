@@ -12,11 +12,13 @@ protocol ArtistInteractorInputProtocol: AnyObject {
     func followOnArtist()
     func unfollowArtist()
     func getAlbumId(at index: Int)
+    func getPlaylist(for index: Int)
 }
 
 protocol ArtistInteractorOutputProtocol: AnyObject {
     func interactorDidFetchArtistInfo(_ artistInfo: (Artist?, [Track], [Album]))
     func interactorDidGetArtistStatus(_ status: ArtistStatus)
+    func interactorDidGetPlaylist(tracks: [Track], for index: Int)
     func interactorDidFollowOnArtist()
     func interactorUnfollowArtist()
     func interactorDidGetAlbumId(_ identifier: String)

@@ -7,13 +7,15 @@
 
 import UIKit.UIViewController
 
-class Router: RouterProtocol {
+class Router {
     private weak var rootController: UINavigationController?
     
     init(rootController: UINavigationController) {
         self.rootController = rootController
     }
-    
+}
+
+extension Router: RouterProtocol {
     func present(_ module: Presentable?) {
         present(module, animated: true)
     }
@@ -63,7 +65,7 @@ class Router: RouterProtocol {
     }
     
     func popToRootModule(animated: Bool) {
-         rootController?.popToRootViewController(animated: animated) 
+         rootController?.popToRootViewController(animated: animated)
     }
     
     func toPresent() -> UIViewController? {

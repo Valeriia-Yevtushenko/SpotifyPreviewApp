@@ -53,6 +53,7 @@ private extension AlbumViewController {
 
 extension AlbumViewController: AlbumTableViewDataSourceDelegate {
     func didSelectItem(at index: Int) {
+        present(PlayerViewController.instantiate(from: PlayerViewController.identifier), animated: true, completion: nil)
         output?.viewSelectedItem(at: index)
     }
 }

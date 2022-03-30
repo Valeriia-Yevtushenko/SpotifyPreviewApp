@@ -13,12 +13,13 @@ protocol SearchCoordinatorOutput: AnyObject {
 
 class SearchCoordinator: BaseCoordinator {
     private let factory: FlowFactory
-    private let router: Router
+    private let router: RouterProtocol
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
+    weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: SearchCoordinatorOutput?
     
-    init(factory: FlowFactory, router: Router, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
         self.factory = factory
         self.router = router
         self.serviceManager = serviceManager
@@ -36,6 +37,7 @@ private extension SearchCoordinator {
         presenter.runSearchModule(viewController: searchModule().0)
         presenter.coordinator = self
         router.setRootModule(categoriesModule, hideBar: false)
+        
     }
 
     func searchModule() -> (Presentable, SearchPresenter) {
@@ -50,6 +52,7 @@ extension SearchCoordinator: CategoriesModuleOutput {
                                                                               router: router,
                                                                               serviceManager: serviceManager)
         playlistCoordinator.output = self
+        playlistCoordinator.playerDelegate = playerDelegate
         playlistCoordinator.start()
         addDependency(playlistCoordinator)
     }

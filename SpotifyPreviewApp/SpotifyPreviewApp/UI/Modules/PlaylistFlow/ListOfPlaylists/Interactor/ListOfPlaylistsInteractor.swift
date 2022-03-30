@@ -48,7 +48,7 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
         case .category(let categoryId):
             let promise: Promise<ListOfPlaylists> = networkService.fetch(urlBuilder
                                                                             .with(path: .category)
-                                                                            .with(data: categoryId)
+                                                                            .with(pathParameter: categoryId)
                                                                             .build())
             
             promise.compactMap { data in

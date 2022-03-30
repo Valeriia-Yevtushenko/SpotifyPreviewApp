@@ -9,7 +9,7 @@ import Foundation
 
 protocol URLBuilderProtocol: AnyObject {
     func with(path: Path) -> URLBuilderProtocol
-    func with(data: String) -> URLBuilderProtocol
+    func with(pathParameter: String) -> URLBuilderProtocol
     func with(queryItems: [String: String]) -> URLBuilderProtocol
     func build() -> String
 }

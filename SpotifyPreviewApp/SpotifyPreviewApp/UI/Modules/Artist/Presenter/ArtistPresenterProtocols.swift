@@ -21,9 +21,11 @@ protocol ArtistViewOutputProtocol: AnyObject {
     func viewDidTapFollow()
     func viewDidTapUnfollow()
     func viewDidTapOnAlbum(at index: Int)
+    func viewDidTapOnTrack(at index: Int)
     func viewDidRefresh()
 }
 
 protocol ArtistModuleOutput: AnyObject {
     func runAlbumFlow(with identifier: String)
+    func runPlayerFlow(with tracks: [Track], for index: Int)
 }

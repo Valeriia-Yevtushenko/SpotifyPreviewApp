@@ -24,11 +24,11 @@ extension EditPlaylistInteractor: EditPlaylistInteractorInputProtocol {
         
         let updateInfoUrl = urlBuilder
             .with(path: .playlist)
-            .with(data: identifier)
+            .with(pathParameter: identifier)
             .build()
         let updateImageUrl = urlBuilder
             .with(path: .playlistImage)
-            .with(data: identifier)
+            .with(pathParameter: identifier)
             .build()
         
         if let info = info, let data = try? JSONEncoder().encode(info), let image = image {

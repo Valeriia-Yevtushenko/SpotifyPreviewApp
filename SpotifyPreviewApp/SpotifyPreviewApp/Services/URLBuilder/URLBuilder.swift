@@ -15,12 +15,13 @@ class URLBuilder {
 
 extension URLBuilder: URLBuilderProtocol {
     func with(path: Path) -> URLBuilderProtocol {
+        self.queryItems = nil
         self.path = path.rawValue
         return self
     }
     
-    func with(data: String) -> URLBuilderProtocol {
-        self.path = String(format: path, data)
+    func with(pathParameter: String) -> URLBuilderProtocol {
+        self.path = String(format: path, pathParameter)
         return self
     }
 

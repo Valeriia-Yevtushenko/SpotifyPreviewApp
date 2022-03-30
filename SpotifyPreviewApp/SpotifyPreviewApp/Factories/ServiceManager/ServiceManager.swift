@@ -13,6 +13,7 @@ protocol ServiceManagerProtocol {
     func keychain() -> KeychainServiceProtocol
     func network() -> NetworkServiceProtocol
     func urlBuilder() -> URLBuilderProtocol
+    func player() -> PlayerServiceProtocol
 }
 
 class ServiceManager {
@@ -21,6 +22,7 @@ class ServiceManager {
     private let keychainService: KeychainServiceProtocol
     private let networkService: NetworkServiceProtocol
     private let urlBuilderService: URLBuilderProtocol
+    private let playerService: PlayerServiceProtocol
     
     init() {
         oauth = OAuth2Swift(consumerKey: Client.identifier.rawValue,
@@ -34,10 +36,15 @@ class ServiceManager {
         networkService = NetworkService(client: oauth.client,
                                         authorizationService: authorizationService)
         urlBuilderService = URLBuilder()
+        playerService = PlayerService()
     }
 }
 
 extension ServiceManager: ServiceManagerProtocol {
+    func player() -> PlayerServiceProtocol {
+        return playerService
+    }
+    
     func urlBuilder() -> URLBuilderProtocol {
         return urlBuilderService
     }
