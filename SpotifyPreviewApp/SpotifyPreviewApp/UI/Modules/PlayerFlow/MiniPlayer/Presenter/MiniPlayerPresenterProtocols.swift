@@ -10,6 +10,7 @@ import Foundation
 protocol MiniPlayerViewInputProtocol: AnyObject {
     func setupPlayer(with item: PlayerItem)
     func updatePlayer(with item: PlayerItem, isPlaying: Bool)
+    func displayErrorAlert()
     func stopPlayer()
 }
 
@@ -21,6 +22,7 @@ protocol MiniPlayerViewOutputProtocol: AnyObject {
 }
 
 protocol MiniPlayerModuleOutput: AnyObject {
+    func hideMiniPlayer()
     func openPlayer()
 }
 

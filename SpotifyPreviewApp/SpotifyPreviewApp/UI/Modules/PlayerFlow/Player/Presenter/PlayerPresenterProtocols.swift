@@ -27,9 +27,9 @@ protocol PlayerViewOutputProtocol: AnyObject {
     func viewNeedToRefreshPlayerTime()
     func viewDidTapShowListOfTracks()
     func viewDidChangePlayerItem(_ index: Int)
-    func viewDidTapDismiss()
+    func viewDidTapDismiss(with success: Bool)
 }
 
 protocol PlayerModuleOutput: AnyObject {
-    func dismissPlayer()
+    func dismissPlayer(with success: Bool)
 }

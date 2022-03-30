@@ -70,6 +70,16 @@ extension MiniPlayerViewController: MiniPlayerViewInputProtocol {
             imageView.setImage(withUrl: imageUrl)
         }
     }
+    
+    func displayErrorAlert() {
+        let alert = UIAlertController(title: "Error",
+                                      message: "We can't play this track. It is only for premium version.",
+                                      preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
+        
+        alert.addAction(okButton)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 private extension MiniPlayerViewController {

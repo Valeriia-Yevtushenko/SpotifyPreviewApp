@@ -18,8 +18,8 @@ extension PlayerPresenter: PlayerViewOutputProtocol {
         interactor?.play(at: index)
     }
     
-    func viewDidTapDismiss() {
-        coordinator?.dismissPlayer()
+    func viewDidTapDismiss(with success: Bool) {
+        coordinator?.dismissPlayer(with: success)
     }
     
     func viewDidTapShowListOfTracks() {

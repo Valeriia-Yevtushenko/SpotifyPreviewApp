@@ -52,7 +52,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Jya-4D-qmC">
                                                 <rect key="frame" x="0.0" y="443.5" width="366" height="64.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AG-OS-dBh">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6AG-OS-dBh">
                                                         <rect key="frame" x="0.0" y="0.0" width="366" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                                         <nil key="textColor"/>
@@ -221,6 +221,7 @@
                         <outlet property="durationLabel" destination="2G1-LZ-dcn" id="bKN-fJ-XOA"/>
                         <outlet property="imageHeightLayoutConstraint" destination="uil-xe-E2j" id="Kug-Dd-7Mj"/>
                         <outlet property="imageView" destination="FWH-18-lzM" id="wZG-h5-tml"/>
+                        <outlet property="imageViewContainerView" destination="82j-kK-KRA" id="BpD-Lh-asO"/>
                         <outlet property="imageWidhtLayoutConstraint" destination="9RJ-5t-drk" id="UfO-Uf-LiT"/>
                         <outlet property="infoStackView" destination="UnY-5W-yKk" id="soe-vc-Pm0"/>
                         <outlet property="playerProgressSlider" destination="FvN-SY-Fe3" id="qfg-n0-hZD"/>

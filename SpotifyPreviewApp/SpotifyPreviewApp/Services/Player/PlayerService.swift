@@ -41,8 +41,10 @@ class PlayerService: NSObject {
             guard !playerItems.isEmpty, let url = URL(string: playerItems[currentIndex].url ?? ""),
                   let data = try? Data(contentsOf: url) else {
                       seal.reject(PlayerError.url)
+                      player?.stop()
                 return
             }
+            
             var item = playerItems[currentIndex]
             player = try? AVAudioPlayer(data: data)
             player?.delegate = self

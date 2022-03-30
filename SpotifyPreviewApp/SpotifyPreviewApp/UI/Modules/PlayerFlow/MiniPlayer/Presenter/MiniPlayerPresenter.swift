@@ -45,7 +45,7 @@ extension MiniPlayerPresenter: MiniPlayerInteractorOutputProtocol {
     }
     
     func interactorFailedToGetCurrentPlayingTrack() {
-        
+        view?.displayErrorAlert()
     }
 }
 

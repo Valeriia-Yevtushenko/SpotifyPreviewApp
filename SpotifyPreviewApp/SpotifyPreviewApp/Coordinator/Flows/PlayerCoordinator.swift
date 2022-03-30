@@ -47,13 +47,22 @@ private extension PlayerCoordinator {
 }
 
 extension PlayerCoordinator: PlayerModuleOutput {
-    func dismissPlayer() {
+    func dismissPlayer(with success: Bool) {
+        if success {
+            showMiniPlayer()
+        } else {
+            containerViewControllerDelegate?.isMiniContainerViewHidden = true
+        }
+        
         router.dismissModule()
-        showMiniPlayer()
     }
 }
 
 extension PlayerCoordinator: MiniPlayerModuleOutput {
+    func hideMiniPlayer() {
+        containerViewControllerDelegate?.isMiniContainerViewHidden = false
+    }
+    
     func openPlayer() {
         let (playerModule, presenter) = factory.makePlayerModule(serviceManager: serviceManager)
         presenter.coordinator = self

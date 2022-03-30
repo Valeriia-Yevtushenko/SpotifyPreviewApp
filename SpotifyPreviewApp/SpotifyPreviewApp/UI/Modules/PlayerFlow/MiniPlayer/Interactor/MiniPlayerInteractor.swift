@@ -26,7 +26,6 @@ extension MiniPlayerInteractor: MiniPlayerInteractorInputProtocol {
     
     func getCurrentPlayingTrack() {
         guard let item = playerService.currentPlaiyngItem else {
-            presenter?.interactorFailedToGetCurrentPlayingTrack()
             return
         }
         
@@ -38,7 +37,7 @@ extension MiniPlayerInteractor: MiniPlayerInteractorInputProtocol {
             .done { item in
                 self.presenter?.interactorDidGetCurrentPlayingTrack(item)
             }.catch { _ in
-                
+                self.presenter?.interactorFailedToGetCurrentPlayingTrack()
             }
     }
 
@@ -57,7 +56,7 @@ extension MiniPlayerInteractor: PlayerServiceDelegate {
             .done { item in
                 self.presenter?.interactorDidGetCurrentPlayingTrack(item)
             }.catch { _ in
-                
+                self.presenter?.interactorFailedToGetCurrentPlayingTrack()
             }
     }
 }

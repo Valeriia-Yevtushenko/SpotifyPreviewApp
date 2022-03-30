@@ -10,6 +10,7 @@ import UIKit
 class PlayerViewController: UIViewController {
     @IBOutlet private weak var accessoryView: UIView!
     @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageViewContainerView: UIView!
     @IBOutlet private weak var imageWidhtLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var imageHeightLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var songNameLabel: UILabel!
@@ -21,6 +22,7 @@ class PlayerViewController: UIViewController {
     @IBOutlet private weak var containerStackView: UIStackView!
     @IBOutlet private weak var playerProgressSlider: UISlider!
     private let tableView = UITableView()
+    private var imageViewContainerWidthViewConstraint: NSLayoutConstraint?
     private var timer: Timer?
     private var isPlaying = true
     private var isRepeating = false
@@ -38,7 +40,7 @@ class PlayerViewController: UIViewController {
 
 private extension PlayerViewController {
     @IBAction func handlePanGestureRecognizer(_ sender: UIPanGestureRecognizer) {
-        output?.viewDidTapDismiss()
+        output?.viewDidTapDismiss(with: true)
     }
     
     @IBAction func playerProgressSliderDidChange(_ sender: UISlider) {
@@ -104,25 +106,30 @@ private extension PlayerViewController {
         let image = UIImage(systemName: "circle.fill")
         playerProgressSlider.setThumbImage(image, for: .normal)
         
-        let size = view.frame.width / 1.6
+        let size = view.frame.width / 1.3
         imageWidhtLayoutConstraint.constant = size
         imageHeightLayoutConstraint.constant = size
     }
     
     func removeListOfTrack() {
         containerStackView.removeArrangedSubview(tableView)
+        imageViewContainerWidthViewConstraint?.isActive = false
+        infoStackView.alignment = .fill
         infoStackView.axis = .vertical
-        let size = view.frame.width / 1.6
+        let size = view.frame.width / 1.3
         imageWidhtLayoutConstraint.constant = size
         imageHeightLayoutConstraint.constant = size
     }
     
     func showListOfTracks() {
-        output?.viewDidTapShowListOfTracks()
         let size = view.frame.width / 5.6
+        output?.viewDidTapShowListOfTracks()
         imageWidhtLayoutConstraint.constant = size
         imageHeightLayoutConstraint.constant = size
+        imageViewContainerWidthViewConstraint = imageViewContainerView.widthAnchor.constraint(equalToConstant: size)
+        imageViewContainerWidthViewConstraint?.isActive = true
         infoStackView.axis = .horizontal
+        infoStackView.alignment = .center
         containerStackView.insertArrangedSubview(tableView, at: 1)
     }
 }
@@ -192,7 +199,7 @@ extension PlayerViewController: PlayerViewInputProtocol {
                                       message: "We can't play this track. It is only for premium version.",
                                       preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
-            self.output?.viewDidTapDismiss()
+            self.output?.viewDidTapDismiss(with: false)
         })
         
         alert.addAction(okButton)
