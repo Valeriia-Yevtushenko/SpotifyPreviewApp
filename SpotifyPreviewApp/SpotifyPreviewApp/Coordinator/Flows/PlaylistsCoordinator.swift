@@ -17,10 +17,15 @@ class PlaylistsCoordinator: BaseCoordinator {
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private let type: PlaylistType
+    private var newItemForPlaylist: String?
     weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: PlaylistsCoordinatorOutput?
     
-    init(factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol, type: PlaylistType) {
+    init(type: PlaylistType,
+         factory: FlowFactory,
+         router: RouterProtocol,
+         serviceManager: ServiceManagerProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
         self.router = router
@@ -28,8 +33,25 @@ class PlaylistsCoordinator: BaseCoordinator {
         self.type = type
     }
     
+    init(newItemForPlaylist: String,
+         factory: FlowFactory,
+         router: RouterProtocol,
+         serviceManager: ServiceManagerProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
+        self.coordinatorFactory = coordinatorFactory
+        self.factory = factory
+        self.router = router
+        self.serviceManager = serviceManager
+        self.type = .user
+        self.newItemForPlaylist = newItemForPlaylist
+    }
+    
     override func start() {
-        runListOfPlaylistsModule()
+        if let newItemForPlaylist = newItemForPlaylist {
+            showListOfPlaylists(for: newItemForPlaylist)
+        } else {
+            runListOfPlaylistsModule()
+        }
     }
 }
 
@@ -42,6 +64,14 @@ private extension PlaylistsCoordinator {
 }
 
 extension PlaylistsCoordinator: ListOfPlaylistsModuleOutput {
+    func dismiss() {
+        router.dismissModule()
+        
+        if newItemForPlaylist != nil {
+            output?.finishPlaylistsFlow(coordinator: self)
+        }
+    }
+    
     func runPlaylistModule(with playlistId: String, type: PlaylistType) {
         let (playlistModule, presenter) = factory.makePlaylistModule(with: playlistId, type: type, serviceManager: serviceManager)
         presenter.coordinator = self
@@ -50,6 +80,36 @@ extension PlaylistsCoordinator: ListOfPlaylistsModuleOutput {
 }
 
 extension PlaylistsCoordinator: PlaylistModuleOutput {
+    func runArtistModule(with artistId: String) {
+        let artistCoordinator = coordinatorFactory.makeArtistCoordinator(artistId: artistId,
+                                                                         status: .followed,
+                                                                         factory: factory,
+                                                                         router: router,
+                                                                         serviceManager: serviceManager)
+        artistCoordinator.output = self
+        artistCoordinator.playerDelegate = playerDelegate
+        artistCoordinator.start()
+        addDependency(artistCoordinator)
+    }
+    
+    func runAlbumModule(with albumId: String) {
+        let albumCoordinator = coordinatorFactory.makeAlbumCoordinator(albumId: albumId,
+                                                                       factory: factory,
+                                                                       router: router,
+                                                                       serviceManager: serviceManager)
+        albumCoordinator.output = self
+        albumCoordinator.playerDelegate = playerDelegate
+        albumCoordinator.start()
+        addDependency(albumCoordinator)
+    }
+    
+    func showListOfPlaylists(for newItemForPlaylist: String) {
+        let (playlistModule, presenter) = factory.makeListOfPlaylistsModule(with: newItemForPlaylist,
+                                                                            serviceManager: serviceManager)
+        presenter.coordinator = self
+        router.present(playlistModule)
+    }
+    
     func runPlayerFlow(with tracks: [Track], for index: Int) {
         playerDelegate?.showPlayer(with: tracks, for: index)
     }
@@ -69,5 +129,17 @@ extension PlaylistsCoordinator: PlaylistModuleOutput {
 extension PlaylistsCoordinator: EditPlaylistModuleOutput {
     func backToPlaylist() {
         router.dismissModule()
+    }
+}
+
+extension PlaylistsCoordinator: ArtistCoordinatorOutput {
+    func finishArtistFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+    }
+}
+
+extension PlaylistsCoordinator: AlbumCoordinatorOutput {
+    func finishAlbumFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
     }
 }

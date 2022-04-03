@@ -14,6 +14,22 @@ final class ArtistPresenter {
 }
 
 extension ArtistPresenter: ArtistViewOutputProtocol {
+    func viewDidTapShowItemAlbum(at index: Int) {
+        interactor?.getTrackAlbumId(for: index)
+    }
+    
+    func viewDidTapAddItemToPlaylist(at index: Int) {
+        interactor?.getTrackUri(for: index)
+    }
+    
+    func viewDidTapShareItem(at index: Int) {
+        interactor?.getTrackURL(for: index)
+    }
+    
+    func viewDidTapDownloadItem(at index: Int) {
+        
+    }
+    
     func viewDidTapOnTrack(at index: Int) {
         interactor?.getPlaylist(for: index)
     }
@@ -40,6 +56,18 @@ extension ArtistPresenter: ArtistViewOutputProtocol {
 }
 
 extension ArtistPresenter: ArtistInteractorOutputProtocol {
+    func interactorDidGetTrackAlbumId(_ albumId: String) {
+        coordinator?.runAlbumFlow(with: albumId)
+    }
+    
+    func interactorDidGetTrackUri(_ uri: String) {
+        coordinator?.runListOfPlaylistFlow(for: uri)
+    }
+    
+    func interactorDidGetTrackURL(_ url: String) {
+        view?.shareURL(url)
+    }
+    
     func interactorDidGetPlaylist(tracks: [Track], for index: Int) {
         coordinator?.runPlayerFlow(with: tracks, for: index)
     }

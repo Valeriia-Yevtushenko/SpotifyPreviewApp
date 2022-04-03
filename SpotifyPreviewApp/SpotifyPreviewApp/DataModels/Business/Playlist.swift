@@ -18,6 +18,7 @@ struct Playlist: Codable {
     let tracks: TracksOfPlaylist?
     let type, uri: String?
     let isPublic: Bool?
+    let snapshotID: String
 
     enum CodingKeys: String, CodingKey {
         case externalUrls = "external_urls"
@@ -25,6 +26,7 @@ struct Playlist: Codable {
         case identifier = "id"
         case images, name, owner
         case tracks, type, uri
+        case snapshotID = "snapshot_id"
         case isPublic = "public"
     }
 }

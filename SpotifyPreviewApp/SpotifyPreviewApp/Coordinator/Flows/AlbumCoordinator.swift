@@ -8,7 +8,7 @@
 import Foundation
 
 protocol AlbumCoordinatorOutput: AnyObject {
-    func finishArtistFlow(coordinator: Coordinator)
+    func finishAlbumFlow(coordinator: Coordinator)
 }
 
 class AlbumCoordinator: BaseCoordinator {
@@ -20,7 +20,11 @@ class AlbumCoordinator: BaseCoordinator {
     weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: AlbumCoordinatorOutput?
     
-    init(albumId: String, factory: AlbumFlow & PlayerFlow, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(albumId: String,
+         factory: AlbumFlow & PlayerFlow,
+         router: RouterProtocol,
+         serviceManager: ServiceManagerProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
         self.albumId = albumId
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
@@ -48,6 +52,6 @@ extension AlbumCoordinator: AlbumModuleOutput {
     }
     
     func finishFlow() {
-        output?.finishArtistFlow(coordinator: self)
+        output?.finishAlbumFlow(coordinator: self)
     }
 }

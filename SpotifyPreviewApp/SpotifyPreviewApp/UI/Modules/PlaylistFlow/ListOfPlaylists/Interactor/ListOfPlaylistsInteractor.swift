@@ -14,6 +14,7 @@ final class ListOfPlaylistsInteractor {
     var networkService: NetworkServiceProtocol!
     var urlBuilder: URLBuilderProtocol!
     var type: PlaylistType!
+    var newItemForPlaylist: String?
 }
 
 extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
@@ -40,7 +41,26 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
             return
         }
         
-        presenter?.interactorDidGetPlaylistId(playlistId, type: type)
+        if let newItemForPlaylist = newItemForPlaylist {
+            guard let jsonData = try? JSONSerialization.data(withJSONObject: ["uris": [newItemForPlaylist]]) else {
+                return
+            }
+            
+            let promise: Promise<Void> = networkService.post(data: jsonData, url: urlBuilder
+                                                                .with(path: .playlistTracks)
+                                                                .with(pathParameter: playlistId)
+                                                                .with(queryItems: ["uris": newItemForPlaylist])
+                                                                .build())
+            
+            promise.done { _ in
+                self.presenter?.interactorDidAddNewItemToPlaylist(name: self.playlists?.items?[index].name)
+            }.catch { error in
+                self.presenter?.interactorFailedToAddNewItemToPlaylist(error.localizedDescription)
+            }
+            
+        } else {
+            presenter?.interactorDidGetPlaylistId(playlistId, type: type)
+        }
     }
     
     func fetchPlaylists() {
@@ -63,9 +83,7 @@ extension ListOfPlaylistsInteractor: ListOfPlaylistsInteractorInputProtocol {
             let promise: Promise<Playlists> = networkService.fetch(urlBuilder
                                                                     .with(path: .userPlaylist)
                                                                     .build())
-            promise.compactMap { data in
-                return data
-            }.done { data in
+            promise.done { data in
                 self.playlists = data
                 self.presenter?.interactorDidFetchPlaylists(data, type: self.type)
             }.catch { _ in

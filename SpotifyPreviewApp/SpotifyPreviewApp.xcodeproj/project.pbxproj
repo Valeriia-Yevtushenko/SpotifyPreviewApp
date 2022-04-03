@@ -96,6 +96,7 @@
 		972CFDBE27F46893008752D0 /* PlaylistTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972CFDBD27F46893008752D0 /* PlaylistTableViewHeaderFooterView.xib */; };
 		972CFDC127F46CDD008752D0 /* PlaylistTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972CFDC027F46CDD008752D0 /* PlaylistTableViewDataSource.swift */; };
 		972CFDC327F49BAB008752D0 /* AlbumTableViewHeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972CFDC227F49BAB008752D0 /* AlbumTableViewHeaderFooterView.xib */; };
+		972EC65127F9E6960029B710 /* TrackContextMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972EC65027F9E6960029B710 /* TrackContextMenuAction.swift */; };
 		972F27C2279428850000BE72 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27C1279428850000BE72 /* ApplicationCoordinator.swift */; };
 		972F27C6279428E00000BE72 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27C4279428E00000BE72 /* BaseCoordinator.swift */; };
 		972F27C7279428E00000BE72 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972F27C5279428E00000BE72 /* Coordinator.swift */; };
@@ -265,6 +266,7 @@
 		972CFDBD27F46893008752D0 /* PlaylistTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlaylistTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
 		972CFDC027F46CDD008752D0 /* PlaylistTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewDataSource.swift; sourceTree = "<group>"; };
 		972CFDC227F49BAB008752D0 /* AlbumTableViewHeaderFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumTableViewHeaderFooterView.xib; sourceTree = "<group>"; };
+		972EC65027F9E6960029B710 /* TrackContextMenuAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackContextMenuAction.swift; sourceTree = "<group>"; };
 		972F27C1279428850000BE72 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		972F27C4279428E00000BE72 /* BaseCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		972F27C5279428E00000BE72 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -387,8 +389,8 @@
 		6B06FDCF27AD259B000E66CE /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				6B06FDD027AD259B000E66CE /* ListOfPlaylistsPresenterProtocols.swift */,
 				6B06FDD127AD259B000E66CE /* ListOfPlaylistsPresenter.swift */,
+				6B06FDD027AD259B000E66CE /* ListOfPlaylistsPresenterProtocols.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -405,8 +407,8 @@
 		6B06FDD627AD259B000E66CE /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				6B06FDD727AD259B000E66CE /* ListOfPlaylistsInteractorProtocols.swift */,
 				6B06FDD827AD259B000E66CE /* ListOfPlaylistsInteractor.swift */,
+				6B06FDD727AD259B000E66CE /* ListOfPlaylistsInteractorProtocols.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -1055,6 +1057,7 @@
 			isa = PBXGroup;
 			children = (
 				972F27F827947FA90000BE72 /* ConfigData */,
+				972EC65027F9E6960029B710 /* TrackContextMenuAction.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1668,6 +1671,7 @@
 				6B9ABFEA27AAD47F00F9F9F3 /* ProfilePresenter.swift in Sources */,
 				6B9ABFE927AAD47F00F9F9F3 /* ProfileAssembly.swift in Sources */,
 				972F27E0279437B10000BE72 /* AuthorizationPresenterProtocols.swift in Sources */,
+				972EC65127F9E6960029B710 /* TrackContextMenuAction.swift in Sources */,
 				97878FA627F2FED100E97377 /* MiniPlayerPresenter.swift in Sources */,
 				972CFDBC27F46865008752D0 /* PlaylistTableViewHeaderFooterView.swift in Sources */,
 				9792A46627D4FE9100EDDA96 /* PlayerPresenterProtocols.swift in Sources */,

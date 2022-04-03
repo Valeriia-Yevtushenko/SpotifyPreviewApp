@@ -79,11 +79,56 @@ private extension PlaylistViewController {
     }
 }
 
+@objc private extension PlaylistViewController {
+    func addButtonDidTap() {
+        let alert = UIAlertController(title: "Add playlist",
+                                      message: "Are you sure you want to add this playlist to favorites?",
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteButton = UIAlertAction(title: "Add", style: .destructive, handler: { _ in
+            self.output?.viewDidTapAddPlaylist()
+        })
+        
+        alert.addAction(cancelButton)
+        alert.addAction(deleteButton)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func trashButtonDidTap() {
+        let alert = UIAlertController(title: "Delete playlist",
+                                      message: "Are you sure you want to delete the playlist? After that you won't be able to restore it.",
+                                      preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let deleteButton = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.output?.viewDidTapDeletePlaylist()
+        })
+        
+        alert.addAction(cancelButton)
+        alert.addAction(deleteButton)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func editButtonDidTap() {
+        output?.viewDidEditPlaylist()
+    }
+    
+    func refreshCollectionView(sender: UIRefreshControl) {
+        output?.viewDidRefresh()
+        sender.endRefreshing()
+    }
+}
+
 extension PlaylistViewController: PlaylistViewInputProtocol {
+    func shareURL(_ url: String) {
+        let url = URL(string: url)
+        let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(activity, animated: true)
+    }
+    
     func setupPlaylist(model: PlaylistViewControllerModel, tracks: [TrackTableViewCellModel]) {
         navigationItem.title = model.name
         playlistTableView.backgroundView = tracks.isEmpty ? playlistTableView.backgroundView: nil
-        dataSource?.setupViewModel(tracks)
+        dataSource?.setupViewModel(tracks, type: model.type)
         
         if let url = model.imageUrl {
             headerView.setImage(withUrl: url)
@@ -103,8 +148,8 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
         }
     }
     
-    func showConfirmationToastView() {
-        toastView.text = "Successfully added"
+    func showConfirmationToastView(with text: String) {
+        toastView.text = text
         toastView.layer.setValue("0.01", forKeyPath: "transform.scale")
         toastView.alpha = 0
         view.addSubview(toastView)
@@ -145,11 +190,45 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
 }
 
 extension PlaylistViewController: PlaylistTableViewDataSourceDelegate {
-    func playDidTap() {
+    func didTapDeleteItem(at index: Int) {
+        let alert = UIAlertController(title: "Are you sure you want to delete the track?",
+                                      message: "If you delete it, you won't be able to restore it.",
+                                      preferredStyle: .alert)
+        let deleteButton = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.output?.viewDidTapDeleteItem(at: index)
+        })
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(deleteButton)
+        alert.addAction(cancelButton)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func didTapShowItemArtist(at index: Int) {
+        output?.viewDidTapShowItemArtist(at: index)
+    }
+    
+    func didTapShowItemAlbum(at index: Int) {
+        output?.viewDidTapShowItemAlbum(at: index)
+    }
+    
+    func didTapAddToPlaylist(at index: Int) {
+        output?.viewDidTapAddItemToPlaylist(at: index)
+    }
+    
+    func didTapShare(at index: Int) {
+        output?.viewDidTapShareItem(at: index)
+    }
+    
+    func didTapDownload(at index: Int) {
+        output?.viewDidTapDownloadItem(at: index)
+    }
+    
+    func didTapPlay() {
         output?.viewDidTapPlay()
     }
     
-    func shuffleDidTap() {
+    func didTapShuffle() {
         output?.viewDidTapShuffle()
     }
     
@@ -159,44 +238,5 @@ extension PlaylistViewController: PlaylistTableViewDataSourceDelegate {
     
     func scrollViewDidScroll() {
         updateHeaderView()
-    }
-}
-
-@objc private extension PlaylistViewController {
-    func addButtonDidTap() {
-        let alert = UIAlertController(title: "Add playlist",
-                                      message: "Are you sure you want to add this playlist to favorites?",
-                                      preferredStyle: .alert)
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let deleteButton = UIAlertAction(title: "Add", style: .destructive, handler: { _ in
-            self.output?.viewDidTapAddPlaylist()
-        })
-        
-        alert.addAction(cancelButton)
-        alert.addAction(deleteButton)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func trashButtonDidTap() {
-        let alert = UIAlertController(title: "Delete playlist",
-                                      message: "Are you sure you want to delete the playlist? After that you won't be able to restore it.",
-                                      preferredStyle: .alert)
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let deleteButton = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-            self.output?.viewDidTapDeletePlaylist()
-        })
-        
-        alert.addAction(cancelButton)
-        alert.addAction(deleteButton)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func editButtonDidTap() {
-        output?.viewDidEditPlaylist()
-    }
-    
-    func refreshCollectionView(sender: UIRefreshControl) {
-        output?.viewDidRefresh()
-        sender.endRefreshing()
     }
 }

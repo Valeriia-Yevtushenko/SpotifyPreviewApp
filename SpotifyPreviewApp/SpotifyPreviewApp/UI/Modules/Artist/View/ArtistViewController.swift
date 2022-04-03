@@ -85,6 +85,12 @@ private extension ArtistViewController {
 }
 
 extension ArtistViewController: ArtistViewInputProtocol {
+    func shareURL(_ url: String) {
+        let url = URL(string: url)
+        let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(activity, animated: true)
+    }
+    
     func setupArtistStatus(_ status: ArtistStatus) {
         switch status {
         case .followed:
@@ -159,6 +165,22 @@ extension ArtistViewController: ArtistViewInputProtocol {
 }
 
 extension ArtistViewController: ArtistTableViewDataSourceDelegate {
+    func didTapShowItemAlbum(at index: Int) {
+        output?.viewDidTapShowItemAlbum(at: index)
+    }
+    
+    func didTapShare(at index: Int) {
+        output?.viewDidTapShareItem(at: index)
+    }
+    
+    func didTapAddToPlaylist(at index: Int) {
+        output?.viewDidTapAddItemToPlaylist(at: index)
+    }
+    
+    func didTapDownload(at index: Int) {
+        output?.viewDidTapDownloadItem(at: index)
+    }
+    
     func didSelectAlbum(at index: Int) {
         output?.viewDidTapOnAlbum(at: index)
     }

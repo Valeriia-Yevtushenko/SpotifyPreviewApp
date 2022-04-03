@@ -14,6 +14,10 @@ class ListOfPlaylistsPresenter {
 }
 
 extension ListOfPlaylistsPresenter: ListOfPlaylistsViewOutputProtocol {
+    func viewDismiss() {
+        coordinator?.dismiss()
+    }
+    
     func viewDidRefresh() {
         interactor?.fetchPlaylists()
     }
@@ -36,6 +40,14 @@ extension ListOfPlaylistsPresenter: ListOfPlaylistsViewOutputProtocol {
 }
 
 extension ListOfPlaylistsPresenter: ListOfPlaylistsInteractorOutputProtocol {
+    func interactorDidAddNewItemToPlaylist(name: String?) {
+        view?.showToastView(with: name ?? "playlist")
+    }
+    
+    func interactorFailedToAddNewItemToPlaylist(_ error: String) {
+        view?.displayErrorAlert(title: "Failed to add track", text: error)
+    }
+    
     func interactorDidFetchPlaylists(_ data: Playlists, type: PlaylistType) {
         let viewModel: [CollectionViewCellModel]
         
@@ -57,7 +69,7 @@ extension ListOfPlaylistsPresenter: ListOfPlaylistsInteractorOutputProtocol {
     }
     
     func interactorFailedToPostPlaylist(_ error: String) {
-        view?.displayErrorAlert(with: error)
+        view?.displayErrorAlert(title: "Failed to create new playlist", text: error)
     }
     
     func interactorDidPostNewPlaylist() {

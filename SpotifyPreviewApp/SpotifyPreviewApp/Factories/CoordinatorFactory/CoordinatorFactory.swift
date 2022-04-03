@@ -45,11 +45,22 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
                                   factory: FlowFactory,
                                   router: RouterProtocol,
                                   serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator {
-        return PlaylistsCoordinator(factory: factory,
+        return PlaylistsCoordinator(type: type,
+                                    factory: factory,
                                     router: router,
                                     serviceManager: serviceManager,
-                                    coordinatorFactory: self,
-                                    type: type)
+                                    coordinatorFactory: self)
+    }
+    
+    func makePlaylistsCoordinator(newItemForPlaylist: String,
+                                  factory: FlowFactory,
+                                  router: RouterProtocol,
+                                  serviceManager: ServiceManagerProtocol) -> PlaylistsCoordinator {
+        return PlaylistsCoordinator(newItemForPlaylist: newItemForPlaylist,
+                                    factory: factory,
+                                    router: router,
+                                    serviceManager: serviceManager,
+                                    coordinatorFactory: self)
     }
     
     func makeProfileCoordinator(factory: FlowFactory,

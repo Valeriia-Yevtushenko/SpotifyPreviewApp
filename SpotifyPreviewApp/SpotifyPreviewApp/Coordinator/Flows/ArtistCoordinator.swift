@@ -21,7 +21,12 @@ class ArtistCoordinator: BaseCoordinator {
     weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: ArtistCoordinatorOutput?
     
-    init(artistId: String, status: ArtistStatus, factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(artistId: String,
+         status: ArtistStatus,
+         factory: FlowFactory,
+         router: RouterProtocol,
+         serviceManager: ServiceManagerProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
         self.artistId = artistId
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
@@ -44,6 +49,17 @@ private extension ArtistCoordinator {
 }
 
 extension ArtistCoordinator: ArtistModuleOutput {
+    func runListOfPlaylistFlow(for newItemForPlaylist: String) {
+        let playlistsCoordinator = coordinatorFactory.makePlaylistsCoordinator(newItemForPlaylist: newItemForPlaylist,
+                                                                              factory: factory,
+                                                                              router: router,
+                                                                              serviceManager: serviceManager)
+        playlistsCoordinator.output = self
+        playlistsCoordinator.playerDelegate = playerDelegate
+        playlistsCoordinator.start()
+        addDependency(playlistsCoordinator)
+    }
+    
     func runPlayerFlow(with tracks: [Track], for index: Int) {
         playerDelegate?.showPlayer(with: tracks, for: index)
     }
@@ -65,12 +81,19 @@ extension ArtistCoordinator: ArtistModuleOutput {
 }
 
 extension ArtistCoordinator: AlbumCoordinatorOutput {
-    func finishArtistFlow(coordinator: Coordinator) {
+    func finishAlbumFlow(coordinator: Coordinator) {
         removeDependency(coordinator)
     }
 }
+
 extension ArtistCoordinator: PlayerCoordinatorOutput {
     func finishPlayerFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+    }
+}
+
+extension ArtistCoordinator: PlaylistsCoordinatorOutput {
+    func finishPlaylistsFlow(coordinator: Coordinator) {
         removeDependency(coordinator)
     }
 }

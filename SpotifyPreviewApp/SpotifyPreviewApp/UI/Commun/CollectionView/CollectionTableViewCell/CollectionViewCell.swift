@@ -19,7 +19,7 @@ final class CollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        cellImageView.image = nil
+        cellImageView.image = UIImage()
         nameLabel.text = nil
     }
     

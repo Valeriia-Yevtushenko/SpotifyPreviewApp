@@ -19,7 +19,10 @@ class SearchCoordinator: BaseCoordinator {
     weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: SearchCoordinatorOutput?
     
-    init(factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(factory: FlowFactory,
+         router: RouterProtocol,
+         serviceManager: ServiceManagerProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
         self.factory = factory
         self.router = router
         self.serviceManager = serviceManager

@@ -40,7 +40,9 @@ extension UIImageView {
                     return
                 }
                 
-                seal.resolve(.fulfilled((image, urlString)))
+                DispatchQueue.main.async {
+                    seal.resolve(.fulfilled((image, urlString)))
+                }
             }
         }
     }
