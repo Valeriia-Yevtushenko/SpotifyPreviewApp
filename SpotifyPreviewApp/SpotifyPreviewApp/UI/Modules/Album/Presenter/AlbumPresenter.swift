@@ -14,6 +14,22 @@ class AlbumPresenter {
 }
 
 extension AlbumPresenter: AlbumViewOutputProtocol {
+    func viewDidTapShareAlbum() {
+        interactor?.getAlbumURL()
+    }
+    
+    func viewDidTapShareItem(at index: Int) {
+        interactor?.getTrackURL(at: index)
+    }
+    
+    func viewDidTapAddItemToPlaylist(at index: Int) {
+        interactor?.getTrackUri(at: index)
+    }
+    
+    func viewDidTapDownloadItem(at index: Int) {
+        
+    }
+    
     func viewDidTapPlay() {
         interactor?.getPlaylist()
     }
@@ -40,6 +56,14 @@ extension AlbumPresenter: AlbumViewOutputProtocol {
 }
 
 extension AlbumPresenter: AlbumInteractorOutputProtocol {
+    func interactorDidGetTrackUri(_ uri: String) {
+        coordinator?.runListOfPlaylistFlow(for: uri)
+    }
+    
+    func interactorDidGetURL(_ url: String) {
+        view?.shareURL(url)
+    }
+    
     func interactorDidGetPlaylist(tracks: [Track], for index: Int) {
         coordinator?.runPlayerFlow(with: tracks, for: index)
     }

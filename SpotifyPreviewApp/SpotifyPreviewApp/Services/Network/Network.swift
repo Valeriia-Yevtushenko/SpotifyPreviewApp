@@ -47,6 +47,24 @@ extension NetworkService: NetworkServiceProtocol {
         }
     }
     
+    func post(data: Data, url: String) -> Promise<Void> {
+        if client.credential.isTokenExpired() {
+           authorizationService.renewAccessToken()
+        }
+       
+        return Promise {seal in
+            client.post(url, body: data) { result in
+                switch result {
+                case .success(_):
+                  seal.fulfill_()
+                case .failure(let error):
+                    debugPrint(error.description)
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
     func post<T: Codable>(data: Data, url: String) -> Promise<T> {
         if client.credential.isTokenExpired() {
            authorizationService.renewAccessToken()
@@ -113,6 +131,24 @@ extension NetworkService: NetworkServiceProtocol {
        
         return Promise {seal in
             client.delete(url) { result in
+                switch result {
+                case .success(_):
+                    seal.fulfill_()
+                case .failure(let error):
+                    debugPrint(error.description)
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    func delete(data: Data, url: String) -> Promise<Void> {
+        if client.credential.isTokenExpired() {
+           authorizationService.renewAccessToken()
+        }
+       
+        return Promise {seal in
+            client.request(url, method: .DELETE, body: data) { result in
                 switch result {
                 case .success(_):
                     seal.fulfill_()

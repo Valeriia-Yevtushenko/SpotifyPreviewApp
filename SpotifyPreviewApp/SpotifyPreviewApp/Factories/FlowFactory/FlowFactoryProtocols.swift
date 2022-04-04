@@ -24,11 +24,11 @@ protocol ProfileFlowFactory: AnyObject {
 protocol PlaylistsFlowFactory: AnyObject {
     func makeListOfPlaylistsModule(with type: PlaylistType,
                                    serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsPresenter)
-    
+    func makeListOfPlaylistsModule(with newItemForPlaylist: String,
+                                   serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfPlaylistsPresenter)
     func makePlaylistModule(with playlistId: String,
                             type: PlaylistType,
                             serviceManager: ServiceManagerProtocol) -> (Presentable, PlaylistPresenter)
-    
     func makeEditPlaylistModule(with playlist: Playlist,
                                 serviceManager: ServiceManagerProtocol) -> (Presentable, EditPlaylistPresenter)
 }

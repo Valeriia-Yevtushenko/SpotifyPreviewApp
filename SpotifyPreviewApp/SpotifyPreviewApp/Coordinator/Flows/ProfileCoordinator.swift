@@ -19,7 +19,10 @@ class ProfileCoordinator: BaseCoordinator {
     weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: ProfileCoordinatorOutput?
     
-    init(factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(factory: FlowFactory,
+         router: RouterProtocol,
+         serviceManager: ServiceManagerProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
         self.router = router

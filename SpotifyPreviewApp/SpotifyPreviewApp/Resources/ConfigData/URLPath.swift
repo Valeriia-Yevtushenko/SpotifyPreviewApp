@@ -18,6 +18,7 @@ enum Path: String {
     case userPlaylist = "me/playlists"
     case playlistFollowers = "playlists/%@/followers"
     case playlistImage = "playlists/%@/images"
+    case playlistTracks = "playlists/%@/tracks"
     
     case following = "me/following"
     case isFolowing = "me/following/contains"

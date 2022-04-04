@@ -9,7 +9,7 @@ import UIKit
 
 class PlayerViewController: UIViewController {
     @IBOutlet private weak var accessoryView: UIView!
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: CustomImageView!
     @IBOutlet private weak var imageViewContainerView: UIView!
     @IBOutlet private weak var imageWidhtLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var imageHeightLayoutConstraint: NSLayoutConstraint!
@@ -162,7 +162,7 @@ extension PlayerViewController: PlayerViewInputProtocol {
         durationLabel.text = item.duration?.asString(style: .abbreviated)
         
         if let imageUrl = item.image {
-            imageView.setImage(withUrl: imageUrl)
+            imageView.loadImageUsingUrlString(urlString: imageUrl)
         }
     }
     
@@ -190,7 +190,7 @@ extension PlayerViewController: PlayerViewInputProtocol {
         durationLabel.text = item.duration?.asString(style: .abbreviated)
         
         if let imageUrl = item.image {
-            imageView.setImage(withUrl: imageUrl)
+            imageView.loadImageUsingUrlString(urlString: imageUrl)
         }
     }
     

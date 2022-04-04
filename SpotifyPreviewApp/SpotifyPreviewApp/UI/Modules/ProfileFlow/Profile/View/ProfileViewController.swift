@@ -22,7 +22,7 @@ struct ProfileInfoModel {
 final class ProfileViewController: UIViewController {
     @IBOutlet private weak var userEmailLabel: UILabel!
     @IBOutlet private weak var usernameLabel: UILabel!
-    @IBOutlet private weak var userImageView: UIImageView!
+    @IBOutlet private weak var userImageView: CustomImageView!
     @IBOutlet private weak var followsView: UIView!
     @IBOutlet private weak var playlistView: UIView!
     @IBOutlet private weak var userImageHeightLayoutConstraint: NSLayoutConstraint!
@@ -122,6 +122,11 @@ extension ProfileViewController: ProfileViewInputProtocol {
     func configureProfileInfo(_ model: ProfileInfoModel) {
         userEmailLabel.text = model.userEmail
         usernameLabel.text = model.username
-        userImageView.setImage(withUrl: model.userImage ?? "")
+        guard let url = model.userImage else {
+            userImageView.image = UIImage(systemName: "person.circle")
+            return
+        }
+        
+        userImageView.loadImageUsingUrlString(urlString: url)
     }
 }

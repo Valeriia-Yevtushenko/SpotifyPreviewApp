@@ -38,7 +38,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ulN-aX-Jg2">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ulN-aX-Jg2" customClass="CustomImageView" customModule="SpotifyPreviewApp" customModuleProvider="target">
                                         <rect key="frame" x="64.5" y="29" width="210" height="205.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="210" id="1Ee-lG-NHW"/>
@@ -211,7 +211,7 @@
                         <outlet property="playlistView" destination="FHi-dU-vIu" id="Jsq-El-leb"/>
                         <outlet property="userEmailLabel" destination="GWv-hv-QuO" id="NqR-Ti-vZp"/>
                         <outlet property="userImageHeightLayoutConstraint" destination="1Ee-lG-NHW" id="VBb-6e-IKP"/>
-                        <outlet property="userImageView" destination="ulN-aX-Jg2" id="5lJ-bS-EJf"/>
+                        <outlet property="userImageView" destination="ulN-aX-Jg2" id="a3C-MD-Pyj"/>
                         <outlet property="userImageWidthLayoutConstraint" destination="Q8u-Da-zEu" id="g1T-ah-Zvg"/>
                         <outlet property="usernameLabel" destination="vEv-pL-Opq" id="gKd-nW-0AA"/>
                     </connections>

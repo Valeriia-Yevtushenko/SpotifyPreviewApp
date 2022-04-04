@@ -14,6 +14,10 @@ final class PlaylistPresenter {
 }
 
 extension PlaylistPresenter: PlaylistViewOutputProtocol {
+    func viewDidTapSharePlaylist() {
+        interactor?.getPlaylistURL()
+    }
+    
     func viewDidTapPlay() {
         interactor?.getTracks()
     }
@@ -24,6 +28,30 @@ extension PlaylistPresenter: PlaylistViewOutputProtocol {
     
     func viewDidSelectItem(at index: Int) {
         interactor?.getPlaylist(for: index)
+    }
+    
+    func viewDidTapAddItemToPlaylist(at index: Int) {
+        interactor?.getTrackUri(at: index)
+    }
+    
+    func viewDidTapShareItem(at index: Int) {
+        interactor?.getTrackURL(at: index)
+    }
+    
+    func viewDidTapDeleteItem(at index: Int) {
+        interactor?.deleteTrack(at: index)
+    }
+    
+    func viewDidTapDownloadItem(at index: Int) {
+        
+    }
+    
+    func viewDidTapShowItemArtist(at index: Int) {
+        interactor?.getTrackArtistId(at: index)
+    }
+    
+    func viewDidTapShowItemAlbum(at index: Int) {
+        interactor?.getTrackAlbumId(at: index)
     }
     
     func viewWillAppear() {
@@ -52,6 +80,31 @@ extension PlaylistPresenter: PlaylistViewOutputProtocol {
 }
 
 extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
+    func interactorDidDeleteItemFromPlaylist(name: String?) {
+        view?.showConfirmationToastView(with: "Successfully deleted")
+        interactor?.fetchPlaylist()
+    }
+    
+    func interactorFailedToDeleteItemFromPlaylist(_ error: String) {
+        view?.displayErrorAlert(with: error)
+    }
+    
+    func interactorDidGetTrackArtistId(_ artistId: String) {
+        coordinator?.runArtistModule(with: artistId)
+    }
+    
+    func interactorDidGetTrackAlbumId(_ albumId: String) {
+        coordinator?.runAlbumModule(with: albumId)
+    }
+    
+    func interactorDidGetURL(_ url: String) {
+        view?.shareURL(url)
+    }
+    
+    func interactorDidGetTrackUri(_ uri: String) {
+        coordinator?.showListOfPlaylists(for: uri)
+    }
+    
     func interactorDidGetPlaylist(tracks: [Track], for index: Int) {
         coordinator?.runPlayerFlow(with: tracks, for: index)
     }
@@ -65,7 +118,7 @@ extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
     }
     
     func interactorDidAddPlaylist() {
-        view?.showConfirmationToastView()
+        view?.showConfirmationToastView(with: "Successfully added")
     }
     
     func interactorFailedToAddPlaylist(_ error: String) {

@@ -11,7 +11,7 @@ class MiniPlayerViewController: UIViewController {
     @IBOutlet private weak var songNameLabel: UILabel!
     @IBOutlet private weak var artistsLabel: UILabel!
     @IBOutlet private weak var togglePlayPauseButton: UIButton!
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: CustomImageView!
     private let tapGestureRecognizer = UITapGestureRecognizer()
     private var isPlaying = true
     var output: MiniPlayerViewOutputProtocol?
@@ -50,7 +50,7 @@ extension MiniPlayerViewController: MiniPlayerViewInputProtocol {
         artistsLabel.text = item.artists
         
         if let imageUrl = item.image {
-            imageView.setImage(withUrl: imageUrl)
+            imageView.loadImageUsingUrlString(urlString: imageUrl)
         }
         
         if isPlaying {
@@ -67,7 +67,7 @@ extension MiniPlayerViewController: MiniPlayerViewInputProtocol {
         artistsLabel.text = item.artists
         
         if let imageUrl = item.image {
-            imageView.setImage(withUrl: imageUrl)
+            imageView.loadImageUsingUrlString(urlString: imageUrl)
         }
     }
     

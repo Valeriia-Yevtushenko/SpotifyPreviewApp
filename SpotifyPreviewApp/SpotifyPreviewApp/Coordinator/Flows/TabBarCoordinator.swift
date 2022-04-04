@@ -18,7 +18,10 @@ class TabBarCoordinator: BaseCoordinator {
     private let serviceManager: ServiceManagerProtocol
     weak var output: TabbarCoordinatorOutput?
     
-    init(containerViewControllerDelegate: ContainerViewControllerDelegate, coordinatorFactory: CoordinatorFactoryProtocol, serviceManager: ServiceManagerProtocol, flowFactory: FlowFactory) {
+    init(containerViewControllerDelegate: ContainerViewControllerDelegate,
+         coordinatorFactory: CoordinatorFactoryProtocol,
+         serviceManager: ServiceManagerProtocol,
+         flowFactory: FlowFactory) {
         self.containerViewControllerDelegate = containerViewControllerDelegate
         self.coordinatorFactory = coordinatorFactory
         self.serviceManager = serviceManager

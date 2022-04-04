@@ -17,7 +17,7 @@ struct EditPlaylistViewControllerModel {
 
 class EditPlaylistViewController: UIViewController {
     @IBOutlet private weak var nameTextField: UITextField!
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: CustomImageView!
     @IBOutlet private weak var visibleStatusStackView: UIStackView!
     @IBOutlet private weak var visibleStatusSwitch: UISwitch!
     @IBOutlet private weak var descriptionTextField: UITextField!
@@ -124,7 +124,7 @@ extension EditPlaylistViewController: EditPlaylistViewInputProtocol {
             return
         }
         
-        imageView.setImage(withUrl: url)
+        imageView.loadImageUsingUrlString(urlString: url)
     }
     
     func displayErrorAlert(with text: String) {

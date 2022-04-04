@@ -9,9 +9,10 @@ import Foundation
 
 protocol ListOfPlaylistsViewInputProtocol: AnyObject {
     func setupData(_ model: [CollectionViewCellModel], type: PlaylistType)
-    func reloadData()
     func displayLabel(with text: String)
-    func displayErrorAlert(with text: String)
+    func showToastView(with text: String)
+    func displayErrorAlert(title: String, text: String)
+    func reloadData()
 }
 
 protocol ListOfPlaylistsViewOutputProtocol: AnyObject {
@@ -20,8 +21,10 @@ protocol ListOfPlaylistsViewOutputProtocol: AnyObject {
     func viewWillAppear()
     func viewDidTapCreatePlaylist(_ playlist: NewPlaylist)
     func viewSelectedItem(at index: Int)
+    func viewDismiss()
 }
 
 protocol ListOfPlaylistsModuleOutput {
+    func dismiss()
     func runPlaylistModule(with playlistId: String, type: PlaylistType)
 }

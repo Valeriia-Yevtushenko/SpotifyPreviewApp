@@ -25,7 +25,10 @@ class PlayerCoordinator: BaseCoordinator {
     weak var containerViewControllerDelegate: ContainerViewControllerDelegate?
     weak var output: PlayerCoordinatorOutput?
     
-    init(factory: PlayerFlow, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(factory: PlayerFlow,
+         router: RouterProtocol,
+         serviceManager: ServiceManagerProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
         self.coordinatorFactory = coordinatorFactory
         self.factory = factory
         self.router = router

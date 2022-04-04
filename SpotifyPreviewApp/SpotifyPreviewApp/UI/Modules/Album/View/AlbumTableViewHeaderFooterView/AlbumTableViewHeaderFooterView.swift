@@ -13,7 +13,7 @@ struct AlbumTableViewHeaderFooterViewModel {
 }
 
 class AlbumTableViewHeaderFooterView: UITableViewHeaderFooterView {
-    @IBOutlet private weak var albumImageView: UIImageView!
+    @IBOutlet private weak var albumImageView: CustomImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     var play: (() -> Void)!
     var shuffle: (() -> Void)!
@@ -23,7 +23,7 @@ class AlbumTableViewHeaderFooterView: UITableViewHeaderFooterView {
         nameLabel.text = model?.name
         
         if let image = model?.imageUrl {
-            albumImageView.setImage(withUrl: image)
+            albumImageView.loadImageUsingUrlString(urlString: image)
         }
     }
 }

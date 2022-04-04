@@ -19,7 +19,10 @@ class SearchCoordinator: BaseCoordinator {
     weak var playerDelegate: PlayerCoordinatorDelegate?
     weak var output: SearchCoordinatorOutput?
     
-    init(factory: FlowFactory, router: RouterProtocol, serviceManager: ServiceManagerProtocol, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(factory: FlowFactory,
+         router: RouterProtocol,
+         serviceManager: ServiceManagerProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
         self.factory = factory
         self.router = router
         self.serviceManager = serviceManager
@@ -61,6 +64,40 @@ extension SearchCoordinator: CategoriesModuleOutput {
 }
 
 extension SearchCoordinator: SearchModuleOutput {
+    func runArtistModule(with artistId: String) {
+        let artistCoordinator = coordinatorFactory.makeArtistCoordinator(artistId: artistId,
+                                                                         status: .followed,
+                                                                         factory: factory,
+                                                                         router: router,
+                                                                         serviceManager: serviceManager)
+        artistCoordinator.output = self
+        artistCoordinator.playerDelegate = playerDelegate
+        artistCoordinator.start()
+        addDependency(artistCoordinator)
+    }
+    
+    func runAlbumModule(with albumId: String) {
+        let albumCoordinator = coordinatorFactory.makeAlbumCoordinator(albumId: albumId,
+                                                                       factory: factory,
+                                                                       router: router,
+                                                                       serviceManager: serviceManager)
+        albumCoordinator.output = self
+        albumCoordinator.playerDelegate = playerDelegate
+        albumCoordinator.start()
+        addDependency(albumCoordinator)
+    }
+    
+    func runListOfPlaylistFlow(for newItemForPlaylist: String) {
+        let playlistsCoordinator = coordinatorFactory.makePlaylistsCoordinator(newItemForPlaylist: newItemForPlaylist,
+                                                                              factory: factory,
+                                                                              router: router,
+                                                                              serviceManager: serviceManager)
+        playlistsCoordinator.output = self
+        playlistsCoordinator.playerDelegate = playerDelegate
+        playlistsCoordinator.start()
+        addDependency(playlistsCoordinator)
+    }
+    
     func runPlayerFlow(with tracks: [Track], for index: Int) {
         playerDelegate?.showPlayer(with: tracks, for: index)
     }
@@ -68,6 +105,18 @@ extension SearchCoordinator: SearchModuleOutput {
 
 extension SearchCoordinator: PlaylistsCoordinatorOutput {
     func finishPlaylistsFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+    }
+}
+
+extension SearchCoordinator: AlbumCoordinatorOutput {
+    func finishAlbumFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+    }
+}
+
+extension SearchCoordinator: ArtistCoordinatorOutput {
+    func finishArtistFlow(coordinator: Coordinator) {
         removeDependency(coordinator)
     }
 }

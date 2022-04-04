@@ -12,17 +12,30 @@ protocol ArtistInteractorInputProtocol: AnyObject {
     func followOnArtist()
     func unfollowArtist()
     func getAlbumId(at index: Int)
+    
     func getPlaylist(for index: Int)
+    
+    func getArtistURL()
+    func getTrackUri(for index: Int)
+    func getTrackURL(for index: Int)
+    func getTrackAlbumId(for index: Int)
 }
 
 protocol ArtistInteractorOutputProtocol: AnyObject {
     func interactorDidFetchArtistInfo(_ artistInfo: (Artist?, [Track], [Album]))
+    func interactorFailedToFetchArtistInfo()
+    
     func interactorDidGetArtistStatus(_ status: ArtistStatus)
     func interactorDidGetPlaylist(tracks: [Track], for index: Int)
+    
     func interactorDidFollowOnArtist()
-    func interactorUnfollowArtist()
-    func interactorDidGetAlbumId(_ identifier: String)
-    func interactorFailedToFetchArtistInfo()
     func interactorFailedToFollowOnArtist(_ error: String)
+    func interactorUnfollowArtist()
     func interactorFailedToUnfollowArtist(_ error: String)
+    
+    func interactorDidGetAlbumId(_ identifier: String)
+    
+    func interactorDidGetURL(_ url: String)
+    func interactorDidGetTrackUri(_ uri: String)
+    func interactorDidGetTrackAlbumId(_ albumId: String)
 }

@@ -8,8 +8,12 @@
 import UIKit
 
 protocol ArtistTableViewDataSourceDelegate: AnyObject {
+    func didTapShareItem(at index: Int)
+    func didTapAddItemToPlaylist(at index: Int)
+    func didTapDownloadItem(at index: Int)
     func didSelectAlbum(at index: Int)
     func didSelectTrack(at index: Int)
+    func didTapShowItemAlbum(at index: Int)
     func scrollViewDidScroll()
 }
 
@@ -61,6 +65,41 @@ extension ArtistTableViewDataSource: UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         delegate?.scrollViewDidScroll()
+    }
+    
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard indexPath.section == 0 else {
+            return nil
+        }
+        
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ -> UIMenu? in
+            let share = UIAction(title: TrackContextMenuAction.share.rawValue,
+                                 image: TrackContextMenuAction.share.image) { _ in
+                self.delegate?.didTapShareItem(at: indexPath.row)
+            }
+            
+            let addToPlaylist = UIAction(title: TrackContextMenuAction.addToPlaylist.rawValue,
+                                         image: TrackContextMenuAction.addToPlaylist.image) { _ in
+                self.delegate?.didTapAddItemToPlaylist(at: indexPath.row)
+            }
+            
+            let download = UIAction(title: TrackContextMenuAction.download.rawValue,
+                                    image: TrackContextMenuAction.download.image) { _ in
+                self.delegate?.didTapDownloadItem(at: indexPath.row)
+            }
+            
+            let showAlbum = UIAction(title: TrackContextMenuAction.album.rawValue,
+                                     image: TrackContextMenuAction.album.image) { _ in
+                 self.delegate?.didTapShowItemAlbum(at: indexPath.row)
+            }
+            
+            return UIMenu.init(children: [share,
+                                          download,
+                                          addToPlaylist,
+                                          showAlbum])
+        }
+        
+        return configuration
     }
 }
 

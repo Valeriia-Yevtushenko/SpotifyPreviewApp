@@ -18,7 +18,10 @@ class AuthorizationCoordinator: BaseCoordinator {
     private let authorizationService: AuthorizationServiceProtocol
     weak var output: AuthorizationCoordinatorOutput?
     
-    init(router: RouterProtocol, authorizationService: AuthorizationServiceProtocol, flowFactory: AuthorizationFlowFactory, coordinatorFactory: CoordinatorFactoryProtocol) {
+    init(router: RouterProtocol,
+         authorizationService: AuthorizationServiceProtocol,
+         flowFactory: AuthorizationFlowFactory,
+         coordinatorFactory: CoordinatorFactoryProtocol) {
         self.router = router
         self.flowFactory = flowFactory
         self.authorizationService = authorizationService

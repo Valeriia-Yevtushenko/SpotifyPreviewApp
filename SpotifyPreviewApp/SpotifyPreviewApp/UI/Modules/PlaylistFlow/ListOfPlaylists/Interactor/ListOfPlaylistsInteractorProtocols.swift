@@ -15,8 +15,10 @@ protocol ListOfPlaylistsInteractorInputProtocol: AnyObject {
 
 protocol ListOfPlaylistsInteractorOutputProtocol: AnyObject {
     func interactorDidFetchPlaylists(_ data: Playlists, type: PlaylistType)
-    func interactorDidPostNewPlaylist()
     func interactorFailedToFetchPlaylists()
+    func interactorDidPostNewPlaylist()
     func interactorFailedToPostPlaylist(_ error: String)
     func interactorDidGetPlaylistId(_ identifier: String, type: PlaylistType)
+    func interactorDidAddNewItemToPlaylist(name: String?)
+    func interactorFailedToAddNewItemToPlaylist(_ error: String)
 }
