@@ -20,6 +20,7 @@ protocol PlaylistViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func viewWillAppear()
     func viewDidRefresh()
+    func viewDidTapSharePlaylist()
     func viewDidSelectItem(at index: Int)
     func viewDidTapAddItemToPlaylist(at index: Int)
     func viewDidTapShareItem(at index: Int)

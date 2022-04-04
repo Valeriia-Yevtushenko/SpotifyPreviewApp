@@ -14,6 +14,10 @@ final class PlaylistPresenter {
 }
 
 extension PlaylistPresenter: PlaylistViewOutputProtocol {
+    func viewDidTapSharePlaylist() {
+        interactor?.getPlaylistURL()
+    }
+    
     func viewDidTapPlay() {
         interactor?.getTracks()
     }
@@ -93,7 +97,7 @@ extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
         coordinator?.runAlbumModule(with: albumId)
     }
     
-    func interactorDidGetTrackURL(_ url: String) {
+    func interactorDidGetURL(_ url: String) {
         view?.shareURL(url)
     }
     

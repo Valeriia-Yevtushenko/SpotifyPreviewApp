@@ -22,6 +22,7 @@ protocol ArtistViewOutputProtocol: AnyObject {
     func viewDidRefresh()
     func viewDidTapFollow()
     func viewDidTapUnfollow()
+    func viewDidTapShareArtist()
     func viewDidTapOnAlbum(at index: Int)
     func viewDidTapOnTrack(at index: Int)
     func viewDidTapAddItemToPlaylist(at index: Int)

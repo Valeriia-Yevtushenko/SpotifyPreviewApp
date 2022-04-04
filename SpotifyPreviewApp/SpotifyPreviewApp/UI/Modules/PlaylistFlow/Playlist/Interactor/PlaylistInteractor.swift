@@ -33,6 +33,14 @@ final class PlaylistInteractor {
 }
 
 extension PlaylistInteractor: PlaylistInteractorInputProtocol {
+    func getPlaylistURL() {
+        guard let url = playlist?.externalUrls.spotify else {
+            return
+        }
+        
+        presenter?.interactorDidGetURL(url)
+    }
+    
     func deleteTrack(at index: Int) {
         guard let trackUri = playlist?.tracks?.items?[index].track?.uri,
               let jsonData = try? JSONSerialization.data(withJSONObject: ["tracks": [["uri": trackUri]]]) else {
@@ -72,7 +80,7 @@ extension PlaylistInteractor: PlaylistInteractorInputProtocol {
             return
         }
         
-        presenter?.interactorDidGetTrackURL(url)
+        presenter?.interactorDidGetURL(url)
     }
     
     func getTrackUri(at index: Int) {

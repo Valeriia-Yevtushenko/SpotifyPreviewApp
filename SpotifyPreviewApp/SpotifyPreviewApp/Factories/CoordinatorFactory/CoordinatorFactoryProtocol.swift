@@ -34,7 +34,7 @@ protocol CoordinatorFactoryProtocol: AnyObject {
                                router: RouterProtocol,
                                serviceManager: ServiceManagerProtocol) -> ArtistCoordinator
     func makeAlbumCoordinator(albumId: String,
-                              factory: AlbumFlow & PlayerFlow,
+                              factory: FlowFactory,
                               router: RouterProtocol,
                               serviceManager: ServiceManagerProtocol) -> AlbumCoordinator
     func makePlayerCoordinator(factory: PlayerFlow,

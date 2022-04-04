@@ -13,7 +13,7 @@ protocol AlbumCoordinatorOutput: AnyObject {
 
 class AlbumCoordinator: BaseCoordinator {
     private let albumId: String
-    private let factory: AlbumFlow & PlayerFlow
+    private let factory: FlowFactory
     private let router: RouterProtocol
     private let serviceManager: ServiceManagerProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
@@ -21,7 +21,7 @@ class AlbumCoordinator: BaseCoordinator {
     weak var output: AlbumCoordinatorOutput?
     
     init(albumId: String,
-         factory: AlbumFlow & PlayerFlow,
+         factory: FlowFactory,
          router: RouterProtocol,
          serviceManager: ServiceManagerProtocol,
          coordinatorFactory: CoordinatorFactoryProtocol) {
@@ -51,7 +51,24 @@ extension AlbumCoordinator: AlbumModuleOutput {
         playerDelegate?.showPlayer(with: tracks, for: index)
     }
     
+    func runListOfPlaylistFlow(for newItemForPlaylist: String) {
+        let playlistsCoordinator = coordinatorFactory.makePlaylistsCoordinator(newItemForPlaylist: newItemForPlaylist,
+                                                                              factory: factory,
+                                                                              router: router,
+                                                                              serviceManager: serviceManager)
+        playlistsCoordinator.output = self
+        playlistsCoordinator.playerDelegate = playerDelegate
+        playlistsCoordinator.start()
+        addDependency(playlistsCoordinator)
+    }
+    
     func finishFlow() {
         output?.finishAlbumFlow(coordinator: self)
+    }
+}
+
+extension AlbumCoordinator: PlaylistsCoordinatorOutput {
+    func finishPlaylistsFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
     }
 }

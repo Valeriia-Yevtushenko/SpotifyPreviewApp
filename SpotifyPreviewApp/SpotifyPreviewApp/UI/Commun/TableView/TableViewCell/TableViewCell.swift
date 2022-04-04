@@ -13,7 +13,7 @@ struct TableViewCellModel {
 }
 
 final class TableViewCell: UITableViewCell {
-    @IBOutlet private weak var cellImageView: UIImageView!
+    @IBOutlet private weak var cellImageView: CustomImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     
     override func prepareForReuse() {
@@ -30,6 +30,6 @@ final class TableViewCell: UITableViewCell {
             return
         }
         
-        cellImageView.setImage(withUrl: image)
+        cellImageView.loadImageUsingUrlString(urlString: image)
     }
 }

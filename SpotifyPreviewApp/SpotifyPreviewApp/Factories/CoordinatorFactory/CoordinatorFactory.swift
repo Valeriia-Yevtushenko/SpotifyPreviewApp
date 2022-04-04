@@ -18,7 +18,7 @@ class CoordinatorFactory: CoordinatorFactoryProtocol {
     }
     
     func makeAlbumCoordinator(albumId: String,
-                              factory: AlbumFlow & PlayerFlow,
+                              factory: FlowFactory,
                               router: RouterProtocol,
                               serviceManager: ServiceManagerProtocol) -> AlbumCoordinator {
         return AlbumCoordinator(albumId: albumId,

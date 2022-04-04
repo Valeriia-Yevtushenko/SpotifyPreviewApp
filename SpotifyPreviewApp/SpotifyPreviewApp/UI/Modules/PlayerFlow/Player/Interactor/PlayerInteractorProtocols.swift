@@ -10,7 +10,7 @@ import Foundation
 protocol PlayerInteractorInputProtocol: AnyObject {
     func play()
     func play(at index: Int)
-    func play(at: Double)
+    func play(at time: Double)
     func next()
     func previous()
     func toggleRepeat()

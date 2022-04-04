@@ -19,7 +19,7 @@ class PlaylistViewController: UIViewController {
     private let toastView = ToastView()
     var output: PlaylistViewOutputProtocol?
     var dataSource: PlaylistTableViewDataSource?
-    var headerView: UIImageView!
+    var headerView: CustomImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +55,7 @@ private extension PlaylistViewController {
         playlistTableView.register(UINib(nibName: TrackTableViewCell.reuseIdentifier, bundle: nil),
                            forCellReuseIdentifier: TrackTableViewCell.reuseIdentifier )
         playlistTableView.refreshControl = refreshControl
-        headerView = UIImageView()
+        headerView = CustomImageView()
         headerView.contentMode = .scaleAspectFill
         headerView.clipsToBounds = true
         playlistTableView.contentInset = UIEdgeInsets(top: 400, left: 0, bottom: 0, right: 0)
@@ -116,6 +116,10 @@ private extension PlaylistViewController {
         output?.viewDidRefresh()
         sender.endRefreshing()
     }
+    
+    func shareButtonDidTap() {
+        output?.viewDidTapSharePlaylist()
+    }
 }
 
 extension PlaylistViewController: PlaylistViewInputProtocol {
@@ -131,7 +135,7 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
         dataSource?.setupViewModel(tracks, type: model.type)
         
         if let url = model.imageUrl {
-            headerView.setImage(withUrl: url)
+            headerView.loadImageUsingUrlString(urlString: url)
             playlistTableView.addSubview(headerView)
         }
         
@@ -142,9 +146,17 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
                                                                   action: #selector(trashButtonDidTap)),
                                                   UIBarButtonItem(barButtonSystemItem: .compose,
                                                                   target: self,
-                                                                  action: #selector(editButtonDidTap))]
+                                                                  action: #selector(editButtonDidTap)),
+                                                  UIBarButtonItem(barButtonSystemItem: .action,
+                                                                  target: self,
+                                                                  action: #selector(shareButtonDidTap))]
         case .category(_):
-            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonDidTap))
+            navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .add,
+                                                                  target: self,
+                                                                  action: #selector(addButtonDidTap)),
+                                                  UIBarButtonItem(barButtonSystemItem: .action,
+                                                                  target: self,
+                                                                  action: #selector(shareButtonDidTap))]
         }
     }
     
@@ -212,15 +224,15 @@ extension PlaylistViewController: PlaylistTableViewDataSourceDelegate {
         output?.viewDidTapShowItemAlbum(at: index)
     }
     
-    func didTapAddToPlaylist(at index: Int) {
+    func didTapAddItemToPlaylist(at index: Int) {
         output?.viewDidTapAddItemToPlaylist(at: index)
     }
     
-    func didTapShare(at index: Int) {
+    func didTapShareItem(at index: Int) {
         output?.viewDidTapShareItem(at: index)
     }
     
-    func didTapDownload(at index: Int) {
+    func didTapDownloadItem(at index: Int) {
         output?.viewDidTapDownloadItem(at: index)
     }
     

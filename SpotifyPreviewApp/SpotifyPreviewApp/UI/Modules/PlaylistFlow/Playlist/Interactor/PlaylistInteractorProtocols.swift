@@ -17,6 +17,7 @@ protocol PlaylistInteractorInputProtocol: AnyObject {
     func getTracks()
     func getShuffledTracks()
     
+    func getPlaylistURL()
     func getTrackUri(at index: Int)
     func getTrackURL(at index: Int)
     func getTrackArtistId(at index: Int)
@@ -37,7 +38,7 @@ protocol PlaylistInteractorOutputProtocol: AnyObject {
     func interactorDidGetPlaylist(tracks: [Track], for index: Int)
     
     func interactorDidGetTrackUri(_ uri: String)
-    func interactorDidGetTrackURL(_ url: String)
+    func interactorDidGetURL(_ url: String)
     func interactorDidGetTrackArtistId(_ artistId: String)
     func interactorDidGetTrackAlbumId(_ albumId: String)
     func interactorDidDeleteItemFromPlaylist(name: String?)

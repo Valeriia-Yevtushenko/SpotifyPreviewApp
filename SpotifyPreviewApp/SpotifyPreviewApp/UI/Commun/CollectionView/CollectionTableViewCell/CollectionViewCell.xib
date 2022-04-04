@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kHW-lJ-gyj">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kHW-lJ-gyj" customClass="CustomImageView" customModule="SpotifyPreviewApp" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWf-pM-sEs">
@@ -42,7 +42,7 @@
                 <constraint firstAttribute="trailing" secondItem="kWf-pM-sEs" secondAttribute="trailing" id="yt6-gg-cOg"/>
             </constraints>
             <connections>
-                <outlet property="cellImageView" destination="kHW-lJ-gyj" id="IsF-DN-zXt"/>
+                <outlet property="cellImageView" destination="kHW-lJ-gyj" id="abn-ad-XKe"/>
                 <outlet property="nameLabel" destination="kWf-pM-sEs" id="lGx-cd-uyh"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="79.6875"/>

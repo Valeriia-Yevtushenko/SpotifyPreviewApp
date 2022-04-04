@@ -7,22 +7,22 @@
 
 import UIKit
 
-protocol TableViewDataSourceDelegate: AnyObject {
+protocol PlayerTableViewDataSourceDelegate: AnyObject {
     func didSelectItem(at index: Int)
 }
 
-final class TableViewDataSource: NSObject {
+final class PlayerTableViewDataSource: NSObject {
     private var viewModel: [TableViewCellModel] = []
-    weak var delegate: TableViewDataSourceDelegate?
+    weak var delegate: PlayerTableViewDataSourceDelegate?
 }
 
-extension TableViewDataSource {
+extension PlayerTableViewDataSource {
     func setupViewModel(_ viewModel: [TableViewCellModel]) {
         self.viewModel = viewModel
     }
 }
 
-extension TableViewDataSource: UITableViewDelegate {
+extension PlayerTableViewDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -32,7 +32,7 @@ extension TableViewDataSource: UITableViewDelegate {
     }
 }
 
-extension TableViewDataSource: UITableViewDataSource {
+extension PlayerTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.count
     }

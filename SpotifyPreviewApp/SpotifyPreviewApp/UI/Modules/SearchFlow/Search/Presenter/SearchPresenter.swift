@@ -14,6 +14,26 @@ final class SearchPresenter {
 }
 
 extension SearchPresenter: SearchViewOutputProtocol {
+    func viewDidTapAddItemToPlaylist(at index: Int) {
+        interactor?.getTrackUri(at: index)
+    }
+    
+    func viewDidTapShareItem(at index: Int) {
+        interactor?.getTrackURL(at: index)
+    }
+    
+    func viewDidTapDownloadItem(at index: Int) {
+        
+    }
+    
+    func viewDidTapShowItemArtist(at index: Int) {
+        interactor?.getTrackArtistId(at: index)
+    }
+    
+    func viewDidTapShowItemAlbum(at index: Int) {
+        interactor?.getTrackAlbumId(at: index)
+    }
+    
     func viewDidSelectItem(at index: Int) {
         interactor?.getTrack(at: index)
     }
@@ -24,6 +44,22 @@ extension SearchPresenter: SearchViewOutputProtocol {
 }
 
 extension SearchPresenter: SearchInteractorOutputProtocol {
+    func interactorDidGetTrackUri(_ uri: String) {
+        coordinator?.runListOfPlaylistFlow(for: uri)
+    }
+    
+    func interactorDidGetTrackURL(_ url: String) {
+        view?.shareURL(url)
+    }
+    
+    func interactorDidGetTrackArtistId(_ artistId: String) {
+        coordinator?.runArtistModule(with: artistId)
+    }
+    
+    func interactorDidGetTrackAlbumId(_ albumId: String) {
+        coordinator?.runAlbumModule(with: albumId)
+    }
+    
     func interactorDidGetTrack(tracks: Track) {
         coordinator?.runPlayerFlow(with: [tracks], for: 0)
     }

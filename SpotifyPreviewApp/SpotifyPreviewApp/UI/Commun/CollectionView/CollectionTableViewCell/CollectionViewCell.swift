@@ -13,7 +13,7 @@ struct CollectionViewCellModel {
 }
 
 final class CollectionViewCell: UICollectionViewCell {
-    @IBOutlet private weak var cellImageView: UIImageView!
+    @IBOutlet private weak var cellImageView: CustomImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     
     override func prepareForReuse() {
@@ -33,7 +33,7 @@ final class CollectionViewCell: UICollectionViewCell {
             return
         }
         
-        cellImageView.setImage(withUrl: imageData)
+        cellImageView.loadImageUsingUrlString(urlString: imageData)
         nameLabel.text = data.name
     }
 }

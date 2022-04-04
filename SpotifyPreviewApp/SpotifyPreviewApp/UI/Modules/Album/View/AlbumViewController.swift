@@ -16,6 +16,7 @@ class AlbumViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonDidTap))
         output?.viewDidLoad()
         configureTableView()
         configureRefreshControl()
@@ -50,9 +51,25 @@ private extension AlbumViewController {
         output?.viewDidRefresh()
         sender.endRefreshing()
     }
+    
+    func shareButtonDidTap() {
+        output?.viewDidTapShareAlbum()
+    }
 }
 
 extension AlbumViewController: AlbumTableViewDataSourceDelegate {
+    func didTapShareItem(at index: Int) {
+        output?.viewDidTapShareItem(at: index)
+    }
+    
+    func didTapAddItemToPlaylist(at index: Int) {
+        output?.viewDidTapAddItemToPlaylist(at: index)
+    }
+    
+    func didTapDownloadItem(at index: Int) {
+        output?.viewDidTapDownloadItem(at: index)
+    }
+    
     func playDidTap() {
         output?.viewDidTapPlay()
     }
@@ -67,7 +84,14 @@ extension AlbumViewController: AlbumTableViewDataSourceDelegate {
 }
 
 extension AlbumViewController: AlbumViewInputProtocol {
+    func shareURL(_ url: String) {
+        let url = URL(string: url)
+        let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(activity, animated: true)
+    }
+    
     func setupData(_ info: AlbumTableViewHeaderFooterViewModel, tracks: [TrackTableViewCellModel]) {
+        albumTableView.backgroundView = nil
         dataSource?.setupData(tracks: tracks, album: info)
     }
     

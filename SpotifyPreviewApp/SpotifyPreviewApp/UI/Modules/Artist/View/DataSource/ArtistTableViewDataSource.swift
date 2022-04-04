@@ -8,9 +8,9 @@
 import UIKit
 
 protocol ArtistTableViewDataSourceDelegate: AnyObject {
-    func didTapShare(at index: Int)
-    func didTapAddToPlaylist(at index: Int)
-    func didTapDownload(at index: Int)
+    func didTapShareItem(at index: Int)
+    func didTapAddItemToPlaylist(at index: Int)
+    func didTapDownloadItem(at index: Int)
     func didSelectAlbum(at index: Int)
     func didSelectTrack(at index: Int)
     func didTapShowItemAlbum(at index: Int)
@@ -75,17 +75,17 @@ extension ArtistTableViewDataSource: UITableViewDelegate {
         let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ -> UIMenu? in
             let share = UIAction(title: TrackContextMenuAction.share.rawValue,
                                  image: TrackContextMenuAction.share.image) { _ in
-                self.delegate?.didTapShare(at: indexPath.row)
+                self.delegate?.didTapShareItem(at: indexPath.row)
             }
             
             let addToPlaylist = UIAction(title: TrackContextMenuAction.addToPlaylist.rawValue,
                                          image: TrackContextMenuAction.addToPlaylist.image) { _ in
-                self.delegate?.didTapAddToPlaylist(at: indexPath.row)
+                self.delegate?.didTapAddItemToPlaylist(at: indexPath.row)
             }
             
             let download = UIAction(title: TrackContextMenuAction.download.rawValue,
                                     image: TrackContextMenuAction.download.image) { _ in
-                self.delegate?.didTapDownload(at: indexPath.row)
+                self.delegate?.didTapDownloadItem(at: indexPath.row)
             }
             
             let showAlbum = UIAction(title: TrackContextMenuAction.album.rawValue,

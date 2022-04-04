@@ -102,6 +102,7 @@ extension PlayerService: PlayerServiceProtocol {
             currentIndex += 1
         }
         
+        player?.stop()
         return play()
     }
     
@@ -110,6 +111,7 @@ extension PlayerService: PlayerServiceProtocol {
             currentIndex -= 1
         }
         
+        player?.stop()
         return play()
     }
     

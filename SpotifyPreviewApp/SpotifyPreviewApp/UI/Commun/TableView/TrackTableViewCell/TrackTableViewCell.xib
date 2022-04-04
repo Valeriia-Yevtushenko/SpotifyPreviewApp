@@ -18,7 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="378" height="82"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TiH-Iz-ibk">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TiH-Iz-ibk" customClass="CustomImageView" customModule="SpotifyPreviewApp" customModuleProvider="target">
                         <rect key="frame" x="20" y="8.5" width="59" height="65"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="65" id="237-EP-tdZ"/>
@@ -60,7 +60,7 @@
             <accessibility key="accessibilityConfiguration" identifier="TrackTableViewCell"/>
             <connections>
                 <outlet property="artistLabel" destination="ugv-C8-YI7" id="Ykf-eX-ZRY"/>
-                <outlet property="cellImageView" destination="TiH-Iz-ibk" id="Djq-9E-Mc0"/>
+                <outlet property="cellImageView" destination="TiH-Iz-ibk" id="hRf-wB-0a4"/>
                 <outlet property="nameLabel" destination="t3B-Rc-RJF" id="fIb-Fo-QsJ"/>
             </connections>
             <point key="canvasLocation" x="173.91304347826087" y="96.428571428571431"/>

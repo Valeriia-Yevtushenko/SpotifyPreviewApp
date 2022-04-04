@@ -14,6 +14,10 @@ final class ArtistPresenter {
 }
 
 extension ArtistPresenter: ArtistViewOutputProtocol {
+    func viewDidTapShareArtist() {
+        interactor?.getArtistURL()
+    }
+    
     func viewDidTapShowItemAlbum(at index: Int) {
         interactor?.getTrackAlbumId(for: index)
     }
@@ -64,7 +68,7 @@ extension ArtistPresenter: ArtistInteractorOutputProtocol {
         coordinator?.runListOfPlaylistFlow(for: uri)
     }
     
-    func interactorDidGetTrackURL(_ url: String) {
+    func interactorDidGetURL(_ url: String) {
         view?.shareURL(url)
     }
     

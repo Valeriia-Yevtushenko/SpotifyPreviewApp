@@ -18,6 +18,14 @@ final class ArtistInteractor {
 }
 
 extension ArtistInteractor: ArtistInteractorInputProtocol {
+    func getArtistURL() {
+        guard let url = artistInfo.0?.externalUrls?.spotify else {
+            return
+        }
+        
+        presenter?.interactorDidGetURL(url)
+    }
+    
     func getTrackAlbumId(for index: Int) {
         presenter?.interactorDidGetTrackAlbumId(artistInfo.1[index].album?.identifier ?? "")
     }
@@ -27,7 +35,7 @@ extension ArtistInteractor: ArtistInteractorInputProtocol {
     }
     
     func getTrackURL(for index: Int) {
-        presenter?.interactorDidGetTrackURL(artistInfo.1[index].externalUrls.spotify)
+        presenter?.interactorDidGetURL(artistInfo.1[index].externalUrls.spotify)
     }
     
     func getPlaylist(for index: Int) {

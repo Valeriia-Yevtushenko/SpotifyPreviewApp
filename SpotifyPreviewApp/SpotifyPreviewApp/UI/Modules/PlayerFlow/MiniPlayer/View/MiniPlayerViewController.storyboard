@@ -32,7 +32,7 @@
                                     <constraint firstAttribute="height" constant="1" id="sD8-zt-QIA"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k1a-No-arp">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k1a-No-arp" customClass="CustomImageView" customModule="SpotifyPreviewApp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="9.5" width="64" height="63"/>
                                 <color key="backgroundColor" systemColor="secondarySystemFillColor"/>
                                 <constraints>
@@ -117,7 +117,7 @@
                     <size key="freeformSize" width="414" height="80"/>
                     <connections>
                         <outlet property="artistsLabel" destination="s6S-H2-NQM" id="wF8-4q-q9J"/>
-                        <outlet property="imageView" destination="k1a-No-arp" id="P6t-kZ-W2a"/>
+                        <outlet property="imageView" destination="k1a-No-arp" id="Twe-re-fV7"/>
                         <outlet property="songNameLabel" destination="JdT-lz-JKN" id="UcX-K1-vCu"/>
                         <outlet property="togglePlayPauseButton" destination="7pv-pF-t2a" id="A41-cT-a98"/>
                     </connections>

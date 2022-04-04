@@ -14,7 +14,7 @@ struct TrackTableViewCellModel {
 }
 
 final class TrackTableViewCell: UITableViewCell {
-    @IBOutlet private weak var cellImageView: UIImageView!
+    @IBOutlet private weak var cellImageView: CustomImageView!
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var artistLabel: UILabel!
     
@@ -28,7 +28,7 @@ final class TrackTableViewCell: UITableViewCell {
     
     func configure(_ model: TrackTableViewCellModel) {
         if let image = model.image {
-            cellImageView.setImage(withUrl: image)
+            cellImageView.loadImageUsingUrlString(urlString: image)
         }
         
         nameLabel.text = model.name

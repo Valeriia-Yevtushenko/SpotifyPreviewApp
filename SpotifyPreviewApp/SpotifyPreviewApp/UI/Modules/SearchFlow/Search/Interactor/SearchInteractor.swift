@@ -16,6 +16,38 @@ final class SearchInteractor {
 }
 
 extension SearchInteractor: SearchInteractorInputProtocol {
+    func getTrackUri(at index: Int) {
+        guard let uri = listOfSearchedTracks?.tracks.items[index].uri else {
+            return
+        }
+        
+        presenter?.interactorDidGetTrackUri(uri)
+    }
+    
+    func getTrackURL(at index: Int) {
+        guard let url = listOfSearchedTracks?.tracks.items[index].externalUrls.spotify else {
+            return
+        }
+        
+        presenter?.interactorDidGetTrackURL(url)
+    }
+    
+    func getTrackArtistId(at index: Int) {
+        guard let artistId = listOfSearchedTracks?.tracks.items[index].artists?.first?.identifier else {
+            return
+        }
+        
+        presenter?.interactorDidGetTrackArtistId(artistId)
+    }
+    
+    func getTrackAlbumId(at index: Int) {
+        guard let albumId = listOfSearchedTracks?.tracks.items[index].album?.identifier else {
+            return
+        }
+        
+        presenter?.interactorDidGetTrackAlbumId(albumId)
+    }
+    
     func getTrack(at index: Int) {
         guard let track = listOfSearchedTracks?.tracks.items[index] else {
             return

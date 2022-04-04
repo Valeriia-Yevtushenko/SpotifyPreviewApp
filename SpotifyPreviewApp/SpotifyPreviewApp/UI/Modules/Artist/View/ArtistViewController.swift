@@ -26,7 +26,7 @@ final class ArtistViewController: UIViewController {
     private let toastView = ToastView()
     var output: ArtistViewOutputProtocol?
     var dataSource: ArtistTableViewDataSource?
-    var headerView: UIImageView!
+    var headerView: CustomImageView!
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ private extension ArtistViewController {
                            forCellReuseIdentifier: TrackTableViewCell.reuseIdentifier )
         artistTableView.register(UINib(nibName: TableViewCell.reuseIdentifier, bundle: nil),
                            forCellReuseIdentifier: TableViewCell.reuseIdentifier )
-        headerView = UIImageView()
+        headerView = CustomImageView()
         artistTableView.addSubview(headerView)
         headerView.contentMode = .scaleAspectFill
         headerView.clipsToBounds = true
@@ -84,6 +84,12 @@ private extension ArtistViewController {
     }
 }
 
+@objc private extension ArtistViewController {
+    func shareButtonDidTap() {
+        output?.viewDidTapShareArtist()
+    }
+}
+
 extension ArtistViewController: ArtistViewInputProtocol {
     func shareURL(_ url: String) {
         let url = URL(string: url)
@@ -94,15 +100,21 @@ extension ArtistViewController: ArtistViewInputProtocol {
     func setupArtistStatus(_ status: ArtistStatus) {
         switch status {
         case .followed:
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.minus"),
+            navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "person.badge.minus"),
                                                                 style: .plain,
                                                                 target: self,
-                                                                action: #selector(unfollowButtonDidTap))
+                                                                action: #selector(unfollowButtonDidTap)),
+                                                  UIBarButtonItem(barButtonSystemItem: .action,
+                                                                  target: self,
+                                                                  action: #selector(shareButtonDidTap))]
         case .unfollowed:
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
+            navigationItem.rightBarButtonItems = [UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
                                                                 style: .plain,
                                                                 target: self,
-                                                                action: #selector(followButtonDidTap))
+                                                                action: #selector(followButtonDidTap)),
+                                                  UIBarButtonItem(barButtonSystemItem: .action,
+                                                                  target: self,
+                                                                  action: #selector(shareButtonDidTap))]
         case .unknown:
             break
         }
@@ -113,9 +125,9 @@ extension ArtistViewController: ArtistViewInputProtocol {
         navigationItem.title = data.name
         
         if let imageUrl = data.image {
-            headerView = UIImageView()
+            headerView = CustomImageView()
             artistTableView.addSubview(headerView)
-            headerView.setImage(withUrl: imageUrl)
+            headerView.loadImageUsingUrlString(urlString: imageUrl)
             headerView.contentMode = .scaleAspectFill
             headerView.clipsToBounds = true
             updateHeaderView()
@@ -169,15 +181,15 @@ extension ArtistViewController: ArtistTableViewDataSourceDelegate {
         output?.viewDidTapShowItemAlbum(at: index)
     }
     
-    func didTapShare(at index: Int) {
+    func didTapShareItem(at index: Int) {
         output?.viewDidTapShareItem(at: index)
     }
     
-    func didTapAddToPlaylist(at index: Int) {
+    func didTapAddItemToPlaylist(at index: Int) {
         output?.viewDidTapAddItemToPlaylist(at: index)
     }
     
-    func didTapDownload(at index: Int) {
+    func didTapDownloadItem(at index: Int) {
         output?.viewDidTapDownloadItem(at: index)
     }
     

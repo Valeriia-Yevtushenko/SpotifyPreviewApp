@@ -15,7 +15,7 @@ struct Tracks: Codable {
 // MARK: - Track
 struct Track: Codable {
     let identifier: String
-    let album: Album?
+    var album: Album?
     let artists: [Artist]?
     let name: String?
     let uri: String

@@ -15,6 +15,7 @@ protocol ArtistInteractorInputProtocol: AnyObject {
     
     func getPlaylist(for index: Int)
     
+    func getArtistURL()
     func getTrackUri(for index: Int)
     func getTrackURL(for index: Int)
     func getTrackAlbumId(for index: Int)
@@ -34,7 +35,7 @@ protocol ArtistInteractorOutputProtocol: AnyObject {
     
     func interactorDidGetAlbumId(_ identifier: String)
     
+    func interactorDidGetURL(_ url: String)
     func interactorDidGetTrackUri(_ uri: String)
-    func interactorDidGetTrackURL(_ url: String)
     func interactorDidGetTrackAlbumId(_ albumId: String)
 }
