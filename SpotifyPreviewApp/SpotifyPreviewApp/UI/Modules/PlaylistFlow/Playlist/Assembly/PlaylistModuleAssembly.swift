@@ -14,6 +14,7 @@ final class PlaylistModuleAssembly {
         let interactor = PlaylistInteractor()
         interactor.networkService = serviceManager.network()
         interactor.urlBuilder = serviceManager.urlBuilder()
+        interactor.databaseManager = serviceManager.database()
         interactor.playlistId = playlistId
         interactor.presenter = presenter
         interactor.playlistType = type

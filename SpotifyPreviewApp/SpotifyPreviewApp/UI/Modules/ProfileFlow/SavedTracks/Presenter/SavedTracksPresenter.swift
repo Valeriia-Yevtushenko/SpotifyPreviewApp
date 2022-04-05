@@ -68,8 +68,16 @@ extension SavedTracksPresenter: SavedTracksInteractorOutputProtocol {
         view?.displayLabel(with: "You don't have saved tracks...")
     }
     
-    func interactorDidGetPlaylist(tracks: [Track], for index: Int) {
+    func interactorDidGetPlaylist(tracks: [TrackModel], for index: Int) {
+        let items: [PlayerItem] = tracks.compactMap {
+            return PlayerItem(duration: nil,
+                              imageData: $0.image,
+                              title: $0.name,
+                              artists: $0.artists,
+                              data: $0.data)
+        }
         
+        coordinator?.runPlayerFlow(with: items, for: index)
     }
     
     func interactorDidGetTrackUri(_ uri: String) {

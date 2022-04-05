@@ -46,7 +46,7 @@ protocol AlbumFlow: AnyObject {
 }
 
 protocol PlayerFlow: AnyObject {
-    func makePlayerModule(with tracks: [Track],
+    func makePlayerModule(with tracks: [PlayerItem],
                           for index: Int,
                           serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter)
     func makePlayerModule(serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter)

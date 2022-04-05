@@ -17,8 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOt-JQ-4Be">
+                                <rect key="frame" x="149" y="54" width="116" height="5"/>
+                                <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="Qi5-6b-k3m"/>
+                                    <constraint firstAttribute="width" constant="116" id="kxM-pu-Iu0"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="81O-Xv-35C">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="kD7-M3-YLp">
                                     <size key="itemSize" width="128" height="128"/>
@@ -32,13 +40,16 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="IOt-JQ-4Be" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="10z-xe-B88"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="81O-Xv-35C" secondAttribute="bottom" id="Biz-wq-jdB"/>
                             <constraint firstItem="81O-Xv-35C" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="PST-Tx-YqP"/>
+                            <constraint firstItem="IOt-JQ-4Be" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="WZ7-Ls-P2d"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="81O-Xv-35C" secondAttribute="trailing" id="cEz-QH-u3B"/>
-                            <constraint firstItem="81O-Xv-35C" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="qMp-Gx-5Kl"/>
+                            <constraint firstItem="81O-Xv-35C" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="qMp-Gx-5Kl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accessoryView" destination="IOt-JQ-4Be" id="oeG-zH-7PS"/>
                         <outlet property="playlistCollectionView" destination="81O-Xv-35C" id="GR3-Hi-A3W"/>
                     </connections>
                 </viewController>
@@ -48,6 +59,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

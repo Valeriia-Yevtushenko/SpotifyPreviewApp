@@ -17,6 +17,7 @@ final class ArtistModuleAssembly {
         let interactor = ArtistInteractor()
         interactor.presenter = presenter
         interactor.identifier = artistId
+        interactor.databaseManager = serviceManager.database()
         interactor.networkService = serviceManager.network()
         interactor.urlBuilder = serviceManager.urlBuilder()
         presenter.interactor = interactor

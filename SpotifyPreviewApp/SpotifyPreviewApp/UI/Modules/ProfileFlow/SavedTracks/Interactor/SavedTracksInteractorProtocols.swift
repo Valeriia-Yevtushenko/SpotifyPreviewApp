@@ -21,7 +21,7 @@ protocol SavedTracksInteractorInputProtocol: AnyObject {
 protocol SavedTracksInteractorOutputProtocol: AnyObject {
     func interactorDidGetTracks(_ tracks: [TrackModel])
     func interactorFailedToGetTracks()
-    func interactorDidGetPlaylist(tracks: [Track], for index: Int)
+    func interactorDidGetPlaylist(tracks: [TrackModel], for index: Int)
     
     func interactorDidGetTrackUri(_ uri: String)
     func interactorDidGetTrackURL(_ url: String)

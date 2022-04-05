@@ -193,6 +193,7 @@
                                 <color key="backgroundColor" systemColor="secondaryLabelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="5" id="7j4-qs-Yj1"/>
+                                    <constraint firstAttribute="width" constant="116" id="Sm2-cK-aM3"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -206,7 +207,6 @@
                             <constraint firstItem="0DX-8i-hh9" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Ezv-A8-6Hm"/>
                             <constraint firstItem="C9y-aC-4KW" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="40" id="NCj-nI-X6z"/>
                             <constraint firstItem="C9y-aC-4KW" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Rv3-CQ-jiU"/>
-                            <constraint firstItem="0DX-8i-hh9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="149" id="SIN-q3-Tkt"/>
                             <constraint firstItem="C9y-aC-4KW" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="omv-iZ-JbM"/>
                         </constraints>
                         <connections>

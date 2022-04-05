@@ -78,7 +78,7 @@ extension FlowFactory: PlayerFlow {
         return MiniPlayerModuleAssembly().createModule(serviceManager: serviceManager)
     }
     
-    func makePlayerModule(with tracks: [Track], for index: Int, serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter) {
+    func makePlayerModule(with tracks: [PlayerItem], for index: Int, serviceManager: ServiceManagerProtocol) -> (Presentable, PlayerPresenter) {
         return PlayerModuleAssembly().createModule(with: tracks, for: index, serviceManager: serviceManager)
     }
 }

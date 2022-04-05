@@ -20,7 +20,7 @@ protocol SearchInteractorInputProtocol: AnyObject {
 
 protocol SearchInteractorOutputProtocol: AnyObject {
     func interactorDidFetchData(_ data: ListOfSearchedTracks)
-    func interactorDidGetTrack(tracks: Track)
+    func interactorDidGetTrack(tracks: [Track])
     func interactorFailedToFetchData()
     
     func interactorDidGetTrackUri(_ uri: String)

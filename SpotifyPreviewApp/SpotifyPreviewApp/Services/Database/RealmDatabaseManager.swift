@@ -27,7 +27,6 @@ extension RealmDatabaseService {
         try? self.container?.write({
             self.container?.add(object)
         })
-
     }
     
     func delete(_ object: Object) {

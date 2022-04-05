@@ -60,7 +60,7 @@ extension ArtistCoordinator: ArtistModuleOutput {
         addDependency(playlistsCoordinator)
     }
     
-    func runPlayerFlow(with tracks: [Track], for index: Int) {
+    func runPlayerFlow(with tracks: [PlayerItem], for index: Int) {
         playerDelegate?.showPlayer(with: tracks, for: index)
     }
 

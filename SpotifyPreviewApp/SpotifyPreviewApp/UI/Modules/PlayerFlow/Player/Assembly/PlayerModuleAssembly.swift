@@ -8,7 +8,7 @@
 import UIKit
 
 final class PlayerModuleAssembly {
-    func createModule(with tracks: [Track], for index: Int, serviceManager: ServiceManagerProtocol) -> (UIViewController, PlayerPresenter) {
+    func createModule(with tracks: [PlayerItem], for index: Int, serviceManager: ServiceManagerProtocol) -> (UIViewController, PlayerPresenter) {
         let playerViewController = PlayerViewController.instantiate(from: PlayerViewController.identifier)
         let presenter = PlayerPresenter()
         presenter.view = playerViewController

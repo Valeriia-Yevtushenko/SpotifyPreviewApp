@@ -29,5 +29,5 @@ protocol SavedTracksModuleOutput {
     func runArtistModule(with artistId: String)
     func runAlbumModule(with albumId: String)
     func runListOfPlaylistFlow(for newItemForPlaylist: String)
-    func runPlayerFlow(with tracks: [Track], for index: Int)
+    func runPlayerFlow(with tracks: [PlayerItem], for index: Int)
 }

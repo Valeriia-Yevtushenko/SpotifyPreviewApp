@@ -12,7 +12,7 @@ protocol AlbumInteractorInputProtocol: AnyObject {
     func getPlaylist(for index: Int)
     func getPlaylist()
     func getShuffledPlaylist()
-    
+    func saveTrack(at index: Int)
     func getTrackUri(at index: Int)
     func getTrackURL(at index: Int)
     func getAlbumURL()

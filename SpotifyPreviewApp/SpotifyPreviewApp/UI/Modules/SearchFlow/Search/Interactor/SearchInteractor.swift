@@ -84,7 +84,7 @@ extension SearchInteractor: SearchInteractorInputProtocol {
             return
         }
         
-        presenter?.interactorDidGetTrack(tracks: track)
+        presenter?.interactorDidGetTrack(tracks: [track])
     }
     
     func fetchSearchText(_ text: String) {

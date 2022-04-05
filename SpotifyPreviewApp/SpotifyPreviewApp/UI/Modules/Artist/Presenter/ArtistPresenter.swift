@@ -31,7 +31,7 @@ extension ArtistPresenter: ArtistViewOutputProtocol {
     }
     
     func viewDidTapDownloadItem(at index: Int) {
-        
+        interactor?.saveTrack(at: index)
     }
     
     func viewDidTapOnTrack(at index: Int) {
@@ -73,6 +73,15 @@ extension ArtistPresenter: ArtistInteractorOutputProtocol {
     }
     
     func interactorDidGetPlaylist(tracks: [Track], for index: Int) {
+        let tracks: [PlayerItem] = tracks.compactMap {
+            let artist = $0.artists?.compactMap { return $0.name }
+            return PlayerItem(duration: nil,
+                              url: $0.previewUrl,
+                              image: $0.album?.images?.first?.url,
+                              title: $0.name,
+                              artists: artist?.joined(separator: ", "), data: nil)
+        }
+        
         coordinator?.runPlayerFlow(with: tracks, for: index)
     }
     

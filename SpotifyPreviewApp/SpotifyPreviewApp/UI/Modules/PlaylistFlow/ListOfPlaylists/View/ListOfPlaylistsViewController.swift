@@ -14,7 +14,8 @@ enum PlaylistType: Equatable {
 }
 
 final class ListOfPlaylistsViewController: UIViewController {
-    @IBOutlet weak var playlistCollectionView: UICollectionView!
+    @IBOutlet private weak var playlistCollectionView: UICollectionView!
+    @IBOutlet private weak var accessoryView: UIView!
     private var refreshControl: UIRefreshControl = UIRefreshControl()
     private let toastView = ToastView()
     var output: ListOfPlaylistsViewOutputProtocol?
@@ -24,6 +25,7 @@ final class ListOfPlaylistsViewController: UIViewController {
         super.viewDidLoad()
         
         output?.viewDidLoad()
+        configureAccessoryView()
         configureCollectionView()
         configureRefreshControl()
     }
@@ -47,6 +49,14 @@ private extension ListOfPlaylistsViewController {
         collectionViewLayout?.minimumInteritemSpacing = 20
         collectionViewLayout?.minimumLineSpacing = 20
         collectionViewLayout?.invalidateLayout()
+    }
+    
+    func configureAccessoryView() {
+        if isModal {
+            accessoryView.layer.cornerRadius = .pi
+        } else {
+            accessoryView.isHidden = true
+        }
     }
     
     func configureRefreshControl() {
