@@ -31,7 +31,7 @@ class CustomImageView: UIImageView {
             }
             
             DispatchQueue.main.async {
-                guard let imageToCache = UIImage(data: data!) else { return }
+                guard let data = data, let imageToCache = UIImage(data: data) else { return }
                 
                 if self.imageUrlString == urlString {
                     self.image = imageToCache

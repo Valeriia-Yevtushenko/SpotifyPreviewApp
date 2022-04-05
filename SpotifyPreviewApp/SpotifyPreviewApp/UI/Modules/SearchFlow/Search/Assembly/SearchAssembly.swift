@@ -16,6 +16,7 @@ final class SearchModuleAssembly {
         let interactor = SearchInteractor()
         interactor.networkService = serviceManager.network()
         interactor.urlBuilder = serviceManager.urlBuilder()
+        interactor.databaseManager = serviceManager.database()
         interactor.presenter = presenter
         presenter.interactor = interactor
         presenter.view = searchViewController

@@ -17,7 +17,7 @@ class ListOfArtistsModuleAssembly {
         interactor.urlBuilder = serviceManager.urlBuilder()
         presenter.interactor = interactor
         presenter.view = listOfArtistsViewController
-        let dataSource = PlayerTableViewDataSource()
+        let dataSource = ArtistsTableViewDataSource()
         dataSource.delegate = listOfArtistsViewController
         listOfArtistsViewController.dataSource = dataSource
         listOfArtistsViewController.output = presenter

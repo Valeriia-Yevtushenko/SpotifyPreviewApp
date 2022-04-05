@@ -19,6 +19,7 @@ protocol SearchFlowFactory: AnyObject {
 protocol ProfileFlowFactory: AnyObject {
     func makeProfileModule(serviceManager: ServiceManagerProtocol) -> (Presentable, ProfilePresenter)
     func makeListOfArtistsModule(serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfArtistsPresenter)
+    func makeListOfSavedTracksModule(serviceManager: ServiceManagerProtocol) -> (Presentable, SavedTracksPresenter)
 }
 
 protocol PlaylistsFlowFactory: AnyObject {

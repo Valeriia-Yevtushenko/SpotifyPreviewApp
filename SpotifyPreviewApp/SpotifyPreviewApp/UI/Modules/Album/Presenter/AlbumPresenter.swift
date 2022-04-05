@@ -74,8 +74,9 @@ extension AlbumPresenter: AlbumInteractorOutputProtocol {
         if let tracks = data.tracks?.items, !tracks.isEmpty {
             tracksViewModel = tracks.compactMap {
                 let artists = $0.artists?.compactMap { return $0.name }
-                return TrackTableViewCellModel(image: data.images?.first?.url,
-                                               name: $0.name, artist: artists?.joined(separator: ", "))
+                return TrackTableViewCellModel(name: $0.name,
+                                               artist: artists?.joined(separator: ", "),
+                                               image: data.images?.first?.url)
             }
         } else {
             tracksViewModel = []

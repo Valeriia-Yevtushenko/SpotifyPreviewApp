@@ -13,4 +13,5 @@ struct PlayerItem {
     let image: String?
     let title: String?
     let artists: String?
+    let data: Data?
 }

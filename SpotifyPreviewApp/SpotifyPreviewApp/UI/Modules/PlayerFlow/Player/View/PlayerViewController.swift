@@ -27,7 +27,7 @@ class PlayerViewController: UIViewController {
     private var isPlaying = true
     private var isRepeating = false
     private var isListOfTracksShowing = false
-    var dataSource: TrackTableViewDataSource?
+    var dataSource: PlayerTableViewDataSource?
     var output: PlayerViewOutputProtocol?
     
     override func viewDidLoad() {
@@ -207,7 +207,7 @@ extension PlayerViewController: PlayerViewInputProtocol {
     }
 }
 
-extension PlayerViewController: TrackTableViewDataSourceDelegate {
+extension PlayerViewController: PlayerTableViewDataSourceDelegate {
     func didSelectItem(at index: Int) {
         output?.viewDidChangePlayerItem(index)
     }

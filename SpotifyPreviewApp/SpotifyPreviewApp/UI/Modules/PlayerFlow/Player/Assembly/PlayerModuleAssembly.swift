@@ -20,7 +20,7 @@ final class PlayerModuleAssembly {
         let playerService = serviceManager.player()
         interactor.playerService = playerService
         playerService.setupDelegate(interactor)
-        playerViewController.dataSource = TrackTableViewDataSource()
+        playerViewController.dataSource = PlayerTableViewDataSource()
         playerViewController.output = presenter
         return (playerViewController, presenter)
     }
@@ -36,7 +36,7 @@ final class PlayerModuleAssembly {
         interactor.playerService = playerService
         interactor.isOpeningFromMiniPlayer = true
         playerService.setupDelegate(interactor)
-        playerViewController.dataSource = TrackTableViewDataSource()
+        playerViewController.dataSource = PlayerTableViewDataSource()
         playerViewController.output = presenter
         return (playerViewController, presenter)
     }

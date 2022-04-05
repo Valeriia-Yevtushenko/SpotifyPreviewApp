@@ -48,7 +48,7 @@ extension PlayerInteractor: PlayerInteractorInputProtocol {
                                   url: $0.previewUrl,
                                   image: $0.album?.images?.first?.url,
                                   title: $0.name,
-                                  artists: artist?.joined(separator: ", "))
+                                  artists: artist?.joined(separator: ", "), data: nil)
             }
             
             playerService.play(with: items, at: index)

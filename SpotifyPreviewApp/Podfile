@@ -10,4 +10,5 @@ target 'SpotifyPreviewApp' do
 	pod 'SwiftLint'
 	pod "PromiseKit", "~> 6.8"
 	pod 'KeychainSwift', '~> 19.0'
+	pod 'RealmSwift'
 end

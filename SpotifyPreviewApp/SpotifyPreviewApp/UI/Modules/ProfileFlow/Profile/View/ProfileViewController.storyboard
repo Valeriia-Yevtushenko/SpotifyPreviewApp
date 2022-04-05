@@ -66,7 +66,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gda-k4-fLn">
-                                <rect key="frame" x="0.0" y="355" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="355" width="375" height="150"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X7y-oj-v4N">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -176,6 +176,60 @@
                                             <outletCollection property="gestureRecognizers" destination="TGG-by-Xbv" appends="YES" id="VbU-bW-bkd"/>
                                         </connections>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uqm-MH-Cza">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="50"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ruc-Ti-Rt1">
+                                                <rect key="frame" x="20" y="8.5" width="24" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="Y8q-rF-VZy"/>
+                                                </constraints>
+                                                <imageReference key="image" image="tray.and.arrow.down" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
+                                                    <hierarchicalColors>
+                                                        <color systemColor="labelColor"/>
+                                                        <color systemColor="secondaryLabelColor"/>
+                                                        <color systemColor="tertiaryLabelColor"/>
+                                                    </hierarchicalColors>
+                                                </imageReference>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Tracks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fv-hU-KDW">
+                                                <rect key="frame" x="66" y="13" width="255" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CUP-Cz-Gtk">
+                                                <rect key="frame" x="333" y="15.5" width="22" height="19"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="22" id="aNN-79-GEU"/>
+                                                </constraints>
+                                                <imageReference key="image" image="chevron.right.circle.fill" catalog="system" renderingMode="hierarchical-single">
+                                                    <hierarchicalColors>
+                                                        <color systemColor="labelColor"/>
+                                                        <color systemColor="secondaryLabelColor"/>
+                                                        <color systemColor="tertiaryLabelColor"/>
+                                                    </hierarchicalColors>
+                                                </imageReference>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="CUP-Cz-Gtk" secondAttribute="trailing" constant="20" id="78c-pY-PYd"/>
+                                            <constraint firstAttribute="bottom" secondItem="3Fv-hU-KDW" secondAttribute="bottom" constant="13" id="8W7-1c-4g4"/>
+                                            <constraint firstItem="Ruc-Ti-Rt1" firstAttribute="top" secondItem="uqm-MH-Cza" secondAttribute="top" constant="13" id="EBT-ww-6qH"/>
+                                            <constraint firstItem="3Fv-hU-KDW" firstAttribute="top" secondItem="uqm-MH-Cza" secondAttribute="top" constant="13" id="Jbu-Ji-7sV"/>
+                                            <constraint firstItem="Ruc-Ti-Rt1" firstAttribute="leading" secondItem="uqm-MH-Cza" secondAttribute="leading" constant="20" id="NA5-jg-M9Y"/>
+                                            <constraint firstItem="CUP-Cz-Gtk" firstAttribute="centerY" secondItem="3Fv-hU-KDW" secondAttribute="centerY" id="Zbs-sv-IUZ"/>
+                                            <constraint firstItem="CUP-Cz-Gtk" firstAttribute="leading" secondItem="3Fv-hU-KDW" secondAttribute="trailing" constant="12" id="Zc6-kP-v5M"/>
+                                            <constraint firstItem="3Fv-hU-KDW" firstAttribute="leading" secondItem="Ruc-Ti-Rt1" secondAttribute="trailing" constant="22" id="hmW-cY-3rQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ruc-Ti-Rt1" secondAttribute="bottom" constant="13" id="mIu-Ha-4cj"/>
+                                            <constraint firstAttribute="height" constant="50" id="yqc-b6-dCh"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="oe5-cT-51k" appends="YES" id="3UV-gY-Avn"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzs-YH-5fE">
@@ -209,6 +263,7 @@
                     <connections>
                         <outlet property="followsView" destination="X7y-oj-v4N" id="j3L-0P-5gr"/>
                         <outlet property="playlistView" destination="FHi-dU-vIu" id="Jsq-El-leb"/>
+                        <outlet property="savedTracksView" destination="uqm-MH-Cza" id="0pq-oV-Lfr"/>
                         <outlet property="userEmailLabel" destination="GWv-hv-QuO" id="NqR-Ti-vZp"/>
                         <outlet property="userImageHeightLayoutConstraint" destination="1Ee-lG-NHW" id="VBb-6e-IKP"/>
                         <outlet property="userImageView" destination="ulN-aX-Jg2" id="a3C-MD-Pyj"/>
@@ -227,7 +282,11 @@
                         <action selector="playlistsSectionDidSelected:" destination="Y6W-OH-hqX" id="FMh-8f-sLp"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="tX5-of-NLz"/>
+                <tapGestureRecognizer id="oe5-cT-51k">
+                    <connections>
+                        <action selector="savedTracksSectionDidSelect:" destination="Y6W-OH-hqX" id="bRz-Or-7CD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="130.43478260869566" y="92.410714285714278"/>
         </scene>
@@ -238,6 +297,7 @@
         <image name="person.2.circle" catalog="system" width="128" height="121"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
+        <image name="tray.and.arrow.down" catalog="system" width="128" height="109"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

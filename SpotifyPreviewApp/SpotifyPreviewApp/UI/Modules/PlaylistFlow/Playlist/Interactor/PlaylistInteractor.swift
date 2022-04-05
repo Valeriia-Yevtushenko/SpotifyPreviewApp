@@ -7,21 +7,6 @@
 
 import Foundation
 import PromiseKit
-// MARK: - Welcome
-struct Welcome: Codable {
-    let tracks: [Trackk]
-    let snapshotID: String
-
-    enum CodingKeys: String, CodingKey {
-        case tracks
-        case snapshotID = "snapshot_id"
-    }
-}
-
-// MARK: - Track
-struct Trackk: Codable {
-    let uri: String
-}
 
 final class PlaylistInteractor {
     private var playlist: Playlist?

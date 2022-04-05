@@ -26,6 +26,10 @@ extension FlowFactory: SearchFlowFactory {
 }
 
 extension FlowFactory: ProfileFlowFactory {
+    func makeListOfSavedTracksModule(serviceManager: ServiceManagerProtocol) -> (Presentable, SavedTracksPresenter) {
+        return SavedTracksModuleAssembly().createModule(serviceManager)
+    }
+    
     func makeListOfArtistsModule(serviceManager: ServiceManagerProtocol) -> (Presentable, ListOfArtistsPresenter) {
         return ListOfArtistsModuleAssembly().createModule(serviceManager: serviceManager)
     }

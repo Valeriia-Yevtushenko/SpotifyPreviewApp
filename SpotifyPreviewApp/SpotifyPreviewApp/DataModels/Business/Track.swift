@@ -17,7 +17,7 @@ struct Track: Codable {
     let identifier: String
     var album: Album?
     let artists: [Artist]?
-    let name: String?
+    let name: String
     let uri: String
     let externalUrls: ExternalUrls
     let previewUrl: String?

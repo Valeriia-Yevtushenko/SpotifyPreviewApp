@@ -14,15 +14,16 @@ final class ProfilePresenter {
 }
 
 extension ProfilePresenter: ProfileViewOutputProtocol {
-    func viewDidSelectedSection(_ sectionType: ProfileSectionType) {
-        switch sectionType {
-        case .playlists:
-            coordinator?.runPlaylistsFlow()
-        case .albums:
-            break
-        case .follows:
-            coordinator?.runListOfArtistsModule()
-        }
+    func viewDidTapOnPlaylistsSection() {
+        coordinator?.runPlaylistsFlow()
+    }
+    
+    func viewDidTapOnFollowsSection() {
+        coordinator?.runListOfArtistsModule()
+    }
+    
+    func viewDidTapOnSavedTracksSection() {
+        coordinator?.runListOfSavedTracksModule()
     }
     
     func viewDidTapReload() {

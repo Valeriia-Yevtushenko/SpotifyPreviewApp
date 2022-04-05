@@ -105,7 +105,9 @@ extension ArtistPresenter: ArtistInteractorOutputProtocol {
     func interactorDidFetchArtistInfo(_ artistInfo: (Artist?, [Track], [Album])) {
         let tracks: [TrackTableViewCellModel] = artistInfo.1.map {
             let artist = $0.artists?.compactMap { return $0.name }
-            return TrackTableViewCellModel(image: $0.album?.images?[0].url, name: $0.name, artist: artist?.joined(separator: ", "))
+            return TrackTableViewCellModel(name: $0.name,
+                                           artist: artist?.joined(separator: ", "),
+                                           image: $0.album?.images?[0].url)
         }
         
         let albums: [TableViewCellModel] = artistInfo.2.map {

@@ -7,6 +7,7 @@
 
 import UIKit
 import OAuthSwift
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

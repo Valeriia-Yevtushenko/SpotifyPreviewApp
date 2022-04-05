@@ -23,7 +23,7 @@ extension SearchPresenter: SearchViewOutputProtocol {
     }
     
     func viewDidTapDownloadItem(at index: Int) {
-        
+        interactor?.saveTrack(at: index)
     }
     
     func viewDidTapShowItemArtist(at index: Int) {
@@ -73,7 +73,9 @@ extension SearchPresenter: SearchInteractorOutputProtocol {
         
         let viewModel: [TrackTableViewCellModel] = data.tracks.items.map {
             let artists = $0.artists?.compactMap { $0.name }
-            return TrackTableViewCellModel(image: $0.album?.images?[0].url, name: $0.name, artist: artists?.joined(separator: ", "))
+            return TrackTableViewCellModel(name: $0.name,
+                                           artist: artists?.joined(separator: ", "),
+                                           image: $0.album?.images?[0].url)
         }
         
         view?.setupData(viewModel)

@@ -11,7 +11,7 @@ class ListOfArtistsViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     private var refreshControl: UIRefreshControl = UIRefreshControl()
     var output: ListOfArtistsViewOutputProtocol?
-    var dataSource: PlayerTableViewDataSource?
+    var dataSource: ArtistsTableViewDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ extension ListOfArtistsViewController: ListOfArtistsViewInputProtocol {
     }
 }
 
-extension ListOfArtistsViewController: PlayerTableViewDataSourceDelegate {
+extension ListOfArtistsViewController: ArtistsTableViewDataSourceDelegate {
     func didSelectItem(at index: Int) {
         output?.viewSelectedItem(at: index)
     }

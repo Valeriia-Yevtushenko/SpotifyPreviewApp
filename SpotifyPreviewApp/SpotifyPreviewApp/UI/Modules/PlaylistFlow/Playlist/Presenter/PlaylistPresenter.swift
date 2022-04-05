@@ -139,8 +139,9 @@ extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
         if let tracks = playlist.tracks?.items, !tracks.isEmpty {
             tracksViewModel = tracks.compactMap {
                 let artists = $0.track?.artists?.compactMap { return $0.name }
-                return TrackTableViewCellModel(image: ($0.track?.album?.images?[2].url),
-                                               name: $0.track?.name, artist: artists?.joined(separator: ", "))
+                return TrackTableViewCellModel(name: $0.track?.name,
+                                               artist: artists?.joined(separator: ", "),
+                                               image: ($0.track?.album?.images?[2].url))
             }
         } else {
             tracksViewModel = []

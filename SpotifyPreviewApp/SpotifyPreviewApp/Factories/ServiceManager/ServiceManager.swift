@@ -14,6 +14,7 @@ protocol ServiceManagerProtocol {
     func network() -> NetworkServiceProtocol
     func urlBuilder() -> URLBuilderProtocol
     func player() -> PlayerServiceProtocol
+    func database() -> RealmDatabaseService
 }
 
 class ServiceManager {
@@ -23,6 +24,7 @@ class ServiceManager {
     private let networkService: NetworkServiceProtocol
     private let urlBuilderService: URLBuilderProtocol
     private let playerService: PlayerServiceProtocol
+    private let databaseService: RealmDatabaseService
     
     init() {
         oauth = OAuth2Swift(consumerKey: Client.identifier.rawValue,
@@ -37,10 +39,15 @@ class ServiceManager {
                                         authorizationService: authorizationService)
         urlBuilderService = URLBuilder()
         playerService = PlayerService()
+        databaseService = RealmDatabaseService()
     }
 }
 
 extension ServiceManager: ServiceManagerProtocol {
+    func database() -> RealmDatabaseService {
+        return databaseService
+    }
+    
     func player() -> PlayerServiceProtocol {
         return playerService
     }

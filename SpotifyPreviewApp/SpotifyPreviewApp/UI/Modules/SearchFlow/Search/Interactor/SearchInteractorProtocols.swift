@@ -11,6 +11,7 @@ protocol SearchInteractorInputProtocol: AnyObject {
     func getTrack(at index: Int)
     func fetchSearchText(_ text: String)
     
+    func saveTrack(at index: Int)
     func getTrackUri(at index: Int)
     func getTrackURL(at index: Int)
     func getTrackArtistId(at index: Int)

@@ -74,7 +74,9 @@ extension PlayerPresenter: PlayerInteractorOutputProtocol {
     
     func interactorDidGetListOfTracks(_ tracks: [PlayerItem]) {
         let tracks: [TrackTableViewCellModel] = tracks.map {
-            return TrackTableViewCellModel(image: $0.image, name: $0.title, artist: $0.artists)
+            return TrackTableViewCellModel(name: $0.title,
+                                           artist: $0.artists,
+                                           image: $0.image)
         }
         
         view?.setupListOfTracks(tracks)

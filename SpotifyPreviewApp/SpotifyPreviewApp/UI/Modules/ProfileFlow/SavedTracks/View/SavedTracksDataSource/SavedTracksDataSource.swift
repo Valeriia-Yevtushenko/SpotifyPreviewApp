@@ -1,39 +1,33 @@
 //
-//  PlaylistTableViewDataSource.swift
+//  SavedTracksDataSource.swift
 //  SpotifyPreviewApp
 //
-//  Created by Valeriia Yevtushenko on 30.03.2022.
+//  Created by Valeriia Yevtushenko on 05.04.2022.
 //
 
 import UIKit
 
-protocol PlaylistTableViewDataSourceDelegate: AnyObject {
+protocol SavedTracksTableViewDataSourceDelegate: AnyObject {
     func didTapPlay()
     func didTapShuffle()
+    func didSelectItem(at index: Int)
     func didTapShareItem(at index: Int)
     func didTapAddItemToPlaylist(at index: Int)
-    func didTapDownloadItem(at index: Int)
-    func didSelectItem(at index: Int)
     func didTapShowItemArtist(at index: Int)
     func didTapShowItemAlbum(at index: Int)
-    func didTapDeleteItem(at index: Int)
-    func scrollViewDidScroll()
 }
 
-final class PlaylistTableViewDataSource: NSObject {
+final class SavedTracksTableViewDataSource: NSObject {
     private var tracks: [TrackTableViewCellModel] = []
-    private var type: PlaylistType?
-    weak var delegate: PlaylistTableViewDataSourceDelegate?
+    weak var delegate: SavedTracksTableViewDataSourceDelegate?
 }
 
-extension PlaylistTableViewDataSource {
-    func setupViewModel(_ tracks: [TrackTableViewCellModel], type: PlaylistType) {
+extension SavedTracksTableViewDataSource {
+    func setupViewModel(_ tracks: [TrackTableViewCellModel]) {
         self.tracks = tracks
-        self.type = type
     }
 }
-
-extension PlaylistTableViewDataSource: UITableViewDelegate {
+extension SavedTracksTableViewDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard !tracks.isEmpty else {
             return nil
@@ -47,10 +41,6 @@ extension PlaylistTableViewDataSource: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.scrollViewDidScroll()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -69,11 +59,6 @@ extension PlaylistTableViewDataSource: UITableViewDelegate {
                 self.delegate?.didTapAddItemToPlaylist(at: indexPath.row)
             }
             
-            let download = UIAction(title: TrackContextMenuAction.download.rawValue,
-                                    image: TrackContextMenuAction.download.image) { _ in
-                self.delegate?.didTapDownloadItem(at: indexPath.row)
-            }
-            
             let showAlbum = UIAction(title: TrackContextMenuAction.album.rawValue,
                                      image: TrackContextMenuAction.album.image) { _ in
                  self.delegate?.didTapShowItemAlbum(at: indexPath.row)
@@ -84,23 +69,8 @@ extension PlaylistTableViewDataSource: UITableViewDelegate {
                  self.delegate?.didTapShowItemArtist(at: indexPath.row)
             }
             
-            guard self.type == .user else {
-                return UIMenu.init(children: [share,
-                                              download,
-                                              addToPlaylist,
-                                              showAlbum,
-                                              showArtist])
-            }
-            
-            let deleteItem = UIAction(title: TrackContextMenuAction.delete.rawValue,
-                                     image: TrackContextMenuAction.delete.image) { _ in
-                 self.delegate?.didTapDeleteItem(at: indexPath.row)
-            }
-            
             return UIMenu.init(children: [addToPlaylist,
-                                          deleteItem,
                                           share,
-                                          download,
                                           showArtist,
                                           showAlbum])
         }
@@ -109,7 +79,7 @@ extension PlaylistTableViewDataSource: UITableViewDelegate {
     }
 }
 
-extension PlaylistTableViewDataSource: UITableViewDataSource {
+extension SavedTracksTableViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tracks.count
     }
