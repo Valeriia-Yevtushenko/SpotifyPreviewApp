@@ -38,7 +38,9 @@ class ServiceManager {
         networkService = NetworkService(client: oauth.client,
                                         authorizationService: authorizationService)
         urlBuilderService = URLBuilder()
-        playerService = PlayerService()
+        let player = PlayerService()
+        player.configure()
+        playerService = player
         databaseService = RealmDatabaseService()
     }
 }
