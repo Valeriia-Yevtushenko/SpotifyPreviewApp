@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PlayerCoordinatorDelegate: AnyObject {
-    func showPlayer(with tracks: [Track], for index: Int)
+    func showPlayer(with tracks: [PlayerItem], for index: Int)
     func showMiniPlayer()
 }
 
@@ -74,7 +74,7 @@ extension PlayerCoordinator: MiniPlayerModuleOutput {
 }
 
 extension PlayerCoordinator: PlayerCoordinatorDelegate {
-    func showPlayer(with tracks: [Track], for index: Int) {
+    func showPlayer(with tracks: [PlayerItem], for index: Int) {
         let (playerModule, presenter) = factory.makePlayerModule(with: tracks,
                                                                  for: index,
                                                                  serviceManager: serviceManager)

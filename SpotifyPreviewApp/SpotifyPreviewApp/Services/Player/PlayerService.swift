@@ -15,6 +15,7 @@ protocol PlayerServiceDelegate: AnyObject {
 
 enum PlayerError: Error {
     case url
+    case empty
 }
 
 class PlayerService: NSObject {
@@ -38,15 +39,27 @@ class PlayerService: NSObject {
 
     private func play() -> Promise<PlayerItem> {
         return Promise { seal in
-            guard !playerItems.isEmpty, let url = URL(string: playerItems[currentIndex].url ?? ""),
-                  let data = try? Data(contentsOf: url) else {
-                      seal.reject(PlayerError.url)
-                      player?.stop()
+            guard !playerItems.isEmpty else {
+                seal.reject(PlayerError.empty)
+                player?.stop()
                 return
             }
             
+            let dataForPlayer: Data
+            
+            if  let url = URL(string: playerItems[currentIndex].url ?? ""),
+                let data = try? Data(contentsOf: url) {
+                dataForPlayer = data
+                player = try? AVAudioPlayer(data: dataForPlayer)
+            } else if let data = playerItems[currentIndex].data {
+                dataForPlayer = data
+                player = try? AVAudioPlayer(data: dataForPlayer)
+            } else {
+                seal.reject(PlayerError.url)
+                player?.stop()
+            }
+           
             var item = playerItems[currentIndex]
-            player = try? AVAudioPlayer(data: data)
             player?.delegate = self
             item.duration = player?.duration
             seal.fulfill(item)

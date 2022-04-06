@@ -16,6 +16,7 @@ protocol ArtistInteractorInputProtocol: AnyObject {
     func getPlaylist(for index: Int)
     
     func getArtistURL()
+    func saveTrack(at index: Int)
     func getTrackUri(for index: Int)
     func getTrackURL(for index: Int)
     func getTrackAlbumId(for index: Int)

@@ -8,7 +8,7 @@
 import Foundation
 
 class PlayerInteractor {
-    var tracks: [Track]!
+    var tracks: [PlayerItem]!
     var index: Int!
     var isOpeningFromMiniPlayer: Bool = false
     var playerService: PlayerServiceProtocol!
@@ -42,16 +42,7 @@ extension PlayerInteractor: PlayerInteractorInputProtocol {
             
             self.presenter?.interactorDidGetCurrentPlayingTrack(item, isPlaying: playerService.isPlaying)
         } else {
-            let items: [PlayerItem] = tracks.compactMap {
-                let artist = $0.artists?.compactMap { return $0.name }
-                return PlayerItem(duration: nil,
-                                  url: $0.previewUrl,
-                                  image: $0.album?.images?.first?.url,
-                                  title: $0.name,
-                                  artists: artist?.joined(separator: ", "))
-            }
-            
-            playerService.play(with: items, at: index)
+            playerService.play(with: tracks, at: index)
                 .done { item in
                     self.presenter?.interactorDidPlay(with: item)
                 }.catch { _ in

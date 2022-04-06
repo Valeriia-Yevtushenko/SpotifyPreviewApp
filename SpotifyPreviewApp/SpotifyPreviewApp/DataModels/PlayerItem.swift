@@ -9,8 +9,10 @@ import AVFoundation
 
 struct PlayerItem {
     var duration: Double?
-    let url: String?
-    let image: String?
-    let title: String?
-    let artists: String?
+    var url: String?
+    var imageData: Data?
+    var image: String?
+    var title: String?
+    var artists: String?
+    var data: Data?
 }

@@ -19,6 +19,7 @@ final class AlbumModuleAssembly {
         interactor.identifier = albumId
         interactor.networkService = serviceManager.network()
         interactor.urlBuilder = serviceManager.urlBuilder()
+        interactor.databaseManager = serviceManager.database()
         presenter.interactor = interactor
         presenter.view = albumViewController
         albumViewController.output = presenter

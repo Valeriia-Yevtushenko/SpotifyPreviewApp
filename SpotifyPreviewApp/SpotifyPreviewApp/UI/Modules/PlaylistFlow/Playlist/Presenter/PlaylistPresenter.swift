@@ -43,7 +43,7 @@ extension PlaylistPresenter: PlaylistViewOutputProtocol {
     }
     
     func viewDidTapDownloadItem(at index: Int) {
-        
+        interactor?.saveTrack(at: index)
     }
     
     func viewDidTapShowItemArtist(at index: Int) {
@@ -106,6 +106,15 @@ extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
     }
     
     func interactorDidGetPlaylist(tracks: [Track], for index: Int) {
+        let tracks: [PlayerItem] = tracks.compactMap {
+            let artist = $0.artists?.compactMap { return $0.name }
+            return PlayerItem(duration: nil,
+                              url: $0.previewUrl,
+                              image: $0.album?.images?.first?.url,
+                              title: $0.name,
+                              artists: artist?.joined(separator: ", "), data: nil)
+        }
+        
         coordinator?.runPlayerFlow(with: tracks, for: index)
     }
     
@@ -139,8 +148,9 @@ extension PlaylistPresenter: PlaylistInteractorOutputProtocol {
         if let tracks = playlist.tracks?.items, !tracks.isEmpty {
             tracksViewModel = tracks.compactMap {
                 let artists = $0.track?.artists?.compactMap { return $0.name }
-                return TrackTableViewCellModel(image: ($0.track?.album?.images?[2].url),
-                                               name: $0.track?.name, artist: artists?.joined(separator: ", "))
+                return TrackTableViewCellModel(name: $0.track?.name,
+                                               artist: artists?.joined(separator: ", "),
+                                               image: ($0.track?.album?.images?[2].url))
             }
         } else {
             tracksViewModel = []

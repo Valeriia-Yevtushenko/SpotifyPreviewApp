@@ -7,32 +7,48 @@
 
 import Foundation
 import PromiseKit
-// MARK: - Welcome
-struct Welcome: Codable {
-    let tracks: [Trackk]
-    let snapshotID: String
-
-    enum CodingKeys: String, CodingKey {
-        case tracks
-        case snapshotID = "snapshot_id"
-    }
-}
-
-// MARK: - Track
-struct Trackk: Codable {
-    let uri: String
-}
 
 final class PlaylistInteractor {
     private var playlist: Playlist?
     var playlistId: String!
     var playlistType: PlaylistType!
     var networkService: NetworkServiceProtocol!
+    var databaseManager: RealmDatabaseService!
     var urlBuilder: URLBuilderProtocol!
     weak var presenter: PlaylistInteractorOutputProtocol?
 }
 
 extension PlaylistInteractor: PlaylistInteractorInputProtocol {
+    func saveTrack(at index: Int) {
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            guard let track = self.playlist?.tracks?.items?[index].track else {
+                return
+            }
+            
+            let trackModel = TrackModel()
+            trackModel.uri = track.uri
+            trackModel.name = track.name
+            trackModel.identifier = track.identifier
+            trackModel.extetnalUrl = track.externalUrls.spotify
+            trackModel.albumId = track.album?.identifier ?? ""
+            trackModel.artistId = track.artists?.first?.identifier ?? ""
+            trackModel.artists = track.artists?.compactMap { $0.name }.joined(separator: ", ") ?? ""
+            
+            if let image = URL(string: track.album?.images?.first?.url ?? "") {
+                trackModel.image = try? Data(contentsOf: image)
+            }
+            
+            if let data = URL(string: track.previewUrl ?? "") {
+                trackModel.data = try? Data(contentsOf: data)
+            }
+            
+            DispatchQueue.main.async {
+                self.databaseManager.save(trackModel)
+            }
+        }
+    }
+    
     func getPlaylistURL() {
         guard let url = playlist?.externalUrls.spotify else {
             return

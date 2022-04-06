@@ -22,6 +22,7 @@ protocol PlaylistInteractorInputProtocol: AnyObject {
     func getTrackURL(at index: Int)
     func getTrackArtistId(at index: Int)
     func getTrackAlbumId(at index: Int)
+    func saveTrack(at index: Int)
     func deleteTrack(at index: Int)
 }
 

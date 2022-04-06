@@ -43,6 +43,12 @@ private extension ProfileCoordinator {
 }
 
 extension ProfileCoordinator: ProfileModuleOutput {
+    func runListOfSavedTracksModule() {
+        let (listOfSavedTracksModule, presenter) = factory.makeListOfSavedTracksModule(serviceManager: serviceManager)
+        presenter.coordinator = self
+        router.push(listOfSavedTracksModule)
+    }
+    
     func runListOfArtistsModule() {
         let (listOfArtistsModule, presenter) = factory.makeListOfArtistsModule(serviceManager: serviceManager)
         presenter.coordinator = self
@@ -65,12 +71,6 @@ extension ProfileCoordinator: ProfileModuleOutput {
     }
 }
 
-extension ProfileCoordinator: PlaylistsCoordinatorOutput {
-    func finishPlaylistsFlow(coordinator: Coordinator) {
-        removeDependency(coordinator)
-    }
-}
-
 extension ProfileCoordinator: ListOfArtistsModuleOutput {
     func runArtistFlow(with identifier: String) {
         let artistCoordinator = coordinatorFactory.makeArtistCoordinator(artistId: identifier,
@@ -85,8 +85,60 @@ extension ProfileCoordinator: ListOfArtistsModuleOutput {
     }
 }
 
+extension ProfileCoordinator: SavedTracksModuleOutput {
+    func runArtistModule(with artistId: String) {
+        let artistCoordinator = coordinatorFactory.makeArtistCoordinator(artistId: artistId,
+                                                                         status: .followed,
+                                                                         factory: factory,
+                                                                         router: router,
+                                                                         serviceManager: serviceManager)
+        artistCoordinator.output = self
+        artistCoordinator.playerDelegate = playerDelegate
+        artistCoordinator.start()
+        addDependency(artistCoordinator)
+    }
+    
+    func runAlbumModule(with albumId: String) {
+        let albumCoordinator = coordinatorFactory.makeAlbumCoordinator(albumId: albumId,
+                                                                       factory: factory,
+                                                                       router: router,
+                                                                       serviceManager: serviceManager)
+        albumCoordinator.output = self
+        albumCoordinator.playerDelegate = playerDelegate
+        albumCoordinator.start()
+        addDependency(albumCoordinator)
+    }
+    
+    func runListOfPlaylistFlow(for newItemForPlaylist: String) {
+        let playlistsCoordinator = coordinatorFactory.makePlaylistsCoordinator(newItemForPlaylist: newItemForPlaylist,
+                                                                              factory: factory,
+                                                                              router: router,
+                                                                              serviceManager: serviceManager)
+        playlistsCoordinator.output = self
+        playlistsCoordinator.playerDelegate = playerDelegate
+        playlistsCoordinator.start()
+        addDependency(playlistsCoordinator)
+    }
+    
+    func runPlayerFlow(with tracks: [PlayerItem], for index: Int) {
+        playerDelegate?.showPlayer(with: tracks, for: index)
+    }
+}
+
 extension ProfileCoordinator: ArtistCoordinatorOutput {
     func finishArtistFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+    }
+}
+
+extension ProfileCoordinator: PlaylistsCoordinatorOutput {
+    func finishPlaylistsFlow(coordinator: Coordinator) {
+        removeDependency(coordinator)
+    }
+}
+
+extension ProfileCoordinator: AlbumCoordinatorOutput {
+    func finishAlbumFlow(coordinator: Coordinator) {
         removeDependency(coordinator)
     }
 }

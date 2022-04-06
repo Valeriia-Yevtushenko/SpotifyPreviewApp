@@ -16,11 +16,14 @@ protocol ProfileViewOutputProtocol: AnyObject {
     func viewDidLoad()
     func viewDidTapReload()
     func viewDidTapLogOut()
-    func viewDidSelectedSection(_ sectionType: ProfileSectionType)
+    func viewDidTapOnPlaylistsSection()
+    func viewDidTapOnFollowsSection()
+    func viewDidTapOnSavedTracksSection()
 }
 
 protocol ProfileModuleOutput {
     func runListOfArtistsModule()
+    func runListOfSavedTracksModule()
     func runPlaylistsFlow()
     func runAuthorizationFlow()
 }

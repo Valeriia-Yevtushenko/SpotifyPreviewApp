@@ -12,12 +12,12 @@ protocol PlayerTableViewDataSourceDelegate: AnyObject {
 }
 
 final class PlayerTableViewDataSource: NSObject {
-    private var viewModel: [TableViewCellModel] = []
+    private var viewModel: [TrackTableViewCellModel] = []
     weak var delegate: PlayerTableViewDataSourceDelegate?
 }
 
 extension PlayerTableViewDataSource {
-    func setupViewModel(_ viewModel: [TableViewCellModel]) {
+    func setupViewModel(_ viewModel: [TrackTableViewCellModel]) {
         self.viewModel = viewModel
     }
 }
@@ -38,7 +38,7 @@ extension PlayerTableViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: TableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        let cell: TrackTableViewCell = tableView.dequeueReusableCell(for: indexPath)
         cell.accessoryType = .disclosureIndicator
         cell.configure(viewModel[indexPath.row])
         return cell

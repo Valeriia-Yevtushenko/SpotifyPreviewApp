@@ -34,5 +34,5 @@ protocol ArtistViewOutputProtocol: AnyObject {
 protocol ArtistModuleOutput: AnyObject {
     func runListOfPlaylistFlow(for newItemForPlaylist: String)
     func runAlbumFlow(with identifier: String)
-    func runPlayerFlow(with tracks: [Track], for index: Int)
+    func runPlayerFlow(with tracks: [PlayerItem], for index: Int)
 }

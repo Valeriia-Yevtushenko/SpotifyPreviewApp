@@ -12,11 +12,42 @@ class AlbumInteractor {
     private var album: Album?
     var networkService: NetworkServiceProtocol!
     var urlBuilder: URLBuilderProtocol!
+    var databaseManager: RealmDatabaseService!
     var identifier: String!
     weak var presenter: AlbumInteractorOutputProtocol?
 }
 
 extension AlbumInteractor: AlbumInteractorInputProtocol {
+    func saveTrack(at index: Int) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            guard let track = self.album?.tracks?.items[index] else {
+                return
+            }
+            
+            let trackModel = TrackModel()
+            trackModel.uri = track.uri
+            trackModel.name = track.name
+            trackModel.identifier = track.identifier
+            trackModel.extetnalUrl = track.externalUrls.spotify
+            trackModel.albumId = track.album?.identifier ?? ""
+            trackModel.artistId = track.artists?.first?.identifier ?? ""
+            trackModel.artists = track.artists?.compactMap { $0.name }.joined(separator: ", ") ?? ""
+            
+            if let image = URL(string: track.album?.images?.first?.url ?? "") {
+                trackModel.image = try? Data(contentsOf: image)
+            }
+            
+            if let data = URL(string: track.previewUrl ?? "") {
+                trackModel.data = try? Data(contentsOf: data)
+            }
+            
+            DispatchQueue.main.async {
+                self.databaseManager.save(trackModel)
+            }
+        }
+
+    }
+    
     func getAlbumURL() {
         guard let url = album?.externalUrls.spotify else {
             return

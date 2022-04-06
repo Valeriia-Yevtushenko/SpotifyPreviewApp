@@ -8,9 +8,10 @@
 import UIKit
 
 struct TrackTableViewCellModel {
-    var image: String?
     var name: String?
     var artist: String?
+    var image: String?
+    var imageData: Data?
 }
 
 final class TrackTableViewCell: UITableViewCell {
@@ -29,6 +30,8 @@ final class TrackTableViewCell: UITableViewCell {
     func configure(_ model: TrackTableViewCellModel) {
         if let image = model.image {
             cellImageView.loadImageUsingUrlString(urlString: image)
+        } else if let data = model.imageData {
+            cellImageView.image = UIImage(data: data)
         }
         
         nameLabel.text = model.name

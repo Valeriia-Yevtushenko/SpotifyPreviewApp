@@ -7,12 +7,6 @@
 
 import UIKit
 
-enum ProfileSectionType {
-    case playlists
-    case albums
-    case follows
-}
-
 struct ProfileInfoModel {
     var userImage: String?
     var username: String?
@@ -25,6 +19,7 @@ final class ProfileViewController: UIViewController {
     @IBOutlet private weak var userImageView: CustomImageView!
     @IBOutlet private weak var followsView: UIView!
     @IBOutlet private weak var playlistView: UIView!
+    @IBOutlet private weak var savedTracksView: UIView!
     @IBOutlet private weak var userImageHeightLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var userImageWidthLayoutConstraint: NSLayoutConstraint!
     
@@ -52,12 +47,16 @@ final class ProfileViewController: UIViewController {
 }
 
 private extension ProfileViewController {
+    @IBAction func savedTracksSectionDidSelect(_ sender: UITapGestureRecognizer) {
+        output?.viewDidTapOnSavedTracksSection()
+    }
+    
     @IBAction func followsSectionDidSelect(_ sender: UITapGestureRecognizer) {
-        output?.viewDidSelectedSection(.follows)
+        output?.viewDidTapOnFollowsSection()
     }
     
     @IBAction func playlistsSectionDidSelected(_ sender: UITapGestureRecognizer) {
-        output?.viewDidSelectedSection(.playlists)
+        output?.viewDidTapOnPlaylistsSection()
     }
     
     @IBAction func logOutButtonDidTap() {
@@ -74,6 +73,7 @@ private extension ProfileViewController {
     func configureSections() {
         setupTopBorder(followsView)
         setupBottomBorder(playlistView)
+        setupBottomBorder(savedTracksView)
         setupBottomBorder(followsView)
     }
     

@@ -23,7 +23,7 @@ extension SearchPresenter: SearchViewOutputProtocol {
     }
     
     func viewDidTapDownloadItem(at index: Int) {
-        
+        interactor?.saveTrack(at: index)
     }
     
     func viewDidTapShowItemArtist(at index: Int) {
@@ -60,8 +60,16 @@ extension SearchPresenter: SearchInteractorOutputProtocol {
         coordinator?.runAlbumModule(with: albumId)
     }
     
-    func interactorDidGetTrack(tracks: Track) {
-        coordinator?.runPlayerFlow(with: [tracks], for: 0)
+    func interactorDidGetTrack(tracks: [Track]) {
+        let tracks: [PlayerItem] = tracks.compactMap {
+            let artist = $0.artists?.compactMap { return $0.name }
+            return PlayerItem(duration: nil,
+                              url: $0.previewUrl,
+                              image: $0.album?.images?.first?.url,
+                              title: $0.name,
+                              artists: artist?.joined(separator: ", "), data: nil)
+        }
+        coordinator?.runPlayerFlow(with: tracks, for: 0)
     }
     
     func interactorDidFetchData(_ data: ListOfSearchedTracks) {
@@ -73,7 +81,9 @@ extension SearchPresenter: SearchInteractorOutputProtocol {
         
         let viewModel: [TrackTableViewCellModel] = data.tracks.items.map {
             let artists = $0.artists?.compactMap { $0.name }
-            return TrackTableViewCellModel(image: $0.album?.images?[0].url, name: $0.name, artist: artists?.joined(separator: ", "))
+            return TrackTableViewCellModel(name: $0.name,
+                                           artist: artists?.joined(separator: ", "),
+                                           image: $0.album?.images?[0].url)
         }
         
         view?.setupData(viewModel)

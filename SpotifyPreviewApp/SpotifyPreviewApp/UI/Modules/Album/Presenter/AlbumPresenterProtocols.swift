@@ -28,7 +28,7 @@ protocol AlbumViewOutputProtocol: AnyObject {
 }
 
 protocol AlbumModuleOutput: AnyObject {
-    func runPlayerFlow(with tracks: [Track], for index: Int)
+    func runPlayerFlow(with tracks: [PlayerItem], for index: Int)
     func runListOfPlaylistFlow(for newItemForPlaylist: String)
     func finishFlow()
 }

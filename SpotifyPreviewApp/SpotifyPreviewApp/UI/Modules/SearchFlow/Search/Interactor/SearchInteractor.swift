@@ -11,11 +11,42 @@ import PromiseKit
 final class SearchInteractor {
     private var listOfSearchedTracks: ListOfSearchedTracks?
     var networkService: NetworkServiceProtocol!
+    var databaseManager: RealmDatabaseService!
     var urlBuilder: URLBuilderProtocol!
     weak var presenter: SearchInteractorOutputProtocol?
 }
 
 extension SearchInteractor: SearchInteractorInputProtocol {
+    func saveTrack(at index: Int) {
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            guard let track = self.listOfSearchedTracks?.tracks.items[index] else {
+                return
+            }
+            
+            let trackModel = TrackModel()
+            trackModel.uri = track.uri
+            trackModel.name = track.name
+            trackModel.identifier = track.identifier
+            trackModel.extetnalUrl = track.externalUrls.spotify
+            trackModel.albumId = track.album?.identifier ?? ""
+            trackModel.artistId = track.artists?.first?.identifier ?? ""
+            trackModel.artists = track.artists?.compactMap { $0.name }.joined(separator: ", ") ?? ""
+            
+            if let image = URL(string: track.album?.images?.first?.url ?? "") {
+                trackModel.image = try? Data(contentsOf: image)
+            }
+            
+            if let data = URL(string: track.previewUrl ?? "") {
+                trackModel.data = try? Data(contentsOf: data)
+            }
+            
+            DispatchQueue.main.async {
+                self.databaseManager.save(trackModel)
+            }
+        }
+    }
+    
     func getTrackUri(at index: Int) {
         guard let uri = listOfSearchedTracks?.tracks.items[index].uri else {
             return
@@ -53,7 +84,7 @@ extension SearchInteractor: SearchInteractorInputProtocol {
             return
         }
         
-        presenter?.interactorDidGetTrack(tracks: track)
+        presenter?.interactorDidGetTrack(tracks: [track])
     }
     
     func fetchSearchText(_ text: String) {
