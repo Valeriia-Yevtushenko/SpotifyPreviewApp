@@ -10,6 +10,7 @@ import UIKit
 class ListOfArtistsViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     private var refreshControl: UIRefreshControl = UIRefreshControl()
+    private var loadingView: UIView?
     var output: ListOfArtistsViewOutputProtocol?
     var dataSource: ArtistsTableViewDataSource?
     
@@ -17,6 +18,7 @@ class ListOfArtistsViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = "Follows"
+        addLoadingView()
         output?.viewDidLoad()
         configureRefreshControl()
         configureTableView()
@@ -49,6 +51,12 @@ private extension ListOfArtistsViewController {
     func configureRefreshControl() {
         refreshControl.addTarget(self, action: #selector(refreshCollectionView(sender:)), for: .valueChanged)
     }
+    
+    func addLoadingView() {
+        let allViewsInXibArray = Bundle.main.loadNibNamed("LoadingView", owner: self, options: nil)
+        loadingView = allViewsInXibArray?.first as? UIView
+        self.view.addSubview(loadingView!)
+    }
 }
 
 @objc private extension ListOfArtistsViewController {
@@ -60,6 +68,7 @@ private extension ListOfArtistsViewController {
 
 extension ListOfArtistsViewController: ListOfArtistsViewInputProtocol {
     func setupData(_ model: [TableViewCellModel]) {
+        loadingView?.removeFromSuperview()
         dataSource?.setupViewModel(model)
     }
     
@@ -68,6 +77,7 @@ extension ListOfArtistsViewController: ListOfArtistsViewInputProtocol {
     }
     
     func displayLabel(with text: String) {
+        loadingView?.removeFromSuperview()
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         label.text = text
         label.numberOfLines = 0

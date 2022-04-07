@@ -20,10 +20,10 @@ final class CategoriesInteractor: CategoriesInteractorInputProtocol {
                                                                         .with(queryItems: ["limit": "50"])
                                                                         .build())
         
-        promise.done {data in
+        promise.done { data in
             self.listOfCategories = data
             self.presenter?.interactorDidFetchCategories(data)
-        }.catch { _ in
+        }.catch { error in
             self.presenter?.interactorFailedToFetchCategories()
         }
     }

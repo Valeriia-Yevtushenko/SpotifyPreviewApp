@@ -42,7 +42,6 @@ extension CategoriesPresenter: CategoriesInteractorOutputProtocol {
             return CollectionViewCellModel(image: $0.icons[0].url, name: $0.name)
         }
         
-        view?.displayLabel(with: "")
         view?.setupData(viewModel)
         view?.reloadData()
     }

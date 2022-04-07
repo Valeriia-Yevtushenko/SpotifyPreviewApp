@@ -22,12 +22,13 @@ final class ProfileViewController: UIViewController {
     @IBOutlet private weak var savedTracksView: UIView!
     @IBOutlet private weak var userImageHeightLayoutConstraint: NSLayoutConstraint!
     @IBOutlet private weak var userImageWidthLayoutConstraint: NSLayoutConstraint!
-    
+    private var loadingView: UIView?
     var output: ProfileViewOutputProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addLoadingView()
         output?.viewDidLoad()
         configureUserImageView()
         configureSections()
@@ -61,6 +62,12 @@ private extension ProfileViewController {
     
     @IBAction func logOutButtonDidTap() {
         output?.viewDidTapLogOut()
+    }
+    
+    func addLoadingView() {
+        let allViewsInXibArray = Bundle.main.loadNibNamed("LoadingView", owner: self, options: nil)
+        loadingView = allViewsInXibArray?.first as? UIView
+        self.view.addSubview(loadingView!)
     }
     
     func configureUserImageView() {
@@ -98,8 +105,11 @@ private extension ProfileViewController {
         bottomBorder.backgroundColor = UIColor.separator.cgColor
         view.layer.addSublayer(bottomBorder)
     }
-    
-    func displayErrorAlert() {
+}
+
+extension ProfileViewController: ProfileViewInputProtocol {
+    func handleError() {
+        loadingView?.removeFromSuperview()
         let alert = UIAlertController(title: "Oops, something went wrong",
                                       message: "Please, check your internet conection and reload view.",
                                       preferredStyle: .alert)
@@ -110,18 +120,16 @@ private extension ProfileViewController {
         alert.addAction(cancelButton)
         alert.addAction(tryAgainButton)
         present(alert, animated: true, completion: nil)
-    }
-}
 
-extension ProfileViewController: ProfileViewInputProtocol {
-    func handleError() {
         usernameLabel.text = nil
         userEmailLabel.text = nil
     }
     
     func configureProfileInfo(_ model: ProfileInfoModel) {
+        loadingView?.removeFromSuperview()
         userEmailLabel.text = model.userEmail
         usernameLabel.text = model.username
+        
         guard let url = model.userImage else {
             userImageView.image = UIImage(systemName: "person.circle")
             return
