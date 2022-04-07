@@ -20,9 +20,7 @@ final class CategoriesInteractor: CategoriesInteractorInputProtocol {
                                                                         .with(queryItems: ["limit": "50"])
                                                                         .build())
         
-        firstly {
-            promise
-        }.done {data in
+        promise.done {data in
             self.listOfCategories = data
             self.presenter?.interactorDidFetchCategories(data)
         }.catch { _ in

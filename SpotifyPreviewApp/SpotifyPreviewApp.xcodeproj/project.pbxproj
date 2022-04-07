@@ -272,6 +272,7 @@
 		970F5F0027FC8E85006EA186 /* SavedTracksModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTracksModuleAssembly.swift; sourceTree = "<group>"; };
 		970F5F0327FC9396006EA186 /* ListOfArtistTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfArtistTableViewDataSource.swift; sourceTree = "<group>"; };
 		970F5F0627FC94BC006EA186 /* SavedTracksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTracksDataSource.swift; sourceTree = "<group>"; };
+		970F5F0827FE23E2006EA186 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		9729FB2B2793758D00AFD1A0 /* SpotifyPreviewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyPreviewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9729FB2E2793758D00AFD1A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9729FB322793758D00AFD1A0 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -492,8 +493,8 @@
 		6B1060C327A927C900EB98A7 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				6B1060C427A927C900EB98A7 /* CategoriesInteractorProtocols.swift */,
 				6B1060C527A927C900EB98A7 /* CategoriesInteractor.swift */,
+				6B1060C427A927C900EB98A7 /* CategoriesInteractorProtocols.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -967,6 +968,7 @@
 				9729FB372793758E00AFD1A0 /* Assets.xcassets */,
 				9729FB392793758E00AFD1A0 /* LaunchScreen.storyboard */,
 				9729FB3C2793758E00AFD1A0 /* Info.plist */,
+				970F5F0827FE23E2006EA186 /* Debug.xcconfig */,
 			);
 			path = SpotifyPreviewApp;
 			sourceTree = "<group>";
@@ -1826,6 +1828,7 @@
 /* Begin XCBuildConfiguration section */
 		9729FB3D2793758E00AFD1A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 970F5F0827FE23E2006EA186 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

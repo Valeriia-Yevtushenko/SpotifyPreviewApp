@@ -18,6 +18,7 @@ xcuserdata
 *.xccheckout
 *.moved-aside
 *.xcuserstate
+*.xcconfig
 
 # CocoaPods
 Pods
