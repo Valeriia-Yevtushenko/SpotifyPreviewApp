@@ -23,7 +23,7 @@ final class CategoriesInteractor: CategoriesInteractorInputProtocol {
         promise.done { data in
             self.listOfCategories = data
             self.presenter?.interactorDidFetchCategories(data)
-        }.catch { error in
+        }.catch { _ in
             self.presenter?.interactorFailedToFetchCategories()
         }
     }

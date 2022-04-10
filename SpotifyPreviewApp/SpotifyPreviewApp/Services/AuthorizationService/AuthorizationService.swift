@@ -78,8 +78,8 @@ extension AuthorizationService: AuthorizationServiceProtocol {
         }
     }
     
-    func renewAccessTokenIfNeeded() {
-        guard !renewToken.isPending, oauth.client.credential.isTokenExpired() else { return }
+    func renewAccessTokenIfNeeded() -> Promise<Void>? {
+        guard !renewToken.isPending, oauth.client.credential.isTokenExpired() else { return nil}
         
         renewToken =  Promise { seal in
             oauth.accessTokenBasicAuthentification = true
@@ -97,5 +97,7 @@ extension AuthorizationService: AuthorizationServiceProtocol {
                 }
             }
         }
+        
+        return renewToken
     }
 }

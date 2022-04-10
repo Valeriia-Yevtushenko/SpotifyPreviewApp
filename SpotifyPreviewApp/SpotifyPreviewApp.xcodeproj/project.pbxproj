@@ -544,8 +544,8 @@
 		6B1060E027A9281F00EB98A7 /* TrackTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				6B1060E127A9281F00EB98A7 /* TrackTableViewCell.xib */,
 				6B1060E227A9281F00EB98A7 /* TrackTableViewCell.swift */,
+				6B1060E127A9281F00EB98A7 /* TrackTableViewCell.xib */,
 			);
 			path = TrackTableViewCell;
 			sourceTree = "<group>";

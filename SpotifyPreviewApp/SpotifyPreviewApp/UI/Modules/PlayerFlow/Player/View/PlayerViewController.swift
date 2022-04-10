@@ -191,6 +191,8 @@ extension PlayerViewController: PlayerViewInputProtocol {
         
         if let imageUrl = item.image {
             imageView.loadImageUsingUrlString(urlString: imageUrl)
+        } else if let data = item.imageData {
+            imageView.image = UIImage(data: data)
         }
     }
     
