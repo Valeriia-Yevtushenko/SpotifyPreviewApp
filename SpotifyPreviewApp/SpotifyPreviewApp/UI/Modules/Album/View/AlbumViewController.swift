@@ -10,6 +10,7 @@ import UIKit
 class AlbumViewController: UIViewController {
     @IBOutlet private weak var albumTableView: UITableView!
     private var refreshControl: UIRefreshControl = UIRefreshControl()
+    private var loadingView: UIView?
     var output: AlbumViewOutputProtocol?
     var dataSource: AlbumTableViewDataSource?
     
@@ -17,6 +18,7 @@ class AlbumViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareButtonDidTap))
+        addLoadingView()
         output?.viewDidLoad()
         configureTableView()
         configureRefreshControl()
@@ -43,6 +45,12 @@ private extension AlbumViewController {
     
     func configureRefreshControl() {
         refreshControl.addTarget(self, action: #selector(refreshCollectionView(sender:)), for: .valueChanged)
+    }
+    
+    func addLoadingView() {
+        let allViewsInXibArray = Bundle.main.loadNibNamed("LoadingView", owner: self, options: nil)
+        loadingView = allViewsInXibArray?.first as? UIView
+        self.view.addSubview(loadingView!)
     }
 }
 
@@ -91,6 +99,7 @@ extension AlbumViewController: AlbumViewInputProtocol {
     }
     
     func setupData(_ info: AlbumTableViewHeaderFooterViewModel, tracks: [TrackTableViewCellModel]) {
+        loadingView?.removeFromSuperview()
         albumTableView.backgroundView = nil
         dataSource?.setupData(tracks: tracks, album: info)
     }
@@ -100,6 +109,7 @@ extension AlbumViewController: AlbumViewInputProtocol {
     }
     
     func displayLabel(with text: String) {
+        loadingView?.removeFromSuperview()
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         label.text = text
         label.numberOfLines = 0

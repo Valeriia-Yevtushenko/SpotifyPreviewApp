@@ -27,18 +27,23 @@ class ServiceManager {
     private let databaseService: RealmDatabaseService
     
     init() {
-        oauth = OAuth2Swift(consumerKey: Client.identifier.rawValue,
-                            consumerSecret: Client.secret.rawValue,
+        let consumerKey = Bundle.main.object(forInfoDictionaryKey: "CLIENT_ID") as? String
+        let consumerSecret = Bundle.main.object(forInfoDictionaryKey: "CLIENT_SECRET") as? String
+        
+        oauth = OAuth2Swift(consumerKey: consumerKey ?? "",
+                            consumerSecret: consumerSecret ?? "",
                             authorizeUrl: Authorization.url.rawValue,
                             accessTokenUrl: Authorization.accessToken.rawValue,
-                            responseType: Authorization.code.rawValue)
+                            responseType: "code")
         keychainService = KeychainService()
         authorizationService = AuthorizationService(oauth: oauth,
                                                     keychainService: keychainService)
         networkService = NetworkService(client: oauth.client,
                                         authorizationService: authorizationService)
         urlBuilderService = URLBuilder()
-        playerService = PlayerService()
+        let player = PlayerService()
+        player.configure()
+        playerService = player
         databaseService = RealmDatabaseService()
     }
 }

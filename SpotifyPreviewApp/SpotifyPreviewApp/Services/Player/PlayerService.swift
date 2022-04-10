@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import MediaPlayer
 import PromiseKit
 
 protocol PlayerServiceDelegate: AnyObject {
@@ -24,20 +25,57 @@ class PlayerService: NSObject {
     private var currentIndex = 0
     weak var delegate: PlayerServiceDelegate?
     
-    override init() {
-        super.init()
-        
+    func configure() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
             print("Playback OK")
             try AVAudioSession.sharedInstance().setActive(true)
             print("Session is Active")
+            setupNowPlayingInfoCenter()
         } catch {
             print(error)
         }
     }
+}
 
-    private func play() -> Promise<PlayerItem> {
+private extension PlayerService {
+    func setupNowPlayingInfoCenter() {
+        MPRemoteCommandCenter.shared().playCommand.addTarget { _ in
+            self.togglePlayPause()
+            self.updateNowPlayingInfoCenter()
+            return .success
+        }
+        MPRemoteCommandCenter.shared().pauseCommand.addTarget { _ in
+            self.togglePlayPause()
+            return .success
+        }
+        MPRemoteCommandCenter.shared().nextTrackCommand.addTarget { _ in
+            var result: MPRemoteCommandHandlerStatus = .success
+            
+            self.next().done { _ in
+                result = .success
+            }.catch { _ in
+                result = .noSuchContent
+            }
+            
+            self.updateNowPlayingInfoCenter()
+            return result
+        }
+        MPRemoteCommandCenter.shared().previousTrackCommand.addTarget { _ in
+            var result: MPRemoteCommandHandlerStatus = .success
+            
+            self.previous().done { _ in
+                result = .success
+            }.catch { _ in
+                result = .noSuchContent
+            }
+            
+            self.updateNowPlayingInfoCenter()
+            return result
+        }
+    }
+    
+    func play() -> Promise<PlayerItem> {
         return Promise { seal in
             guard !playerItems.isEmpty else {
                 seal.reject(PlayerError.empty)
@@ -62,8 +100,40 @@ class PlayerService: NSObject {
             var item = playerItems[currentIndex]
             player?.delegate = self
             item.duration = player?.duration
+            updateNowPlayingInfoCenter()
             seal.fulfill(item)
             player?.play()
+        }
+    }
+    
+    func updateNowPlayingInfoCenter() {
+        DispatchQueue.global(qos: .userInteractive).async { [self] in
+            let currentItem = self.playerItems[currentIndex]
+            var info = [String: Any]()
+            info = [
+                MPMediaItemPropertyTitle: currentItem.title ?? "",
+                MPMediaItemPropertyArtist: currentItem.artists ?? "",
+                MPMediaItemPropertyPlaybackDuration: self.player?.duration ?? "",
+                MPNowPlayingInfoPropertyElapsedPlaybackTime: self.player?.currentTime ?? ""
+            ]
+            
+            if let data = currentItem.imageData,
+               let image = UIImage(data: data) {
+                info[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { _ in
+                        return image
+                    })
+            } else if let imageUrl = currentItem.image,
+                      let url = URL(string: imageUrl),
+                      let data = try? Data(contentsOf: url),
+                      let image = UIImage(data: data) {
+                info[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(boundsSize: image.size, requestHandler: { _ in
+                        return image
+                    })
+            }
+            
+            DispatchQueue.main.async {
+                MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+            }
         }
     }
 }

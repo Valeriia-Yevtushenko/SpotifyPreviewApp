@@ -9,15 +9,16 @@ import UIKit
 
 final class CategoriesViewController: UIViewController {
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
-    
     private var searchController: UISearchController?
     private var refreshControl: UIRefreshControl = UIRefreshControl()
+    private var loadingView: UIView?
     var output: CategoriesViewOutputProtocol?
     var dataSource: CollectionViewDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addLoadingView()
         configureRefreshControl()
         configureCollectionView()
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -47,6 +48,12 @@ private extension CategoriesViewController {
         refreshControl.addTarget(self, action: #selector(refreshCollectionView(sender:)), for: .valueChanged)
     }
     
+    func addLoadingView() {
+        let allViewsInXibArray = Bundle.main.loadNibNamed("LoadingView", owner: self, options: nil)
+        loadingView = allViewsInXibArray?.first as? UIView
+        self.view.addSubview(loadingView!)
+    }
+    
     @objc func refreshCollectionView(sender: UIRefreshControl) {
         output?.viewDidRefresh()
         sender.endRefreshing()
@@ -55,7 +62,9 @@ private extension CategoriesViewController {
 
 extension CategoriesViewController: CategoriesViewInputProtocol {
     func setupData(_ model: [CollectionViewCellModel]) {
+        loadingView?.removeFromSuperview()
         dataSource?.setupViewModel(model)
+        categoriesCollectionView.backgroundView = nil
     }
     
     func configureSearchController(searchResultsController: Presentable?) {
@@ -71,6 +80,7 @@ extension CategoriesViewController: CategoriesViewInputProtocol {
     }
     
     func displayLabel(with text: String) {
+        loadingView?.removeFromSuperview()
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         label.text = text
         label.textColor = .lightGray

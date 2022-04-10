@@ -17,13 +17,15 @@ class PlaylistViewController: UIViewController {
     @IBOutlet private weak var playlistTableView: UITableView!
     private var refreshControl: UIRefreshControl = UIRefreshControl()
     private let toastView = ToastView()
+    private var loadingView: UIView?
+    private var headerView: CustomImageView!
     var output: PlaylistViewOutputProtocol?
     var dataSource: PlaylistTableViewDataSource?
-    var headerView: CustomImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addLoadingView()
         output?.viewDidLoad()
         configureTableView()
         configureRefreshControl()
@@ -76,6 +78,12 @@ private extension PlaylistViewController {
         }
         
         headerView.frame = headerRect
+    }
+    
+    func addLoadingView() {
+        let allViewsInXibArray = Bundle.main.loadNibNamed("LoadingView", owner: self, options: nil)
+        loadingView = allViewsInXibArray?.first as? UIView
+        self.view.addSubview(loadingView!)
     }
 }
 
@@ -130,6 +138,7 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
     }
     
     func setupPlaylist(model: PlaylistViewControllerModel, tracks: [TrackTableViewCellModel]) {
+        loadingView?.removeFromSuperview()
         navigationItem.title = model.name
         playlistTableView.backgroundView = tracks.isEmpty ? playlistTableView.backgroundView: nil
         dataSource?.setupViewModel(tracks, type: model.type)
@@ -184,6 +193,7 @@ extension PlaylistViewController: PlaylistViewInputProtocol {
     }
     
     func displayLabel(with text: String) {
+        loadingView?.removeFromSuperview()
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         label.text = text
         label.textColor = .lightGray

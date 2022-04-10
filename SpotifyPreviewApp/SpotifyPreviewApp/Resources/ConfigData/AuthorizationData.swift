@@ -19,8 +19,3 @@ enum Authorization: String {
     case state = "e21392da45dbf4"
     case code = "code"
 }
-
-enum Client: String {
-    case identifier = "b3d154a34d9748b1b0028fa3ad1e9931"
-    case secret = "4fe70c1969e84552aef7653f454d1ad7"
-}

@@ -93,6 +93,8 @@
 		970F5F0127FC8E85006EA186 /* SavedTracksModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F5F0027FC8E85006EA186 /* SavedTracksModuleAssembly.swift */; };
 		970F5F0427FC9396006EA186 /* ListOfArtistTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F5F0327FC9396006EA186 /* ListOfArtistTableViewDataSource.swift */; };
 		970F5F0727FC94BC006EA186 /* SavedTracksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F5F0627FC94BC006EA186 /* SavedTracksDataSource.swift */; };
+		970F5F0E27FED001006EA186 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970F5F0D27FED001006EA186 /* LoadingView.xib */; };
+		970F5F1027FED697006EA186 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970F5F0F27FED697006EA186 /* CALayer.swift */; };
 		9729FB2F2793758D00AFD1A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729FB2E2793758D00AFD1A0 /* AppDelegate.swift */; };
 		9729FB332793758D00AFD1A0 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729FB322793758D00AFD1A0 /* AuthorizationViewController.swift */; };
 		9729FB362793758D00AFD1A0 /* AuthorizationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9729FB342793758D00AFD1A0 /* AuthorizationViewController.storyboard */; };
@@ -272,6 +274,9 @@
 		970F5F0027FC8E85006EA186 /* SavedTracksModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTracksModuleAssembly.swift; sourceTree = "<group>"; };
 		970F5F0327FC9396006EA186 /* ListOfArtistTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfArtistTableViewDataSource.swift; sourceTree = "<group>"; };
 		970F5F0627FC94BC006EA186 /* SavedTracksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedTracksDataSource.swift; sourceTree = "<group>"; };
+		970F5F0827FE23E2006EA186 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		970F5F0D27FED001006EA186 /* LoadingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		970F5F0F27FED697006EA186 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		9729FB2B2793758D00AFD1A0 /* SpotifyPreviewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyPreviewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9729FB2E2793758D00AFD1A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9729FB322793758D00AFD1A0 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -492,8 +497,8 @@
 		6B1060C327A927C900EB98A7 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				6B1060C427A927C900EB98A7 /* CategoriesInteractorProtocols.swift */,
 				6B1060C527A927C900EB98A7 /* CategoriesInteractor.swift */,
+				6B1060C427A927C900EB98A7 /* CategoriesInteractorProtocols.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -539,8 +544,8 @@
 		6B1060E027A9281F00EB98A7 /* TrackTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				6B1060E127A9281F00EB98A7 /* TrackTableViewCell.xib */,
 				6B1060E227A9281F00EB98A7 /* TrackTableViewCell.swift */,
+				6B1060E127A9281F00EB98A7 /* TrackTableViewCell.xib */,
 			);
 			path = TrackTableViewCell;
 			sourceTree = "<group>";
@@ -709,6 +714,7 @@
 		6B9ABFD227AAD2B100F9F9F3 /* Commun */ = {
 			isa = PBXGroup;
 			children = (
+				970F5F0C27FECFE9006EA186 /* LoadingView */,
 				6B9ABFD427AAD2F600F9F9F3 /* TableView */,
 				6B9ABFD327AAD2EC00F9F9F3 /* CollectionView */,
 				97A418AD27B028FD0012CD3D /* ToastView.swift */,
@@ -935,6 +941,14 @@
 			path = SavedTracksDataSource;
 			sourceTree = "<group>";
 		};
+		970F5F0C27FECFE9006EA186 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				970F5F0D27FED001006EA186 /* LoadingView.xib */,
+			);
+			path = LoadingView;
+			sourceTree = "<group>";
+		};
 		9729FB222793758D00AFD1A0 = {
 			isa = PBXGroup;
 			children = (
@@ -967,6 +981,7 @@
 				9729FB372793758E00AFD1A0 /* Assets.xcassets */,
 				9729FB392793758E00AFD1A0 /* LaunchScreen.storyboard */,
 				9729FB3C2793758E00AFD1A0 /* Info.plist */,
+				970F5F0827FE23E2006EA186 /* Debug.xcconfig */,
 			);
 			path = SpotifyPreviewApp;
 			sourceTree = "<group>";
@@ -1003,6 +1018,7 @@
 				972F27D027942B3F0000BE72 /* StoryboardInstantiable.swift */,
 				972F27CF27942B3F0000BE72 /* UIViewController.swift */,
 				97878F9727F219E700E97377 /* Double.swift */,
+				970F5F0F27FED697006EA186 /* CALayer.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1564,6 +1580,7 @@
 				6B3D61CE27BE6CDA00AE58B8 /* AlbumViewController.storyboard in Resources */,
 				97A418A727AFC7F00012CD3D /* PlaylistViewController.storyboard in Resources */,
 				6B1060D027A927C900EB98A7 /* CategoriesViewController.storyboard in Resources */,
+				970F5F0E27FED001006EA186 /* LoadingView.xib in Resources */,
 				970F5EF727FC8D30006EA186 /* SavedTracksViewController.storyboard in Resources */,
 				9792A46227D4FE1100EDDA96 /* PlayerViewController.storyboard in Resources */,
 				97DA15D627B6807300DE2D7D /* ListOfArtistsViewController.storyboard in Resources */,
@@ -1674,6 +1691,7 @@
 				97A418AA27AFC7F00012CD3D /* PlaylistInteractorProtocols.swift in Sources */,
 				972F27FA27947FC50000BE72 /* AuthorizationData.swift in Sources */,
 				970F5EFB27FC8DCC006EA186 /* SavedTracksPresenterProtocols.swift in Sources */,
+				970F5F1027FED697006EA186 /* CALayer.swift in Sources */,
 				97B4554027E6429200167718 /* PlayerService.swift in Sources */,
 				970F5F0127FC8E85006EA186 /* SavedTracksModuleAssembly.swift in Sources */,
 				970F5EFF27FC8DEF006EA186 /* SavedTracksInteractorProtocols.swift in Sources */,
@@ -1826,6 +1844,7 @@
 /* Begin XCBuildConfiguration section */
 		9729FB3D2793758E00AFD1A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 970F5F0827FE23E2006EA186 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

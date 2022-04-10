@@ -25,8 +25,10 @@ extension AuthorizationService: AuthorizationServiceProtocol {
     func logOut() {
         keychainService.remove(key: "token")
         
-        oauth = OAuth2Swift(consumerKey: Client.identifier.rawValue,
-                            consumerSecret: Client.secret.rawValue,
+        let consumerKey = Bundle.main.object(forInfoDictionaryKey: "CLIENT_ID") as? String
+        let consumerSecret = Bundle.main.object(forInfoDictionaryKey: "CLIENT_SECRET") as? String
+        oauth = OAuth2Swift(consumerKey: consumerKey ?? "",
+                            consumerSecret: consumerSecret ?? "",
                             authorizeUrl: Authorization.url.rawValue,
                             accessTokenUrl: Authorization.accessToken.rawValue,
                             responseType: Authorization.code.rawValue)
@@ -57,9 +59,11 @@ extension AuthorizationService: AuthorizationServiceProtocol {
                 return
             }
             
-            oauth.authorize(withCallbackURL: redirectURL, scope: Authorization.scope.rawValue,
-                           state: Authorization.state.rawValue, codeChallenge: Authorization.codeChallenge.rawValue,
-                                                 codeVerifier: Authorization.codeVerifier.rawValue) { result in
+            oauth.authorize(withCallbackURL: redirectURL,
+                            scope: Authorization.scope.rawValue,
+                            state: Authorization.state.rawValue,
+                            codeChallenge: Authorization.codeChallenge.rawValue,
+                            codeVerifier: Authorization.codeVerifier.rawValue) { result in
                 switch result {
                 case .success(let (credential, _, _)):
                     let token = Token(access: credential.oauthToken,
@@ -74,8 +78,8 @@ extension AuthorizationService: AuthorizationServiceProtocol {
         }
     }
     
-    func renewAccessToken() {
-        guard !renewToken.isPending else { return }
+    func renewAccessTokenIfNeeded() -> Promise<Void>? {
+        guard !renewToken.isPending, oauth.client.credential.isTokenExpired() else { return nil}
         
         renewToken =  Promise { seal in
             oauth.accessTokenBasicAuthentification = true
@@ -93,5 +97,7 @@ extension AuthorizationService: AuthorizationServiceProtocol {
                 }
             }
         }
+        
+        return renewToken
     }
 }

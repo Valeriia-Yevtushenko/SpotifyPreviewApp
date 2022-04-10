@@ -18,12 +18,14 @@ final class ListOfPlaylistsViewController: UIViewController {
     @IBOutlet private weak var accessoryView: UIView!
     private var refreshControl: UIRefreshControl = UIRefreshControl()
     private let toastView = ToastView()
+    private var loadingView: UIView?
     var output: ListOfPlaylistsViewOutputProtocol?
     var dataSource: CollectionViewDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addLoadingView()
         output?.viewDidLoad()
         configureAccessoryView()
         configureCollectionView()
@@ -62,6 +64,12 @@ private extension ListOfPlaylistsViewController {
     func configureRefreshControl() {
         refreshControl.addTarget(self, action: #selector(refreshCollectionView(sender:)), for: .valueChanged)
     }
+    
+    func addLoadingView() {
+        let allViewsInXibArray = Bundle.main.loadNibNamed("LoadingView", owner: self, options: nil)
+        loadingView = allViewsInXibArray?.first as? UIView
+        self.view.addSubview(loadingView!)
+    }
 }
 
 extension ListOfPlaylistsViewController: ListOfPlaylistsViewInputProtocol {
@@ -86,6 +94,7 @@ extension ListOfPlaylistsViewController: ListOfPlaylistsViewInputProtocol {
     }
     
     func setupData(_ model: [CollectionViewCellModel], type: PlaylistType) {
+        loadingView?.removeFromSuperview()
         dataSource?.setupViewModel(model)
         playlistCollectionView.backgroundView = model.isEmpty ? playlistCollectionView.backgroundView: nil
         
@@ -103,6 +112,7 @@ extension ListOfPlaylistsViewController: ListOfPlaylistsViewInputProtocol {
     }
     
     func displayLabel(with text: String) {
+        loadingView?.removeFromSuperview()
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
         label.text = text
         label.numberOfLines = 0
