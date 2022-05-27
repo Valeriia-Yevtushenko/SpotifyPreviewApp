@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Container View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ContainerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ContainerViewController" customModule="SpotifyPreviewApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zwM-3c-dwh">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j32-hy-imm">
+                                <rect key="frame" x="0.0" y="733" width="414" height="80"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="hgW-yh-Ynn"/>
+                                </constraints>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zwM-3c-dwh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="4bo-R2-sxD"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="zwM-3c-dwh" secondAttribute="bottom" id="GBu-4c-Bpg"/>
+                            <constraint firstItem="zwM-3c-dwh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="cDq-xP-J5i"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="zwM-3c-dwh" secondAttribute="trailing" id="h20-zI-Z4i"/>
+                            <constraint firstItem="j32-hy-imm" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="kbw-5G-FFM"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="j32-hy-imm" secondAttribute="bottom" constant="49" id="pPh-DJ-2Mu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="j32-hy-imm" secondAttribute="trailing" id="zlV-7h-mMI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainContainerView" destination="zwM-3c-dwh" id="pZW-SP-N7D"/>
+                        <outlet property="miniContainerView" destination="j32-hy-imm" id="WUz-jW-Jbi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46" y="52"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
